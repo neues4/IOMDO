@@ -1,4 +1,4 @@
-package bachelorthesis.IOMDOProject;
+package bachelorthesis.IOMDOProject.model;
 
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.Model;
