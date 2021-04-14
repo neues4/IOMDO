@@ -21,7 +21,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 		//Defaut language is german.
-		I18n.setLocale(new Locale("de_CH"));
+		I18n.setLocale(new Locale("en"));
 		staticStage = stage;
 		scene = new Scene(loadFXML("LogIn"));
 		stage.setTitle(I18n.getString("start.titel"));
@@ -46,11 +46,6 @@ public class Main extends Application {
 	private static Parent loadFXML(String fxml) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"),I18n.getResourceBundle());
 		return fxmlLoader.load();
-	}
-	
-	@FXML
-	protected void handleClickMe(ActionEvent event) throws IOException {
-		Scene scene2 = new Scene(loadFXML("RecordDocument_PatientData"));
 	}
 	
 	public static void main(String[] args) {
