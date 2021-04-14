@@ -1,5 +1,5 @@
 package bachelorthesis.IOMDOProject.view;
 
-public class ViewController {
+public class EmptyClass {
 
 }
