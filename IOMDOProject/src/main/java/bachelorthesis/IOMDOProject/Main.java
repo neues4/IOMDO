@@ -1,6 +1,8 @@
 package bachelorthesis.IOMDOProject;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,6 +32,12 @@ public class Main extends Application {
 		FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
 		return fxmlLoader.load();
 	}
+	
+	@FXML
+	protected void handleClickMe(ActionEvent event) throws IOException {
+		Scene scene2 = new Scene(loadFXML("RecordDocument_PatientData"));
+	}
+	
 	public static void main(String[] args) {
 		launch();
 	}
