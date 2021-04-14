@@ -17,7 +17,7 @@
                   <Font size="70.0" />
                </font>
             </Label>
-            <Button fx:id="btnNewProtocol" mnemonicParsing="false" prefHeight="70.0" prefWidth="500.0" text="%btn.newProtocol" onAction='#goToCreateNewProtocol'>
+            <Button fx:id="btnNewProtocol" mnemonicParsing="false" onAction="#goToCreateNewProtocol" prefHeight="70.0" prefWidth="500.0" text="%btn.newProtocol">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
