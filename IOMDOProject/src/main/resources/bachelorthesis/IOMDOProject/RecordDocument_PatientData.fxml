@@ -18,7 +18,7 @@
          <children>
             <VBox alignment="CENTER" fillWidth="false">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="220.0" text="Protokoll erfassen">
+                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="220.0" text="%btn.newProtocol">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -26,7 +26,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="220.0" text="Protokoll anschauen">
+                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="220.0" text="%btn.protocolOverview">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -34,7 +34,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="220.0" text="Abfrage erstellen">
+                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="220.0" text="%btn.createQuery">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -42,7 +42,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="220.0" text="Ontologie erweitern">
+                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="220.0" text="%btn.expandOntology">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -50,7 +50,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="220.0" text="Einstellungen">
+                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="220.0" text="%btn.settings">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -67,7 +67,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="Nr." textAlignment="JUSTIFY">
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="%lbl.nr" textAlignment="JUSTIFY">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -80,7 +80,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="PID">
+                        <Label text="%lbl.PID">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -93,7 +93,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="FID">
+                        <Label text="%lbl.FID">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -106,7 +106,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Diagnose">
+                        <Label text="%lbl.diagnosis">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -119,7 +119,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Operation">
+                        <Label text="%lbl.surgery">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -132,7 +132,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="ISIS-Gerät">
+                        <Label text="%lbl.ISISDevice">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -152,7 +152,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="314.0">
                      <children>
-                        <Label text="Name">
+                        <Label text="%lbl.surname">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -165,7 +165,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Vorname">
+                        <Label text="%lbl.firstName">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -178,7 +178,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Geburtsdatum">
+                        <Label text="%lbl.dateOfBirth">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -191,7 +191,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="OP-Datum">
+                        <Label text="%lbl.dateOfSurgery">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -204,7 +204,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Operateur">
+                        <Label text="%lbl.surgeon">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -217,7 +217,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Assistent">
+                        <Label text="%lbl.assistant">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -236,9 +236,20 @@
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
+            <Label alignment="CENTER" text="IOMDO">
+               <font>
+                  <Font size="60.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets right="40.0" />
+               </padding>
+            </Label>
             <VBox alignment="CENTER" prefHeight="140.0" prefWidth="250.0">
                <children>
-                  <Label text="Eingeloggt als:">
+                  <Label text="%lbl.loggedInAs">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -248,7 +259,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" text="Ausloggen">
+                  <Button mnemonicParsing="false" text="%btn.logout">
                      <font>
                         <Font size="15.0" />
                      </font>
