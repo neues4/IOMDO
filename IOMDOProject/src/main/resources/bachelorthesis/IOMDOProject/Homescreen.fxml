@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.HomeScreenController">
    <center>
       <VBox alignment="CENTER" prefHeight="540.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
@@ -17,7 +17,7 @@
                   <Font size="70.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="500.0" text="Protokoll erfassen">
+            <Button fx:id="btnNewProtocol" mnemonicParsing="false" onAction="#goToCreateNewProtocol" prefHeight="70.0" prefWidth="500.0" text="%btn.newProtocol">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -25,7 +25,7 @@
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="500.0" text="Protokoll anschauen">
+            <Button fx:id="btnProtocolOverview" mnemonicParsing="false" prefHeight="70.0" prefWidth="500.0" text="%btn.protocolOverview">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -33,7 +33,7 @@
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="500.0" text="Abfrage erstellen">
+            <Button fx:id="btnCreateQuery" mnemonicParsing="false" prefHeight="70.0" prefWidth="500.0" text="%btn.createQuery">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -41,7 +41,7 @@
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="500.0" text="Ontologie erweitern">
+            <Button fx:id="btnExpandOntology" mnemonicParsing="false" prefHeight="70.0" prefWidth="500.0" text="%btn.expandOntology">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -49,7 +49,7 @@
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="500.0" text="Einstellungen">
+            <Button fx:id="BtnSettings" mnemonicParsing="false" prefHeight="70.0" prefWidth="500.0" text="%btn.settings">
                <font>
                   <Font size="30.0" />
                </font>
@@ -62,17 +62,17 @@
          <children>
             <VBox alignment="CENTER" prefHeight="140.0" prefWidth="250.0">
                <children>
-                  <Label text="Eingeloggt als:">
+                  <Label fx:id="lblLoggedInAs" text="%lbl.loggedInAs">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="26.0" prefWidth="192.0" text="Vorname Nachname">
+                  <Label fx:id="lblName" prefHeight="26.0" prefWidth="192.0" text="Vorname Nachname">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" text="Ausloggen">
+                  <Button fx:id="btnLogout" mnemonicParsing="false" text="%btn.logout">
                      <font>
                         <Font size="15.0" />
                      </font>
