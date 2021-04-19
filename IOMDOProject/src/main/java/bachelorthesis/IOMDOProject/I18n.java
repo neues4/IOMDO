@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 public class I18n {
 	private static final String BASE_NAME = "bachelorthesis.IOMDOProject.lang";
 	private static ResourceBundle i18nBundle = ResourceBundle.getBundle(BASE_NAME);
+	
 	public static void setLocale(Locale locale) {
 		i18nBundle = ResourceBundle.getBundle(BASE_NAME, locale);
 	}

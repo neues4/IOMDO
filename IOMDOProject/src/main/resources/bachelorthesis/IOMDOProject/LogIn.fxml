@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -13,10 +15,9 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="wrongUsernameLabel" textFill="#d41717" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
                <children>
-                  <Label alignment="TOP_LEFT" text="%lbl.username">
+                  <Label text="%lbl.username">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -24,7 +25,7 @@
                   <TextField fx:id="usernameTF" promptText="%lbl.username" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
                <children>
                   <Label text="%lbl.password">
                      <font>
@@ -34,8 +35,19 @@
                   <PasswordField fx:id="passwordTF" promptText="%lbl.password" />
                </children>
             </HBox>
+            <Label fx:id="wrongUsernameLabel" alignment="TOP_LEFT" textFill="#d41717">
+               <VBox.margin>
+                  <Insets bottom="8.0" />
+               </VBox.margin>
+            </Label>
             <Button fx:id="logInBtn" mnemonicParsing="false" onAction="#userLogIn" text="%btn.logIn" />
          </children>
       </VBox>
    </center>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </right>
 </BorderPane>

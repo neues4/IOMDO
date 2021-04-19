@@ -1,8 +1,11 @@
 package bachelorthesis.IOMDOProject.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ResourceBundle;
-
+import java.util.Scanner;
+import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,9 +20,9 @@ import javafx.scene.control.TextField;
  */
 public class LogInController {
 
-	
+
 	public LogInController() {
-		
+
 	}
 	@FXML
 	private ResourceBundle resources;
@@ -32,26 +35,74 @@ public class LogInController {
 	@FXML
 	private Label wrongUsernameLabel;
 
-/**
- * Starts event after pressing the Log in button
- * @param event
- * @throws IOException
- */
+	private File file;
+
+	/**
+	 * Starts event after pressing the Log in button
+	 * @param event
+	 * @throws IOException
+	 */
 	public void userLogIn(ActionEvent event) throws IOException{
-		checkLogIn();
+
+		file = new File("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\loginInfo.txt");
+		validateLogIn();
+
 	}
 
-/**
- * Checks the user name and password input.
- * @throws IOException
- */
-	private void checkLogIn() throws IOException {
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 * @throws IOException
+	 */
+	private int searchUsername(String name) throws IOException {
+		Scanner sc= new Scanner(file);
+
+		//now read the file line by line...
+		int lineNr = 0;
+		while (sc.hasNextLine()) {
+			String line = sc.nextLine();
+			lineNr++;
+			if(line.equals(name)) { 
+				sc.close();
+				return lineNr -1;
+			}
+		}
+		sc.close();
+		return 0;
+	}	
+
+
+
+	/**
+	 * Checks the user name and password input.
+	 * @throws IOException
+	 */
+	private void validateLogIn() throws IOException {
 		Main main = new Main();
-		wrongUsernameLabel.setText("Falsche Angabe");
-		main.changeScene("Homescreen.fxml");
+		Scanner sc= new Scanner(file);
+		int lineNr = searchUsername(usernameTF.getText().toString());
+		skipLines(sc, lineNr);
+		if(usernameTF.getText().toString().equals(sc.next()) && passwordTF.getText().toString().equals(sc.next())) {
+			main.changeScene("Homescreen.fxml");
+			sc.close();
+		} else {wrongUsernameLabel.setText(I18n.getString("LogInError.wrongCredentials"));
+		sc.close();}
+
+
 	}
 
-	
-
-	
+	/**
+	 * Skips the line in a text file.
+	 * @param sc
+	 * @param lineNr
+	 */
+	private static void skipLines(Scanner sc,int lineNr){
+		for(int i = 0; i < lineNr;i++){
+			if(sc.hasNextLine())sc.nextLine();
+		}
+	}
 }
+
+
+
