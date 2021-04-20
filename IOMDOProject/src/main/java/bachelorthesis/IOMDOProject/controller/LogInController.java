@@ -10,6 +10,7 @@ import bachelorthesis.IOMDOProject.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -34,6 +35,9 @@ public class LogInController {
 	private TextField usernameTF;
 	@FXML
 	private Label wrongUsernameLabel;
+	
+	@FXML
+	private Hyperlink newAccountHL;
 
 	private File file;
 
@@ -47,6 +51,11 @@ public class LogInController {
 		file = new File("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\loginInfo.txt");
 		validateLogIn();
 
+	}
+	
+	public void newAccountScreen(ActionEvent event) throws IOException{
+		Main main = new Main();
+		main.changeScene("NewAccount.fxml");
 	}
 
 	/**
@@ -86,7 +95,7 @@ public class LogInController {
 		if(usernameTF.getText().toString().equals(sc.next()) && passwordTF.getText().toString().equals(sc.next())) {
 			main.changeScene("Homescreen.fxml");
 			sc.close();
-		} else {wrongUsernameLabel.setText(I18n.getString("LogInError.wrongCredentials"));
+		} else {wrongUsernameLabel.setText(I18n.getString("errorMsg.wrongCredentials"));
 		sc.close();}
 
 
