@@ -25,7 +25,7 @@
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button fx:id="btnProtocolOverview" mnemonicParsing="false" prefHeight="70.0" prefWidth="500.0" text="%btn.protocolOverview">
+            <Button fx:id="btnProtocolOverview" mnemonicParsing="false" onAction="#openProtocolOverview" prefHeight="70.0" prefWidth="500.0" text="%btn.protocolOverview">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>

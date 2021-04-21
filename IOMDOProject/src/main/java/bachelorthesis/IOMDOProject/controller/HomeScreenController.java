@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import bachelorthesis.IOMDOProject.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -47,4 +48,12 @@ public class HomeScreenController {
     	main.changeScene("RecordDocument_PatientData.fxml");
     }
 	
+    public void openProtocolOverview(ActionEvent event) throws IOException {
+    	Main main = new Main();
+    	main.changeScene("Menu.fxml");
+		//Parent p = main.returnParent("ProtocolOverview.fxml");
+		
+	
+    }
+    
 }
