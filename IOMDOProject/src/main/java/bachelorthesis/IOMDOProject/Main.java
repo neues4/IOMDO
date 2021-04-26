@@ -43,17 +43,21 @@ public class Main extends Application {
 		staticStage.getScene().setRoot(window);
 	}
 	
+	public Parent returnParent(String fxml)throws IOException{
+		Parent window = FXMLLoader.load(getClass().getResource(fxml),I18n.getResourceBundle());
+		return window;
+	}
+	
 	private static Parent loadFXML(String fxml) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"),I18n.getResourceBundle());
 		return fxmlLoader.load();
 	}
 	
-	@FXML
-	protected void handleClickMe(ActionEvent event) throws IOException {
-		Scene scene2 = new Scene(loadFXML("RecordDocument_PatientData"));
-	}
+
 	
 	public static void main(String[] args) {
 		launch();
 	}
+
+	
 }
