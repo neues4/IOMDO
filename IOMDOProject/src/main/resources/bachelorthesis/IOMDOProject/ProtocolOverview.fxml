@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeTableColumn?>
@@ -10,15 +11,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="gridPaneProtocolOverview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" vgap="8.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
+<GridPane fx:id="gridPaneProtocolOverview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" vgap="8.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ProtocolOverviewController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="793.6" minWidth="10.0" prefWidth="793.6" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.60003662109375" minWidth="7.2000000000000455" prefWidth="7.2000000000000455" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="152.8" minHeight="10.0" prefHeight="152.8" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="266.80000000000007" minHeight="10.0" prefHeight="231.2" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="242.20003356933597" minHeight="0.0" prefHeight="89.40000000000003" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="64.80000915527344" minHeight="10.0" prefHeight="18.40000381469727" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="406.39995117187505" minHeight="10.0" prefHeight="377.59999618530276" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="335.60003051757815" minHeight="0.0" prefHeight="157.20003662109377" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <TreeTableView prefHeight="267.0" prefWidth="787.0" GridPane.rowIndex="1">
@@ -39,7 +40,7 @@
             <Insets left="8.0" />
          </GridPane.margin>
       </TreeTableView>
-      <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
+      <HBox alignment="BOTTOM_LEFT" prefHeight="38.0" prefWidth="792.0" spacing="8.0">
          <children>
             <Label text="Suche">
                <padding>
@@ -48,6 +49,7 @@
             </Label>
             <TextField />
             <TextField fx:id="TBDtestTF" />
+            <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#test" text="Button" />
          </children>
          <opaqueInsets>
             <Insets />

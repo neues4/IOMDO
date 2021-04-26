@@ -44,24 +44,34 @@ public class MenuController implements Initializable {
 	public void openNewProtocol(ActionEvent event) throws IOException {
 		Main m = new Main();
 		Parent p = m.returnParent("RecordDocument_PatientData.fxml");
-		gridPane.getChildren().removeAll();	
-		gridPane.getChildren().setAll(p);
+		borderPaneMenu.setCenter(p);
+		//gridPane.getChildren().removeAll();	
+		//gridPane.getChildren().setAll(p);
 	}
 
-	public void openProtocolOverview(ActionEvent event) throws IOException {
+	public  void openProtocolOverview(ActionEvent event) throws IOException {
 		Main m = new Main();
 		Parent p = m.returnParent("ProtocolOverview.fxml");
+		borderPaneMenu.setCenter(p);
+		
 		//borderPaneMenu.setCenter(p);
-		gridPane.getChildren().removeAll();	
+		//BorderPane bp = (BorderPane) this.borderPaneMenu;
+		//bp.setCenter(p);
+		
+		//gridPane.getChildren().removeAll();	
 		
 		//ersetzt nur Children aus ProtocolOverviev
 		//gridPane.getChildren().setAll(p.getChildrenUnmodifiable());
 		
 		//Ersetzt GridPane mit ProtocolOverview 
-		gridPane.getChildren().setAll(p);
+		//gridPane.getChildren().setAll(p);
 
 
 	}
+	
+	
+	
+	
 	public void openCreatQuery(ActionEvent event) throws IOException {
 
 	}
