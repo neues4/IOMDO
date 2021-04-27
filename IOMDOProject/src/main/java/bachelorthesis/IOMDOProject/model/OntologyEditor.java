@@ -27,7 +27,6 @@ import bachelorthesis.IOMDOProject.Main;
  * 
  * @author neues4
  * 
- *
  */
 public class OntologyEditor {
 
@@ -192,5 +191,18 @@ public class OntologyEditor {
 			ioe.printStackTrace();
 		}
 
+	}
+	
+	
+	/**
+	 * Method to return a specific value of a property of a specific individual
+	 * @param indvURI the URI of the individual
+	 * @param propURI the URI of the property (for example the URI of "has first name")
+	 * @return 
+	 */
+	public RDFNode getPropertyOfIndividual(String indvURI, String propURI) {
+		Individual indv = ontModel.getIndividual(indvURI);
+		DatatypeProperty property = ontModel.getDatatypeProperty(propURI);
+		return indv.getPropertyValue(property);
 	}
 }
