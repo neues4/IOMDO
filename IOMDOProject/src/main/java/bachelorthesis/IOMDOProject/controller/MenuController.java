@@ -1,22 +1,17 @@
 package bachelorthesis.IOMDOProject.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+
 
 
 public class MenuController implements Initializable {
@@ -38,11 +33,19 @@ public class MenuController implements Initializable {
 	
 	@FXML
 	private GridPane gridPane;
+	
+	private Main m;
+	
+
+	
+	public MenuController() {
+		m = new Main();
+	}
 
 	
 
 	public void openNewProtocol(ActionEvent event) throws IOException {
-		Main m = new Main();
+		//Main m = new Main();
 		Parent p = m.returnParent("RecordDocument_PatientData.fxml");
 		borderPaneMenu.setCenter(p);
 		//gridPane.getChildren().removeAll();	
@@ -50,7 +53,7 @@ public class MenuController implements Initializable {
 	}
 
 	public  void openProtocolOverview(ActionEvent event) throws IOException {
-		Main m = new Main();
+		//Main m = new Main();
 		Parent p = m.returnParent("ProtocolOverview.fxml");
 		borderPaneMenu.setCenter(p);
 		

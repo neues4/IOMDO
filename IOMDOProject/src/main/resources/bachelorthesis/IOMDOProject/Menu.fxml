@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPaneMenu" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.HomeScreenController">
+<BorderPane fx:id="borderPaneMenu" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.MenuController">
    <top>
       <HBox alignment="TOP_RIGHT" minHeight="80.0" BorderPane.alignment="CENTER">
          <children>
@@ -49,7 +49,7 @@
       <VBox spacing="8.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="newProtocolBtn" mnemonicParsing="false" onAction="#openNewProtocol" prefHeight="80.0" prefWidth="200.0" text="%btn.newProtocol" />
-            <Button fx:id="protocolOverviewBtn" mnemonicParsing="false" onAction="#openProtocolOverview2" prefHeight="80.0" prefWidth="200.0" text="%btn.protocolOverview" />
+            <Button fx:id="protocolOverviewBtn" mnemonicParsing="false" onAction="#openProtocolOverview" prefHeight="80.0" prefWidth="200.0" text="%btn.protocolOverview" />
             <Button fx:id="createQueryBtn" mnemonicParsing="false" onAction="#openCreatQuery" prefHeight="80.0" prefWidth="200.0" text="%btn.createQuery" />
             <Button fx:id="expandOntologyBtn" mnemonicParsing="false" onAction="#openExpandOntology" prefHeight="80.0" prefWidth="200.0" text="%btn.expandOntology" />
             <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#openSettings" prefHeight="80.0" prefWidth="200.0" text="%btn.settings" />

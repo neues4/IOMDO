@@ -93,7 +93,7 @@ public class LogInController {
 		int lineNr = searchUsername(usernameTF.getText().toString());
 		skipLines(sc, lineNr);
 		if(usernameTF.getText().toString().equals(sc.next()) && passwordTF.getText().toString().equals(sc.next())) {
-			main.changeScene("Homescreen.fxml");
+			main.changeScene("Menu.fxml");
 			sc.close();
 		} else {wrongUsernameLabel.setText(I18n.getString("errorMsg.wrongCredentials"));
 		sc.close();}

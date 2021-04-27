@@ -22,10 +22,10 @@
     <RowConstraints maxHeight="335.60003051757815" minHeight="0.0" prefHeight="157.20003662109377" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TreeTableView prefHeight="267.0" prefWidth="787.0" GridPane.rowIndex="1">
+      <TreeTableView fx:id="ProtocolTTView" prefHeight="267.0" prefWidth="787.0" GridPane.rowIndex="1">
         <columns>
           <TreeTableColumn prefWidth="44.0" text="Fallnr." />
-          <TreeTableColumn prefWidth="64.0" text="Vorname" />
+          <TreeTableColumn fx:id="surnameTTColumn" prefWidth="64.0" text="Vorname" />
             <TreeTableColumn prefWidth="69.60003662109375" text="Nachname" />
             <TreeTableColumn prefWidth="81.60003662109375" text="Geburtstag" />
             <TreeTableColumn prefWidth="73.60003662109375" text="Diagnose" />
