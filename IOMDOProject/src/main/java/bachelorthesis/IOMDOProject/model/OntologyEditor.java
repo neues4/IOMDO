@@ -171,6 +171,61 @@ public class OntologyEditor {
 		DatatypeProperty firstName = ontModel.getDatatypeProperty(propURI);
 		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
 	}
+	
+	/**
+	 * Method to add the first name to a individual
+	 * @param indvURI the URI of the individual
+	 * @param name the name we want to add
+	 */
+	public void addFirstName(String indvURI, String name) {
+		Individual indv = ontModel.getIndividual(indvURI);
+		DatatypeProperty firstName = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000253");
+		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
+	}
+	
+	/**
+	 * Method to add the surname to a individual
+	 * @param indvURI the URI of the individual
+	 * @param name the name we want to add
+	 */
+	public void addSurname(String indvURI, String name) {
+		Individual indv = ontModel.getIndividual(indvURI);
+		DatatypeProperty firstName = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000254");
+		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
+	}
+	
+	/**
+	 * Method to add the PID to a individual
+	 * @param indvURI the URI of the individual
+	 * @param name the name we want to add
+	 */
+	public void addPID(String indvURI, String name) {
+		Individual indv = ontModel.getIndividual(indvURI);
+		DatatypeProperty firstName = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000251");
+		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
+	}
+	
+	/**
+	 * Method to add the FID to a individual
+	 * @param indvURI the URI of the individual
+	 * @param name the name we want to add
+	 */
+	public void addFID(String indvURI, String name) {
+		Individual indv = ontModel.getIndividual(indvURI);
+		DatatypeProperty firstName = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000252");
+		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
+	}
+	
+	/**
+	 * Method to add the birthday to a individual
+	 * @param indvURI the URI of the individual
+	 * @param name the name we want to add
+	 */
+	public void addBirthday(String indvURI, String name) {
+		Individual indv = ontModel.getIndividual(indvURI);
+		DatatypeProperty firstName = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000255");
+		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
+	}
 
 
 	/**
@@ -203,6 +258,61 @@ public class OntologyEditor {
 	public RDFNode getPropertyOfIndividual(String indvURI, String propURI) {
 		Individual indv = ontModel.getIndividual(indvURI);
 		DatatypeProperty property = ontModel.getDatatypeProperty(propURI);
+		return indv.getPropertyValue(property);
+	}
+	
+	/**
+	 * Method to get the first name of a specific individual
+	 * @param indvURI the URI of the individual
+	 * @return the first name of the individual
+	 */
+	public RDFNode getFirstName(String indvURI) {
+		Individual indv = ontModel.getIndividual(indvURI);
+		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000253");
+		return indv.getPropertyValue(property);
+	}
+	
+	/**
+	 * Method to get the surname of a specific individual
+	 * @param indvURI the URI of the individual
+	 * @return the surname of the individual
+	 */
+	public RDFNode getSurname(String indvURI) {
+		Individual indv = ontModel.getIndividual(indvURI);
+		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000254");
+		return indv.getPropertyValue(property);
+	}
+	
+	/**
+	 * Method to get the PID of a specific individual
+	 * @param indvURI the URI of the individual
+	 * @return the PID of the individual
+	 */
+	public RDFNode getPID(String indvURI) {
+		Individual indv = ontModel.getIndividual(indvURI);
+		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000251");
+		return indv.getPropertyValue(property);
+	}
+	
+	/**
+	 * Method to get the FID of a specific individual
+	 * @param indvURI the URI of the individual
+	 * @return the FID of the individual
+	 */
+	public RDFNode getFID(String indvURI) {
+		Individual indv = ontModel.getIndividual(indvURI);
+		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000252");
+		return indv.getPropertyValue(property);
+	}
+	
+	/**
+	 * Method to get the birthday of a specific individual
+	 * @param indvURI the URI of the individual
+	 * @return the birthday of the individual
+	 */
+	public RDFNode getBirthday(String indvURI) {
+		Individual indv = ontModel.getIndividual(indvURI);
+		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000255");
 		return indv.getPropertyValue(property);
 	}
 }
