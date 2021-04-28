@@ -3,9 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -17,29 +17,12 @@
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.60003662109375" minWidth="7.2000000000000455" prefWidth="7.2000000000000455" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="64.80000915527344" minHeight="10.0" prefHeight="18.40000381469727" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="406.39995117187505" minHeight="10.0" prefHeight="377.59999618530276" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="335.60003051757815" minHeight="0.0" prefHeight="157.20003662109377" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="104.00000114440918" minHeight="10.0" prefHeight="57.59999580383301" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="407.99998474121094" minHeight="0.0" prefHeight="4.799981689453119" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="406.39995117187505" minHeight="0.0" prefHeight="372.00001831054686" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="412.2000213623047" minHeight="0.0" prefHeight="143.99996643066413" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TreeTableView fx:id="ProtocolTTView" prefHeight="267.0" prefWidth="787.0" GridPane.rowIndex="1">
-        <columns>
-          <TreeTableColumn prefWidth="44.0" text="Fallnr." />
-          <TreeTableColumn fx:id="surnameTTColumn" prefWidth="64.0" text="Vorname" />
-            <TreeTableColumn prefWidth="69.60003662109375" text="Nachname" />
-            <TreeTableColumn prefWidth="81.60003662109375" text="Geburtstag" />
-            <TreeTableColumn prefWidth="73.60003662109375" text="Diagnose" />
-            <TreeTableColumn prefWidth="76.0" text="Operation" />
-            <TreeTableColumn prefWidth="72.0" text="OP-Datum" />
-            <TreeTableColumn prefWidth="52.0" text="FID" />
-            <TreeTableColumn prefWidth="60.7999267578125" text="PID" />
-            <TreeTableColumn prefWidth="79.99993896484375" text="Operateur" />
-            <TreeTableColumn prefWidth="107.199951171875" text="Assistent" />
-        </columns>
-         <GridPane.margin>
-            <Insets left="8.0" />
-         </GridPane.margin>
-      </TreeTableView>
       <HBox alignment="BOTTOM_LEFT" prefHeight="38.0" prefWidth="792.0" spacing="8.0">
          <children>
             <Label text="Suche">
@@ -58,5 +41,20 @@
             <Insets />
          </GridPane.margin>
       </HBox>
+      <TableView fx:id="protocolTblView" prefHeight="379.0" prefWidth="792.0" GridPane.rowIndex="2">
+        <columns>
+          <TableColumn prefWidth="40.800018310546875" text="Fallnr." />
+          <TableColumn fx:id="firstnameTblColumn" prefWidth="84.80001831054688" text="Vorname" />
+            <TableColumn fx:id="surnameTblColumn" prefWidth="79.199951171875" text="Nachname" />
+            <TableColumn prefWidth="96.800048828125" text="Geburtstag" />
+            <TableColumn prefWidth="75.0" text="Diagnose" />
+            <TableColumn prefWidth="75.0" text="Operation" />
+            <TableColumn prefWidth="75.0" text="OP-Datum" />
+            <TableColumn prefWidth="45.5999755859375" text="FID" />
+            <TableColumn prefWidth="75.20001220703125" text="PID" />
+            <TableColumn prefWidth="73.5999755859375" text="Operateur" />
+            <TableColumn prefWidth="64.800048828125" text="Assistent" />
+        </columns>
+      </TableView>
    </children>
 </GridPane>
