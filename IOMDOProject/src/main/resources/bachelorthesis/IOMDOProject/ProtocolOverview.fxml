@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -26,14 +25,13 @@
    <children>
       <HBox alignment="BOTTOM_LEFT" prefHeight="38.0" prefWidth="792.0" spacing="8.0">
          <children>
-            <Label text="Suche">
+            <Label text="%lbl.search">
                <padding>
                   <Insets left="8.0" />
                </padding>
             </Label>
             <TextField fx:id="searchTF" />
-            <ChoiceBox fx:id="columnSelectChoiceBox" prefWidth="150.0" />
-            <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#test" text="Button" />
+            <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="47.0" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -44,17 +42,17 @@
       </HBox>
       <TableView fx:id="protocolTblView" prefHeight="379.0" prefWidth="792.0" GridPane.rowIndex="2">
         <columns>
-          <TableColumn prefWidth="40.800018310546875" text="Fallnr." />
-          <TableColumn fx:id="firstnameTblColumn" prefWidth="84.80001831054688" text="Vorname" />
-            <TableColumn fx:id="surnameTblColumn" prefWidth="79.199951171875" text="Nachname" />
-            <TableColumn prefWidth="96.800048828125" text="Geburtstag" />
-            <TableColumn prefWidth="75.0" text="Diagnose" />
-            <TableColumn prefWidth="75.0" text="Operation" />
-            <TableColumn prefWidth="75.0" text="OP-Datum" />
-            <TableColumn prefWidth="45.5999755859375" text="FID" />
-            <TableColumn prefWidth="75.20001220703125" text="PID" />
-            <TableColumn prefWidth="73.5999755859375" text="Operateur" />
-            <TableColumn prefWidth="64.800048828125" text="Assistent" />
+          <TableColumn fx:id="caseNrColumn" prefWidth="40.800018310546875" text="%lbl.caseNr" />
+          <TableColumn fx:id="firstnameColumn" prefWidth="84.80001831054688" text="%lbl.firstName" />
+            <TableColumn fx:id="surnameColumn" prefWidth="79.199951171875" text="%lbl.surname" />
+            <TableColumn fx:id="dateOfBirthColumn" prefWidth="96.800048828125" text="%lbl.dateOfBirth" />
+            <TableColumn fx:id="diagnosisColumn" prefWidth="75.0" text="%lbl.diagnosis" />
+            <TableColumn fx:id="surgeryColumn" prefWidth="75.0" text="%lbl.surgery" />
+            <TableColumn fx:id="dateOfSurgeryColumn" prefWidth="75.0" text="%lbl.dateOfSurgery" />
+            <TableColumn fx:id="FIDColumn" prefWidth="45.5999755859375" text="%lbl.FID" />
+            <TableColumn fx:id="PIDColumn" prefWidth="75.20001220703125" text="%lbl.PID" />
+            <TableColumn fx:id="surgeonColumn" prefWidth="73.5999755859375" text="%lbl.surgeon" />
+            <TableColumn fx:id="assistantColumn" prefWidth="64.800048828125" text="%lbl.assistant" />
         </columns>
       </TableView>
    </children>

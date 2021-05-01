@@ -9971,6 +9971,21 @@ objectives is a planned process.</obo:IAO_0000116>
     
 
 
+    <!-- http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000218 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000218">
+        <rdf:type rdf:resource="http://medicis/spm.owl/OntoSPM#patient"/>
+        <IOMO:IOMO_0000250 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</IOMO:IOMO_0000250>
+        <IOMO:IOMO_0000251 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00001001</IOMO:IOMO_0000251>
+        <IOMO:IOMO_0000252 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1001</IOMO:IOMO_0000252>
+        <IOMO:IOMO_0000253>Benjamin</IOMO:IOMO_0000253>
+        <IOMO:IOMO_0000254>Blume</IOMO:IOMO_0000254>
+        <IOMO:IOMO_0000255 rdf:datatype="http://www.w3.org/2001/XMLSchema#date">01.01.1995</IOMO:IOMO_0000255>
+        <rdfs:label xml:lang="en">patient2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000262 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000262">
@@ -9980,7 +9995,7 @@ objectives is a planned process.</obo:IAO_0000116>
         <IOMO:IOMO_0000252 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1000</IOMO:IOMO_0000252>
         <IOMO:IOMO_0000253>Paul</IOMO:IOMO_0000253>
         <IOMO:IOMO_0000254>McCartney</IOMO:IOMO_0000254>
-        <IOMO:IOMO_0000255>12.12.1970</IOMO:IOMO_0000255>
+        <IOMO:IOMO_0000255 rdf:datatype="http://www.w3.org/2001/XMLSchema#date">12.12.1970</IOMO:IOMO_0000255>
         <rdfs:label xml:lang="en">patient 1</rdfs:label>
     </owl:NamedIndividual>
     
