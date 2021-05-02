@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.RDPatDatController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -32,7 +32,7 @@
                   <Insets left="-50.0" right="30.0" />
                </padding>
             </Label>
-            <TextField prefWidth="150.0" />
+            <TextField fx:id="caseNrTF" prefWidth="150.0" />
          </children>
          <GridPane.margin>
             <Insets />
@@ -48,7 +48,7 @@
                   <Insets left="-100.0" />
                </padding>
             </Label>
-            <TextField prefWidth="150.0" />
+            <TextField fx:id="surnameTF" prefWidth="150.0" />
          </children>
          <GridPane.margin>
             <Insets />
@@ -64,7 +64,7 @@
                   <Insets left="-50.0" right="30.0" />
                </padding>
             </Label>
-            <TextField prefWidth="150.0" />
+            <TextField fx:id="pidTF" prefWidth="150.0" />
          </children>
          <padding>
             <Insets right="-40.0" />
@@ -77,7 +77,7 @@
                   <Insets left="-100.0" />
                </padding>
             </Label>
-            <TextField prefWidth="150.0" />
+            <TextField fx:id="firstNameTF" prefWidth="150.0" />
          </children>
          <padding>
             <Insets right="-100.0" />
@@ -90,7 +90,7 @@
                   <Insets left="-50.0" right="30.0" />
                </padding>
             </Label>
-            <TextField prefWidth="150.0" />
+            <TextField fx:id="fidTF" prefWidth="150.0" />
          </children>
          <GridPane.margin>
             <Insets />
@@ -106,7 +106,7 @@
                   <Insets left="-100.0" />
                </padding>
             </Label>
-            <TextField prefWidth="150.0" />
+            <TextField fx:id="birthdayTF" prefWidth="150.0" />
          </children>
          <GridPane.margin>
             <Insets />
@@ -122,7 +122,7 @@
                   <Insets left="-50.0" right="30.0" />
                </padding>
             </Label>
-            <ChoiceBox prefWidth="150.0" />
+            <ComboBox fx:id="diagnosisCB" prefWidth="150.0" />
          </children>
          <padding>
             <Insets right="-40.0" />
@@ -151,7 +151,7 @@
                   <Insets left="-50.0" right="30.0" />
                </padding>
             </Label>
-            <ChoiceBox prefWidth="150.0" />
+            <ComboBox fx:id="surgeryCB" prefWidth="150.0" />
          </children>
          <padding>
             <Insets right="-40.0" />
@@ -164,7 +164,7 @@
                   <Insets left="-100.0" />
                </padding>
             </Label>
-            <ChoiceBox prefWidth="150.0" />
+            <ComboBox fx:id="surgeonCB" prefWidth="150.0" />
          </children>
          <padding>
             <Insets right="-100.0" />
@@ -177,7 +177,7 @@
                   <Insets left="-50.0" right="30.0" />
                </padding>
             </Label>
-            <ChoiceBox prefWidth="150.0" />
+            <ComboBox fx:id="deviceCB" prefWidth="150.0" />
          </children>
          <padding>
             <Insets right="-40.0" />
@@ -190,7 +190,7 @@
                   <Insets left="-100.0" />
                </padding>
             </Label>
-            <ChoiceBox prefWidth="150.0" />
+            <ComboBox fx:id="assistantCB" prefWidth="150.0" />
          </children>
          <padding>
             <Insets right="-100.0" />
@@ -201,7 +201,7 @@
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="%btn.next" />
+                  <Button fx:id="nextBtn" mnemonicParsing="false" onAction="#savePatientNext" prefHeight="30.0" prefWidth="100.0" text="%btn.next" />
                </children>
             </HBox>
          </children>
