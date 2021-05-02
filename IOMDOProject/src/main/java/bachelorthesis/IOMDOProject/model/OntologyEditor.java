@@ -30,7 +30,11 @@ import bachelorthesis.IOMDOProject.Main;
  */
 public class OntologyEditor {
 
+	// a new instance of an ontology model
 	private static OntModel ontModel;
+	
+	// a new counter to count the URIs
+	Counter uriCounter = new Counter(262);
 
 	/**
 	 * Constructor to create a new Ontology Editor.
@@ -148,17 +152,38 @@ public class OntologyEditor {
 
 
 	/**
+	 * DELETE! DO NOT USE!
 	 * Method to create a new individual
 	 * @param classURI the class URI of the class where a new individual should be added
 	 * @param newIndvURI the URI of the new individual (has to be edited with counter!)
 	 * @param indvLabel the label of the new individual
 	 */
-	public void createNewOntIndividual(String classURI, String newIndvURI, String indvLabel) {
+	/*
+	public void createNewOntIndividual(String classURI, String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass(classURI);
+		String iomoURI = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000";
+		//String newIndvURI = getOntologyURL().concat(iomo).concat("124");
+		Integer count = uriCounter.getValue();
+		String newIndvURI = iomoURI.concat(count.toString());
 		Individual indv = ontClass.createIndividual(newIndvURI);
+		indv.addLabel(indvLabel, "EN");
+		uriCounter.increment();	
+	}
+	 */
+
+	public void createNewPatient(String indvLabel) {
+		OntClass ontClass = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#patient");
+		Individual indv = ontClass.createIndividual(createNewURI());
 		indv.addLabel(indvLabel, "EN");
 	}
 
+	public String createNewURI() {
+		String iomoURI = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000";
+		Integer count = uriCounter.getValue();
+		String newURI = iomoURI.concat(count.toString());
+		uriCounter.increment();	
+		return newURI;
+	}
 
 	/**
 	 * Method to add property to individual
@@ -172,59 +197,94 @@ public class OntologyEditor {
 		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
 	}
 	
+	public String getIndividualURI() {
+		String indiURI = null;
+		Iterator iter = ontModel.listIndividuals();
+		if(iter.hasNext()) {
+			Individual indi = (Individual) iter.next();
+			indiURI = indi.getURI();
+			return indiURI;
+		}
+		return null; 
+	}
+
 	/**
 	 * Method to add the first name to a individual
 	 * @param indvURI the URI of the individual
 	 * @param name the name we want to add
 	 */
-	public void addFirstName(String indvURI, String name) {
-		Individual indv = ontModel.getIndividual(indvURI);
+	public void addFirstName(String name) {
+		Individual indv = ontModel.getIndividual(getIndividualURI());
 		DatatypeProperty firstName = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000253");
 		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
 	}
-	
+
 	/**
 	 * Method to add the surname to a individual
 	 * @param indvURI the URI of the individual
 	 * @param name the name we want to add
 	 */
-	public void addSurname(String indvURI, String name) {
-		Individual indv = ontModel.getIndividual(indvURI);
+	public void addSurname(String name) {
+		Individual indv = ontModel.getIndividual(getIndividualURI());
 		DatatypeProperty firstName = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000254");
 		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
 	}
-	
+
 	/**
 	 * Method to add the PID to a individual
 	 * @param indvURI the URI of the individual
 	 * @param name the name we want to add
 	 */
-	public void addPID(String indvURI, String name) {
-		Individual indv = ontModel.getIndividual(indvURI);
+	public void addPID(String name) {
+		Individual indv = ontModel.getIndividual(getIndividualURI());
 		DatatypeProperty firstName = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000251");
 		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
 	}
-	
+
 	/**
 	 * Method to add the FID to a individual
 	 * @param indvURI the URI of the individual
 	 * @param name the name we want to add
 	 */
-	public void addFID(String indvURI, String name) {
-		Individual indv = ontModel.getIndividual(indvURI);
+	public void addFID(String name) {
+		Individual indv = ontModel.getIndividual(getIndividualURI());
 		DatatypeProperty firstName = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000252");
 		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
 	}
-	
+
 	/**
 	 * Method to add the birthday to a individual
 	 * @param indvURI the URI of the individual
 	 * @param name the name we want to add
 	 */
-	public void addBirthday(String indvURI, String name) {
-		Individual indv = ontModel.getIndividual(indvURI);
+	public void addBirthday(String name) {
+		Individual indv = ontModel.getIndividual(getIndividualURI());
 		DatatypeProperty firstName = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000255");
 		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
+	}
+	
+	public void addDiagnosis() {
+		
+	}
+	
+	public void addSurgery() {
+		
+	}
+	
+	public void addISISDevice() {
+		
+	}
+	
+	public void addOperationDate() {
+		
+	}
+	
+	public void addSurgeon() {
+		
+	}
+	
+	public void addAssistant() {
+		
 	}
 
 
@@ -247,8 +307,8 @@ public class OntologyEditor {
 		}
 
 	}
-	
-	
+
+
 	/**
 	 * Method to return a specific value of a property of a specific individual
 	 * @param indvURI the URI of the individual
@@ -260,7 +320,7 @@ public class OntologyEditor {
 		DatatypeProperty property = ontModel.getDatatypeProperty(propURI);
 		return indv.getPropertyValue(property);
 	}
-	
+
 	/**
 	 * Method to get the first name of a specific individual
 	 * @param indvURI the URI of the individual
@@ -271,7 +331,7 @@ public class OntologyEditor {
 		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000253");
 		return indv.getPropertyValue(property);
 	}
-	
+
 	/**
 	 * Method to get the surname of a specific individual
 	 * @param indvURI the URI of the individual
@@ -282,7 +342,7 @@ public class OntologyEditor {
 		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000254");
 		return indv.getPropertyValue(property);
 	}
-	
+
 	/**
 	 * Method to get the PID of a specific individual
 	 * @param indvURI the URI of the individual
@@ -293,7 +353,7 @@ public class OntologyEditor {
 		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000251");
 		return indv.getPropertyValue(property);
 	}
-	
+
 	/**
 	 * Method to get the FID of a specific individual
 	 * @param indvURI the URI of the individual
@@ -304,7 +364,7 @@ public class OntologyEditor {
 		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000252");
 		return indv.getPropertyValue(property);
 	}
-	
+
 	/**
 	 * Method to get the birthday of a specific individual
 	 * @param indvURI the URI of the individual
