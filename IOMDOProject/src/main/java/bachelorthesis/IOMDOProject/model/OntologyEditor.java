@@ -149,6 +149,26 @@ public class OntologyEditor {
 		}
 		return indAL;
 	}
+	
+	public ArrayList<String> getAllPatients() {
+		ArrayList<String> patAl = new ArrayList();
+		Iterator indIter = ontModel.listIndividuals(ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#patient"));
+		while (indIter.hasNext()) {
+			Individual ind = (Individual) indIter.next();
+			patAl.add(ind.getLabel("EN"));
+		}
+		return patAl;
+	}
+	
+	public ArrayList<String> getAllPatientURIs() {
+		ArrayList<String> patAl = new ArrayList();
+		Iterator indIter = ontModel.listIndividuals(ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#patient"));
+		while (indIter.hasNext()) {
+			Individual ind = (Individual) indIter.next();
+			patAl.add(ind.getURI());
+		}
+		return patAl;
+	}
 
 
 	/**
@@ -208,6 +228,17 @@ public class OntologyEditor {
 		return null; 
 	}
 
+	/**
+	 * Method to add the nr to a individual
+	 * @param indvURI the URI of the individual
+	 * @param name the name we want to add
+	 */
+	public void addNr(String name) {
+		Individual indv = ontModel.getIndividual(getIndividualURI());
+		DatatypeProperty firstName = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000250");
+		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
+	}
+	
 	/**
 	 * Method to add the first name to a individual
 	 * @param indvURI the URI of the individual
