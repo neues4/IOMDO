@@ -76,6 +76,8 @@ public class ProtocolOverviewController  {
 	
 	private ObservableList<Patient> list = FXCollections.observableArrayList();
 	
+	private String patientURI;
+	
 	
 	 @FXML
 	    public void initialize() throws ParseException {
@@ -100,10 +102,15 @@ public class ProtocolOverviewController  {
 			//protocolTblView.setPlaceholder(new Label("placeholder"));
 			protocolTblView.setItems(list);
 
+			// Add all Patients to the List
+			ArrayList<String> AL = new ArrayList<String>(oe.getAllPatientURIs());
+			for (int i = 0; i < AL.size(); i++) {
+				patientURI = AL.get(i);
+				list.add(loadPatient(oe, patientURI));
+			}
 			
-			
-			list.add(loadPatient(oe, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000262"));
-			list.add(loadPatient(oe, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000276"));
+			//list.add(loadPatient(oe, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000262"));
+			//list.add(loadPatient(oe, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000276"));
 			
 			
 			FilteredList<Patient> filteredData = new FilteredList<>(FXCollections.observableList(list));
