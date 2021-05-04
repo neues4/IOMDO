@@ -1,13 +1,19 @@
 package bachelorthesis.IOMDOProject.controller;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Predicate;
 
-import bachelorthesis.IOMDOProject.I18n;
+//import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.model.OntologyEditor;
 import bachelorthesis.IOMDOProject.model.Patient;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -35,8 +41,6 @@ public class ProtocolOverviewController  {
 	@FXML
 	private TextField searchTF;
 	
-	
-	
 	@FXML
 	private Button resetBtn;
 	
@@ -48,11 +52,10 @@ public class ProtocolOverviewController  {
 	
 	@FXML
 	private TableColumn<Patient, String> firstnameColumn;
-	
 	@FXML
 	private TableColumn<Patient, String> caseNrColumn;
 	@FXML
-	private TableColumn<Patient, String> dateOfBirthColumn;	
+	private TableColumn<Patient, LocalDate> dateOfBirthColumn;	
 	@FXML
 	private TableColumn<Patient, String> diagnosisColumn;
 	@FXML
@@ -69,28 +72,38 @@ public class ProtocolOverviewController  {
 	private TableColumn<Patient, String> assistantColumn;
 	
 	
-	private OntologyEditor oe = new OntologyEditor("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IOMO_19.owl");
+	private OntologyEditor oe = new OntologyEditor("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IOMO_20.owl");
 	
 	private ObservableList<Patient> list = FXCollections.observableArrayList();
 	
 	
 	 @FXML
-	    public void initialize() {
+	    public void initialize() throws ParseException {
 		 
 			surnameColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("surname"));
 			firstnameColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("firstname"));
+	
 			
 			//date of birth funktioniert nicht!!!
-			dateOfBirthColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("birthday"));
+			//dateOfBirthColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("birthday"));
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.mm.yyyy");
+			
+			//dateOfBirthColumn.setCellValueFactory(( new PropertyValueFactory<Patient, LocalDate>("birthday")).getValue().birthdayProperty());
+			
+			dateOfBirthColumn.setCellValueFactory(cellData -> cellData.getValue().birthdayProperty());
+			
+		    
+			
 			FIDColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("FID"));
 			PIDColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("PID"));
 			
 			//protocolTblView.setPlaceholder(new Label("placeholder"));
 			protocolTblView.setItems(list);
+
 			
- 
+			
 			list.add(loadPatient(oe, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000262"));
-			list.add(loadPatient(oe, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000218"));
+			list.add(loadPatient(oe, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000276"));
 			
 			
 			FilteredList<Patient> filteredData = new FilteredList<>(FXCollections.observableList(list));
@@ -108,7 +121,6 @@ public class ProtocolOverviewController  {
 	 * @throws IOException
 	 */
 	public void reset(ActionEvent event) throws IOException{
-		
 		//protocolTblView.setPlaceholder(new Label("Nothing found"));		
 		searchTF.setText("");
         event.consume();
@@ -121,9 +133,12 @@ public class ProtocolOverviewController  {
 	 * @param oe
 	 * @param indvUri
 	 * @return
+	 * @throws ParseException 
 	 */
-	public Patient loadPatient(OntologyEditor oe, String indvUri) {
-		return new Patient(oe.getSurname(indvUri).toString(), oe.getFirstName(indvUri).toString(), oe.getBirthday(indvUri).toString(), oe.getPID(indvUri).toString(), oe.getFID(indvUri).toString());
+	public Patient loadPatient(OntologyEditor oe, String indvUri) throws ParseException {
+		//formatter.parse(oe.getBirthday(indvUri).toString().substring(0, 10));
+		System.out.println(oe.getBirthday(indvUri).toString());
+		return new Patient(oe.getSurname(indvUri).toString(), oe.getFirstName(indvUri).toString(), LocalDate.now() , oe.getPID(indvUri).toString(), oe.getFID(indvUri).toString());
 	}
 	
 	/**
@@ -135,7 +150,7 @@ public class ProtocolOverviewController  {
 	private boolean searchFindsPatient(Patient patient, String searchText) {
 		return (patient.getSurname().toLowerCase().contains(searchText.toLowerCase())) ||
 		            (patient.getFirstname().toLowerCase().contains(searchText.toLowerCase())) ||
-		            patient.getbirthday().toLowerCase().contains(searchText.toLowerCase()) ||
+		           // patient.getbirthday().toLowerCase().contains(searchText.toLowerCase()) ||
 		            patient.getFID().toLowerCase().contains(searchText.toLowerCase()) ||
 		            patient.getPID().toLowerCase().contains(searchText.toLowerCase()) ;
 		          //  Integer.valueOf(patient.getFID()).toString().equals(searchText.toLowerCase());

@@ -13,7 +13,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 
-
+/**
+ * 
+ * @author romap1
+ *
+ */
 public class MenuController implements Initializable {
 
 
@@ -27,22 +31,24 @@ public class MenuController implements Initializable {
 	private Button expandOntologyBtn;
 	@FXML
 	private Button settingsBtn;
+	@FXML
+	private Button logOutBtn;
 
 	@FXML
 	private BorderPane borderPaneMenu;
-	
+
 	@FXML
 	private GridPane gridPane;
-	
-	private Main m;
-	
 
-	
+	private Main m;
+
+
+
 	public MenuController() {
 		m = new Main();
 	}
 
-	
+
 
 	public void openNewProtocol(ActionEvent event) throws IOException {
 		//Main m = new Main();
@@ -56,25 +62,31 @@ public class MenuController implements Initializable {
 		//Main m = new Main();
 		Parent p = m.returnParent("ProtocolOverview.fxml");
 		borderPaneMenu.setCenter(p);
-		
+
 		//borderPaneMenu.setCenter(p);
 		//BorderPane bp = (BorderPane) this.borderPaneMenu;
 		//bp.setCenter(p);
-		
+
 		//gridPane.getChildren().removeAll();	
-		
+
 		//ersetzt nur Children aus ProtocolOverviev
 		//gridPane.getChildren().setAll(p.getChildrenUnmodifiable());
-		
+
 		//Ersetzt GridPane mit ProtocolOverview 
 		//gridPane.getChildren().setAll(p);
 
 
 	}
-	
-	
-	
-	
+
+	/**
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
+	public void logout(ActionEvent event) throws IOException {
+		m.changeScene("Login.fxml");
+	}
+
 	public void openCreatQuery(ActionEvent event) throws IOException {
 
 	}

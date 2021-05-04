@@ -1,6 +1,9 @@
 package bachelorthesis.IOMDOProject.model;
 
+import java.time.LocalDate;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Patient {
@@ -11,7 +14,7 @@ public class Patient {
 		private SimpleStringProperty firstname;
 		private SimpleStringProperty PID;
 		private SimpleStringProperty FID;
-		private SimpleStringProperty birthday;
+		private ObjectProperty <LocalDate>birthday;
 		
 		/**
 		 * 
@@ -21,14 +24,13 @@ public class Patient {
 		 * @param PID
 		 * @param FID
 		 */
-		public Patient(String surname, String firstname, String birthday, String PID, String FID) {
+		public Patient(String surname, String firstname, LocalDate birthday, String PID, String FID) {
 			this.surname = new SimpleStringProperty(surname);
 			this.firstname = new SimpleStringProperty(firstname);
-			this.birthday = new SimpleStringProperty(birthday);
+			this.birthday = new SimpleObjectProperty<>(birthday);
 			this.PID = new SimpleStringProperty(PID);
 			this.FID = new SimpleStringProperty(FID);
 		}
-		
 		
 		public String getSurname() {
 			return surname.get();
@@ -36,7 +38,7 @@ public class Patient {
 		public String getFirstname() {
 			return firstname.get();
 		}
-		public String getbirthday() {
+		public LocalDate getbirthday() {
 			return birthday.get();
 		}
 		public String getPID() {
@@ -45,6 +47,8 @@ public class Patient {
 		public String getFID() {
 			return FID.get();
 		}
-		
+		public ObjectProperty<LocalDate> birthdayProperty() {
+		    return birthday;
+		}
 	
 }

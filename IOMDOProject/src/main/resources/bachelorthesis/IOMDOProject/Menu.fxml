@@ -20,7 +20,7 @@
                <children>
                   <Label text="%lbl.loggedInAs" />
                   <Label text="Label" />
-                  <Button mnemonicParsing="false" text="%btn.logout" />
+                  <Button fx:id="logOutBtn" mnemonicParsing="false" onAction="#logout" text="%btn.logout" />
                </children>
                <HBox.margin>
                   <Insets right="8.0" top="8.0" />
