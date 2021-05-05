@@ -9994,7 +9994,7 @@ objectives is a planned process.</obo:IAO_0000116>
         <IOMO:IOMO_0000252 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1000</IOMO:IOMO_0000252>
         <IOMO:IOMO_0000253>Paul</IOMO:IOMO_0000253>
         <IOMO:IOMO_0000254>McCartney</IOMO:IOMO_0000254>
-        <IOMO:IOMO_0000255 rdf:datatype="http://www.w3.org/2001/XMLSchema#date">12.12.1970</IOMO:IOMO_0000255>
+        <IOMO:IOMO_0000255 rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2002.09.25</IOMO:IOMO_0000255>
         <rdfs:label xml:lang="en">patient 1</rdfs:label>
     </owl:NamedIndividual>
     
@@ -10081,7 +10081,7 @@ objectives is a planned process.</obo:IAO_0000116>
         <IOMO:IOMO_0000252 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1001</IOMO:IOMO_0000252>
         <IOMO:IOMO_0000253>Benjamin</IOMO:IOMO_0000253>
         <IOMO:IOMO_0000254>Blume</IOMO:IOMO_0000254>
-        <IOMO:IOMO_0000255 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">01.01.1991</IOMO:IOMO_0000255>
+        <IOMO:IOMO_0000255 rdf:datatype="http://www.w3.org/2001/XMLSchema#date">01.01.1991</IOMO:IOMO_0000255>
         <rdfs:label xml:lang="en">patient2</rdfs:label>
     </owl:NamedIndividual>
     

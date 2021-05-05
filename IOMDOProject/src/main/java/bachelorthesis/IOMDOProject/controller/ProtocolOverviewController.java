@@ -1,30 +1,20 @@
 package bachelorthesis.IOMDOProject.controller;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 import java.util.function.Predicate;
-
-//import bachelorthesis.IOMDOProject.I18n;
+import org.apache.jena.datatypes.xsd.XSDDatatype;
 import bachelorthesis.IOMDOProject.model.OntologyEditor;
 import bachelorthesis.IOMDOProject.model.Patient;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
@@ -55,7 +45,7 @@ public class ProtocolOverviewController  {
 	@FXML
 	private TableColumn<Patient, String> caseNrColumn;
 	@FXML
-	private TableColumn<Patient, LocalDate> dateOfBirthColumn;	
+	private TableColumn<Patient, String> dateOfBirthColumn;	
 	@FXML
 	private TableColumn<Patient, String> diagnosisColumn;
 	@FXML
@@ -87,12 +77,12 @@ public class ProtocolOverviewController  {
 	
 			
 			//date of birth funktioniert nicht!!!
-			//dateOfBirthColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("birthday"));
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.mm.yyyy");
+			dateOfBirthColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("birthday"));
+			//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.mm.yyyy");
 			
 			//dateOfBirthColumn.setCellValueFactory(( new PropertyValueFactory<Patient, LocalDate>("birthday")).getValue().birthdayProperty());
 			
-			dateOfBirthColumn.setCellValueFactory(cellData -> cellData.getValue().birthdayProperty());
+			//dateOfBirthColumn.setCellValueFactory(cellData -> cellData.getValue().birthdayProperty());
 			
 		    
 			
@@ -143,9 +133,14 @@ public class ProtocolOverviewController  {
 	 * @throws ParseException 
 	 */
 	public Patient loadPatient(OntologyEditor oe, String indvUri) throws ParseException {
-		//formatter.parse(oe.getBirthday(indvUri).toString().substring(0, 10));
-		System.out.println(oe.getBirthday(indvUri).toString());
-		return new Patient(oe.getSurname(indvUri).toString(), oe.getFirstName(indvUri).toString(), LocalDate.now() , oe.getPID(indvUri).toString(), oe.getFID(indvUri).toString());
+		//System.out.println(oe.getBirthday(indvUri).toString().replace("^^" + XSDDatatype.XSDdate.getURI(), ""));
+		//System.out.println(XSDDatatype.XSDdate.getURI());
+		//System.out.println(XSDDatatype.XSDdate.unparse(oe.getBirthday(indvUri)));
+		//System.out.println(XSDDatatype.XSDdate.parse("2002-09-24"));
+		//System.out.println(XSDDatatype.XSDdate.trimPlus(XSDDatatype.XSDdate.getURI()));
+		
+		
+		return new Patient(oe.getSurname(indvUri).toString(), oe.getFirstName(indvUri).toString(), oe.getBirthdayValue(indvUri), oe.getPID(indvUri).toString(), oe.getFID(indvUri).toString());
 	}
 	
 	/**
@@ -157,13 +152,11 @@ public class ProtocolOverviewController  {
 	private boolean searchFindsPatient(Patient patient, String searchText) {
 		return (patient.getSurname().toLowerCase().contains(searchText.toLowerCase())) ||
 		            (patient.getFirstname().toLowerCase().contains(searchText.toLowerCase())) ||
-		           // patient.getbirthday().toLowerCase().contains(searchText.toLowerCase()) ||
+		            patient.getBirthday().toLowerCase().contains(searchText.toLowerCase()) ||
 		            patient.getFID().toLowerCase().contains(searchText.toLowerCase()) ||
 		            patient.getPID().toLowerCase().contains(searchText.toLowerCase()) ;
 		          //  Integer.valueOf(patient.getFID()).toString().equals(searchText.toLowerCase());
 		}
-	
-	
 	
 	/**
 	 * 

@@ -9,6 +9,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.ontology.DatatypeProperty;
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
@@ -394,7 +395,7 @@ public class OntologyEditor {
 		Individual indv = ontModel.getIndividual(indvURI);
 		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000252");
 		return indv.getPropertyValue(property);
-	}
+	}                              
 
 	/**
 	 * Method to get the birthday of a specific individual
@@ -405,5 +406,16 @@ public class OntologyEditor {
 		Individual indv = ontModel.getIndividual(indvURI);
 		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000255");
 		return indv.getPropertyValue(property);
+	}
+	
+	/**
+	 * Method to get the birthday of a specific individual as String
+	 * @param indvURI
+	 * @return the birthday of the individual as String
+	 */ 
+	public String getBirthdayValue(String indvURI) {
+		Individual indv = ontModel.getIndividual(indvURI);
+		RDFNode node  = indv.getPropertyValue(ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000255"));
+		return node.toString().replace("^^" + XSDDatatype.XSDdate.getURI(), "").toString();
 	}
 }
