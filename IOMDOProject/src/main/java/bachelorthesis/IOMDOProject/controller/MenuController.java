@@ -33,6 +33,9 @@ public class MenuController implements Initializable {
 	private Button settingsBtn;
 	@FXML
 	private Button logOutBtn;
+	@FXML
+	private Button test;
+	
 
 	@FXML
 	private BorderPane borderPaneMenu;
@@ -48,7 +51,11 @@ public class MenuController implements Initializable {
 		m = new Main();
 	}
 
-
+	//übergangslösung für verknüpfung zuIOMDocumentation.fxml
+	public  void test(ActionEvent event) throws IOException {
+		Parent p = m.returnParent("IOMDocumentation.fxml");
+		borderPaneMenu.setCenter(p);
+	}
 
 	public void openNewProtocol(ActionEvent event) throws IOException {
 		//Main m = new Main();

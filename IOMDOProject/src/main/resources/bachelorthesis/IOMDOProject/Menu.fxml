@@ -56,4 +56,11 @@
          </children>
       </VBox>
    </left>
+   <bottom>
+      <Button fx:id="test" mnemonicParsing="false" onAction="#test" text="Button" BorderPane.alignment="TOP_RIGHT">
+         <BorderPane.margin>
+            <Insets bottom="8.0" right="8.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
 </BorderPane>
