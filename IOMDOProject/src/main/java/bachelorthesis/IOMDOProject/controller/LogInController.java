@@ -48,7 +48,7 @@ public class LogInController {
 	 */
 	public void userLogIn(ActionEvent event) throws IOException{
 
-		file = new File("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\loginInfo.txt");
+		file = new File("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/loginInfo.txt");
 		validateLogIn();
 
 	}

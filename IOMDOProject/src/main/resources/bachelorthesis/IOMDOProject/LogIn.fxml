@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -33,28 +35,38 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="wrongUsernameLabel" alignment="TOP_LEFT" maxWidth="200.0" textFill="#d41717" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button fx:id="logInBtn" mnemonicParsing="false" onAction="#userLogIn" text="%btn.logIn" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <Label text="%lbl.username" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Label fx:id="wrongUsernameLabel" alignment="TOP_LEFT" maxWidth="200.0" textFill="#d41717" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button fx:id="logInBtn" mnemonicParsing="false" onAction="#userLogIn" text="%btn.logIn" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Label text="%lbl.username" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTF" promptText="%lbl.username" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Label text="%lbl.password" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <TextField fx:id="usernameTF" promptText="%lbl.username" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label text="%lbl.password" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <PasswordField fx:id="passwordTF" promptText="%lbl.password" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <Hyperlink fx:id="newAccountHL" onAction="#newAccountScreen" text="%hl.createNewAccount" GridPane.columnIndex="4" GridPane.rowIndex="9" />
-            <Label text="%lbl.LogIn" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <PasswordField fx:id="passwordTF" promptText="%lbl.password" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Hyperlink fx:id="newAccountHL" onAction="#newAccountScreen" text="%hl.createNewAccount" GridPane.columnIndex="4" GridPane.rowIndex="10" />
+            <Label text="%lbl.LogIn" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
+            <AnchorPane prefHeight="48.0" prefWidth="397.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="3">
+               <children>
+                  <ImageView fitHeight="226.0" fitWidth="550.0" layoutX="5.0" layoutY="2.0">
+                     <image>
+                        <Image url="@Logo.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
          </children>
       </GridPane>
    </center>
