@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -32,7 +33,7 @@
                   <Insets left="-50.0" right="30.0" />
                </padding>
             </Label>
-            <TextField fx:id="caseNrTF" prefWidth="150.0" />
+            <TextField fx:id="caseNrTF" />
          </children>
          <GridPane.margin>
             <Insets />
@@ -122,7 +123,7 @@
                   <Insets left="-50.0" right="30.0" />
                </padding>
             </Label>
-            <ComboBox fx:id="diagnosisCB" prefWidth="150.0" />
+            <JFXComboBox fx:id="diagnosisCB" prefWidth="150.0" />
          </children>
          <padding>
             <Insets right="-40.0" />
@@ -135,7 +136,7 @@
                   <Insets left="-100.0" />
                </padding>
             </Label>
-            <TextField prefWidth="150.0" />
+            <TextField fx:id="dateOfSurgeryTF" prefWidth="150.0" />
          </children>
          <GridPane.margin>
             <Insets />
@@ -201,7 +202,7 @@
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="nextBtn" mnemonicParsing="false" onAction="#savePatientNext" prefHeight="30.0" prefWidth="100.0" text="%btn.next" />
+                  <Button fx:id="nextBtn" mnemonicParsing="false" onAction="#savePatientNext" text="%btn.next" />
                </children>
             </HBox>
          </children>
