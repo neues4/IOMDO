@@ -24,6 +24,7 @@ public class Main extends Application {
 		I18n.setLocale(new Locale("de_CH"));
 		staticStage = stage;
 		scene = new Scene(loadFXML("LogIn"));
+		scene.getStylesheets().add(getClass().getResource("style1.css").toExternalForm());
 		stage.setTitle(I18n.getString("start.titel"));
 		stage.setScene(scene);
 		stage.show();
