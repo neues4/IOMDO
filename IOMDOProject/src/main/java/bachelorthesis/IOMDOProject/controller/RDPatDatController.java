@@ -92,13 +92,6 @@ public class RDPatDatController {
 
 	Counter patNumber = new Counter(1);
 
-	private final MenuController contr;
-
-	public RDPatDatController() {
-			contr = new MenuController();
-	}
-
-
 	@FXML
 	public void initialize() {
 		diagnosisCB.setItems(diagnosisList);
@@ -110,7 +103,6 @@ public class RDPatDatController {
 
 	@FXML
 	public void savePatientNext(ActionEvent event) throws IOException {
-
 
 		Integer patNum = patNumber.getValue();
 		String patLabel = "Patient".concat(patNum.toString());
@@ -141,8 +133,6 @@ public class RDPatDatController {
 
 		ontEdit.saveNewOWLFile(); 	
 		patNumber.increment();
-	
-
 	}
 
 }
