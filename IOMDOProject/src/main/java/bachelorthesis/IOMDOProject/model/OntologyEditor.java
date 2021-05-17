@@ -361,6 +361,7 @@ public class OntologyEditor {
 
 	/**
 	 * Method to get the birthday of a specific individual as String
+	 * @author romap1
 	 * @param indvURI
 	 * @return the birthday of the individual as String
 	 */ 

@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import bachelorthesis.IOMDOProject.model.OntologyEditor;
 import bachelorthesis.IOMDOProject.model.Patient;
+import bachelorthesis.IOMDOProject.model.Surgery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -47,22 +48,22 @@ public class ProtocolOverviewController  {
 	@FXML
 	private TableColumn<Patient, String> dateOfBirthColumn;	
 	@FXML
-	private TableColumn<Patient, String> diagnosisColumn;
+	private TableColumn<Surgery, String> diagnosisColumn;
 	@FXML
-	private TableColumn<Patient, String> surgeryColumn;
+	private TableColumn<Surgery, String> surgeryColumn;
 	@FXML
-	private TableColumn<Patient, String> dateOfSurgeryColumn;
+	private TableColumn<Surgery, String> dateOfSurgeryColumn;
 	@FXML
 	private TableColumn<Patient, String> FIDColumn;
 	@FXML
 	private TableColumn<Patient, String> PIDColumn;
 	@FXML
-	private TableColumn<Patient, String> surgeonColumn;
+	private TableColumn<Surgery, String> surgeonColumn;
 	@FXML
-	private TableColumn<Patient, String> assistantColumn;
+	private TableColumn<Surgery, String> assistantColumn;
 	
 	
-	private OntologyEditor oe = new OntologyEditor("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IOMO_20.owl");
+	private OntologyEditor oe = new OntologyEditor("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IOMO_23.owl");
 	
 	private ObservableList<Patient> list = FXCollections.observableArrayList();
 	
@@ -72,22 +73,23 @@ public class ProtocolOverviewController  {
 	 @FXML
 	    public void initialize() throws ParseException {
 		 
+		 caseNrColumn.setCellValueFactory(new PropertyValueFactory<>("caseNr"));
 			surnameColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("surname"));
 			firstnameColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("firstname"));
-	
-			
-			//date of birth funktioniert nicht!!!
 			dateOfBirthColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("birthday"));
-			//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.mm.yyyy");
-			
+			//diagnosisColumn.setCellValueFactory(new PropertyValueFactory<Surgery, String>("diagnosis"));
+			//surgeryColumn.setCellValueFactory(new PropertyValueFactory<Surgery, String>("surgery"));
+			//dateOfSurgeryColumn.setCellValueFactory(new PropertyValueFactory<Surgery, String>("surgerydate"));
+			//surgeonColumn.setCellValueFactory(new PropertyValueFactory<Surgery, String>("surgeon"));
+			//assistantColumn.setCellValueFactory(new PropertyValueFactory<Surgery, String>("assistant"));
 			//dateOfBirthColumn.setCellValueFactory(( new PropertyValueFactory<Patient, LocalDate>("birthday")).getValue().birthdayProperty());
-			
 			//dateOfBirthColumn.setCellValueFactory(cellData -> cellData.getValue().birthdayProperty());
 			
 		    
 			
 			FIDColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("FID"));
 			PIDColumn.setCellValueFactory(new PropertyValueFactory<Patient, String>("PID"));
+			
 			
 			//protocolTblView.setPlaceholder(new Label("placeholder"));
 			protocolTblView.setItems(list);
@@ -140,7 +142,7 @@ public class ProtocolOverviewController  {
 		//System.out.println(XSDDatatype.XSDdate.trimPlus(XSDDatatype.XSDdate.getURI()));
 		
 		
-		return new Patient(oe.getSurname(indvUri).toString(), oe.getFirstName(indvUri).toString(), oe.getBirthdayValue(indvUri), oe.getPID(indvUri).toString(), oe.getFID(indvUri).toString());
+		return new Patient(oe.getSurname(indvUri).toString(), oe.getFirstName(indvUri).toString(), oe.getBirthdayValue(indvUri), oe.getPID(indvUri).toString(), oe.getFID(indvUri).toString(), 1);
 	}
 	
 	/**
