@@ -28,7 +28,7 @@ import javafx.util.StringConverter;
  *
  */
 public class RDPatDatController {
-	
+
 
 	//für Mac
 	OntologyEditor ontEdit = new OntologyEditor("/Users/stefanie/Desktop/IOMO_27.owl");
@@ -89,15 +89,9 @@ public class RDPatDatController {
 
 	@FXML
 	private Button nextBtn;
-	
+
 	Counter patNumber = new Counter(1);
-	
-	private MenuController controller;
-	
-	@FXML
-	private BorderPane borderPaneMenu;
-	
-	
+
 	@FXML
 	public void initialize() {
 		diagnosisCB.setItems(diagnosisList);
@@ -105,25 +99,30 @@ public class RDPatDatController {
 		surgeonCB.setItems(surgeonList);
 		deviceCB.setItems(deviceList);
 		assistantCB.setItems(assistantList);
-		//FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"), I18n.getResourceBundle());
-	
 	}
 
 	@FXML
 	public void savePatientNext(ActionEvent event) throws IOException {
-		
-	
+
 		Integer patNum = patNumber.getValue();
 		String patLabel = "Patient".concat(patNum.toString());
 
-		ontEdit.createNewPatient(patLabel);
-		ontEdit.createSurgery(ontEdit.getAllSurgeries().get(surgeryCB.getSelectionModel().getSelectedItem()), "Surgery");
-		ontEdit.createDiagnosis(ontEdit.getAllDiagnosis().get(diagnosisCB.getSelectionModel().getSelectedItem()), "Diagnosis");
+		String pat = ontEdit.createNewPatient(patLabel); 
 
+		ontEdit.addPropertiesToPatient(pat, caseNrTF.getText(), pidTF.getText(), fidTF.getText(), firstNameTF.getText(), surnameTF.getText(), birthdayTF.getText());
 
-		ontEdit.addPropertiesToPatient(caseNrTF.getText(), pidTF.getText(), fidTF.getText(), firstNameTF.getText(), surnameTF.getText(), birthdayTF.getText());
+		String surgery= ontEdit.createSurgery(ontEdit.getAllSurgeries().get(surgeryCB.getSelectionModel().getSelectedItem()), "Surgery");
 
-		ontEdit.addPropertiesToSurgery(dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem());
+		ontEdit.addPropertiesToSurgery(surgery, dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem());
+
+		String diagnosis = ontEdit.createDiagnosis(ontEdit.getAllDiagnosis().get(diagnosisCB.getSelectionModel().getSelectedItem()), "Diagnosis");
+
+		String iomDocument = ontEdit.createNewIOMDocument("Document");
+
+		ontEdit.addStatement(pat, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000285", iomDocument);
+		ontEdit.addStatement(iomDocument, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", surgery);
+		ontEdit.addStatement(iomDocument, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", diagnosis);
+
 
 		//ontEdit.addStatement(ontEdit.createNewPatient(patLabel), "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", ontEdit.createDiagnosis(diagnosisCB.getSelectionModel().getSelectedItem()));
 
@@ -132,12 +131,8 @@ public class RDPatDatController {
 		System.out.println(surgeryCB.getSelectionModel().getSelectedItem());
 
 
-
 		ontEdit.saveNewOWLFile(); 	
 		patNumber.increment();
-		 
-	
-
 	}
 
 }
