@@ -29,8 +29,8 @@ public class RDPatDatController {
 	
 
 	// für Mac
-	OntologyEditor ontEdit = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_23.owl");
-
+	//OntologyEditor ontEdit = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_23.owl");
+	OntologyEditor ontEdit = new OntologyEditor("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IOMO_23.owl");
 
 	// Diagnosis
 	ObservableList<String> diagnosisList = FXCollections.observableArrayList(ontEdit.getAllDiagnosis().keySet());
@@ -90,6 +90,11 @@ public class RDPatDatController {
 	
 	Counter patNumber = new Counter(1);
 	
+	private MenuController controller;
+	
+	@FXML
+	private BorderPane borderPaneMenu;
+	
 	
 	@FXML
 	public void initialize() {
@@ -98,11 +103,14 @@ public class RDPatDatController {
 		surgeonCB.setItems(surgeonList);
 		deviceCB.setItems(deviceList);
 		assistantCB.setItems(assistantList);
+		//FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"), I18n.getResourceBundle());
+	
 	}
 
 	@FXML
 	public void savePatientNext(ActionEvent event) throws IOException {
-		/*
+		
+	
 		Integer patNum = patNumber.getValue();
 		String patLabel = "Patient".concat(patNum.toString());
 
@@ -123,10 +131,9 @@ public class RDPatDatController {
 
 
 
-
 		ontEdit.saveNewOWLFile(); 	
 		patNumber.increment();
-		 */
+		 
 	
 
 	}
