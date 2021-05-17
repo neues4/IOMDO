@@ -30,9 +30,9 @@ import javafx.util.StringConverter;
 public class RDPatDatController {
 	
 
-	// für Mac
-	//OntologyEditor ontEdit = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_23.owl");
-	OntologyEditor ontEdit = new OntologyEditor("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IOMO_23.owl");
+	//für Mac
+	OntologyEditor ontEdit = new OntologyEditor("/Users/stefanie/Desktop/IOMO_27.owl");
+
 
 	// Diagnosis
 	ObservableList<String> diagnosisList = FXCollections.observableArrayList(ontEdit.getAllDiagnosis().keySet());
