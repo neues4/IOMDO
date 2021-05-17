@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane dividerPositions="0.194229112833764" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="466.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.IOMDocumentationController">
+<SplitPane fx:id="splitpane" dividerPositions="0.194229112833764" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="466.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.IOMDocumentationController">
   <items>
       <GridPane>
         <columnConstraints>
@@ -23,10 +23,13 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <Button fx:id="save" mnemonicParsing="false" onAction="#save" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
       </GridPane>
       <ScrollPane hbarPolicy="NEVER" prefHeight="398.0" prefWidth="848.0">
          <content>
-            <GridPane fx:id="infoGrid" hgap="8.0" prefHeight="379.0" prefWidth="800.0" vgap="8.0">
+            <GridPane fx:id="infoGrid" gridLinesVisible="true" hgap="8.0" prefHeight="379.0" prefWidth="800.0" vgap="8.0">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.2000274658203" minWidth="8.6000337600708" prefWidth="61.40001678466797" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="413.3999662399292" minWidth="10.0" prefWidth="173.59997253417973" />
@@ -45,31 +48,30 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="4.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label text="Label" />
-                        <TextField />
-                        <Button fx:id="addRowBtn" mnemonicParsing="false" onAction="#addRow" text="Button" />
+                        <Label text="%lbl.time" />
+                        <TextField fx:id="timeStartTF" />
+                        <Button id="test" fx:id="addRowBtn" mnemonicParsing="false" onAction="#addRow" text="Button" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="4.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Label text="Label" />
-                        <ComboBox prefWidth="150.0" />
+                        <Label text="%lbl.category" />
+                        <ComboBox fx:id="categoryIOMStart" prefWidth="150.0" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="4.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <children>
-                        <Label text="Label" />
-                        <ComboBox prefWidth="150.0" />
+                        <Label text="%lbl.entry" />
+                        <ComboBox fx:id="entryIOMStart" prefWidth="150.0" />
                         <Button mnemonicParsing="false" text="Button" visible="false" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="4.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                      <children>
-                        <Label text="Label" />
-                        <TextField />
+                        <Label text="%lbl.comment" />
+                        <TextField fx:id="commentIOMStart" />
                      </children>
                   </VBox>
-                  <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="5" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </content>
