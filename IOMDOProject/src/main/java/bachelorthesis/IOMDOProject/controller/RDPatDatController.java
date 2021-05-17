@@ -30,7 +30,7 @@ import javafx.util.StringConverter;
 public class RDPatDatController {
 
 
-	// für Mac
+	//für Mac
 	OntologyEditor ontEdit = new OntologyEditor("/Users/stefanie/Desktop/IOMO_27.owl");
 
 
