@@ -64,7 +64,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="test" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#test" text="Button" />
+            <Button fx:id="test" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#test" text="IOM Erfassung" />
          </children>
       </HBox>
    </bottom>

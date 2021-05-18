@@ -32,8 +32,8 @@ public class RDPatDatController {
 
 	//für Mac
 	OntologyEditor ontEdit = new OntologyEditor("/Users/stefanie/Desktop/IOMO_27.owl");
-
-
+	//Windows
+	//OntologyEditor ontEdit = new OntologyEditor("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IOMO_28.owl");
 	// Diagnosis
 	ObservableList<String> diagnosisList = FXCollections.observableArrayList(ontEdit.getAllDiagnosis().keySet());
 

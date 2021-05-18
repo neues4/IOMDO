@@ -11,19 +11,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="gridPaneProtocolOverview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" vgap="8.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ProtocolOverviewController">
+<GridPane fx:id="gridPaneProtocolOverview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="8.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ProtocolOverviewController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="793.6" minWidth="10.0" prefWidth="793.6" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.60003662109375" minWidth="7.2000000000000455" prefWidth="7.2000000000000455" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="794.799951171875" minWidth="10.0" prefWidth="790.0000244140625" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.60003662109375" minWidth="4.800048828125" prefWidth="9.5999755859375" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="104.00000114440918" minHeight="10.0" prefHeight="57.59999580383301" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="407.99998474121094" minHeight="0.0" prefHeight="4.799981689453119" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="406.39995117187505" minHeight="0.0" prefHeight="372.00001831054686" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="412.2000213623047" minHeight="0.0" prefHeight="143.99996643066413" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <HBox alignment="BOTTOM_LEFT" prefHeight="38.0" prefWidth="792.0" spacing="8.0">
+      <HBox alignment="BOTTOM_LEFT" prefHeight="38.0" prefWidth="792.0" spacing="8.0" GridPane.rowIndex="1">
          <children>
             <Label text="%lbl.search">
                <padding>

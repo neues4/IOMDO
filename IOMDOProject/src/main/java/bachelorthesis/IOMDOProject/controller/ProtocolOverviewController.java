@@ -63,8 +63,8 @@ public class ProtocolOverviewController  {
 	private TableColumn<Surgery, String> assistantColumn;
 	
 	
-	private OntologyEditor oe = new OntologyEditor("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IOMO_23.owl");
-	
+	//private OntologyEditor oe = new OntologyEditor("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IOMO_28.owl");
+	private OntologyEditor oe = new OntologyEditor("myModel.owl");
 	private ObservableList<Patient> list = FXCollections.observableArrayList();
 	
 	private String patientURI;
@@ -141,8 +141,11 @@ public class ProtocolOverviewController  {
 		//System.out.println(XSDDatatype.XSDdate.parse("2002-09-24"));
 		//System.out.println(XSDDatatype.XSDdate.trimPlus(XSDDatatype.XSDdate.getURI()));
 		
-		
-		return new Patient(oe.getSurname(indvUri).toString(), oe.getFirstName(indvUri).toString(), oe.getBirthdayValue(indvUri), oe.getPID(indvUri).toString(), oe.getFID(indvUri).toString(), 1);
+		//.replace("^^" + XSDDatatype.XSDint.getURI(), "eger").toString()
+		//^^http://www.w3.org/2001/XMLSchema#integer
+		return new Patient(oe.getSurname(indvUri).toString(), oe.getFirstName(indvUri).toString(), 
+				oe.getBirthdayValue(indvUri), oe.getPID(indvUri).toString(), oe.getFID(indvUri).toString(), 
+				Integer.parseInt(oe.getCaseNumber(indvUri).toString().replace("^^" + XSDDatatype.XSDint.getURI(), "").toString()));
 	}
 	
 	/**

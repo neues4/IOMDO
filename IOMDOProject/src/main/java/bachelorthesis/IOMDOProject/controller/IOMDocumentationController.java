@@ -2,16 +2,20 @@ package bachelorthesis.IOMDOProject.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -44,13 +48,13 @@ public class IOMDocumentationController {
 
 	@FXML
 	private TextField timeStartTF;
-	
+
 	@FXML
 	private ComboBox<String> categoryIOMStart;
-	
+
 	@FXML
 	private ComboBox<String> entryIOMStart;
-	
+
 	@FXML
 	private TextField commentIOMStart;
 
@@ -58,7 +62,13 @@ public class IOMDocumentationController {
 
 	private Map<String, Node> nodeList = new HashMap<String, Node>();
 
-	public void initialize(URL location, ResourceBundle resources) {
+
+	private ObservableList<String> categoryList = FXCollections.observableArrayList("cat1", "cat2");
+	private ObservableList<String> entryList = FXCollections.observableArrayList("entry1", "entry2");
+
+	public void initialize() {
+		categoryIOMStart.setItems(categoryList);
+		entryIOMStart.setItems(entryList);
 
 	}
 
@@ -71,13 +81,15 @@ public class IOMDocumentationController {
 		//create nessecary nodes
 		TextField timeTF = new TextField();	
 		ComboBox<String> categoryCB = new ComboBox<String>();
+		categoryCB.setItems(categoryList);
 		ComboBox<String> entryCB = new ComboBox<String>();
+		entryCB.setItems(entryList);
 		TextField commentTF = new TextField();
 		Button deleteBtn = new Button();
 		//E:\Bachelorthesis2021Workspace\maven.1618306824553\IOMDOProject\src\main\resources\bachelorthesis\IOMDOProject
 		//Image img = new Image("/src/main/resources/bachelorthesis/IOMDOProject/173-bin.png");
-	     //ImageView view = new ImageView(img);
-	    // deleteBtn.setGraphic(view);
+		//ImageView view = new ImageView(img);
+		// deleteBtn.setGraphic(view);
 		//add nodes to HashMap, Key is ROW + Columnnumber. eg. Key = 21 for Node in ROW 2, Columne 1. 
 		nodeList.put(row + "1", timeTF );
 		nodeList.put(row + "2", categoryCB );
@@ -117,19 +129,19 @@ public class IOMDocumentationController {
 	 * @throws IOException
 	 */
 	public  void save(ActionEvent event) throws IOException {
-		
-		System.out.println(timeStartTF.getText());
-		//categoryIOMStart.getId();
-		//entryIOMStart.getId();
-		System.out.println(commentIOMStart.getText());
+
+		System.out.println("Zeit: " + timeStartTF.getText());
+		System.out.println("Kategorie: " + categoryIOMStart.getSelectionModel().getSelectedItem());
+		System.out.println("Eintrag: " + entryIOMStart.getSelectionModel().getSelectedItem());
+		System.out.println("Kommentar: " + commentIOMStart.getText());
 
 		int rowsToRead = nodeList.size()/4;
 		for(int i= 1; i <= rowsToRead; i++) {
-			System.out.println(getTextField(nodeList.get( i + 1 +"" + 1)).getText());
-			getComboBox(nodeList.get( i + 1 +"" + 2));
-			getComboBox(nodeList.get( i + 1 +"" + 3));
-			System.out.println(getTextField(nodeList.get( i + 1 +"" + 4)).getText());
-		
+			System.out.println("Zeit: " + getTextField(  nodeList.get( i + 1 +"" + 1)).getText());
+			System.out.println("Kategorie: " + getComboBox(nodeList.get( i + 1 +"" + 2)).getSelectionModel().getSelectedItem());
+			System.out.println("Eintrag: " + getComboBox(nodeList.get( i + 1 +"" + 3)).getSelectionModel().getSelectedItem());
+			System.out.println("Kommentar: " + getTextField(nodeList.get( i + 1 +"" + 4)).getText());
+			
 		}
 		//Node node = nodeList.get("21");
 		//TextField test =  (TextField) node.getClass().cast(node);
@@ -146,12 +158,12 @@ public class IOMDocumentationController {
 			TextField test = (TextField) node.getClass().cast(node);
 			return test.getText();
 		}
-		
+
 		return "";
 	}
-	*/
-	
-	
+	 */
+
+
 	@SuppressWarnings("exports")
 	public TextField getTextField(Node node) {
 		return (TextField) node.getClass().cast(node);
