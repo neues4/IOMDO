@@ -54,10 +54,18 @@
       </VBox>
    </left>
    <bottom>
-      <Button fx:id="test" mnemonicParsing="false" onAction="#test" text="Button" BorderPane.alignment="TOP_RIGHT">
+      <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER_RIGHT">
          <BorderPane.margin>
             <Insets bottom="8.0" right="8.0" />
          </BorderPane.margin>
-      </Button>
+         <children>
+            <Button fx:id="baselinesBtn" mnemonicParsing="false" onAction="#openBaselines" text="Baselines">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="test" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#test" text="Button" />
+         </children>
+      </HBox>
    </bottom>
 </BorderPane>

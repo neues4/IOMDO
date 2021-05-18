@@ -35,6 +35,9 @@ public class MenuController implements Initializable {
 	private Button logOutBtn;
 	@FXML
 	private Button test;
+	// ÜBERGANGSLÖSUNG
+	@FXML
+	private Button baselinesBtn;
 	
 	@FXML
 	private Label userDisplay;
@@ -86,6 +89,11 @@ public class MenuController implements Initializable {
 		//gridPane.getChildren().setAll(p);
 
 
+	}
+	// ÜBERGANGSLÖSUNG
+	public void openBaselines(ActionEvent event) throws IOException {
+		Parent p = m.returnParent("Baselines.fxml");
+		borderPaneMenu.setCenter(p);
 	}
 
 	/**
