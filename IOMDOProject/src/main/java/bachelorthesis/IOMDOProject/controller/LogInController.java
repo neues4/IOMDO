@@ -100,8 +100,6 @@ public class LogInController {
 			sc.close();
 		} else {wrongUsernameLabel.setText(I18n.getString("errorMsg.wrongCredentials"));
 		sc.close();}
-
-
 	}
 
 	/**

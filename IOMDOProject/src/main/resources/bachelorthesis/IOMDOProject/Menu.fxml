@@ -19,7 +19,7 @@
             <VBox alignment="TOP_RIGHT">
                <children>
                   <Label text="%lbl.loggedInAs" />
-                  <Label text="Label" />
+                  <Label fx:id="userDisplay" text="Label" />
                   <Button fx:id="logOutBtn" mnemonicParsing="false" onAction="#logout" text="%btn.logout" />
                </children>
                <HBox.margin>

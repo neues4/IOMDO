@@ -36,6 +36,9 @@ public class MenuController implements Initializable {
 	@FXML
 	private Button test;
 	
+	@FXML
+	private Label userDisplay;
+	
 
 	@FXML
 	private BorderPane borderPaneMenu;

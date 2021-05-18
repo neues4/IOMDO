@@ -75,8 +75,8 @@ public class IOMDocumentationController {
 		TextField commentTF = new TextField();
 		Button deleteBtn = new Button();
 		//E:\Bachelorthesis2021Workspace\maven.1618306824553\IOMDOProject\src\main\resources\bachelorthesis\IOMDOProject
-		Image img = new Image("/src/main/resources/bachelorthesis/IOMDOProject/173-bin.png");
-	     ImageView view = new ImageView(img);
+		//Image img = new Image("/src/main/resources/bachelorthesis/IOMDOProject/173-bin.png");
+	     //ImageView view = new ImageView(img);
 	    // deleteBtn.setGraphic(view);
 		//add nodes to HashMap, Key is ROW + Columnnumber. eg. Key = 21 for Node in ROW 2, Columne 1. 
 		nodeList.put(row + "1", timeTF );
