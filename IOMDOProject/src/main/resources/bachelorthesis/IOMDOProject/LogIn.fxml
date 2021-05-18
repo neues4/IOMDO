@@ -16,7 +16,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.LogInController">
    <center>
-      <GridPane hgap="8.0" vgap="8.0" BorderPane.alignment="CENTER">
+      <GridPane hgap="8.0" style="-fx-background-color: white;" vgap="8.0" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
@@ -39,19 +39,19 @@
         </rowConstraints>
          <children>
             <Label fx:id="wrongUsernameLabel" alignment="TOP_LEFT" maxWidth="200.0" textFill="#d41717" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Button fx:id="logInBtn" mnemonicParsing="false" onAction="#userLogIn" text="%btn.logIn" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Button fx:id="logInBtn" mnemonicParsing="false" onAction="#userLogIn" stylesheets="@TestStyle.css" text="%btn.logIn" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <Label text="%lbl.username" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTF" promptText="%lbl.username" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <TextField fx:id="usernameTF" promptText="%lbl.username" stylesheets="@TestStyle.css" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <Label text="%lbl.password" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <PasswordField fx:id="passwordTF" promptText="%lbl.password" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <PasswordField fx:id="passwordTF" promptText="%lbl.password" stylesheets="@TestStyle.css" GridPane.columnIndex="2" GridPane.rowIndex="6" />
             <Hyperlink fx:id="newAccountHL" onAction="#newAccountScreen" text="%hl.createNewAccount" GridPane.columnIndex="4" GridPane.rowIndex="10" />
             <Label text="%lbl.LogIn" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
