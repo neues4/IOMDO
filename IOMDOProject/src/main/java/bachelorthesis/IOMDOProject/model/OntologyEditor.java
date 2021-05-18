@@ -358,6 +358,12 @@ public class OntologyEditor {
 		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000255");
 		return indv.getPropertyValue(property);
 	}
+	
+	public RDFNode getCaseNumber(String indvURI) {
+		Individual indv = ontModel.getIndividual(indvURI);
+		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000250");
+		return indv.getPropertyValue(property);
+	}
 
 	/**
 	 * Method to get the birthday of a specific individual as String
