@@ -1,8 +1,6 @@
 package bachelorthesis.IOMDOProject;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,47 +14,19 @@ import java.util.Locale;
  */
 public class Main extends Application {
 	
-	private static Stage staticStage;
-	private static Scene scene;
 	@Override
 	public void start(Stage stage) throws IOException {
 		//Defaut language is german.
 		I18n.setLocale(new Locale("de_CH"));
-		staticStage = stage;
-		scene = new Scene(loadFXML("LogIn"));
+		//I18n.setLocale(new Locale("en"));
+		Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"),I18n.getResourceBundle());
+		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("style1.css").toExternalForm());
 		stage.setTitle(I18n.getString("start.titel"));
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	static void setRoot(String fxml) throws IOException {
-		scene.setRoot(loadFXML(fxml));
-	}
-	
-	/**
-	 * Changes scene on same window.
-	 * @param fxml
-	 * @throws IOException
-	 */
-	public void changeScene(String fxml) throws IOException {
-		Parent window = FXMLLoader.load(getClass().getResource(fxml),I18n.getResourceBundle());
-		staticStage.getScene().setRoot(window);
-	}
-	
-	public Parent returnParent(String fxml)throws IOException{
-		Parent window = FXMLLoader.load(getClass().getResource(fxml),I18n.getResourceBundle());
-		return window;
-	}
-	
-	
-	private static Parent loadFXML(String fxml) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"),I18n.getResourceBundle());
-		return fxmlLoader.load();
-	}
-	
-
-	
+		
 	public static void main(String[] args) {
 		launch();
 	}

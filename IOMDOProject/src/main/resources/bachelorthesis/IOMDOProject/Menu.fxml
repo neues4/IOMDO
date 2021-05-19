@@ -34,6 +34,10 @@
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -59,14 +63,14 @@
             <Insets bottom="8.0" right="8.0" />
          </BorderPane.margin>
          <children>
-            <Button fx:id="patientDataBtn" disable="true" mnemonicParsing="false" onAction="#openPatientData" text="Patienten Daten" visible="false" wrapText="true" />
-            <Button fx:id="baselinesBtn" mnemonicParsing="false" onAction="#openBaselines" text="Baselines" visible="false">
+            <Button fx:id="patientDataBtn" disable="true" mnemonicParsing="false" onAction="#openPatientData" text="%lbl.caseData" visible="false" wrapText="true" />
+            <Button fx:id="baselinesBtn" mnemonicParsing="false" onAction="#openBaselines" text="%lbl.baselines" visible="false">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </Button>
-            <Button fx:id="iomDocumentationBtn" alignment="CENTER_RIGHT" contentDisplay="RIGHT" disable="true" mnemonicParsing="false" onAction="#openIOMDocumentation" text="IOM Erfassung" visible="false" />
-            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveDocumentation" text="Speichern" visible="false" />
+            <Button fx:id="iomDocumentationBtn" alignment="CENTER_RIGHT" contentDisplay="RIGHT" disable="true" mnemonicParsing="false" onAction="#openIOMDocumentation" text="%lbl.IOMrecording" visible="false" />
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveDocumentation" text="%lbl.save" visible="false" />
          </children>
       </HBox>
    </bottom>

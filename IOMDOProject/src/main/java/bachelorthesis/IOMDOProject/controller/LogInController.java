@@ -9,10 +9,15 @@ import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * 
@@ -35,7 +40,7 @@ public class LogInController {
 	private TextField usernameTF;
 	@FXML
 	private Label wrongUsernameLabel;
-	
+
 	@FXML
 	private Hyperlink newAccountHL;
 
@@ -52,13 +57,38 @@ public class LogInController {
 		file = new File("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\loginInfo.txt");
 		// Für Mac:
 		//file = new File("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/loginInfo.txt");
-		validateLogIn();
+		Scanner sc= new Scanner(file);
+		int lineNr = searchUsername(usernameTF.getText().toString());
+		skipLines(sc, lineNr);
+		if(usernameTF.getText().toString().equals(sc.next()) && passwordTF.getText().toString().equals(sc.next())) {
+			//Parent parent = FXMLLoader.load(Main.class.getResource("Menu.fxml"),  I18n.getResourceBundle());
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("Menu.fxml"));
+			loader.setResources(resources);
+			Parent root = loader.load();
+
+			Scene scene = new Scene(root);
+			Stage window =  (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(scene);
+			window.show();
+			//sets Username from Menu View.
+			MenuController controller = loader.getController();
+			controller.setLabelText(usernameTF.getText());
+			sc.close();
+
+		} else {wrongUsernameLabel.setText(I18n.getString("errorMsg.wrongCredentials"));
+		sc.close();}
 
 	}
-	
+
 	public void newAccountScreen(ActionEvent event) throws IOException{
-		Main main = new Main();
-		main.changeScene("NewAccount.fxml");
+		
+		Parent root = FXMLLoader.load(Main.class.getResource("NewAccount.fxml"),  I18n.getResourceBundle());
+		Scene scene = new Scene(root);
+		Stage window =  (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+		
 	}
 
 	/**
@@ -83,24 +113,6 @@ public class LogInController {
 		sc.close();
 		return 0;
 	}	
-
-
-
-	/**
-	 * Checks the user name and password input.
-	 * @throws IOException
-	 */
-	private void validateLogIn() throws IOException {
-		Main main = new Main();
-		Scanner sc= new Scanner(file);
-		int lineNr = searchUsername(usernameTF.getText().toString());
-		skipLines(sc, lineNr);
-		if(usernameTF.getText().toString().equals(sc.next()) && passwordTF.getText().toString().equals(sc.next())) {
-			main.changeScene("Menu.fxml");
-			sc.close();
-		} else {wrongUsernameLabel.setText(I18n.getString("errorMsg.wrongCredentials"));
-		sc.close();}
-	}
 
 	/**
 	 * Skips the line in a text file.
