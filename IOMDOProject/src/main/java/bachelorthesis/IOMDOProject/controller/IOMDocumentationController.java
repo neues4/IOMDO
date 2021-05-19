@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
@@ -57,6 +58,23 @@ public class IOMDocumentationController {
 
 	@FXML
 	private TextField commentIOMStart;
+	
+	@FXML
+	private Label patientNameLbl;
+	
+	@FXML
+	private Label birthdayLbl;
+	
+	@FXML
+	private Label diagnoseLbl;
+	
+	@FXML
+	private Label surgeryLbl;
+	
+	@FXML
+	private Label dateLbl;
+	
+	
 
 	private int row = 2;
 
