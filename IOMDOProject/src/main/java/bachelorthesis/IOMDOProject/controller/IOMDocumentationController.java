@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import bachelorthesis.IOMDOProject.model.OntologyEditor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -74,15 +75,19 @@ public class IOMDocumentationController {
 	@FXML
 	private Label dateLbl;
 	
-	
+	OntologyEditor ontEdit = new OntologyEditor("/Users/stefanie/Desktop/BADokumente/IOMO_29.owl");
 
 	private int row = 2;
 
 	private Map<String, Node> nodeList = new HashMap<String, Node>();
 
 
-	private ObservableList<String> categoryList = FXCollections.observableArrayList("cat1", "cat2");
+	//private ObservableList<String> categoryList = FXCollections.observableArrayList("cat1", "cat2");
 	private ObservableList<String> entryList = FXCollections.observableArrayList("entry1", "entry2");
+	
+	private ObservableList<String> categoryList = FXCollections.observableArrayList(ontEdit.getAllEntitiesToBeShown().keySet());
+	
+
 
 	public void initialize() {
 		categoryIOMStart.setItems(categoryList);

@@ -36,7 +36,7 @@ public class OntologyEditor {
 	private static OntModel ontModel;
 
 	// a new counter to count the URIs
-	Counter uriCounter = new Counter(400);
+	Counter uriCounter = new Counter(500);
 
 	/**
 	 * Constructor to create a new Ontology Editor.
@@ -358,7 +358,7 @@ public class OntologyEditor {
 		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000255");
 		return indv.getPropertyValue(property);
 	}
-	
+
 	public RDFNode getCaseNumber(String indvURI) {
 		Individual indv = ontModel.getIndividual(indvURI);
 		DatatypeProperty property = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000250");
@@ -378,13 +378,54 @@ public class OntologyEditor {
 	}
 
 	public Map<String, String> getAllEntitiesToBeShown() {
-		OntClass measurementDatum = ontModel.getOntClass("http://purl.obolibrary.org/obo/IAO_0000109"); 
+		OntClass mepFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000400");
+		OntClass sepFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000401");
+		OntClass vepFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000403");
+		OntClass aepFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000402");
+		OntClass eegFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000231");
+		OntClass reflexFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000234");
+		OntClass dwaveFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000387");
+		OntClass emgFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000370");
+		OntClass mappingFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000376");
+		OntClass aepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000240");
+		OntClass cbtMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000371");
+		OntClass dwaveMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000369");
+		OntClass mappingMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000373");
+		OntClass sepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242");
+		OntClass tesMepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000378");
+		OntClass dcsMepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000238");
+		OntClass vepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000244");
+		OntClass anesthesiaProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000159");
+		OntClass surgicalProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058");
+		OntClass humanAction = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#human_action");
+		OntClass technicalIssues = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000154");
+		OntClass iomProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000057");
+
 		HashMap<String, String> showEntityMap = new HashMap<>();
-		Iterator measDatIter = measurementDatum.listSubClasses();
-		while (measDatIter.hasNext()) {
-			OntClass sub = (OntClass) measDatIter.next();
-			showEntityMap.put(sub.getLabel("EN"), sub.getURI());
-		}
+
+		showEntityMap.put(mepFinding.getLabel("DE"), mepFinding.getURI());
+		showEntityMap.put(sepFinding.getLabel("DE"), sepFinding.getURI());
+		showEntityMap.put(vepFinding.getLabel("DE"), vepFinding.getURI());
+		showEntityMap.put(aepFinding.getLabel("DE"), aepFinding.getURI());
+		showEntityMap.put(eegFinding.getLabel("DE"), eegFinding.getURI());
+		showEntityMap.put(reflexFinding.getLabel("DE"), reflexFinding.getURI());
+		showEntityMap.put(dwaveFinding.getLabel("DE"), dwaveFinding.getURI());
+		showEntityMap.put(emgFinding.getLabel("DE"), emgFinding.getURI());
+		showEntityMap.put(mappingFinding.getLabel("DE"), mappingFinding.getURI());
+		showEntityMap.put(aepMeasurement.getLabel("DE"), aepMeasurement.getURI());
+		showEntityMap.put(cbtMeasurement.getLabel("DE"), cbtMeasurement.getURI());
+		showEntityMap.put(dwaveMeasurement.getLabel("DE"), dwaveMeasurement.getURI());
+		showEntityMap.put(mappingMeasurement.getLabel("DE"), mappingMeasurement.getURI());
+		showEntityMap.put(sepMeasurement.getLabel("DE"), sepMeasurement.getURI());
+		showEntityMap.put(tesMepMeasurement.getLabel("DE"), tesMepMeasurement.getURI());
+		showEntityMap.put(dcsMepMeasurement.getLabel("DE"), tesMepMeasurement.getURI());
+		showEntityMap.put(vepMeasurement.getLabel("DE"), vepMeasurement.getURI());
+		showEntityMap.put(anesthesiaProcess.getLabel("DE"), anesthesiaProcess.getURI());
+		showEntityMap.put(surgicalProcess.getLabel("DE"), surgicalProcess.getURI());
+		showEntityMap.put(humanAction.getLabel("DE"), humanAction.getURI());
+		showEntityMap.put(technicalIssues.getLabel("DE"), technicalIssues.getURI());
+		showEntityMap.put(iomProcess.getLabel("DE"), iomProcess.getURI());
+
 		return showEntityMap;
 	}
 
@@ -409,14 +450,14 @@ public class OntologyEditor {
 		indv.addProperty(miliAmpValue, value);
 
 	}
-	
+
 	public String createNewMilisecond(String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000384");
 		Individual indv = ontClass.createIndividual(createNewURI());
 		indv.addLabel(indvLabel, "EN");
 		return indv.getURI();
 	}
-	
+
 	public void addPropertiesToMilisecond(String miliampere, String value) {
 		Individual indv = ontModel.getIndividual(miliampere);
 		DatatypeProperty miliSecValue = ontModel.getDatatypeProperty("http://purl.obolibrary.org/obo/IAO_0000004");
