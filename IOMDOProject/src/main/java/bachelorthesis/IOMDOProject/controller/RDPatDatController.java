@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 
+import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
 import bachelorthesis.IOMDOProject.model.Counter;
 import bachelorthesis.IOMDOProject.model.OntologyEditor;
@@ -31,9 +32,10 @@ public class RDPatDatController {
 
 
 	//für Mac
-	OntologyEditor ontEdit = new OntologyEditor("/Users/stefanie/Desktop/IOMO_27.owl");
+	//OntologyEditor ontEdit = new OntologyEditor("/Users/stefanie/Desktop/IOMO_27.owl");
 	//Windows
 	//OntologyEditor ontEdit = new OntologyEditor("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IOMO_28.owl");
+	OntologyEditor ontEdit = OntologyEditor.getInstance();
 	// Diagnosis
 	ObservableList<String> diagnosisList = FXCollections.observableArrayList(ontEdit.getAllDiagnosis().keySet());
 
@@ -133,6 +135,14 @@ public class RDPatDatController {
 
 		ontEdit.saveNewOWLFile(); 	
 		patNumber.increment();
+		
+		/*
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("IOMDocumentation.fxml"));
+		loader.setResources(I18n.getResourceBundle());
+		IOMDocumentationController controller = loader.getController();
+		controller.setPatientData("teset", "birthday");
+		*/
 	}
 
 }

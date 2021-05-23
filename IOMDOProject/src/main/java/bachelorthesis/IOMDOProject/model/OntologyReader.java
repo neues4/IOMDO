@@ -26,11 +26,12 @@ import org.apache.jena.rdf.model.Statement;
 
 
 /**
- * 
- * @author neues4
+ * Kopie von OntologyEditor, werde noch bearbeiten welche klassen es braucht und welche nicht. 
+ * Reading Ontology only.
+ * @author romap1
  * 
  */
-public class OntologyEditor {
+public class OntologyReader {
 
 
 
@@ -38,17 +39,18 @@ public class OntologyEditor {
 	// a new instance of an ontology model // romap1: habe static rausgenommen, weil ich vorteil nicht gesehen habe
 	private  OntModel ontModel;
 
-	private static OntologyEditor editor;
+	private static OntologyReader editor;
 	// a new counter to count the URIs
 	Counter uriCounter = new Counter(500);
 
 
-	public static OntologyEditor getInstance()
+	public static OntologyReader getInstance()
 	{
+
 		if (editor == null)
 			//Windows
-			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_29.owl");
-		//mac
+			editor = new OntologyReader("myModel.owl");
+		//Mac
 
 		return editor;
 	}
@@ -57,14 +59,14 @@ public class OntologyEditor {
 	 * Constructor to create a new Ontology Editor.
 	 * @param filePath the local path to the Ontology File (.owl)
 	 */
-	public OntologyEditor(String filePath) {
+	public OntologyReader(String filePath) {
 
 		ontModel = ModelFactory.createOntologyModel();
 		try {
 			File file = new File(filePath);
 			FileReader reader = new FileReader(file);
 			ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
-			ontModel.read(reader, null);
+			ontModel.read(reader, "myModel.owl");
 			//ontModel.write(System.out, "RDF/XML-ABBREV");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -75,8 +75,8 @@ public class IOMDocumentationController {
 	@FXML
 	private Label dateLbl;
 	
-	OntologyEditor ontEdit = new OntologyEditor("/Users/stefanie/Desktop/BADokumente/IOMO_29.owl");
-
+	//OntologyEditor ontEdit = new OntologyEditor("/Users/stefanie/Desktop/BADokumente/IOMO_29.owl");
+	OntologyEditor ontEdit = OntologyEditor.getInstance();
 	private int row = 2;
 
 	private Map<String, Node> nodeList = new HashMap<String, Node>();
