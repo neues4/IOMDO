@@ -192,5 +192,11 @@ public class IOMDocumentationController {
 	public ComboBox<String> getComboBox(Node node) {
 		return (ComboBox<String>) node.getClass().cast(node);
 	}
+	
+	public void setPatientData(String s1, String s2) {
+		patientNameLbl.setText(s1);
+		birthdayLbl.setText(s2);
+		
+	}
 
 }
