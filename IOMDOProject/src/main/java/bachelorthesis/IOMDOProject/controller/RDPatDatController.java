@@ -8,6 +8,7 @@ import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
 import bachelorthesis.IOMDOProject.model.Counter;
 import bachelorthesis.IOMDOProject.model.OntologyEditor;
+import bachelorthesis.IOMDOProject.model.PatientSurgeryData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,9 +19,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.util.StringConverter;
 
 /**
@@ -57,7 +61,7 @@ public class RDPatDatController {
 	private TextField caseNrTF;
 
 	@FXML
-	private TextField surnameTF;
+	public TextField surnameTF;
 
 	@FXML
 	private TextField pidTF;
@@ -91,6 +95,8 @@ public class RDPatDatController {
 
 	@FXML
 	private Button nextBtn;
+	
+	private String surname = "empty";
 
 	Counter patNumber = new Counter(1);
 
@@ -101,11 +107,24 @@ public class RDPatDatController {
 		surgeonCB.setItems(surgeonList);
 		deviceCB.setItems(deviceList);
 		assistantCB.setItems(assistantList);
+	
 	}
 
 	@FXML
+	public void saveToVariable(MouseEvent event) {
+		System.out.println("onMouse exited");
+		System.out.println(surnameTF.getText());
+		surname = surnameTF.getText();
+		
+		PatientSurgeryData.getInstance().setSurname(surnameTF.getText());
+	}
+	
+	
+	
+	
+	@FXML
 	public void savePatientNext(ActionEvent event) throws IOException {
-
+/**
 		Integer patNum = patNumber.getValue();
 		String patLabel = "Patient".concat(patNum.toString());
 
@@ -135,7 +154,7 @@ public class RDPatDatController {
 
 		ontEdit.saveNewOWLFile(); 	
 		patNumber.increment();
-		
+		*/
 		/*
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("IOMDocumentation.fxml"));
@@ -143,6 +162,45 @@ public class RDPatDatController {
 		IOMDocumentationController controller = loader.getController();
 		controller.setPatientData("teset", "birthday");
 		*/
+		/**
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("Menu.fxml"));
+		loader.setResources(I18n.getResourceBundle());
+		BorderPane pane = loader.load();
+		MenuController controller = loader.<MenuController>getController();
+		
+		
+		//controller.setLabelText(usernameTF.getText());
+		//controller.getPatientData();
+		
+		
+		FXMLLoader loader2 = new FXMLLoader();
+		loader2.setLocation(Main.class.getResource("Baselines.fxml"));
+		loader2.setResources(I18n.getResourceBundle());
+		ScrollPane pane2 = loader2.load();
+		RDBaselineDatController controller2 = loader2.<RDBaselineDatController>getController();
+		controller.borderPaneMenu.setCenter(pane2);
+		System.out.println(controller.borderPaneMenu.toString());
+	*/
+		
+		System.out.println(getName());
 	}
+	
+	
+	public String getName() {
+		//return surnameTF.getText();
+		return surname;
+	}
+	
+	/**
+	//Input will be accesible for IOMDocumentationController or other Controller
+	public void setData() {
+				PatientSurgeryData dataHolder = PatientSurgeryData.getInstance();
+				dataHolder.setSurname(surnameTF.getText().toString());
+				System.out.println(surnameTF.getText().toString());
+
+	}
+	**/
+	
 
 }
