@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.IOMRecordingController">
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+         <content>
+            <SplitPane dividerPositions="0.9476" orientation="VERTICAL">
+               <items>
+                  <BorderPane>
+                     <top>
+                        <Accordion fx:id="accordion" BorderPane.alignment="CENTER">
+                          <panes>
+                            <TitledPane animated="false" text="Baselines SSEPs">
+                                 <content>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Medianus L" GridPane.rowIndex="1" />
+                                          <Label text="N" GridPane.columnIndex="1" />
+                                          <Label text="P" GridPane.columnIndex="2" />
+                                          <Label text="Amplitude" GridPane.columnIndex="3" />
+                                          <Label text="Medianus R" GridPane.rowIndex="2" />
+                                          <Label text="Tibialis L" GridPane.rowIndex="3" />
+                                          <Label text="Tibialis R" GridPane.rowIndex="4" />
+                                          <TextField fx:id="tfMedLN" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="tfMedRN" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField fx:id="tfTibLN" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <TextField fx:id="tfTibRN" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <TextField fx:id="tfMedLP" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <TextField fx:id="tfMedRP" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <TextField fx:id="tfTibLP" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <TextField fx:id="tfTibRP" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                       </children>
+                                    </GridPane>
+                                 </content>
+                            </TitledPane>
+                            <TitledPane animated="false" text="Baselines TES MEPs">
+                                 <content>
+                                    <GridPane fx:id="tesMepGridpane">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <ComboBox fx:id="cbTes1" prefWidth="150.0" GridPane.rowIndex="2" />
+                                          <Label text="Muskel" GridPane.rowIndex="1" />
+                                          <Label text="C1/C2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label text="C3/C4" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <Label text="Andere" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                          <TextField fx:id="tf1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField fx:id="tf2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <TextField fx:id="tf3" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <TextField fx:id="tf4" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <TextField fx:id="tf5" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <TextField fx:id="tf6" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <TextField fx:id="tf7" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                          <TextField fx:id="tf8" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                          <TextField fx:id="tf9" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                          <TextField fx:id="tf10" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                                          <TextField fx:id="tf11" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                                          <TextField fx:id="tf12" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                                          <TextField fx:id="tf13" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                                          <TextField fx:id="tf14" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="13" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="14" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="15" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="10" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="11" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="12" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="13" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="14" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="15" />
+                                          <ComboBox fx:id="cbTes2" prefWidth="150.0" GridPane.rowIndex="3" />
+                                          <ComboBox fx:id="cbTes3" prefWidth="150.0" GridPane.rowIndex="4" />
+                                          <ComboBox fx:id="cbTes4" prefWidth="150.0" GridPane.rowIndex="5" />
+                                          <ComboBox fx:id="cbTes5" prefWidth="150.0" GridPane.rowIndex="6" />
+                                          <ComboBox fx:id="cbTes6" prefWidth="150.0" GridPane.rowIndex="7" />
+                                          <ComboBox fx:id="cbTes7" prefWidth="150.0" GridPane.rowIndex="8" />
+                                          <ComboBox fx:id="cbTes8" prefWidth="150.0" GridPane.rowIndex="9" />
+                                          <ComboBox fx:id="cbTes9" prefWidth="150.0" GridPane.rowIndex="10" />
+                                          <ComboBox fx:id="cbTes10" prefWidth="150.0" GridPane.rowIndex="11" />
+                                          <ComboBox fx:id="cbTes11" prefWidth="150.0" GridPane.rowIndex="12" />
+                                          <ComboBox fx:id="cbTes12" prefWidth="150.0" GridPane.rowIndex="13" />
+                                          <ComboBox fx:id="cbTes13" prefWidth="150.0" GridPane.rowIndex="14" />
+                                          <ComboBox fx:id="cbTes14" prefWidth="150.0" GridPane.rowIndex="15" />
+                                       </children>
+                                    </GridPane>
+                                 </content>
+                            </TitledPane>
+                            <TitledPane animated="false" text="Baselines DCS MEPs">
+                                 <content>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Muskel" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="#1" GridPane.columnIndex="1" />
+                                          <Label text="#2" GridPane.columnIndex="2" />
+                                          <Label text="#3" GridPane.columnIndex="3" />
+                                          <Label text="#4" GridPane.columnIndex="4" />
+                                          <ComboBox fx:id="cbDcs1" prefWidth="150.0" GridPane.rowIndex="1" />
+                                          <ComboBox fx:id="cbDcs2" prefWidth="150.0" GridPane.rowIndex="2" />
+                                          <ComboBox fx:id="cbDcs3" prefWidth="150.0" GridPane.rowIndex="3" />
+                                          <ComboBox fx:id="cbDcs4" prefWidth="150.0" GridPane.rowIndex="4" />
+                                          <ComboBox fx:id="cbDcs5" prefWidth="150.0" GridPane.rowIndex="5" />
+                                          <ComboBox fx:id="cbDcs6" prefWidth="150.0" GridPane.rowIndex="6" />
+                                          <ComboBox fx:id="cbDcs7" prefWidth="150.0" GridPane.rowIndex="7" />
+                                          <ComboBox fx:id="cbDcs8" prefWidth="150.0" GridPane.rowIndex="8" />
+                                          <ComboBox fx:id="cbDcs9" prefWidth="150.0" GridPane.rowIndex="9" />
+                                          <ComboBox fx:id="cbDcs10" prefWidth="150.0" GridPane.rowIndex="10" />
+                                          <TextField fx:id="tfDcs1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="tfDcs2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField fx:id="tfDcs3" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <TextField fx:id="tfDcs4" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <TextField fx:id="tfDcs5" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <TextField fx:id="tfDcs6" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <TextField fx:id="tfDcs7" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <TextField fx:id="tfDcs8" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                          <TextField fx:id="tfDcs9" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                          <TextField fx:id="tfDcs10" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="10" />
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="10" />
+                                       </children>
+                                    </GridPane>
+                                 </content>
+                            </TitledPane>
+                              <TitledPane animated="false" layoutX="10.0" layoutY="60.0" text="Baselines AEPs">
+                                 <content>
+                                    <GridPane>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="AEP L" GridPane.rowIndex="1" />
+                                          <Label text="AEP R" GridPane.rowIndex="2" />
+                                          <Label text="I" GridPane.columnIndex="1" />
+                                          <Label text="II" GridPane.columnIndex="2" />
+                                          <Label text="III" GridPane.columnIndex="3" />
+                                          <Label text="IV" GridPane.columnIndex="4" />
+                                          <Label text="V" GridPane.columnIndex="5" />
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                          <TextField GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                                          <TextField GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                                       </children>
+                                    </GridPane>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane animated="false" layoutX="10.0" layoutY="196.0" text="Baselines VEPs">
+                                 <content>
+                                    <GridPane>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="VEP" GridPane.rowIndex="1" />
+                                          <Label text="L" GridPane.columnIndex="1" />
+                                          <Label text="R" GridPane.columnIndex="2" />
+                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane animated="false" layoutX="10.0" layoutY="221.0" text="Reflexe">
+                                 <content>
+                                    <GridPane>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="BR" GridPane.rowIndex="1" />
+                                          <Label text="LAR" GridPane.rowIndex="2" />
+                                          <Label text="BCR" GridPane.rowIndex="3" />
+                                          <Label text="L" GridPane.columnIndex="1" />
+                                          <Label text="R" GridPane.columnIndex="2" />
+                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                       </children>
+                                    </GridPane>
+                                 </content>
+                              </TitledPane>
+                          </panes>
+                        </Accordion>
+                     </top>
+                     <center>
+                        <GridPane fx:id="infoGrid" BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints vgrow="SOMETIMES" />
+                            <RowConstraints vgrow="SOMETIMES" />
+                              <RowConstraints vgrow="SOMETIMES" />
+                              <RowConstraints vgrow="SOMETIMES" />
+                              <RowConstraints vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <VBox spacing="4.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="%lbl.time" />
+                                    <TextField fx:id="timeStartTF" promptText="10:00" />
+                                    <Button id="test" fx:id="addRowBtn" mnemonicParsing="false" onAction="#addRow" text="Add" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" spacing="4.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="%lbl.category" />
+                                    <ComboBox fx:id="categoryIOMStart" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="4.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="%lbl.entry" />
+                                    <ComboBox fx:id="entryIOMStart" />
+                                    <Button mnemonicParsing="false" text="Button" visible="false" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="4.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="%lbl.comment" />
+                                    <TextField fx:id="commentIOMStart" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                        </GridPane>
+                     </center>
+                  </BorderPane>
+                  <HBox alignment="TOP_RIGHT" SplitPane.resizableWithParent="false">
+                     <children>
+                        <Button fx:id="save" mnemonicParsing="false" onAction="#save" text="Button">
+                           <HBox.margin>
+                              <Insets right="24.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </items>
+            </SplitPane>
+         </content>
+      </ScrollPane>
+   </center>
+   <top>
+      <GridPane maxHeight="-Infinity">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="%lbl.nr">
+                     <padding>
+                        <Insets left="-50.0" right="30.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="caseNrTF" />
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets right="-40.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <Label text="%lbl.surname">
+                     <padding>
+                        <Insets left="-100.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="surnameTF" onMouseExited="#saveToVariable" prefWidth="150.0" />
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets right="-100.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Label text="%lbl.PID">
+                     <padding>
+                        <Insets left="-50.0" right="30.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="pidTF" prefWidth="150.0" />
+               </children>
+               <padding>
+                  <Insets right="-40.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Label text="%lbl.firstName">
+                     <padding>
+                        <Insets left="-100.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="firstNameTF" prefWidth="150.0" />
+               </children>
+               <padding>
+                  <Insets right="-100.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <Label text="%lbl.FID">
+                     <padding>
+                        <Insets left="-50.0" right="30.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="fidTF" prefWidth="150.0" />
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets right="-40.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Label text="%lbl.dateOfBirth">
+                     <padding>
+                        <Insets left="-100.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="birthdayTF" prefWidth="150.0" />
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets right="-100.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+               <children>
+                  <Label text="%lbl.diagnosis">
+                     <padding>
+                        <Insets left="-50.0" right="30.0" />
+                     </padding>
+                  </Label>
+                  <ComboBox fx:id="diagnosisCB" prefWidth="150.0" />
+               </children>
+               <padding>
+                  <Insets right="-40.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Label text="%lbl.dateOfSurgery">
+                     <padding>
+                        <Insets left="-100.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="dateOfSurgeryTF" prefWidth="150.0" />
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets right="-100.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+               <children>
+                  <Label text="%lbl.surgery">
+                     <padding>
+                        <Insets left="-50.0" right="30.0" />
+                     </padding>
+                  </Label>
+                  <ComboBox fx:id="surgeryCB" prefWidth="150.0" />
+               </children>
+               <padding>
+                  <Insets right="-40.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <children>
+                  <Label text="%lbl.surgeon">
+                     <padding>
+                        <Insets left="-100.0" />
+                     </padding>
+                  </Label>
+                  <ComboBox fx:id="surgeonCB" prefWidth="150.0" />
+               </children>
+               <padding>
+                  <Insets right="-100.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+               <children>
+                  <Label text="%lbl.ISISDevice">
+                     <padding>
+                        <Insets left="-50.0" right="30.0" />
+                     </padding>
+                  </Label>
+                  <ComboBox fx:id="deviceCB" prefWidth="150.0" />
+               </children>
+               <padding>
+                  <Insets right="-40.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <children>
+                  <Label text="%lbl.assistant">
+                     <padding>
+                        <Insets left="-100.0" />
+                     </padding>
+                  </Label>
+                  <ComboBox fx:id="assistantCB" prefWidth="150.0" />
+               </children>
+               <padding>
+                  <Insets right="-100.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+         </children>
+      </GridPane>
+   </top>
+</BorderPane>
