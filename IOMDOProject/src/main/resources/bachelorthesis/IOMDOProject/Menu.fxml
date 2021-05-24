@@ -19,7 +19,7 @@
             <VBox alignment="TOP_RIGHT">
                <children>
                   <Label text="%lbl.loggedInAs" />
-                  <Label fx:id="userDisplay" text="Label" />
+                  <Label fx:id="userName" text="Label" />
                   <Button fx:id="logOutBtn" mnemonicParsing="false" onAction="#logout" text="%btn.logout" />
                </children>
                <HBox.margin>
@@ -64,7 +64,7 @@
          </BorderPane.margin>
          <children>
             <Button fx:id="patientDataBtn" disable="true" mnemonicParsing="false" onAction="#openPatientData" text="%lbl.caseData" visible="false" wrapText="true" />
-            <Button fx:id="baselinesBtn" mnemonicParsing="false" onAction="#openBaselines" text="%lbl.baselines" visible="false">
+            <Button fx:id="baselinesBtn" mnemonicParsing="false" onAction="#openBaselines" onMouseExited="#test" text="%lbl.baselines" visible="false">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
