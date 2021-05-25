@@ -47,8 +47,9 @@ public class OntologyEditor {
 	{
 		if (editor == null)
 			//Windows
-			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_29.owl");
+			//editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_29.owl");
 		//mac
+		editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_29.owl");
 
 		return editor;
 	}
@@ -412,9 +413,10 @@ public class OntologyEditor {
 		OntClass vepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000244");
 		OntClass anesthesiaProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000159");
 		OntClass surgicalProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058");
-		OntClass humanAction = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#human_action");
+		OntClass humanAction = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human");
 		OntClass technicalIssues = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000154");
 		OntClass iomProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000057");
+		
 
 		HashMap<String, String> showEntityMap = new HashMap<>();
 
@@ -444,6 +446,22 @@ public class OntologyEditor {
 		return showEntityMap;
 	}
 
+	/**
+	 * Method to get all the subclasses of a given class
+	 * @param classURI the uri of the class
+	 * @return a hash map with the german label as key and the uri as value
+	 */
+	public Map<String, String> getSubclasses(String classURI) {
+		OntClass ontClass = ontModel.getOntClass(classURI);
+		HashMap<String, String> subClassMap = new HashMap<>();
+		Iterator iter = ontClass.listSubClasses();
+		while (iter.hasNext()) {
+			OntClass sub = (OntClass) iter.next();
+			subClassMap.put(sub.getLabel("DE"), sub.getURI());
+		}
+		return subClassMap;
+	}
+	
 
 	public String createNewIOMDocument(String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000277");
