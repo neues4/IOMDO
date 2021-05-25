@@ -24,11 +24,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
+/**
+ * Controller for the recording durinig Intraoperative Neuromonitoring
+ * @author romap1, neues4
+ *
+ */
 public class IOMRecordingController {
 
+//This class is split in 3 Parts for a better Overview: Part1: Patient/Surgery Data, Part2: Baselines, Part3: IOM actual Recording
 
-
-	//Start Patient and Surgery Data
+	//Variables Patient/Surgery Data-----------------------------------
 
 	@FXML
 	private TextField caseNrTF;
@@ -69,56 +74,10 @@ public class IOMRecordingController {
 	@FXML
 	private Button nextBtn;
 
-	//End Patient and Surgery Data
+	//-----------------------------------Variables Patient/Surgery Data
 
-	//Start IOM Documentation 
-
-	@FXML
-	private Button addRowBtn;
-
-	@FXML
-	private RowConstraints row2;
-
-	@FXML
-	private GridPane infoGrid;
-
-	@FXML
-	private SplitPane splitpane;
-
-	@FXML
-	private Button save;
-
-	@FXML
-	private TextField timeStartTF;
-
-	@FXML
-	private ComboBox<String> categoryIOMStart;
-
-	@FXML
-	private ComboBox<String> entryIOMStart;
-
-	@FXML
-	private TextField commentIOMStart;
-
-	@FXML
-	private Label patientNameLbl;
-
-	@FXML
-	private Label birthdayLbl;
-
-	@FXML
-	private Label diagnoseLbl;
-
-	@FXML
-	private Label surgeryLbl;
-
-	@FXML
-	private Label dateLbl;
-
-	//End IOM Documentation
-
-
-	//Start Baselines Section
+	
+	//Variables Baselines ---------------------------------------------
 
 	@FXML
 	private Accordion accordion;
@@ -146,13 +105,107 @@ public class IOMRecordingController {
 	private Button btnSaveTesMep, btnSaveSsep, btnSaveDcsMep;
 
 
-	//End Baseline Section
+	//-------------------------------------------------------Variables Baselines
+	
+	//Variables IOM actual Recording-------------------------------------------------
+
+		@FXML
+		private Button addRowBtn;
+
+		@FXML
+		private RowConstraints row2;
+
+		@FXML
+		private GridPane infoGrid;
+
+		@FXML
+		private SplitPane splitpane;
+
+		@FXML
+		private Button save;
+
+		@FXML
+		private TextField timeStartTF;
+
+		@FXML
+		private ComboBox<String> categoryIOMStart;
+
+		@FXML
+		private ComboBox<String> entryIOMStart;
+
+		@FXML
+		private TextField commentIOMStart;
+
+		@FXML
+		private Label patientNameLbl;
+
+		@FXML
+		private Label birthdayLbl;
+
+		@FXML
+		private Label diagnoseLbl;
+
+		@FXML
+		private Label surgeryLbl;
+
+		@FXML
+		private Label dateLbl;
+
+		//---------------------------------------------------Variables IOM actual Recording
+	
+	
 
 	// new instance of Ontology Editor
 	OntologyEditor ontEdit = OntologyEditor.getInstance();
+	public void initialize() {
+		// Patient data start
+		diagnosisCB.setItems(diagnosisList);
+		surgeryCB.setItems(surgeryList);
+		surgeonCB.setItems(surgeonList);
+		deviceCB.setItems(deviceList);
+		assistantCB.setItems(assistantList);
+		// Patient data end
+
+		//IOM Documentation start
+		categoryIOMStart.setItems(categoryList);
+		//entryIOMStart.setItems(entryList);
+		//IOM Documentation end
+		
+		// Baseline start
+		cbTes1.setItems(muscleList);
+		cbTes2.setItems(muscleList);
+		cbTes3.setItems(muscleList);
+		cbTes4.setItems(muscleList);
+		cbTes5.setItems(muscleList);
+		cbTes6.setItems(muscleList);
+		cbTes7.setItems(muscleList);
+		cbTes8.setItems(muscleList);
+		cbTes9.setItems(muscleList);
+		cbTes10.setItems(muscleList);
+		cbTes11.setItems(muscleList);
+		cbTes12.setItems(muscleList);
+		cbTes13.setItems(muscleList);
+		cbTes14.setItems(muscleList);
+		
+		cbDcs1.setItems(muscleList);
+		cbDcs2.setItems(muscleList);
+		cbDcs3.setItems(muscleList);
+		cbDcs4.setItems(muscleList);
+		cbDcs5.setItems(muscleList);
+		cbDcs6.setItems(muscleList);
+		cbDcs7.setItems(muscleList);
+		cbDcs8.setItems(muscleList);
+		cbDcs9.setItems(muscleList);
+		cbDcs10.setItems(muscleList);
+		// Baseline end
+	}
+
+	
+	
+	
 
 
-	// Patient Data Start
+	// Patient Data Start---------------------------------------------------------------
 
 	Counter patNumber = new Counter(1);
 
@@ -199,7 +252,7 @@ public class IOMRecordingController {
 		patNumber.increment();
 	}
 
-	// Patient Data End
+	// -------------------------------------------------------------Patient Data End
 
 
 
@@ -207,9 +260,20 @@ public class IOMRecordingController {
 	public  void saveToVariable(MouseEvent event) throws IOException {
 
 	}
+	
+	
+	// Baseline Start
+	ObservableList<String> muscleList = FXCollections.observableArrayList(ontEdit.getAllMuscles().keySet());
+	
+	Counter muscNumber = new Counter(1);
+	Counter mANumber = new Counter(1);
+	// Baseline End
+	
+	
+	
 
 
-	//IOM Documentation Start
+	//IOM Recording Start-----------------------------------------------
 
 	//Counter for the Rows in the GridPane. Row 0 is Empty and Row 1 already has Nodes. Therefore the counter starts at 2.
 	private int row = 2;
@@ -246,49 +310,7 @@ public class IOMRecordingController {
 	private ObservableList<String> actionList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human").keySet());
 
 
-	public void initialize() {
-		// Patient data start
-		diagnosisCB.setItems(diagnosisList);
-		surgeryCB.setItems(surgeryList);
-		surgeonCB.setItems(surgeonList);
-		deviceCB.setItems(deviceList);
-		assistantCB.setItems(assistantList);
-		// Patient data end
-
-		//IOM Documentation start
-		categoryIOMStart.setItems(categoryList);
-		//entryIOMStart.setItems(entryList);
-		//IOM Documentation end
-		
-		// Baseline start
-		cbTes1.setItems(muscleList);
-		cbTes2.setItems(muscleList);
-		cbTes3.setItems(muscleList);
-		cbTes4.setItems(muscleList);
-		cbTes5.setItems(muscleList);
-		cbTes6.setItems(muscleList);
-		cbTes7.setItems(muscleList);
-		cbTes8.setItems(muscleList);
-		cbTes9.setItems(muscleList);
-		cbTes10.setItems(muscleList);
-		cbTes11.setItems(muscleList);
-		cbTes12.setItems(muscleList);
-		cbTes13.setItems(muscleList);
-		cbTes14.setItems(muscleList);
-		
-		cbDcs1.setItems(muscleList);
-		cbDcs2.setItems(muscleList);
-		cbDcs3.setItems(muscleList);
-		cbDcs4.setItems(muscleList);
-		cbDcs5.setItems(muscleList);
-		cbDcs6.setItems(muscleList);
-		cbDcs7.setItems(muscleList);
-		cbDcs8.setItems(muscleList);
-		cbDcs9.setItems(muscleList);
-		cbDcs10.setItems(muscleList);
-		// Baseline end
-	}
-
+	
 	/**
 	 * Adds a new Set of Nodes in the next empty Row of the GridPane.
 	 * @param event
@@ -482,14 +504,8 @@ public class IOMRecordingController {
 		return (ComboBox<String>) node.getClass().cast(node);
 	}
 
-	//IOM Documentation End
+	//----------------------------------------------IOM Documentation End
 	
-	
-	// Baseline Start
-	ObservableList<String> muscleList = FXCollections.observableArrayList(ontEdit.getAllMuscles().keySet());
-	
-	Counter muscNumber = new Counter(1);
-	Counter mANumber = new Counter(1);
-	// Baseline End
+
 
 }
