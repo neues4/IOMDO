@@ -16,12 +16,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.IOMRecordingController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
          <content>
-            <SplitPane dividerPositions="0.9476" orientation="VERTICAL">
+            <SplitPane dividerPositions="0.4541723666210669" orientation="VERTICAL">
                <items>
                   <BorderPane>
                      <top>
@@ -339,7 +338,7 @@
                         </Accordion>
                      </top>
                      <center>
-                        <GridPane fx:id="infoGrid" BorderPane.alignment="CENTER">
+                        <GridPane fx:id="infoGrid" hgap="8.0" maxWidth="-Infinity" vgap="8.0" BorderPane.alignment="TOP_LEFT">
                           <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -350,11 +349,11 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
+                            <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
                             <RowConstraints vgrow="SOMETIMES" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <VBox spacing="4.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -384,15 +383,12 @@
                                  </children>
                               </VBox>
                            </children>
-                           <padding>
-                              <Insets top="8.0" />
-                           </padding>
                         </GridPane>
                      </center>
                   </BorderPane>
-                  <HBox alignment="TOP_RIGHT" SplitPane.resizableWithParent="false">
+                  <HBox alignment="TOP_RIGHT" prefWidth="965.0" SplitPane.resizableWithParent="false">
                      <children>
-                        <Button fx:id="save" mnemonicParsing="false" onAction="#save" text="Button">
+                        <Button fx:id="save" mnemonicParsing="false" onAction="#save" text="%lbl.save">
                            <HBox.margin>
                               <Insets right="24.0" />
                            </HBox.margin>
@@ -405,195 +401,116 @@
       </ScrollPane>
    </center>
    <top>
-      <GridPane maxHeight="-Infinity">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
+      <GridPane hgap="8.0" vgap="8.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="%lbl.nr">
-                     <padding>
-                        <Insets left="-50.0" right="30.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="caseNrTF" />
-               </children>
+            <Label text="%lbl.nr" wrapText="true" />
+            <TextField fx:id="caseNrTF" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets right="24.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label text="%lbl.surname" wrapText="true" GridPane.columnIndex="2">
+               <GridPane.margin>
+                  <Insets left="8.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="surnameTF" onMouseExited="#saveToVariable" prefWidth="150.0" GridPane.columnIndex="3">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
-               <padding>
-                  <Insets right="-40.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
-               <children>
-                  <Label text="%lbl.surname">
-                     <padding>
-                        <Insets left="-100.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="surnameTF" onMouseExited="#saveToVariable" prefWidth="150.0" />
-               </children>
+            </TextField>
+            <Label text="%lbl.diagnosis" wrapText="true" GridPane.columnIndex="5">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
-               <padding>
-                  <Insets right="-100.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-               <children>
-                  <Label text="%lbl.PID">
-                     <padding>
-                        <Insets left="-50.0" right="30.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="pidTF" prefWidth="150.0" />
-               </children>
-               <padding>
-                  <Insets right="-40.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                  <Label text="%lbl.firstName">
-                     <padding>
-                        <Insets left="-100.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="firstNameTF" prefWidth="150.0" />
-               </children>
-               <padding>
-                  <Insets right="-100.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-               <children>
-                  <Label text="%lbl.FID">
-                     <padding>
-                        <Insets left="-50.0" right="30.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="fidTF" prefWidth="150.0" />
-               </children>
+            </Label>
+            <ComboBox fx:id="diagnosisCB" prefWidth="150.0" GridPane.columnIndex="6">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
-               <padding>
-                  <Insets right="-40.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <Label text="%lbl.dateOfBirth">
-                     <padding>
-                        <Insets left="-100.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="birthdayTF" prefWidth="150.0" />
-               </children>
+            </ComboBox>
+            <Label text="%lbl.dateOfSurgery" wrapText="true" GridPane.columnIndex="7" />
+            <TextField fx:id="dateOfSurgeryTF" maxWidth="-Infinity" GridPane.columnIndex="8">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
-               <padding>
-                  <Insets right="-100.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
-               <children>
-                  <Label text="%lbl.diagnosis">
-                     <padding>
-                        <Insets left="-50.0" right="30.0" />
-                     </padding>
-                  </Label>
-                  <ComboBox fx:id="diagnosisCB" prefWidth="150.0" />
-               </children>
-               <padding>
-                  <Insets right="-40.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <children>
-                  <Label text="%lbl.dateOfSurgery">
-                     <padding>
-                        <Insets left="-100.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="dateOfSurgeryTF" prefWidth="150.0" />
-               </children>
+            </TextField>
+            <Label text="%lbl.FID" wrapText="true" GridPane.rowIndex="1" />
+            <TextField fx:id="fidTF" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="24.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label text="%lbl.firstName" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="8.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="firstNameTF" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
-               <padding>
-                  <Insets right="-100.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
-               <children>
-                  <Label text="%lbl.surgery">
-                     <padding>
-                        <Insets left="-50.0" right="30.0" />
-                     </padding>
-                  </Label>
-                  <ComboBox fx:id="surgeryCB" prefWidth="150.0" />
-               </children>
-               <padding>
-                  <Insets right="-40.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <children>
-                  <Label text="%lbl.surgeon">
-                     <padding>
-                        <Insets left="-100.0" />
-                     </padding>
-                  </Label>
-                  <ComboBox fx:id="surgeonCB" prefWidth="150.0" />
-               </children>
-               <padding>
-                  <Insets right="-100.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
-               <children>
-                  <Label text="%lbl.ISISDevice">
-                     <padding>
-                        <Insets left="-50.0" right="30.0" />
-                     </padding>
-                  </Label>
-                  <ComboBox fx:id="deviceCB" prefWidth="150.0" />
-               </children>
-               <padding>
-                  <Insets right="-40.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <children>
-                  <Label text="%lbl.assistant">
-                     <padding>
-                        <Insets left="-100.0" />
-                     </padding>
-                  </Label>
-                  <ComboBox fx:id="assistantCB" prefWidth="150.0" />
-               </children>
-               <padding>
-                  <Insets right="-100.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            </TextField>
+            <Label text="%lbl.surgery" wrapText="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <ComboBox fx:id="surgeryCB" prefWidth="150.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </ComboBox>
+            <Label text="%lbl.surgeon" wrapText="true" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <ComboBox fx:id="surgeonCB" prefWidth="150.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+            <Label text="%lbl.PID" wrapText="true" GridPane.rowIndex="2" />
+            <TextField fx:id="pidTF" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="24.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label text="%lbl.dateOfBirth" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="8.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="birthdayTF" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </TextField>
+            <Label text="%lbl.ISISDevice" wrapText="true" GridPane.columnIndex="5" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <ComboBox fx:id="deviceCB" prefWidth="150.0" GridPane.columnIndex="6" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </ComboBox>
+            <Label text="%lbl.assistant" wrapText="true" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+            <ComboBox fx:id="assistantCB" prefWidth="150.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
          </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
       </GridPane>
    </top>
 </BorderPane>
