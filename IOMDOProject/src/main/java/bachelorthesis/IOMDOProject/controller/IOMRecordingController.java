@@ -1,10 +1,13 @@
 package bachelorthesis.IOMDOProject.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
 import bachelorthesis.IOMDOProject.I18n;
+import bachelorthesis.IOMDOProject.Main;
 import bachelorthesis.IOMDOProject.model.Counter;
 import bachelorthesis.IOMDOProject.model.OntologyEditor;
 import bachelorthesis.IOMDOProject.model.PatientSurgeryData;
@@ -20,6 +23,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -36,40 +41,10 @@ public class IOMRecordingController {
 	//Variables Patient/Surgery Data-----------------------------------
 
 	@FXML
-	private TextField caseNrTF;
+	private TextField caseNrTF, surnameTF, pidTF , firstNameTF, fidTF, birthdayTF, dateOfSurgeryTF;
 
 	@FXML
-	public TextField surnameTF;
-
-	@FXML
-	private TextField pidTF;
-
-	@FXML
-	private TextField firstNameTF;
-
-	@FXML
-	private TextField fidTF;
-
-	@FXML
-	private TextField birthdayTF;
-
-	@FXML
-	private TextField dateOfSurgeryTF;
-
-	@FXML
-	private ComboBox<String> diagnosisCB;
-
-	@FXML
-	private ComboBox<String> surgeryCB;
-
-	@FXML
-	private ComboBox<String> surgeonCB;
-
-	@FXML
-	private ComboBox<String> deviceCB;
-
-	@FXML
-	private ComboBox<String> assistantCB;
+	private ComboBox<String> diagnosisCB, surgeryCB, surgeonCB, deviceCB,  assistantCB;
 
 	@FXML
 	private Button nextBtn;
@@ -110,7 +85,7 @@ public class IOMRecordingController {
 	//Variables IOM actual Recording-------------------------------------------------
 
 		@FXML
-		private Button addRowBtn;
+		private Button addRowBtn, save;
 
 		@FXML
 		private RowConstraints row2;
@@ -122,10 +97,7 @@ public class IOMRecordingController {
 		private SplitPane splitpane;
 
 		@FXML
-		private Button save;
-
-		@FXML
-		private TextField timeStartTF;
+		private TextField timeStartTF, commentIOMStart, value;
 
 		@FXML
 		private ComboBox<String> categoryIOMStart;
@@ -133,30 +105,19 @@ public class IOMRecordingController {
 		@FXML
 		private ComboBox<String> entryIOMStart;
 
+		
 		@FXML
-		private TextField commentIOMStart;
+		private Label patientNameLbl, birthdayLbl,diagnoseLbl, surgeryLbl, dateLbl ;
 
-		@FXML
-		private Label patientNameLbl;
-
-		@FXML
-		private Label birthdayLbl;
-
-		@FXML
-		private Label diagnoseLbl;
-
-		@FXML
-		private Label surgeryLbl;
-
-		@FXML
-		private Label dateLbl;
+		
 
 		//---------------------------------------------------Variables IOM actual Recording
 	
 	
 
 	// new instance of Ontology Editor
-	OntologyEditor ontEdit = OntologyEditor.getInstance();
+	private OntologyEditor ontEdit = OntologyEditor.getInstance();
+	
 	public void initialize() {
 		// Patient data start
 		diagnosisCB.setItems(diagnosisList);
@@ -258,9 +219,9 @@ public class IOMRecordingController {
 
 
 
-	public  void saveToVariable(MouseEvent event) throws IOException {
+	
 
-	}
+	
 	
 	
 	// Baseline Start
@@ -316,26 +277,27 @@ public class IOMRecordingController {
 	 * Adds a new Set of Nodes in the next empty Row of the GridPane.
 	 * @param event
 	 * @throws IOException
+	 * @throws URISyntaxException 
 	 */
-	public  void addRow(ActionEvent event) throws IOException {
+	public  void addRow(ActionEvent event) throws IOException, URISyntaxException {
 		//create nessecary nodes
 		TextField timeTF = new TextField();	
 		ComboBox<String> categoryCB = new ComboBox<String>();
 		categoryCB.setItems(categoryList);
 		ComboBox<String> entryCB = new ComboBox<String>();
 		//entryCB.setItems(entryList);
+		TextField valueTF = new TextField();
 		TextField commentTF = new TextField();
 		Button deleteBtn = new Button();
 
-		//E:\Bachelorthesis2021Workspace\maven.1618306824553\IOMDOProject\src\main\resources\bachelorthesis\IOMDOProject
-		//Image img = new Image("/src/main/resources/bachelorthesis/IOMDOProject/173-bin.png");
-		//ImageView view = new ImageView(img);
-		// deleteBtn.setGraphic(view);
+		ImageView view = new ImageView(Main.class.getResource("173-bin.png").toExternalForm());
+		deleteBtn.setGraphic(view);
 
 		//add nodes to HashMap, Key is ROW + Columnnumber. eg. Key = 21 for Node in ROW 2, Columne 1. 
 		nodeList.put(row + "1", timeTF );
 		nodeList.put(row + "2", categoryCB );
 		nodeList.put(row + "3", entryCB );
+		nodeList.put(row + "4", valueTF );
 		nodeList.put(row + "5", commentTF );
 
 		// register an action event for the dynamically created category combobox
@@ -355,6 +317,7 @@ public class IOMRecordingController {
 				infoGrid.getChildren().remove(timeTF);
 				infoGrid.getChildren().remove(categoryCB);
 				infoGrid.getChildren().remove(entryCB);
+				infoGrid.getChildren().remove(valueTF);
 				infoGrid.getChildren().remove(commentTF);
 				row--;
 			}
@@ -364,6 +327,7 @@ public class IOMRecordingController {
 		infoGrid.add(timeTF, 1, row);
 		infoGrid.add(categoryCB , 2, row); 
 		infoGrid.add(entryCB, 3, row);
+		infoGrid.add(valueTF, 4, row);
 		infoGrid.add(commentTF, 5, row);
 		infoGrid.add(deleteBtn, 6, row);
 		//removes Add button from row to place it a row further below
@@ -372,6 +336,8 @@ public class IOMRecordingController {
 		infoGrid.add(addRowBtn, 1, row);
 
 	}
+	
+
 
 	// IOM Documentation Category Combobox
 	// MUSS NOCH IM FXML HINZUGEFÜGT WERDEN!!
@@ -387,21 +353,32 @@ public class IOMRecordingController {
 	 */
 	public  void save(ActionEvent event) throws IOException {
 		// Patient Data start
-		savePatient();
+		//savePatient();
 		// Patient Data end
 		
-		//IOM Documentation start
+		
+		
+		
+		//IOM actual Recording------------------------------------------------
+		
+		String document = ontEdit.createNewIOMDocument("Document");
+		
+		String NS = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_";
+		//String has_data_item = "0000282";
+		//String has_document = "0000285";
+		
 		System.out.println("Zeit: " + timeStartTF.getText());
 		System.out.println("Kategorie: " + categoryIOMStart.getSelectionModel().getSelectedItem());
 		System.out.println("Eintrag: " + entryIOMStart.getSelectionModel().getSelectedItem());
 		System.out.println("Kommentar: " + commentIOMStart.getText());
 
+		
 		int rowsToRead = nodeList.size()/4;
-		for(int i= 1; i <= rowsToRead; i++) {
-			System.out.println("Zeit: " + getTextField(  nodeList.get( i + 1 +"" + 1)).getText());
-			System.out.println("Kategorie: " + getComboBox(nodeList.get( i + 1 +"" + 2)).getSelectionModel().getSelectedItem());
-			System.out.println("Eintrag: " + getComboBox(nodeList.get( i + 1 +"" + 3)).getSelectionModel().getSelectedItem());
-			System.out.println("Kommentar: " + getTextField(nodeList.get( i + 1 +"" + 5)).getText());
+		for(int i= 2; i <= rowsToRead + 1; i++) {
+			System.out.println("Zeit" + i + ": "+ getTextField(  nodeList.get( i  +"" + 1)).getText());
+			System.out.println("Kategorie"+ i +": "+ getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().getSelectedItem());
+			System.out.println("Eintrag" + i + ": "+getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem());
+			System.out.println("Kommentar" + i+ ": "+getTextField(nodeList.get( i  +"" + 5)).getText());
 			//IOM Documentation end
 		}
 

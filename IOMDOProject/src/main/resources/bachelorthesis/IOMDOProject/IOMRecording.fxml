@@ -20,7 +20,7 @@
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
          <content>
-            <SplitPane dividerPositions="0.4541723666210669" orientation="VERTICAL">
+            <SplitPane dividerPositions="0.39429928741092624" orientation="VERTICAL">
                <items>
                   <BorderPane>
                      <top>
@@ -338,7 +338,7 @@
                         </Accordion>
                      </top>
                      <center>
-                        <GridPane fx:id="infoGrid" hgap="8.0" maxWidth="-Infinity" vgap="8.0" BorderPane.alignment="TOP_LEFT">
+                        <GridPane fx:id="infoGrid" hgap="8.0" vgap="8.0" BorderPane.alignment="TOP_LEFT">
                           <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -350,7 +350,7 @@
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
-                            <RowConstraints vgrow="SOMETIMES" />
+                            <RowConstraints />
                               <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
@@ -374,6 +374,12 @@
                                     <Label text="%lbl.entry" />
                                     <ComboBox fx:id="entryIOMStart" />
                                     <Button mnemonicParsing="false" text="Button" visible="false" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="4.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label text="Label" />
+                                    <TextField fx:id="value" />
                                  </children>
                               </VBox>
                               <VBox spacing="4.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
@@ -430,7 +436,7 @@
                   <Insets left="8.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="surnameTF" onMouseExited="#saveToVariable" prefWidth="150.0" GridPane.columnIndex="3">
+            <TextField fx:id="surnameTF" prefWidth="150.0" GridPane.columnIndex="3">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
