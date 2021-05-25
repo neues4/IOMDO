@@ -47,9 +47,9 @@ public class OntologyEditor {
 	{
 		if (editor == null)
 			//Windows
-			//editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_29.owl");
+			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_29.owl");
 		//mac
-		editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_29.owl");
+		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_29.owl");
 
 		return editor;
 	}
@@ -123,49 +123,14 @@ public class OntologyEditor {
 
 	}
 
-
-	/**
-	 * Method to get all the Individuals of the ontology
-	 * @return ArrayList of the individuals (label)
-	 */
-	public ArrayList<String> getAllIndividuals() {
-		ArrayList<String> indAL = new ArrayList();
-		Iterator indIter = ontModel.listIndividuals();
-		while (indIter.hasNext()) {
-			Individual ind = (Individual) indIter.next();
-			indAL.add(ind.getURI().substring(ind.getURI().length()-4, ind.getURI().length()));
-			//????????
-		}
-		return indAL;
-	}
-
-
-	public ArrayList<String> getAllPatientURIs() {
-		ArrayList<String> patAl = new ArrayList();
-		Iterator indIter = ontModel.listIndividuals(ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#patient"));
-		while (indIter.hasNext()) {
-			Individual ind = (Individual) indIter.next();
-			patAl.add(ind.getURI());
-		}
-		return patAl;
-	}
-
-	public ArrayList<String> getAllSurgeryURIs() {
-		ArrayList<String> patAl = new ArrayList();
-		Iterator indIter = ontModel.listIndividuals(ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#patient"));
-		while (indIter.hasNext()) {
-			Individual ind = (Individual) indIter.next();
-			patAl.add(ind.getURI());
-		}
-		return patAl;
-	}
-
 	public String createNewPatient(String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#patient");
 		Individual indv = ontClass.createIndividual(createNewURI());
 		indv.addLabel(indvLabel, "EN");
 		return indv.getURI();
 	}
+	
+	
 
 	public String createNewIndividual(String classURI, String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass(classURI);
@@ -173,6 +138,7 @@ public class OntologyEditor {
 		indv.addLabel(indvLabel, "EN");
 		return indv.getURI();
 	}
+	
 
 	public String createNewURI() {
 		String iomoURI = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000";
@@ -217,48 +183,6 @@ public class OntologyEditor {
 		indv.addProperty(datPropBirthday, birthday);
 	}
 
-
-
-	public String createDiagnosis(String classURI, String indvLabel) {
-		OntClass ontClass = ontModel.getOntClass(classURI);
-		Individual indv = ontClass.createIndividual(createNewURI());
-		indv.addLabel(indvLabel, "EN");
-		//ObjectProperty obProp = ontModel.getObjectProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282");
-		//indv.addProperty(obProp, "");
-		return indv.getURI();
-
-	}
-
-	public String createMuscle(String classURI, String indvLabel) {
-		OntClass ontClass = ontModel.getOntClass(classURI);
-		Individual indv = ontClass.createIndividual(createNewURI());
-		indv.addLabel(indvLabel, "EN");
-		//ObjectProperty obProp = ontModel.getObjectProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282");
-		//indv.addProperty(obProp, "");
-		return indv.getURI();
-
-	}
-
-	public String createNewMeasurement(String classURI, String indvLabel) {
-		OntClass ontClass = ontModel.getOntClass(classURI);
-		Individual indv = ontClass.createIndividual(createNewURI());
-		indv.addLabel(indvLabel, "EN");
-		//ObjectProperty obProp = ontModel.getObjectProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282");
-		//indv.addProperty(obProp, "");
-		return indv.getURI();
-
-	}
-
-	public String createSurgery(String classURI, String indvLabel) {
-		OntClass ontClass = ontModel.getOntClass(classURI);
-		Individual indv = ontClass.createIndividual(createNewURI());
-		indv.addLabel(indvLabel, "EN");
-		//ObjectProperty obProp = ontModel.getObjectProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282");
-		//indv.addProperty(obProp, "");
-		return indv.getURI();
-
-	}
-
 	public void addPropertiesToSurgery(String surgery, String surgeryDate, String surgeon, String assistant, String isisDevice) {
 		Individual indv = ontModel.getIndividual(surgery);
 		DatatypeProperty datPropSurgeryDate = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000365");
@@ -271,8 +195,7 @@ public class OntologyEditor {
 		indv.addProperty(datPropIsisDevice, isisDevice);
 	}
 
-
-
+	
 	public void addStatement(String subject, String property, String object ) {
 
 		Statement stmt = ontModel.createStatement
@@ -525,9 +448,4 @@ public class OntologyEditor {
 		return baselineMap;
 	}
 
-	public void addPropertyToIndividual(String indvURI, String propURI, String name) {
-		Individual indv = ontModel.getIndividual(indvURI);
-		DatatypeProperty firstName = ontModel.getDatatypeProperty(propURI);
-		indv.addProperty(firstName, ontModel.createTypedLiteral(name));
-	}
 }
