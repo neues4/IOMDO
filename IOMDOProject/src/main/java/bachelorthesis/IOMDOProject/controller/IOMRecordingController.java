@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import bachelorthesis.IOMDOProject.I18n;
+import bachelorthesis.IOMDOProject.model.Counter;
 import bachelorthesis.IOMDOProject.model.OntologyEditor;
 import bachelorthesis.IOMDOProject.model.PatientSurgeryData;
 import javafx.collections.FXCollections;
@@ -19,6 +20,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
@@ -146,21 +148,68 @@ public class IOMRecordingController {
 
 	//End Baseline Section
 
+	// new instance of Ontology Editor
+	OntologyEditor ontEdit = OntologyEditor.getInstance();
+
+
+	// Patient Data Start
+
+	Counter patNumber = new Counter(1);
+
+	// Diagnosis
+	ObservableList<String> diagnosisList = FXCollections.observableArrayList(ontEdit.getAllDiagnosis().keySet());
+	// Surgeries
+	ObservableList<String> surgeryList = FXCollections.observableArrayList(ontEdit.getAllSurgeries().keySet());
+	// Surgeons
+	ObservableList<String> surgeonList = FXCollections.observableArrayList("Abu Isa", "Bervini", "Fichtner", "Finkenstädt", "Krähenbühl", "Lutz",
+			"Murek", "Pollo", "Raabe", "Schär", "Schläppi", "Schucht", "Seidel", "Ulrich", "Vulcu");
+	// Devices
+	ObservableList<String> deviceList = FXCollections.observableArrayList("Einstein", "Mieze", "Napoleon", "Rosalinde");
+	// Assistants
+	ObservableList<String> assistantList = FXCollections.observableArrayList("Consuegra", "Finkenstädt", "Goldberg", "Häni", "Hlavica", "Jesse", 
+			"Lutz", "Mija", "Montalbetti", "Müller", "Nowacki", "Osmanagic", "Redeker", "Ropelato", "Schütz", "Tashi", "Zubak");
+
+	/*
+	 * a method to save a new patient instance to the ontology, his diagnosis and his surgery with all the dataproperties
+	 */
+	public void savePatient () {
+		Integer patNum = patNumber.getValue();
+		String patLabel = "Patient".concat(patNum.toString());
+
+		String pat = ontEdit.createNewPatient(patLabel); 
+
+		ontEdit.addPropertiesToPatient(pat, caseNrTF.getText(), pidTF.getText(), fidTF.getText(), firstNameTF.getText(), surnameTF.getText(), birthdayTF.getText());
+
+		String surgery= ontEdit.createSurgery(ontEdit.getAllSurgeries().get(surgeryCB.getSelectionModel().getSelectedItem()), "Surgery");
+
+		ontEdit.addPropertiesToSurgery(surgery, dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem());
+
+		String diagnosis = ontEdit.createDiagnosis(ontEdit.getAllDiagnosis().get(diagnosisCB.getSelectionModel().getSelectedItem()), "Diagnosis");
+
+		String iomDocument = ontEdit.createNewIOMDocument("Document");
+
+		ontEdit.addStatement(pat, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000285", iomDocument);
+		ontEdit.addStatement(iomDocument, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", surgery);
+		ontEdit.addStatement(iomDocument, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", diagnosis);
+
+		System.out.println(ontEdit.getAllDiagnosis().get(diagnosisCB.getSelectionModel().getSelectedItem()));
+		System.out.println(surgeryCB.getSelectionModel().getSelectedItem());
+
+		ontEdit.saveNewOWLFile(); 	
+		patNumber.increment();
+	}
+
+	// Patient Data End
 
 
 
 
-
-
-
-
-	public  void saveToVariable(ActionEvent event) throws IOException {
+	public  void saveToVariable(MouseEvent event) throws IOException {
 
 	}
 
 
 	//IOM Documentation Start
-	OntologyEditor ontEdit = OntologyEditor.getInstance();
 
 	//Counter for the Rows in the GridPane. Row 0 is Empty and Row 1 already has Nodes. Therefore the counter starts at 2.
 	private int row = 2;
@@ -169,15 +218,75 @@ public class IOMRecordingController {
 
 	private ObservableList<String> entryList = FXCollections.observableArrayList("entry1", "entry2");
 
+	// create the list for the first dropdown
 	private ObservableList<String> categoryList = FXCollections.observableArrayList(ontEdit.getAllEntitiesToBeShown().keySet());
+
+	// create all the lists for the second dropdown of the IOM Documentation
+	private ObservableList<String> vepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000403").keySet());
+	private ObservableList<String> mappingMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000373").keySet());
+	private ObservableList<String> technicalIssuesList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000154").keySet());
+	private ObservableList<String> dwaveMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000369").keySet());
+	private ObservableList<String> tesMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000378").keySet());
+	private ObservableList<String> dcsMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000238").keySet());
+	private ObservableList<String> vepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000244").keySet());
+	private ObservableList<String> sepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242").keySet());
+	private ObservableList<String> aepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000240").keySet());
+	private ObservableList<String> cbtMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000371").keySet());
+	private ObservableList<String> surgeryProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058").keySet());
+	private ObservableList<String> reflexFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000234").keySet());
+	private ObservableList<String> eegFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000231").keySet());
+	private ObservableList<String> anesthesyProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000159").keySet());
+	private ObservableList<String> mappingFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000376").keySet());
+	private ObservableList<String> iomProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000057").keySet());
+	private ObservableList<String> sepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000401").keySet());
+	private ObservableList<String> aepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000402").keySet());
+	private ObservableList<String> dwaveFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000387").keySet());
+	private ObservableList<String> emgFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000370").keySet());
+	private ObservableList<String> mepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000400").keySet());
+	private ObservableList<String> actionList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human").keySet());
 
 
 	public void initialize() {
+		// Patient data start
+		diagnosisCB.setItems(diagnosisList);
+		surgeryCB.setItems(surgeryList);
+		surgeonCB.setItems(surgeonList);
+		deviceCB.setItems(deviceList);
+		assistantCB.setItems(assistantList);
+		// Patient data end
 
 		//IOM Documentation start
 		categoryIOMStart.setItems(categoryList);
-		entryIOMStart.setItems(entryList);
+		//entryIOMStart.setItems(entryList);
 		//IOM Documentation end
+		
+		// Baseline start
+		cbTes1.setItems(muscleList);
+		cbTes2.setItems(muscleList);
+		cbTes3.setItems(muscleList);
+		cbTes4.setItems(muscleList);
+		cbTes5.setItems(muscleList);
+		cbTes6.setItems(muscleList);
+		cbTes7.setItems(muscleList);
+		cbTes8.setItems(muscleList);
+		cbTes9.setItems(muscleList);
+		cbTes10.setItems(muscleList);
+		cbTes11.setItems(muscleList);
+		cbTes12.setItems(muscleList);
+		cbTes13.setItems(muscleList);
+		cbTes14.setItems(muscleList);
+		
+		cbDcs1.setItems(muscleList);
+		cbDcs2.setItems(muscleList);
+		cbDcs3.setItems(muscleList);
+		cbDcs4.setItems(muscleList);
+		cbDcs5.setItems(muscleList);
+		cbDcs6.setItems(muscleList);
+		cbDcs7.setItems(muscleList);
+		cbDcs8.setItems(muscleList);
+		cbDcs9.setItems(muscleList);
+		cbDcs10.setItems(muscleList);
+		// Baseline end
 	}
 
 	/**
@@ -191,7 +300,7 @@ public class IOMRecordingController {
 		ComboBox<String> categoryCB = new ComboBox<String>();
 		categoryCB.setItems(categoryList);
 		ComboBox<String> entryCB = new ComboBox<String>();
-		entryCB.setItems(entryList);
+		//entryCB.setItems(entryList);
 		TextField commentTF = new TextField();
 		Button deleteBtn = new Button();
 
@@ -205,6 +314,14 @@ public class IOMRecordingController {
 		nodeList.put(row + "2", categoryCB );
 		nodeList.put(row + "3", entryCB );
 		nodeList.put(row + "5", commentTF );
+
+		// register an action event for the dynamically created category combobox
+		categoryCB.addEventHandler(ActionEvent.ACTION, 
+				new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent event) {
+				showItem(categoryCB, entryCB);
+			}
+		});
 
 
 		//add delete event on delete Button
@@ -233,12 +350,23 @@ public class IOMRecordingController {
 
 	}
 
+	// IOM Documentation Category Combobox
+	// MUSS NOCH IM FXML HINZUGEFÜGT WERDEN!!
+	@FXML
+	void categoryIOMStartOnAction(ActionEvent event) {
+		showItem(categoryIOMStart, entryIOMStart);
+	}
+
 	/**
 	 * 
 	 * @param event
 	 * @throws IOException
 	 */
 	public  void save(ActionEvent event) throws IOException {
+		// Patient Data start
+		savePatient();
+		// Patient Data end
+		
 		//IOM Documentation start
 		System.out.println("Zeit: " + timeStartTF.getText());
 		System.out.println("Kategorie: " + categoryIOMStart.getSelectionModel().getSelectedItem());
@@ -267,6 +395,81 @@ public class IOMRecordingController {
 	}
 	 */
 
+	/**
+	 * a method to show the right item in the second combobox of the IOM Documentation
+	 */
+	public void showItem(ComboBox<String> category, ComboBox<String> entry) {
+		String item = category.getSelectionModel().getSelectedItem();
+		switch (item) {
+		case "VEP Beobachtung":
+			entry.setItems(vepFindingList);
+			break;
+		case "Mapping Messung":
+			entry.setItems(mappingMeasurementList);
+			break;
+		case "Technische Probleme":
+			entry.setItems(technicalIssuesList);
+			break;
+		case "D-Welle Messung":
+			entry.setItems(dwaveMeasurementList);
+			break;
+		case "TES MEP Messung":
+			entry.setItems(tesMepMeasurementList);
+			break;
+		case "DCS MEP Messung":
+			entry.setItems(dcsMepMeasurementList);
+			break;
+		case "VEP Messung":
+			entry.setItems(vepMeasurementList);
+		case "SEP Messung":
+			entry.setItems(sepMeasurementList);
+			break;
+		case "AEP Messung":
+			entry.setItems(aepMeasurementList);
+			break;
+		case "CBT Messung":
+			entry.setItems(cbtMeasurementList);
+			break;
+		case "Operationsprozess":
+			entry.setItems(surgeryProcessList);
+			break;
+		case "Reflex Beobachtung":
+			entry.setItems(reflexFindingList);
+			break;
+		case "EEG Beobachtung":
+			entry.setItems(eegFindingList);
+			break;
+		case "Anästhesie Prozess":
+			entry.setItems(anesthesyProcessList);
+			break;
+		case "Mapping Beobachtung":
+			entry.setItems(mappingFindingList);
+			break;
+		case "IOM Prozess":
+			entry.setItems(iomProcessList);
+			break;
+		case "SEP Beobachtung":
+			entry.setItems(sepFindingList);
+			break;
+		case "AEP Beobachtung":
+			entry.setItems(aepFindingList);
+			break;
+		case "D-Welle Beobachtung":
+			entry.setItems(dwaveFindingList);
+			break;
+		case "EMG Beobachtung":
+			entry.setItems(emgFindingList);
+			break;
+		case "MEP Beobachtung":
+			entry.setItems(mepFindingList);
+			break;
+		case "Aktion":
+			entry.setItems(actionList);
+		case " ":
+			break;
+		}	
+	}
+
 
 	@SuppressWarnings("exports")
 	public TextField getTextField(Node node) {
@@ -280,7 +483,13 @@ public class IOMRecordingController {
 	}
 
 	//IOM Documentation End
-
-
+	
+	
+	// Baseline Start
+	ObservableList<String> muscleList = FXCollections.observableArrayList(ontEdit.getAllMuscles().keySet());
+	
+	Counter muscNumber = new Counter(1);
+	Counter mANumber = new Counter(1);
+	// Baseline End
 
 }

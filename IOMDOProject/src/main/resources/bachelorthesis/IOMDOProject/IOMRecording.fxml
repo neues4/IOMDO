@@ -366,7 +366,7 @@
                               <VBox alignment="TOP_CENTER" spacing="4.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <children>
                                     <Label text="%lbl.category" />
-                                    <ComboBox fx:id="categoryIOMStart" />
+                                    <ComboBox fx:id="categoryIOMStart" onAction="#categoryIOMStartOnAction" />
                                  </children>
                               </VBox>
                               <VBox spacing="4.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
