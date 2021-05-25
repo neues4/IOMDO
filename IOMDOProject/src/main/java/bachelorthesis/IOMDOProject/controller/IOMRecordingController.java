@@ -225,6 +225,7 @@ public class IOMRecordingController {
 	/*
 	 * a method to save a new patient instance to the ontology, his diagnosis and his surgery with all the dataproperties
 	 */
+	
 	public void savePatient () {
 		Integer patNum = patNumber.getValue();
 		String patLabel = "Patient".concat(patNum.toString());
