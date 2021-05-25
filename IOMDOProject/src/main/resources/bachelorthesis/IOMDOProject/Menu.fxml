@@ -57,21 +57,4 @@
          </children>
       </VBox>
    </left>
-   <bottom>
-      <HBox alignment="TOP_RIGHT" spacing="8.0" BorderPane.alignment="CENTER_RIGHT">
-         <BorderPane.margin>
-            <Insets bottom="8.0" right="8.0" />
-         </BorderPane.margin>
-         <children>
-            <Button fx:id="patientDataBtn" disable="true" mnemonicParsing="false" onAction="#openPatientData" text="%lbl.caseData" visible="false" wrapText="true" />
-            <Button fx:id="baselinesBtn" mnemonicParsing="false" onAction="#openBaselines" onMouseExited="#test" text="%lbl.baselines" visible="false">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="iomDocumentationBtn" alignment="CENTER_RIGHT" contentDisplay="RIGHT" disable="true" mnemonicParsing="false" onAction="#openIOMDocumentation" text="%lbl.IOMrecording" visible="false" />
-            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveDocumentation" text="%lbl.save" visible="false" />
-         </children>
-      </HBox>
-   </bottom>
 </BorderPane>

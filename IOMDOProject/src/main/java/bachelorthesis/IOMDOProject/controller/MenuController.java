@@ -41,17 +41,7 @@ public class MenuController {
 	private Button settingsBtn;
 	@FXML
 	private Button logOutBtn;
-	@FXML
-	private Button saveBtn;
-
-	// ÜBERGANGSLÖSUNG
-	@FXML
-	private Button baselinesBtn;
-	@FXML
-	private Button patientDataBtn;
-	@FXML
-	private Button iomDocumentationBtn;
-
+	
 	@FXML
 	private Label userName;
 
@@ -65,85 +55,19 @@ public class MenuController {
 		
 	}
 
-	//übergangslösung für verknüpfung zuIOMDocumentation.fxml
-	public  void openIOMDocumentation(ActionEvent event) throws IOException {
-		
-		
-		
-		changeCenter("IOMDocumentation.fxml");
-		baselinesBtn.setDisable(false);
-		patientDataBtn.setDisable(true);
-		iomDocumentationBtn.setDisable(false);
-		saveBtn.setDisable(false);
-		
-
-	}
 
 	public void openNewProtocol(ActionEvent event) throws IOException {
 		//changeCenter("RecordDocument_PatientData.fxml");
 		changeCenter("IOMRecording.fxml");
-		baselinesBtn.setVisible(true);
-		patientDataBtn.setVisible(true);
-		iomDocumentationBtn.setVisible(true);
-		saveBtn.setVisible(true);
-		baselinesBtn.setDisable(false);
-		patientDataBtn.setDisable(true);
-		iomDocumentationBtn.setDisable(true);
-		saveBtn.setDisable(true);
+		
 	}
 
 	public  void openProtocolOverview(ActionEvent event) throws IOException {
 		changeCenter("ProtocolOverview.fxml");
-		baselinesBtn.setVisible(false);
-		patientDataBtn.setVisible(false);
-		iomDocumentationBtn.setVisible(false);
-		saveBtn.setVisible(false);
-	}
-	// ÜBERGANGSLÖSUNG
-	public void openBaselines(ActionEvent event) throws IOException {
-		
-//Reads Name of Patient and prints it. Doesnt work, getName() returns "";
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("RecordDocument_PatientData.fxml"));
-		loader.setResources(I18n.getResourceBundle());
-		GridPane pane = loader.load();
-		RDPatDatController controller = loader.<RDPatDatController>getController();
-		//controller.initialize();
-		String s = controller.getName();
-		System.out.println( "Name:" + s);
-		
-		String s0 = PatientSurgeryData.getInstance().getSurname();
-		System.out.println(s0);
-		
-		
-		
-		changeCenter("Baselines.fxml");
-		patientDataBtn.setDisable(false);
-		iomDocumentationBtn.setDisable(false);
-		saveBtn.setDisable(true);
 		
 	}
+
 	
-	@FXML
-	public void test(MouseEvent event) throws IOException {
-		
-		String s0 = PatientSurgeryData.getInstance().getSurname();
-		System.out.println(s0);
-		System.out.println("menu exited");
-		
-		
-	}
-	public void openPatientData(ActionEvent event) throws IOException {
-		//borderPaneMenu.setCenter(FXMLLoader.load(Main.class.getResource("RecordDocument_PatientData.fxml"),  I18n.getResourceBundle()));
-		changeCenter("RecordDocument_PatientData.fxml");
-		iomDocumentationBtn.setDisable(true);
-	}
-
-
-
-	public void saveDocumentation(ActionEvent event) throws IOException {
-		baselinesBtn.setDisable(true);
-	}
 
 	/**
 	 * 
