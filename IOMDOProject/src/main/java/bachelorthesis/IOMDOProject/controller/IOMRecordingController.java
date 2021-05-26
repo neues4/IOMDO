@@ -36,7 +36,7 @@ import javafx.scene.layout.RowConstraints;
  */
 public class IOMRecordingController {
 
-//This class is split in 3 Parts for a better Overview: Part1: Patient/Surgery Data, Part2: Baselines, Part3: IOM actual Recording
+	//This class is split in 3 Parts for a better Overview: Part1: Patient/Surgery Data, Part2: Baselines, Part3: IOM actual Recording
 
 	//Variables Patient/Surgery Data-----------------------------------
 
@@ -51,7 +51,7 @@ public class IOMRecordingController {
 
 	//-----------------------------------Variables Patient/Surgery Data
 
-	
+
 	//Variables Baselines ---------------------------------------------
 
 	@FXML
@@ -61,13 +61,13 @@ public class IOMRecordingController {
 	private GridPane tesMepGridpane;
 
 	@FXML
-	private ComboBox<String> cbTes1, cbTes2, cbTes3, cbTes4, cbTes5, cbTes6, cbTes7, cbTes8, cbTes9, cbTes10, cbTes11, cbTes12, cbTes13, cbTes14;
+	private ComboBox<String> cbTes1, cbTes2, cbTes3, cbTes4, cbTes5, cbTes6, cbTes7, cbTes8, cbTes9, cbTes10, cbTes11, cbTes12, cbTes13, cbTes14, cbTes15, cbTes16;
 
 	@FXML
 	private ComboBox<String> cbDcs1, cbDcs2, cbDcs3, cbDcs4, cbDcs5, cbDcs6, cbDcs7, cbDcs8, cbDcs9, cbDcs10;
 
 	@FXML
-	private TextField tf1, tf2, tf3, tf4, tf5, tf6, tf7, tf8, tf9, tf10, tf11, tf12, tf13, tf14;
+	private TextField tf1, tf2, tf3, tf4, tf5, tf6, tf7, tf8, tf9, tf10, tf11, tf12, tf13, tf14, tf15, tf16;
 
 	@FXML
 	private TextField tfDcs1, tfDcs2, tfDcs3, tfDcs4, tfDcs5, tfDcs6, tfDcs7, tfDcs8, tfDcs9, tfDcs10;
@@ -81,43 +81,43 @@ public class IOMRecordingController {
 
 
 	//-------------------------------------------------------Variables Baselines
-	
+
 	//Variables IOM actual Recording-------------------------------------------------
 
-		@FXML
-		private Button addRowBtn, save;
+	@FXML
+	private Button addRowBtn, save;
 
-		@FXML
-		private RowConstraints row2;
+	@FXML
+	private RowConstraints row2;
 
-		@FXML
-		private GridPane infoGrid;
+	@FXML
+	private GridPane infoGrid;
 
-		@FXML
-		private SplitPane splitpane;
+	@FXML
+	private SplitPane splitpane;
 
-		@FXML
-		private TextField timeStartTF, commentIOMStart, value;
+	@FXML
+	private TextField timeStartTF, commentIOMStart, value;
 
-		@FXML
-		private ComboBox<String> categoryIOMStart;
+	@FXML
+	private ComboBox<String> categoryIOMStart;
 
-		@FXML
-		private ComboBox<String> entryIOMStart;
+	@FXML
+	private ComboBox<String> entryIOMStart;
 
-		
-		@FXML
-		private Label patientNameLbl, birthdayLbl,diagnoseLbl, surgeryLbl, dateLbl ;
 
-		
+	@FXML
+	private Label patientNameLbl, birthdayLbl,diagnoseLbl, surgeryLbl, dateLbl ;
 
-		//---------------------------------------------------Variables IOM actual Recording
-	
-	
+
+
+	//---------------------------------------------------Variables IOM actual Recording
+
+
 
 	// new instance of Ontology Editor
 	private OntologyEditor ontEdit = OntologyEditor.getInstance();
-	
+
 	public void initialize() {
 		// Patient data start
 		diagnosisCB.setItems(diagnosisList);
@@ -131,7 +131,7 @@ public class IOMRecordingController {
 		categoryIOMStart.setItems(categoryList);
 		//entryIOMStart.setItems(entryList);
 		//IOM Documentation end
-		
+
 		// Baseline start
 		cbTes1.setItems(muscleList);
 		cbTes2.setItems(muscleList);
@@ -147,7 +147,9 @@ public class IOMRecordingController {
 		cbTes12.setItems(muscleList);
 		cbTes13.setItems(muscleList);
 		cbTes14.setItems(muscleList);
-		
+		cbTes15.setItems(muscleList);
+		cbTes16.setItems(muscleList);
+
 		cbDcs1.setItems(muscleList);
 		cbDcs2.setItems(muscleList);
 		cbDcs3.setItems(muscleList);
@@ -161,9 +163,9 @@ public class IOMRecordingController {
 		// Baseline end
 	}
 
-	
-	
-	
+
+
+
 
 
 	// Patient Data Start---------------------------------------------------------------
@@ -186,7 +188,7 @@ public class IOMRecordingController {
 	/*
 	 * a method to save a new patient instance to the ontology, his diagnosis and his surgery with all the dataproperties
 	 */
-	
+
 	public void savePatient () {
 		Integer patNum = patNumber.getValue();
 		String patLabel = "Patient".concat(patNum.toString());
@@ -219,20 +221,20 @@ public class IOMRecordingController {
 
 
 
-	
 
-	
-	
-	
+
+
+
+
 	// Baseline Start
 	ObservableList<String> muscleList = FXCollections.observableArrayList(ontEdit.getAllMuscles().keySet());
-	
+
 	Counter muscNumber = new Counter(1);
 	Counter mANumber = new Counter(1);
 	// Baseline End
-	
-	
-	
+
+
+
 
 
 	//IOM Recording Start-----------------------------------------------
@@ -252,10 +254,10 @@ public class IOMRecordingController {
 	private ObservableList<String> mappingMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000373").keySet());
 	private ObservableList<String> technicalIssuesList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000154").keySet());
 	private ObservableList<String> dwaveMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000369").keySet());
-	private ObservableList<String> tesMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000378").keySet());
-	private ObservableList<String> dcsMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000238").keySet());
-	private ObservableList<String> vepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000244").keySet());
-	private ObservableList<String> sepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242").keySet());
+	//private ObservableList<String> tesMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000378").keySet());
+	//private ObservableList<String> dcsMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000238").keySet());
+	//private ObservableList<String> vepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000244").keySet());
+	//private ObservableList<String> sepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242").keySet());
 	private ObservableList<String> aepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000240").keySet());
 	private ObservableList<String> cbtMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000371").keySet());
 	private ObservableList<String> surgeryProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058").keySet());
@@ -271,8 +273,18 @@ public class IOMRecordingController {
 	private ObservableList<String> mepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000400").keySet());
 	private ObservableList<String> actionList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human").keySet());
 
+	// a list for the muscles chosen in tes mep baseline
+	private ObservableList<String> tesMepMuscleChoice = FXCollections.observableArrayList();
 
-	
+	// a list for the muscles chosen in dcs mep baseline
+	private ObservableList<String> dcsMepMuscleChoice = FXCollections.observableArrayList();
+
+	// a map for the comboboxes in tes mep
+	private Map<Integer, ComboBox<String>> cbTesMap = new HashMap<Integer, ComboBox<String>>();
+
+	// a map for the comboboxes in dcs mep
+	private Map<Integer, ComboBox<String>> cbDcsMap = new HashMap<Integer, ComboBox<String>>();
+
 	/**
 	 * Adds a new Set of Nodes in the next empty Row of the GridPane.
 	 * @param event
@@ -336,7 +348,7 @@ public class IOMRecordingController {
 		infoGrid.add(addRowBtn, 1, row);
 
 	}
-	
+
 
 
 	// IOM Documentation Category Combobox
@@ -344,6 +356,10 @@ public class IOMRecordingController {
 	@FXML
 	void categoryIOMStartOnAction(ActionEvent event) {
 		showItem(categoryIOMStart, entryIOMStart);
+
+		gatherTesMuscles();
+
+		gatherDcsMuscles();
 	}
 
 	/**
@@ -355,24 +371,24 @@ public class IOMRecordingController {
 		// Patient Data start
 		//savePatient();
 		// Patient Data end
-		
-		
-		
-		
+
+
+
+
 		//IOM actual Recording------------------------------------------------
-		
+
 		String document = ontEdit.createNewIOMDocument("Document");
-		
+
 		String NS = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_";
 		//String has_data_item = "0000282";
 		//String has_document = "0000285";
-		
+
 		System.out.println("Zeit: " + timeStartTF.getText());
 		System.out.println("Kategorie: " + categoryIOMStart.getSelectionModel().getSelectedItem());
 		System.out.println("Eintrag: " + entryIOMStart.getSelectionModel().getSelectedItem());
 		System.out.println("Kommentar: " + commentIOMStart.getText());
 
-		
+
 		int rowsToRead = nodeList.size()/4;
 		for(int i= 2; i <= rowsToRead + 1; i++) {
 			System.out.println("Zeit" + i + ": "+ getTextField(  nodeList.get( i  +"" + 1)).getText());
@@ -414,16 +430,18 @@ public class IOMRecordingController {
 			entry.setItems(dwaveMeasurementList);
 			break;
 		case "TES MEP Messung":
-			entry.setItems(tesMepMeasurementList);
+			entry.setItems(tesMepMuscleChoice);
 			break;
 		case "DCS MEP Messung":
-			entry.setItems(dcsMepMeasurementList);
+			entry.setItems(dcsMepMuscleChoice);
 			break;
+			/*
 		case "VEP Messung":
 			entry.setItems(vepMeasurementList);
 		case "SEP Messung":
 			entry.setItems(sepMeasurementList);
 			break;
+			 */
 		case "AEP Messung":
 			entry.setItems(aepMeasurementList);
 			break;
@@ -470,6 +488,53 @@ public class IOMRecordingController {
 		}	
 	}
 
+	/**
+	 * a method to gather all the muscles which were chosen in the baseline (TES MEP) section 
+	 */
+	public void gatherTesMuscles() {
+		cbTesMap.put(1, cbTes1);
+		cbTesMap.put(2, cbTes2);
+		cbTesMap.put(3, cbTes3);
+		cbTesMap.put(4, cbTes4);
+		cbTesMap.put(5, cbTes5);
+		cbTesMap.put(6, cbTes6);
+		cbTesMap.put(7, cbTes7);
+		cbTesMap.put(8, cbTes8);
+		cbTesMap.put(9, cbTes9);
+		cbTesMap.put(10, cbTes10);
+		cbTesMap.put(11, cbTes11);
+		cbTesMap.put(12, cbTes12);
+		cbTesMap.put(13, cbTes13);
+		cbTesMap.put(14, cbTes14);
+		cbTesMap.put(15, cbTes15);
+		cbTesMap.put(16, cbTes16);
+
+		for (int i = 1; i <= cbTesMap.size(); i ++) {
+			if (cbTesMap.get(i).getSelectionModel().getSelectedItem() != null) {
+				tesMepMuscleChoice.addAll(cbTesMap.get(i).getSelectionModel().getSelectedItem());
+			}	
+		}
+	}
+
+	public void gatherDcsMuscles() {
+		cbDcsMap.put(1, cbDcs1);
+		cbDcsMap.put(2, cbDcs2);
+		cbDcsMap.put(3, cbDcs3);
+		cbDcsMap.put(4, cbDcs4);
+		cbDcsMap.put(5, cbDcs5);
+		cbDcsMap.put(6, cbDcs6);
+		cbDcsMap.put(7, cbDcs7);
+		cbDcsMap.put(8, cbDcs8);
+		cbDcsMap.put(9, cbDcs9);
+		cbDcsMap.put(10, cbDcs10);
+
+		for (int i = 1; i <= cbDcsMap.size(); i ++) {
+			if (cbDcsMap.get(i).getSelectionModel().getSelectedItem() != null) {
+				dcsMepMuscleChoice.addAll(cbDcsMap.get(i).getSelectionModel().getSelectedItem());
+			}	
+		}
+	}
+
 
 	@SuppressWarnings("exports")
 	public TextField getTextField(Node node) {
@@ -483,7 +548,7 @@ public class IOMRecordingController {
 	}
 
 	//----------------------------------------------IOM Documentation End
-	
+
 
 
 }

@@ -94,6 +94,7 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
                                           <ComboBox fx:id="cbTes1" prefWidth="150.0" GridPane.rowIndex="2" />
@@ -156,6 +157,14 @@
                                           <ComboBox fx:id="cbTes12" prefWidth="150.0" GridPane.rowIndex="13" />
                                           <ComboBox fx:id="cbTes13" prefWidth="150.0" GridPane.rowIndex="14" />
                                           <ComboBox fx:id="cbTes14" prefWidth="150.0" GridPane.rowIndex="15" />
+                                          <ComboBox fx:id="cbTes15" prefWidth="150.0" GridPane.rowIndex="16" />
+                                          <ComboBox fx:id="cbTes16" prefWidth="150.0" GridPane.rowIndex="17" />
+                                          <TextField fx:id="tf15" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                                          <TextField fx:id="tf16" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="16" />
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="17" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="16" />
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="17" />
                                        </children>
                                     </GridPane>
                                  </content>
@@ -174,7 +183,6 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
