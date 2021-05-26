@@ -47,9 +47,9 @@ public class OntologyEditor {
 	{
 		if (editor == null)
 			//Windows
-			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_29.owl");
+			//editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_29.owl");
 		//mac
-		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_29.owl");
+		editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_29.owl");
 
 		return editor;
 	}
@@ -125,7 +125,7 @@ public class OntologyEditor {
 
 	public String createNewPatient(String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#patient");
-		Individual indv = ontClass.createIndividual(createNewURI());
+		Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
 		indv.addLabel(indvLabel, "EN");
 		return indv.getURI();
 	}
@@ -134,17 +134,15 @@ public class OntologyEditor {
 
 	public String createNewIndividual(String classURI, String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass(classURI);
-		Individual indv = ontClass.createIndividual(createNewURI());
+		Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
 		indv.addLabel(indvLabel, "EN");
 		return indv.getURI();
 	}
 	
 
-	public String createNewURI() {
-		String iomoURI = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000";
-		Integer count = uriCounter.getValue();
-		String newURI = iomoURI.concat(count.toString());
-		uriCounter.increment();	
+	public String createNewURI(String label) {
+		String iomoURI = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO#";
+		String newURI = iomoURI.concat(label);
 		return newURI;
 	}
 
@@ -330,10 +328,10 @@ public class OntologyEditor {
 		OntClass cbtMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000371");
 		OntClass dwaveMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000369");
 		OntClass mappingMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000373");
-		OntClass sepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242");
+		//OntClass sepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242");
 		OntClass tesMepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000378");
 		OntClass dcsMepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000238");
-		OntClass vepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000244");
+		//OntClass vepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000244");
 		OntClass anesthesiaProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000159");
 		OntClass surgicalProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058");
 		OntClass humanAction = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human");
@@ -356,10 +354,10 @@ public class OntologyEditor {
 		showEntityMap.put(cbtMeasurement.getLabel("DE"), cbtMeasurement.getURI());
 		showEntityMap.put(dwaveMeasurement.getLabel("DE"), dwaveMeasurement.getURI());
 		showEntityMap.put(mappingMeasurement.getLabel("DE"), mappingMeasurement.getURI());
-		showEntityMap.put(sepMeasurement.getLabel("DE"), sepMeasurement.getURI());
+		//showEntityMap.put(sepMeasurement.getLabel("DE"), sepMeasurement.getURI());
 		showEntityMap.put(tesMepMeasurement.getLabel("DE"), tesMepMeasurement.getURI());
 		showEntityMap.put(dcsMepMeasurement.getLabel("DE"), tesMepMeasurement.getURI());
-		showEntityMap.put(vepMeasurement.getLabel("DE"), vepMeasurement.getURI());
+		//showEntityMap.put(vepMeasurement.getLabel("DE"), vepMeasurement.getURI());
 		showEntityMap.put(anesthesiaProcess.getLabel("DE"), anesthesiaProcess.getURI());
 		showEntityMap.put(surgicalProcess.getLabel("DE"), surgicalProcess.getURI());
 		showEntityMap.put(humanAction.getLabel("DE"), humanAction.getURI());
@@ -388,14 +386,14 @@ public class OntologyEditor {
 
 	public String createNewIOMDocument(String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000277");
-		Individual indv = ontClass.createIndividual(createNewURI());
+		Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
 		indv.addLabel(indvLabel, "EN");
 		return indv.getURI();
 	}
 
 	public String createNewMiliampere(String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000268");
-		Individual indv = ontClass.createIndividual(createNewURI());
+		Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
 		indv.addLabel(indvLabel, "EN");
 		return indv.getURI();
 	}
@@ -409,7 +407,7 @@ public class OntologyEditor {
 
 	public String createNewMilisecond(String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000384");
-		Individual indv = ontClass.createIndividual(createNewURI());
+		Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
 		indv.addLabel(indvLabel, "EN");
 		return indv.getURI();
 	}
@@ -424,12 +422,19 @@ public class OntologyEditor {
 
 	public Map<String, String> getAllMuscles() {
 		OntClass muscle = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000227");
+		OntClass ringMuscle = ontModel.getOntClass("http://purl.obolibrary.org/obo/FMA_46841");
 		HashMap<String, String> muscleMap = new HashMap<>();
 		Iterator surgeryIter = muscle.listSubClasses();
 		while (surgeryIter.hasNext()) {
 			OntClass sub = (OntClass) surgeryIter.next();
-			muscleMap.put(sub.getLabel("DE"), sub.getURI());
+			//muscleMap.put(sub.getLabel("DE"), sub.getURI());
+			Iterator test = sub.listSubClasses();
+			while (test.hasNext()) {
+				OntClass subTest = (OntClass) test.next();
+				muscleMap.put(subTest.getLabel("DE"),subTest.getURI());
+			}
 		}
+		muscleMap.put(ringMuscle.getLabel("DE"), ringMuscle.getURI());
 		return muscleMap;
 	}
 
