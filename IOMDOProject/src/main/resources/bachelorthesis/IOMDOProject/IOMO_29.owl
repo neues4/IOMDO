@@ -467,6 +467,35 @@ We also have the outstanding issue of how to aim different definitions to differ
     
 
 
+    <!-- http://purl.obolibrary.org/obo/UBPROP_0000008 -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/UBPROP_0000008">
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Notes on the how instances of this class vary across species.</obo:IAO_0000115>
+        <oboInOwl:hasDbXref rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UBPROP:0000008</oboInOwl:hasDbXref>
+        <oboInOwl:hasOBONamespace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">uberon</oboInOwl:hasOBONamespace>
+        <oboInOwl:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">taxon_notes</oboInOwl:id>
+        <oboInOwl:is_metadata_tag rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</oboInOwl:is_metadata_tag>
+        <oboInOwl:shorthand rdf:datatype="http://www.w3.org/2001/XMLSchema#string">taxon_notes</oboInOwl:shorthand>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">taxon_notes</rdfs:label>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.obolibrary.org/obo/UBPROP_0000009 -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/UBPROP_0000009">
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Notes on the evolved function of instances of this class.</obo:IAO_0000115>
+        <obo:IAO_0000116 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This annotation property may be replaced with an annotation property from an external ontology such as IAO</obo:IAO_0000116>
+        <oboInOwl:hasDbXref rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UBPROP:0000009</oboInOwl:hasDbXref>
+        <oboInOwl:hasOBONamespace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">uberon</oboInOwl:hasOBONamespace>
+        <oboInOwl:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">function_notes</oboInOwl:id>
+        <oboInOwl:is_metadata_tag rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</oboInOwl:is_metadata_tag>
+        <oboInOwl:shorthand rdf:datatype="http://www.w3.org/2001/XMLSchema#string">function_notes</oboInOwl:shorthand>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">function_notes</rdfs:label>
+    </owl:AnnotationProperty>
+    
+
+
     <!-- http://purl.obolibrary.org/obo/mondo#excluded_from_qc_check -->
 
     <owl:AnnotationProperty rdf:about="http://purl.obolibrary.org/obo/mondo#excluded_from_qc_check">
@@ -3694,7 +3723,7 @@ Each of these 3 primitives can be composed to yield a cross-product of different
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000250">
         <rdfs:domain rdf:resource="http://medicis/spm.owl/OntoSPM#patient"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
         <rdfs:label xml:lang="en">has case number</rdfs:label>
     </owl:DatatypeProperty>
     
@@ -4559,6 +4588,7 @@ Note that incision refers to the tissues that have been cut, rather than the spa
 These actions are triples of a human effector, a human actor and an affected physical object.
 
 [www.oxforddictionary.com in Jan 2015]</obo:IAO_0000115>
+        <rdfs:label xml:lang="de">Aktion</rdfs:label>
         <skos:prefLabel xml:lang="fr">action humaine de manipulation d&apos;un objet</skos:prefLabel>
         <skos:prefLabel xml:lang="en">manipulating action by human</skos:prefLabel>
         <skos:prefLabel xml:lang="de">von Menschen manipulierende Aktionen</skos:prefLabel>
@@ -6032,20 +6062,6 @@ OMIM mapping confirmed by DO. [SN].</rdfs:comment>
     
 
 
-    <!-- http://purl.obolibrary.org/obo/FMA_44691 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/FMA_44691">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000227"/>
-        <obo:IAO_0000412 rdf:resource="http://purl.obolibrary.org/obo/fma.owl"/>
-        <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gastrocnemius branch of tibial nerve</oboInOwl:hasExactSynonym>
-        <oboInOwl:hasOBONamespace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fma</oboInOwl:hasOBONamespace>
-        <oboInOwl:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FMA:44691</oboInOwl:id>
-        <rdfs:label xml:lang="de">Gastro</rdfs:label>
-        <rdfs:label xml:lang="en">Nerve to gastrocnemius</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://purl.obolibrary.org/obo/FMA_44836 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/FMA_44836">
@@ -6059,34 +6075,6 @@ OMIM mapping confirmed by DO. [SN].</rdfs:comment>
         <oboInOwl:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FMA:44836</oboInOwl:id>
         <rdfs:label xml:lang="de">Medianus</rdfs:label>
         <rdfs:label xml:lang="en">Palmar branch of median nerve</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/FMA_45414 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/FMA_45414">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/FMA_44691"/>
-        <obo:IAO_0000412 rdf:resource="http://purl.obolibrary.org/obo/fma.owl"/>
-        <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gastrocnemius branch of right tibial nerve</oboInOwl:hasExactSynonym>
-        <oboInOwl:hasOBONamespace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fma</oboInOwl:hasOBONamespace>
-        <oboInOwl:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FMA:45414</oboInOwl:id>
-        <rdfs:label xml:lang="de">Gastro</rdfs:label>
-        <rdfs:label xml:lang="en">Nerve to right gastrocnemius</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://purl.obolibrary.org/obo/FMA_45415 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/FMA_45415">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/FMA_44691"/>
-        <obo:IAO_0000412 rdf:resource="http://purl.obolibrary.org/obo/fma.owl"/>
-        <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gastrocnemius branch of left tibial nerve</oboInOwl:hasExactSynonym>
-        <oboInOwl:hasOBONamespace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fma</oboInOwl:hasOBONamespace>
-        <oboInOwl:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FMA:45415</oboInOwl:id>
-        <rdfs:label xml:lang="de">Gastro links</rdfs:label>
-        <rdfs:label xml:lang="en">Nerve to left gastrocnemius</rdfs:label>
     </owl:Class>
     
 
@@ -6226,7 +6214,7 @@ OMIM mapping confirmed by DO. [SN].</rdfs:comment>
     <!-- http://purl.obolibrary.org/obo/FMA_50867 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/FMA_50867">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000227"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000385"/>
         <obo:IAO_0000412 rdf:resource="http://purl.obolibrary.org/obo/fma.owl"/>
         <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abducens nerve [VI]</oboInOwl:hasExactSynonym>
         <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abducens nerve tree</oboInOwl:hasExactSynonym>
@@ -6246,7 +6234,7 @@ OMIM mapping confirmed by DO. [SN].</rdfs:comment>
     <!-- http://purl.obolibrary.org/obo/FMA_50871 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/FMA_50871">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000227"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000385"/>
         <obo:IAO_0000412 rdf:resource="http://purl.obolibrary.org/obo/fma.owl"/>
         <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hypoglossal nerve [XII]</oboInOwl:hasExactSynonym>
         <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hypoglossal nerve tree</oboInOwl:hasExactSynonym>
@@ -6311,7 +6299,7 @@ OMIM mapping confirmed by DO. [SN].</rdfs:comment>
         <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Left accessory nerve tree</oboInOwl:hasExactSynonym>
         <oboInOwl:hasOBONamespace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fma</oboInOwl:hasOBONamespace>
         <oboInOwl:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FMA:50899</oboInOwl:id>
-        <rdfs:label xml:lang="de">Accessorius</rdfs:label>
+        <rdfs:label xml:lang="de">Accessorius links</rdfs:label>
         <rdfs:label xml:lang="en">Left spinal accessory nerve</rdfs:label>
     </owl:Class>
     
@@ -6350,7 +6338,7 @@ OMIM mapping confirmed by DO. [SN].</rdfs:comment>
     <!-- http://purl.obolibrary.org/obo/FMA_5731 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/FMA_5731">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000227"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000385"/>
         <obo:IAO_0000412 rdf:resource="http://purl.obolibrary.org/obo/fma.owl"/>
         <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tenth cranial nerve</oboInOwl:hasExactSynonym>
         <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vagus</oboInOwl:hasExactSynonym>
@@ -6463,7 +6451,7 @@ OMIM mapping confirmed by DO. [SN].</rdfs:comment>
     <!-- http://purl.obolibrary.org/obo/FMA_6720 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/FMA_6720">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000227"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000385"/>
         <obo:IAO_0000412 rdf:resource="http://purl.obolibrary.org/obo/fma.owl"/>
         <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Accessory nerve</oboInOwl:hasExactSynonym>
         <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Accessory nerve [XI]</oboInOwl:hasExactSynonym>
@@ -7939,6 +7927,46 @@ objectives is a planned process.</obo:IAO_0000116>
     
 
 
+    <!-- http://purl.obolibrary.org/obo/UBERON_0001388 -->
+
+    <owl:Class rdf:about="http://purl.obolibrary.org/obo/UBERON_0001388">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000227"/>
+        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The most superficial muscle of the triceps surae group, in the posterior portion of the lower hindleg.</obo:IAO_0000115>
+        <obo:IAO_0000412 rdf:resource="http://purl.obolibrary.org/obo/uberon.owl"/>
+        <obo:UBPROP_0000001 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The most superficial calf muscle in the posterior part of the leg. [TFD][VHOG]</obo:UBPROP_0000001>
+        <obo:UBPROP_0000003 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The most prominent ventral muscle of the shank is the gastrocnemius, the &apos;calf&apos; muscle. In mammals, it has two heads, resulting from the fusion of two different phylogenetic predecessors.[well established][VHOG]</obo:UBPROP_0000003>
+        <obo:UBPROP_0000008 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In mammals this muscle has two heads[ISBN:0073040584]</obo:UBPROP_0000008>
+        <obo:UBPROP_0000009 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">involved in standing, walking, running and jumping</obo:UBPROP_0000009>
+        <oboInOwl:hasDbXref rdf:resource="http://en.wikipedia.org/wiki/Gastrocnemius_muscle"/>
+        <oboInOwl:hasDbXref rdf:resource="http://linkedlifedata.com/resource/umls/id/C0242691"/>
+        <oboInOwl:hasDbXref rdf:resource="http://www.snomedbrowser.com/Codes/Details/181700004"/>
+        <oboInOwl:hasDbXref rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BTO:0000506</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EFO:0001413</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EHDAA2:0000701</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EHDAA:8293</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EMAPA:35375</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FMA:22541</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MA:0002306</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NCIT:C32666</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UMLS:C0242691</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref rdf:datatype="http://www.w3.org/2001/XMLSchema#string">VHOG:0001193</oboInOwl:hasDbXref>
+        <oboInOwl:hasDbXref rdf:datatype="http://www.w3.org/2001/XMLSchema#string">galen:Gastrocnemius</oboInOwl:hasDbXref>
+        <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">gastrocnemius muscle</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">m. gastrocnemius</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasExactSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">m.gastrocnemius</oboInOwl:hasExactSynonym>
+        <oboInOwl:hasOBONamespace rdf:datatype="http://www.w3.org/2001/XMLSchema#string">uberon</oboInOwl:hasOBONamespace>
+        <oboInOwl:hasRelatedSynonym rdf:datatype="http://www.w3.org/2001/XMLSchema#string">musculus gastrocnemius</oboInOwl:hasRelatedSynonym>
+        <oboInOwl:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UBERON:0001388</oboInOwl:id>
+        <oboInOwl:inSubset rdf:resource="http://purl.oboInOwllibrary.org/oboInOwl/uberon/core#efo_slim"/>
+        <oboInOwl:inSubset rdf:resource="http://purl.oboInOwllibrary.org/oboInOwl/uberon/core#pheno_slim"/>
+        <oboInOwl:inSubset rdf:resource="http://purl.oboInOwllibrary.org/oboInOwl/uberon/core#uberon_slim"/>
+        <rdfs:label xml:lang="de">Gastro</rdfs:label>
+        <rdfs:label xml:lang="en">gastrocnemius</rdfs:label>
+        <foaf:depicted_by rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://upload.wikimedia.org/wikipedia/commons/8/8e/Gastrocnemius.png</foaf:depicted_by>
+    </owl:Class>
+    
+
+
     <!-- http://purl.obolibrary.org/obo/UBERON_0001532 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/UBERON_0001532">
@@ -7989,7 +8017,7 @@ objectives is a planned process.</obo:IAO_0000116>
     <!-- http://purl.obolibrary.org/obo/UBERON_0001649 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/UBERON_0001649">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000227"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000385"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cranial nerve that branches into the ramus communicans (to the skin), the pretrematic (to the walls of the pharynx and mouth, viscero-sensory fibers), and the larval post-trematic branch (lost in the adult).</obo:IAO_0000115>
         <obo:IAO_0000412 rdf:resource="http://purl.obolibrary.org/obo/uberon.owl"/>
         <obo:UBPROP_0000001 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Small nerve consisting of branchiomotor and visceral efferent and afferent fibers which innervate the m. subarculais rectus I, dorsal buccal mucosa, and the tongue.[AAO]</obo:UBPROP_0000001>
@@ -9225,7 +9253,6 @@ objectives is a planned process.</obo:IAO_0000116>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000403"/>
         <obo:IAO_0000115 xml:lang="en">A documented interpretation of a significant  flattening of the amplitute of an evoked potential.</obo:IAO_0000115>
         <rdfs:label xml:lang="de">VEP flacher</rdfs:label>
-        <rdfs:label xml:lang="de">flacheres evoziertes Potenzial</rdfs:label>
         <rdfs:label xml:lang="en">flattened VEP</rdfs:label>
     </owl:Class>
     
@@ -9277,7 +9304,6 @@ objectives is a planned process.</obo:IAO_0000116>
     <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000132">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000403"/>
         <obo:IAO_0000115 xml:lang="en">An interference signal overlaying over the evoked potential preventing an interpretation of the signal.</obo:IAO_0000115>
-        <rdfs:label xml:lang="de">Artefakt von evoziertem Potenzial überlagert</rdfs:label>
         <rdfs:label xml:lang="de">VEP Artefakt überlagert</rdfs:label>
         <rdfs:label xml:lang="en">artifact overlay of VEP</rdfs:label>
     </owl:Class>
@@ -9292,7 +9318,6 @@ objectives is a planned process.</obo:IAO_0000116>
         <obo:IAO_0000115 xml:lang="de">Eine interpretierte signifikante Änderung der Amplitude eines evozierten Potentials.</obo:IAO_0000115>
         <rdfs:label xml:lang="de">VEP Veränderung</rdfs:label>
         <rdfs:label xml:lang="en">change of VEP</rdfs:label>
-        <rdfs:label xml:lang="de">Änderung des evozierten Potentials</rdfs:label>
     </owl:Class>
     
 
@@ -9303,7 +9328,6 @@ objectives is a planned process.</obo:IAO_0000116>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000403"/>
         <obo:IAO_0000115 xml:lang="en">A documented interpretation of a delay of an evoked potential.</obo:IAO_0000115>
         <rdfs:label xml:lang="de">VEP leicht verzögert</rdfs:label>
-        <rdfs:label xml:lang="de">Verzögerung des evozierten Potenzials</rdfs:label>
         <rdfs:label xml:lang="en">delay of VEP</rdfs:label>
     </owl:Class>
     
@@ -9368,7 +9392,6 @@ objectives is a planned process.</obo:IAO_0000116>
     <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000141">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000134"/>
         <obo:IAO_0000115 xml:lang="en">A documented interpretation of a significant drop of an evoked potential.</obo:IAO_0000115>
-        <rdfs:label xml:lang="de">Abfall des evozierten Potenzials</rdfs:label>
         <rdfs:label xml:lang="de">VEP Abfall</rdfs:label>
         <rdfs:label xml:lang="en">decline of VEP</rdfs:label>
     </owl:Class>
@@ -9380,7 +9403,6 @@ objectives is a planned process.</obo:IAO_0000116>
     <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000142">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000134"/>
         <obo:IAO_0000115 xml:lang="en">A documented interpretation of a significant drop of an evoked potential.</obo:IAO_0000115>
-        <rdfs:label xml:lang="de">Abnahme des evozierten Potenzials</rdfs:label>
         <rdfs:label xml:lang="de">VEP Abnahme</rdfs:label>
         <rdfs:label xml:lang="en">decrease of VEP</rdfs:label>
     </owl:Class>
@@ -9393,7 +9415,6 @@ objectives is a planned process.</obo:IAO_0000116>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000134"/>
         <obo:IAO_0000115 xml:lang="en">A documented interpretation of a significant increase of an evoked potential.</obo:IAO_0000115>
         <rdfs:label xml:lang="de">VEP Zunahme</rdfs:label>
-        <rdfs:label xml:lang="de">Zunahme des evozierten Potenzials</rdfs:label>
         <rdfs:label xml:lang="en">increase of VEP</rdfs:label>
     </owl:Class>
     
@@ -9695,7 +9716,6 @@ objectives is a planned process.</obo:IAO_0000116>
         <obo:IAO_0000115 xml:lang="en">A documented interpretation of a stable evoked potential.</obo:IAO_0000115>
         <rdfs:label xml:lang="de">VEP gleichbleibend</rdfs:label>
         <rdfs:label xml:lang="en">consistent VEP</rdfs:label>
-        <rdfs:label xml:lang="de">gleichbleibendes evoziertes Potenzial</rdfs:label>
     </owl:Class>
     
 
@@ -10327,7 +10347,7 @@ objectives is a planned process.</obo:IAO_0000116>
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/IAO_0000109"/>
         <obo:IAO_0000115 xml:lang="en">The curve of the measured visually evoked potential provided by the IOM device.</obo:IAO_0000115>
         <oboInOwl:hasExactSynonym xml:lang="en">visually evoked potential measurement</oboInOwl:hasExactSynonym>
-        <rdfs:comment xml:lang="de">VEP Messung</rdfs:comment>
+        <rdfs:label xml:lang="de">VEP Messung</rdfs:label>
         <rdfs:label xml:lang="en">VEP measurement</rdfs:label>
     </owl:Class>
     
@@ -11703,6 +11723,77 @@ Wichtig sind die &quot;schäden&quot;  im IOM kontext.</obo:IAO_0000115>
     
 
 
+    <!-- http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000442 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000442">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000370"/>
+        <rdfs:label xml:lang="de">EMG burst</rdfs:label>
+        <rdfs:label xml:lang="en">EMG burst</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000443 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000443">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000370"/>
+        <obo:IAO_0000115 xml:lang="en">Spontaneous activity</obo:IAO_0000115>
+        <rdfs:label xml:lang="de">SPN / SPA</rdfs:label>
+        <rdfs:label xml:lang="en">SPN / SPA</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000444 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000444">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000231"/>
+        <rdfs:label xml:lang="de">EEG Burst Suppression</rdfs:label>
+        <rdfs:label xml:lang="en">EEG burst suppression</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000445 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000445">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000387"/>
+        <rdfs:label xml:lang="de">D-Welle ableitbar</rdfs:label>
+        <rdfs:label xml:lang="en">d-wave derivable</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000446 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000446">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000387"/>
+        <rdfs:label xml:lang="de">D-Welle nicht ableitbar</rdfs:label>
+        <rdfs:label xml:lang="en">d-wave not derivable</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000448 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000448">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/UBERON_0001388"/>
+        <rdfs:label xml:lang="de">Gastro links</rdfs:label>
+        <rdfs:label xml:lang="en">left gastrocnemius</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000449 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000449">
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/UBERON_0001388"/>
+        <rdfs:label xml:lang="de">Gastro rechts</rdfs:label>
+        <rdfs:label xml:lang="en">right gastrocnemius</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -11719,7 +11810,7 @@ Wichtig sind die &quot;schäden&quot;  im IOM kontext.</obo:IAO_0000115>
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000262">
         <rdf:type rdf:resource="http://medicis/spm.owl/OntoSPM#patient"/>
         <IOMO:IOMO_0000285 rdf:resource="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000286"/>
-        <IOMO:IOMO_0000250 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</IOMO:IOMO_0000250>
+        <IOMO:IOMO_0000250 rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</IOMO:IOMO_0000250>
         <IOMO:IOMO_0000251 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00001000</IOMO:IOMO_0000251>
         <IOMO:IOMO_0000252 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1000</IOMO:IOMO_0000252>
         <IOMO:IOMO_0000253>Paul</IOMO:IOMO_0000253>
@@ -11806,7 +11897,7 @@ Wichtig sind die &quot;schäden&quot;  im IOM kontext.</obo:IAO_0000115>
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000276">
         <rdf:type rdf:resource="http://medicis/spm.owl/OntoSPM#patient"/>
-        <IOMO:IOMO_0000250 rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</IOMO:IOMO_0000250>
+        <IOMO:IOMO_0000250 rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</IOMO:IOMO_0000250>
         <IOMO:IOMO_0000251 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00001001</IOMO:IOMO_0000251>
         <IOMO:IOMO_0000252 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1001</IOMO:IOMO_0000252>
         <IOMO:IOMO_0000253>Benjamin</IOMO:IOMO_0000253>
