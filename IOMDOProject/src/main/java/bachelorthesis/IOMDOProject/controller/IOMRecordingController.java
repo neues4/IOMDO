@@ -195,11 +195,11 @@ public class IOMRecordingController {
 
 		String pat = ontEdit.createNewPatient(patLabel); 
 
-		ontEdit.addPropertiesToPatient(pat, caseNrTF.getText(), pidTF.getText(), fidTF.getText(), firstNameTF.getText(), surnameTF.getText(), birthdayTF.getText());
+		ontEdit.addPatientProperties(pat, caseNrTF.getText(), pidTF.getText(), fidTF.getText(), firstNameTF.getText(), surnameTF.getText(), birthdayTF.getText());
 
 		String surgery= ontEdit.createNewIndividual(ontEdit.getAllSurgeries().get(surgeryCB.getSelectionModel().getSelectedItem()), "Surgery");
 
-		ontEdit.addPropertiesToSurgery(surgery, dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem());
+		ontEdit.addSurgeryProperties(surgery, dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem());
 
 		String diagnosis = ontEdit.createNewIndividual(ontEdit.getAllDiagnosis().get(diagnosisCB.getSelectionModel().getSelectedItem()), "Diagnosis");
 
@@ -377,10 +377,21 @@ public class IOMRecordingController {
 
 		//IOM actual Recording------------------------------------------------
 
-		String document = ontEdit.createNewIOMDocument("Document");
-
+		String document = ontEdit.createNewIOMDocument("IOMDocument");
 		String NS = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_";
-		//String has_data_item = "0000282";
+		String has_data_item = "0000282";
+		String category =categoryIOMStart.getSelectionModel().getSelectedItem();
+		String entry= entryIOMStart.getSelectionModel().getSelectedItem();
+		ontEdit.addStatement(document, NS + has_data_item , category);
+		
+	
+		//Entry ist noch keine uri, Hashmap mit allen Events erstellen und mit string abfragen??
+		//ontEdit.addTimestampToEntity(entry, "timestamp");
+	
+		
+	
+		
+		
 		//String has_document = "0000285";
 
 		System.out.println("Zeit: " + timeStartTF.getText());

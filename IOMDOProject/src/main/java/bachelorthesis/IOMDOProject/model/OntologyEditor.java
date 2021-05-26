@@ -32,7 +32,8 @@ import org.apache.jena.rdf.model.Statement;
  */
 public class OntologyEditor {
 
-
+	//Namesspace
+	private String ns = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_";
 
 
 	// a new instance of an ontology model // romap1: habe static rausgenommen, weil ich vorteil nicht gesehen habe
@@ -47,9 +48,9 @@ public class OntologyEditor {
 	{
 		if (editor == null)
 			//Windows
-			//editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_29.owl");
+			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_29.owl");
 		//mac
-		editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_29.owl");
+		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_29.owl");
 
 		return editor;
 	}
@@ -157,7 +158,7 @@ public class OntologyEditor {
 		return null; 
 	}
 
-	public void addPropertiesToPatient(String pat, String nr, String PID, String FID, String firstname, String surname, String birthday) {
+	public void addPatientProperties(String pat, String nr, String PID, String FID, String firstname, String surname, String birthday) {
 		Individual indv = ontModel.getIndividual(pat);
 		DatatypeProperty datPropNr = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000250");
 		DatatypeProperty datPropPid = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000251");
@@ -181,7 +182,7 @@ public class OntologyEditor {
 		indv.addProperty(datPropBirthday, birthday);
 	}
 
-	public void addPropertiesToSurgery(String surgery, String surgeryDate, String surgeon, String assistant, String isisDevice) {
+	public void addSurgeryProperties(String surgery, String surgeryDate, String surgeon, String assistant, String isisDevice) {
 		Individual indv = ontModel.getIndividual(surgery);
 		DatatypeProperty datPropSurgeryDate = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000365");
 		DatatypeProperty datPropSurgeon = ontModel.getDatatypeProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000363");
@@ -192,6 +193,18 @@ public class OntologyEditor {
 		indv.addProperty(datPropAssistant, assistant);
 		indv.addProperty(datPropIsisDevice, isisDevice);
 	}
+	
+	/**
+	 * Adds the data property timestamp to the given entity.
+	 * @author romap1
+	 * @param entity The Uri of the entity
+	 * @param timestamp the time as String
+	 */
+	public void addTimestampToEntity(String entity, String timestamp) {
+		Individual indv = ontModel.getIndividual(entity);
+		DatatypeProperty datPropSurgeryDate = ontModel.getDatatypeProperty( ns + "0000266");
+		indv.addProperty(datPropSurgeryDate, timestamp);
+	} 
 
 	
 	public void addStatement(String subject, String property, String object ) {
