@@ -9,6 +9,7 @@ import java.util.Map;
 import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
 import bachelorthesis.IOMDOProject.model.Counter;
+import bachelorthesis.IOMDOProject.model.EntryMap;
 import bachelorthesis.IOMDOProject.model.OntologyEditor;
 import bachelorthesis.IOMDOProject.model.PatientSurgeryData;
 import javafx.collections.FXCollections;
@@ -369,10 +370,12 @@ public class IOMRecordingController {
 	 */
 	public  void save(ActionEvent event) throws IOException {
 		// Patient Data start
-		//savePatient();
+		savePatient();
 		// Patient Data end
 
 
+		
+		
 
 
 		//IOM actual Recording------------------------------------------------
@@ -384,6 +387,8 @@ public class IOMRecordingController {
 		String entry= entryIOMStart.getSelectionModel().getSelectedItem();
 		ontEdit.addStatement(document, NS + has_data_item , category);
 		
+		EntryMap map = new EntryMap();
+		System.out.println("Recording Controller" + map.getUri(entry));
 	
 		//Entry ist noch keine uri, Hashmap mit allen Events erstellen und mit string abfragen??
 		//ontEdit.addTimestampToEntity(entry, "timestamp");
