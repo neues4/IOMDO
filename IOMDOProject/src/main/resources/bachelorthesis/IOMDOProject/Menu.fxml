@@ -47,13 +47,13 @@
       </GridPane>
    </center>
    <left>
-      <VBox spacing="8.0" BorderPane.alignment="CENTER">
+      <VBox focusTraversable="true" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="newProtocolBtn" mnemonicParsing="false" onAction="#openNewProtocol" prefHeight="80.0" prefWidth="200.0" text="%btn.newProtocol" />
-            <Button fx:id="protocolOverviewBtn" mnemonicParsing="false" onAction="#openProtocolOverview" prefHeight="80.0" prefWidth="200.0" text="%btn.protocolOverview" />
-            <Button fx:id="createQueryBtn" mnemonicParsing="false" onAction="#openCreatQuery" prefHeight="80.0" prefWidth="200.0" text="%btn.createQuery" />
-            <Button fx:id="expandOntologyBtn" mnemonicParsing="false" onAction="#openExpandOntology" prefHeight="80.0" prefWidth="200.0" text="%btn.expandOntology" />
-            <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#openSettings" prefHeight="80.0" prefWidth="200.0" text="%btn.settings" />
+            <Button fx:id="newProtocolBtn" mnemonicParsing="false" onAction="#openNewProtocol" prefHeight="80.0" prefWidth="150.0" text="%btn.newProtocol" />
+            <Button fx:id="protocolOverviewBtn" mnemonicParsing="false" onAction="#openProtocolOverview" prefHeight="80.0" prefWidth="150.0" text="%btn.protocolOverview" />
+            <Button fx:id="createQueryBtn" mnemonicParsing="false" onAction="#openCreatQuery" prefHeight="80.0" prefWidth="150.0" text="%btn.createQuery" />
+            <Button fx:id="expandOntologyBtn" mnemonicParsing="false" onAction="#openExpandOntology" prefHeight="80.0" prefWidth="150.0" text="%btn.expandOntology" />
+            <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#openSettings" prefHeight="80.0" prefWidth="150.0" text="%btn.settings" />
          </children>
       </VBox>
    </left>

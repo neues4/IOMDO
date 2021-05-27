@@ -26,7 +26,7 @@
                      <top>
                         <Accordion fx:id="accordion" BorderPane.alignment="CENTER">
                           <panes>
-                            <TitledPane animated="false" text="Baselines SSEPs">
+                            <TitledPane fx:id="SSEPPane" animated="false" text="Baselines SSEPs">
                                  <content>
                                     <GridPane prefWidth="983.0">
                                       <columnConstraints>

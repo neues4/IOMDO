@@ -21,14 +21,22 @@ import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * Controller for the recording durinig Intraoperative Neuromonitoring
@@ -81,6 +89,9 @@ public class IOMRecordingController {
 
 	@FXML
 	private Button btnSaveTesMep, btnSaveSsep, btnSaveDcsMep;
+	
+	@FXML
+	private TitledPane SSEPPane;
 
 
 	//-------------------------------------------------------Variables Baselines
@@ -108,10 +119,17 @@ public class IOMRecordingController {
 	@FXML
 	private ComboBox<String> entryIOMStart;
 
-
 	@FXML
 	private Label patientNameLbl, birthdayLbl,diagnoseLbl, surgeryLbl, dateLbl ;
+	
+	// a map for the tf in sep baselines
+	private Map<String, Node> nodeMapSepBaselines = new HashMap<String, Node>();
+	
+	// a map for the cb and tf in tes baselines
+	private Map<String, Node> nodeMapTesBaselines = new HashMap<String, Node>();
 
+	// a map for the cb and tf in dcs baselines
+	private Map<String, Node> nodeMapDcsBaselines = new HashMap<String, Node>();
 
 
 	//---------------------------------------------------Variables IOM actual Recording
@@ -163,6 +181,19 @@ public class IOMRecordingController {
 		cbDcs8.setItems(muscleList);
 		cbDcs9.setItems(muscleList);
 		cbDcs10.setItems(muscleList);
+		
+		
+		//changes color of the Text of the TitlePane when at least one of the contained Textfields has an input.
+		tfMedLN.textProperty().addListener((Observable) -> {
+		if (tfMedLN.getText() != "") {
+			SSEPPane.setTextFill(Color.GREEN);
+			}
+		
+		else {
+			SSEPPane.setTextFill(Color.BLACK);
+		}
+		});
+		
 		// Baseline end
 	}
 
@@ -229,15 +260,6 @@ public class IOMRecordingController {
 	// Baseline Start-----------------------------------------------------------------------------------------
 		// put all the labels of the muscles in a list
 		ObservableList<String> muscleList = FXCollections.observableArrayList(ontEdit.getAllMuscles().keySet());
-
-		// a map for the tf in sep baselines
-		private Map<String, Node> nodeMapSepBaselines = new HashMap<String, Node>();
-		
-		// a map for the cb and tf in tes baselines
-		private Map<String, Node> nodeMapTesBaselines = new HashMap<String, Node>();
-
-		// a map for the cb and tf in dcs baselines
-		private Map<String, Node> nodeMapDcsBaselines = new HashMap<String, Node>();
 
 		public void getSepBaselineValues() {
 			
@@ -381,8 +403,10 @@ public class IOMRecordingController {
 				}
 			}
 		}
-
-		//--------
+		
+		
+		
+		//-------------------Baseline End
 
 
 
@@ -395,7 +419,7 @@ public class IOMRecordingController {
 
 	private Map<String, Node> nodeList = new HashMap<String, Node>();
 
-	private ObservableList<String> entryList = FXCollections.observableArrayList("entry1", "entry2");
+	//private ObservableList<String> entryList = FXCollections.observableArrayList("entry1", "entry2");
 
 	// create the list for the first dropdown
 	private ObservableList<String> categoryList = FXCollections.observableArrayList(ontEdit.getAllEntitiesToBeShown().keySet());
@@ -436,6 +460,10 @@ public class IOMRecordingController {
 	// a map for the comboboxes in dcs mep
 	private Map<Integer, ComboBox<String>> cbDcsMap = new HashMap<Integer, ComboBox<String>>();
 
+	
+
+	
+	
 	/**
 	 * Adds a new Set of Nodes in the next empty Row of the GridPane.
 	 * @param event
@@ -445,17 +473,36 @@ public class IOMRecordingController {
 	public  void addRow(ActionEvent event) throws IOException, URISyntaxException {
 		//create nessecary nodes
 		TextField timeTF = new TextField();	
+		Tooltip tp = new Tooltip();
+		tp.setText("this is a test");
+		timeTF.setTooltip(tp);
 		ComboBox<String> categoryCB = new ComboBox<String>();
 		categoryCB.setItems(categoryList);
+		
+		//categoryCB.setMaxHeight(Control.USE_COMPUTED_SIZE);
+		
 		ComboBox<String> entryCB = new ComboBox<String>();
-		//entryCB.setItems(entryList);
+		
+		
 		TextField valueTF = new TextField();
 		TextField commentTF = new TextField();
 		Button deleteBtn = new Button();
-
-		ImageView view = new ImageView(Main.class.getResource("173-bin.png").toExternalForm());
-		deleteBtn.setGraphic(view);
-
+		
+		//Textfield for value is not visible by default
+		valueTF.setDisable(true);
+		valueTF.setVisible(false);
+		
+		//Texfield for value is only visible when a category with measurement selected. 
+		categoryCB.setOnAction ((selectedItem) -> {
+			   if(categoryCB.getSelectionModel().getSelectedItem().contains(I18n.getString("rec.measurement"))) {
+				   valueTF.setDisable(false);
+					valueTF.setVisible(true);
+			   }else {
+				   valueTF.setDisable(true);
+					valueTF.setVisible(false);
+			   }
+			});
+		
 		//add nodes to HashMap, Key is ROW + Columnnumber. eg. Key = 21 for Node in ROW 2, Columne 1. 
 		nodeList.put(row + "1", timeTF );
 		nodeList.put(row + "2", categoryCB );
@@ -471,7 +518,10 @@ public class IOMRecordingController {
 			}
 		});
 
-
+		//add bin graphic for Delete Button
+		ImageView view = new ImageView(Main.class.getResource("173-bin.png").toExternalForm());
+		deleteBtn.setGraphic(view);
+		
 		//add delete event on delete Button
 		deleteBtn.addEventHandler(ActionEvent.ACTION,
 				new EventHandler<ActionEvent>() {
@@ -581,6 +631,9 @@ public class IOMRecordingController {
 			
 			
 			String comment = getTextField(nodeList.get( i  +"" + 5)).getText();
+			if(!comment.isEmpty()) {
+				//save comment
+			}
 			
 		}
 	
