@@ -41,32 +41,55 @@ public class EntryMap {
 		entryMap = new HashMap<String, String>();
 		//VEP Beobachtung = 403
 		HashMap<String, String> vepFindingMap = (HashMap<String, String>) ontEdit.getSubclasses( NS + "IOMO_0000403");
-		
+		//Mapping MEssung = 373
 		HashMap<String, String> mappingMeasurementMap = (HashMap<String, String>) ontEdit.getSubclasses(NS +"IOMO_0000373");
+		//Technische Probleme= 154
 		HashMap<String, String> technicalIssuesMap = (HashMap<String, String>) ontEdit.getSubclasses(NS + "IOMO_0000154");
-		HashMap<String, String> dwaveMeasurementMap = (HashMap<String, String>) ontEdit.getSubclasses(NS + "IOMO_0000369");
+		
+		//HashMap<String, String> dwaveMeasurementMap = (HashMap<String, String>) ontEdit.getSubclasses(NS + "IOMO_0000369");
+		//AEP Messung = 240
 		HashMap<String, String> aepMeasurementMap = (HashMap<String, String>) ontEdit.getSubclasses(NS + "IOMO_0000240");
+		//CBT Messung = 371, Nötig?
 		HashMap<String, String> cbtMeasurementMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000371");
+		//Operationsprozess = 58
 		HashMap<String, String> surgeryProcessMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000058");
+		//es fehlen noch alle Unterkategorien!!!
+		
+//Reflex Beobachtungen = 234
 		HashMap<String, String> reflexFindingMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000234");
+		//EEG Beobachtung = 231
 		HashMap<String, String> eegFindingMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000231");
+		//Anästhesie Prozess = 159
 		HashMap<String, String> anesthesyProcessMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000159");
+		//Mapping Beobachtung = 376
 		HashMap<String, String> mappingFindingMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000376");
+		//IOM Prozess = 57, nötig?, hat noch unterkategorien
 		HashMap<String, String> iomProcessMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000057");
+		//SEP Beobachtung= 401
 		HashMap<String, String> sepFindingMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000401");
+		//SEP Veränderungen = 417
+		HashMap<String, String> changeOfSEPMAP = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000417");
+		//AEP Beobachtung = 402
 		HashMap<String, String> aepFindingMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000402");
+		//AEP Veränderung= 429
+		HashMap<String, String> changeOfAEPMap = (HashMap<String, String>) ontEdit.getSubclasses(NS + "IOMO_0000429");
+		//D-Wave finding =387, no subclasses!!
 		HashMap<String, String> dwaveFindingMap = (HashMap<String, String>) ontEdit.getSubclasses(NS + "IOMO_0000387");
+		//EMG finding = 370, no subclasses!!
 		HashMap<String, String> emgFindingMap = (HashMap<String, String>) ontEdit.getSubclasses(NS + "IOMO_0000370");
+		//MEP Beobachtung = 400
 		HashMap<String, String> mepFindingMap = (HashMap<String, String>) ontEdit.getSubclasses(NS + "IOMO_0000400");
+		//MEP Veränderungen =405
+		HashMap<String, String> changeOfMEPMap = (HashMap<String, String>) ontEdit.getSubclasses(NS + "IOMO_0000405");
+		//manipulating_action_by_human, hat noch unterkategorien, noch nicht gelöst
 		HashMap<String, String> actionMap = (HashMap<String, String>) ontEdit.getSubclasses( "http://medicis/spm.owl/OntoSPM#manipulating_action_by_human");
 		
 		//Puts all maps into the entryMap
-		entryMap.putAll(vepFindingMap);entryMap.putAll(mappingMeasurementMap);entryMap.putAll(technicalIssuesMap);entryMap.putAll(dwaveMeasurementMap);
+		entryMap.putAll(vepFindingMap);entryMap.putAll(mappingMeasurementMap);entryMap.putAll(technicalIssuesMap);//entryMap.putAll(dwaveMeasurementMap);
 		entryMap.putAll(aepMeasurementMap);entryMap.putAll(cbtMeasurementMap);entryMap.putAll(surgeryProcessMap);entryMap.putAll(reflexFindingMap);
 		entryMap.putAll(eegFindingMap);entryMap.putAll(anesthesyProcessMap);entryMap.putAll(mappingFindingMap);entryMap.putAll(iomProcessMap);
 		entryMap.putAll(sepFindingMap);entryMap.putAll(aepFindingMap);entryMap.putAll(dwaveFindingMap);entryMap.putAll(emgFindingMap);entryMap.putAll(mepFindingMap);
-		entryMap.putAll(actionMap);
-
+		entryMap.putAll(actionMap); entryMap.putAll(changeOfSEPMAP);entryMap.putAll(changeOfAEPMap);entryMap.putAll(changeOfMEPMap);
 	}
 
 		
