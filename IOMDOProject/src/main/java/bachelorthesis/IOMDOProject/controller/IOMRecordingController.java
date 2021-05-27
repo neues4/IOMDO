@@ -521,7 +521,7 @@ public class IOMRecordingController {
 	 */
 	public  void save(ActionEvent event) throws IOException {
 		// Patient Data start
-		savePatient();
+		//savePatient();
 		//getSepBaselineValues();
 		//getTesBaselineValues();
 		//getDcsBaselineValues();
@@ -534,25 +534,61 @@ public class IOMRecordingController {
 
 		//IOM actual Recording------------------------------------------------
 
-		String document = ontEdit.createNewIOMDocument("IOMDocument");
-		String NS = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_";
-		String has_data_item = "0000282";
-		String category =categoryIOMStart.getSelectionModel().getSelectedItem();
-		String entry= entryIOMStart.getSelectionModel().getSelectedItem();
-		ontEdit.addStatement(document, NS + has_data_item , category);
+		String document = ontEdit.createNewIOMDocument("IOMDocumentTest");
+		String NS = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/";
+		String has_data_item = "IOMO_0000282";
+		
+		String entry1= entryIOMStart.getSelectionModel().getSelectedItem();
+		
 		
 		EntryMap map = new EntryMap();
-		System.out.println("Recording Controller" + map.getUri(entry));
-	
-		//Entry ist noch keine uri, Hashmap mit allen Events erstellen und mit string abfragen??
-		//ontEdit.addTimestampToEntity(entry, "timestamp");
-	
+
 		
-	
+		//Only a Kategory with Meassurement will be saved into the Ontology.  new Baseline not included! Basline measurment can be removed 
+		String category1 =categoryIOMStart.getSelectionModel().getSelectedItem();
+		String category1Uri = map.getUri(category1);
+		System.out.println(category1Uri);
+		if(category1.contains(I18n.getString("rec.measurement"))) {
+			ontEdit.addStatement(document, NS + has_data_item , category1Uri );
+			//value.getText();
+			//timestamp funktioniert noch nicht!
+			//ontEdit.addTimestampToEntity(category1Uri, "timestamp");
+			//Add Value to measurement needs to be added!
+			ontEdit.saveNewOWLFile();
+		}; 
 		
+		
+		
+		int rowsToRead = nodeList.size()/4;
+		for(int i= 2; i <= rowsToRead + 1; i++) {
+			String time = getTextField(  nodeList.get( i  +"" + 1)).getText();
+			String category = getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().getSelectedItem();
+			
+			if(category1.contains(I18n.getString("rec.measurement"))) {
+				//uri fehlt noch!
+				ontEdit.addStatement(document, NS + has_data_item , category);
+				//ontEdit.addTimestampToEntity(category, time);
+				value.getText();
+				
+				//Add Value to measurement needs to be added!
+			}else {
+				String entry = getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem();
+				String entryUri = map.getUri(entry);
+				ontEdit.addStatement(document, NS + has_data_item , entryUri);
+				//ontEdit.addTimestampToEntity(entryUri, time);
+			}
+			
+			
+			
+			String comment = getTextField(nodeList.get( i  +"" + 5)).getText();
+			
+		}
+	
+		//ontEdit.saveNewOWLFile();
 		
 		//String has_document = "0000285";
 
+		/*
 		System.out.println("Zeit: " + timeStartTF.getText());
 		System.out.println("Kategorie: " + categoryIOMStart.getSelectionModel().getSelectedItem());
 		System.out.println("Eintrag: " + entryIOMStart.getSelectionModel().getSelectedItem());
@@ -566,11 +602,14 @@ public class IOMRecordingController {
 			System.out.println("Eintrag" + i + ": "+getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem());
 			System.out.println("Kommentar" + i+ ": "+getTextField(nodeList.get( i  +"" + 5)).getText());
 			//IOM Documentation end
+				 
 		}
+		
+		*/
 
 	}
 
-	/**
+	/*
 	public String getTextFromNode(Node node) {
 		if (node.getClass().cast(node).getClass().equals(tf.getClass())) {
 			TextField test = (TextField) node.getClass().cast(node);

@@ -55,7 +55,7 @@ public class EntryMap {
 		HashMap<String, String> surgeryProcessMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000058");
 		//es fehlen noch alle Unterkategorien!!!
 		
-//Reflex Beobachtungen = 234
+		//Reflex Beobachtungen = 234
 		HashMap<String, String> reflexFindingMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000234");
 		//EEG Beobachtung = 231
 		HashMap<String, String> eegFindingMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000231");
@@ -83,6 +83,9 @@ public class EntryMap {
 		HashMap<String, String> changeOfMEPMap = (HashMap<String, String>) ontEdit.getSubclasses(NS + "IOMO_0000405");
 		//manipulating_action_by_human, hat noch unterkategorien, noch nicht gelöst
 		HashMap<String, String> actionMap = (HashMap<String, String>) ontEdit.getSubclasses( "http://medicis/spm.owl/OntoSPM#manipulating_action_by_human");
+		//get all Entities that are shown as Category in the GUI
+		HashMap<String, String> categoryMap  = (HashMap<String, String>) ontEdit.getAllEntitiesToBeShown(); 
+		
 		
 		//Puts all maps into the entryMap
 		entryMap.putAll(vepFindingMap);entryMap.putAll(mappingMeasurementMap);entryMap.putAll(technicalIssuesMap);//entryMap.putAll(dwaveMeasurementMap);
@@ -90,6 +93,15 @@ public class EntryMap {
 		entryMap.putAll(eegFindingMap);entryMap.putAll(anesthesyProcessMap);entryMap.putAll(mappingFindingMap);entryMap.putAll(iomProcessMap);
 		entryMap.putAll(sepFindingMap);entryMap.putAll(aepFindingMap);entryMap.putAll(dwaveFindingMap);entryMap.putAll(emgFindingMap);entryMap.putAll(mepFindingMap);
 		entryMap.putAll(actionMap); entryMap.putAll(changeOfSEPMAP);entryMap.putAll(changeOfAEPMap);entryMap.putAll(changeOfMEPMap);
+		entryMap.putAll(categoryMap);
+		
+		
+		//put indivituadl Entities into the entryMAP
+		//entryMap.put();
+	
+		
+		
+	
 	}
 
 		

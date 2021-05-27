@@ -21,7 +21,9 @@ import org.apache.jena.ontology.Ontology;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.util.iterator.ExtendedIterator;
 
 
 
@@ -33,7 +35,7 @@ import org.apache.jena.rdf.model.Statement;
 public class OntologyEditor {
 
 	//Namesspace
-	private String ns = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_";
+	private String ns = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/";
 
 
 	// a new instance of an ontology model // romap1: habe static rausgenommen, weil ich vorteil nicht gesehen habe
@@ -202,7 +204,7 @@ public class OntologyEditor {
 	 */
 	public void addTimestampToEntity(String entity, String timestamp) {
 		Individual indv = ontModel.getIndividual(entity);
-		DatatypeProperty datPropSurgeryDate = ontModel.getDatatypeProperty( ns + "0000266");
+		DatatypeProperty datPropSurgeryDate = ontModel.getDatatypeProperty( ns + "IOMO_0000266");
 		indv.addProperty(datPropSurgeryDate, timestamp);
 	} 
 
@@ -466,4 +468,15 @@ public class OntologyEditor {
 		return baselineMap;
 	}
 
+	//Returns a Map of all NsPrefixes
+	@SuppressWarnings("exports")
+	public Map<String, String> test() {
+		//return ontModel.listClasses();
+		return ontModel.getNsPrefixMap();
+		
+	}
+	
+
+	
+	
 }
