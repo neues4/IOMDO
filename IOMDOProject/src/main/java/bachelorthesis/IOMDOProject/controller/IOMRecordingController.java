@@ -91,7 +91,7 @@ public class IOMRecordingController {
 	private Button btnSaveTesMep, btnSaveSsep, btnSaveDcsMep;
 	
 	@FXML
-	private TitledPane SSEPPane;
+	private TitledPane SSEPPane, TESMEPPane, DCSMEPPane, AEPPane, VEPPane, reflexPane;
 
 
 	//-------------------------------------------------------Variables Baselines
@@ -186,13 +186,34 @@ public class IOMRecordingController {
 		//changes color of the Text of the TitlePane when at least one of the contained Textfields has an input.
 		tfMedLN.textProperty().addListener((Observable) -> {
 		if (tfMedLN.getText() != "") {
-			SSEPPane.setTextFill(Color.GREEN);
-			}
-		
+			SSEPPane.setTextFill(Color.GREEN);}
 		else {
-			SSEPPane.setTextFill(Color.BLACK);
-		}
+			SSEPPane.setTextFill(Color.BLACK);}
 		});
+		tfMedRN.textProperty().addListener((Observable) -> {
+			if (tfMedLN.getText() != "") {
+				SSEPPane.setTextFill(Color.GREEN);}
+			else {
+				SSEPPane.setTextFill(Color.BLACK);}
+			});
+		tfTibLN.textProperty().addListener((Observable) -> {
+			if (tfMedLN.getText() != "") {
+				SSEPPane.setTextFill(Color.GREEN);}
+			else {
+				SSEPPane.setTextFill(Color.BLACK);}
+			});
+		tfTibRN.textProperty().addListener((Observable) -> {
+			if (tfMedLN.getText() != "") {
+				SSEPPane.setTextFill(Color.GREEN);}
+			else {
+				SSEPPane.setTextFill(Color.BLACK);}
+			});
+		//AEPPAne
+		
+		
+		
+		//, TESMEPPane, DCSMEPPane, AEPPane, VEPPane, reflexPane;
+		
 		
 		// Baseline end
 	}
@@ -405,6 +426,103 @@ public class IOMRecordingController {
 		}
 		
 		
+		public void cbTes1isUsed(ActionEvent event) {
+			if (!cbTes1.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes2isUsed(ActionEvent event) {
+			if (!cbTes2.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes3isUsed(ActionEvent event) {
+			if (!cbTes3.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes4isUsed(ActionEvent event) {
+			if (!cbTes4.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes5isUsed(ActionEvent event) {
+			if (!cbTes5.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes6isUsed(ActionEvent event) {
+			if (!cbTes6.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes7isUsed(ActionEvent event) {
+			if (!cbTes7.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes8isUsed(ActionEvent event) {
+			if (!cbTes8.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes9isUsed(ActionEvent event) {
+			if (!cbTes9.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes10isUsed(ActionEvent event) {
+			if (!cbTes10.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes11isUsed(ActionEvent event) {
+			if (!cbTes11.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes12isUsed(ActionEvent event) {
+			if (!cbTes12.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes13isUsed(ActionEvent event) {
+			if (!cbTes13.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes14isUsed(ActionEvent event) {
+			if (!cbTes14.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes15isUsed(ActionEvent event) {
+			if (!cbTes15.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+		public void cbTes16isUsed(ActionEvent event) {
+			if (!cbTes16.getSelectionModel().getSelectedItem().isBlank()) {
+				TESMEPPane.setTextFill(Color.GREEN);}
+			else {
+				TESMEPPane.setTextFill(Color.BLACK);}
+			}
+			
 		
 		//-------------------Baseline End
 

@@ -67,7 +67,7 @@
                                     </GridPane>
                                  </content>
                             </TitledPane>
-                            <TitledPane animated="false" text="Baselines TES MEPs">
+                            <TitledPane fx:id="TESMEPPane" animated="false" text="Baselines TES MEPs">
                                  <content>
                                     <GridPane fx:id="tesMepGridpane">
                                       <columnConstraints>
@@ -97,7 +97,7 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <ComboBox fx:id="cbTes1" prefWidth="150.0" GridPane.rowIndex="2" />
+                                          <ComboBox fx:id="cbTes1" onAction="#cbTes1isUsed" prefWidth="150.0" GridPane.rowIndex="2" />
                                           <Label text="Muskel" GridPane.rowIndex="1" />
                                           <Label text="C1/C2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <Label text="C3/C4" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -144,21 +144,21 @@
                                           <TextField fx:id="tf44" GridPane.columnIndex="3" GridPane.rowIndex="13" />
                                           <TextField fx:id="tf45" GridPane.columnIndex="3" GridPane.rowIndex="14" />
                                           <TextField fx:id="tf46" GridPane.columnIndex="3" GridPane.rowIndex="15" />
-                                          <ComboBox fx:id="cbTes2" prefWidth="150.0" GridPane.rowIndex="3" />
-                                          <ComboBox fx:id="cbTes3" prefWidth="150.0" GridPane.rowIndex="4" />
-                                          <ComboBox fx:id="cbTes4" prefWidth="150.0" GridPane.rowIndex="5" />
-                                          <ComboBox fx:id="cbTes5" prefWidth="150.0" GridPane.rowIndex="6" />
-                                          <ComboBox fx:id="cbTes6" prefWidth="150.0" GridPane.rowIndex="7" />
-                                          <ComboBox fx:id="cbTes7" prefWidth="150.0" GridPane.rowIndex="8" />
-                                          <ComboBox fx:id="cbTes8" prefWidth="150.0" GridPane.rowIndex="9" />
-                                          <ComboBox fx:id="cbTes9" prefWidth="150.0" GridPane.rowIndex="10" />
-                                          <ComboBox fx:id="cbTes10" prefWidth="150.0" GridPane.rowIndex="11" />
-                                          <ComboBox fx:id="cbTes11" prefWidth="150.0" GridPane.rowIndex="12" />
-                                          <ComboBox fx:id="cbTes12" prefWidth="150.0" GridPane.rowIndex="13" />
-                                          <ComboBox fx:id="cbTes13" prefWidth="150.0" GridPane.rowIndex="14" />
-                                          <ComboBox fx:id="cbTes14" prefWidth="150.0" GridPane.rowIndex="15" />
-                                          <ComboBox fx:id="cbTes15" prefWidth="150.0" GridPane.rowIndex="16" />
-                                          <ComboBox fx:id="cbTes16" prefWidth="150.0" GridPane.rowIndex="17" />
+                                          <ComboBox fx:id="cbTes2" onAction="#cbTes2isUsed" prefWidth="150.0" GridPane.rowIndex="3" />
+                                          <ComboBox fx:id="cbTes3" onAction="#cbTes3isUsed" prefWidth="150.0" GridPane.rowIndex="4" />
+                                          <ComboBox fx:id="cbTes4" onAction="#cbTes4isUsed" prefWidth="150.0" GridPane.rowIndex="5" />
+                                          <ComboBox fx:id="cbTes5" onAction="#cbTes5isUsed" prefWidth="150.0" GridPane.rowIndex="6" />
+                                          <ComboBox fx:id="cbTes6" onAction="#cbTes6isUsed" prefWidth="150.0" GridPane.rowIndex="7" />
+                                          <ComboBox fx:id="cbTes7" onAction="#cbTes7isUsed" prefWidth="150.0" GridPane.rowIndex="8" />
+                                          <ComboBox fx:id="cbTes8" onAction="#cbTes8isUsed" prefWidth="150.0" GridPane.rowIndex="9" />
+                                          <ComboBox fx:id="cbTes9" onAction="#cbTes9isUsed" prefWidth="150.0" GridPane.rowIndex="10" />
+                                          <ComboBox fx:id="cbTes10" onAction="#cbTes10isUsed" prefWidth="150.0" GridPane.rowIndex="11" />
+                                          <ComboBox fx:id="cbTes11" onAction="#cbTes11isUsed" prefWidth="150.0" GridPane.rowIndex="12" />
+                                          <ComboBox fx:id="cbTes12" onAction="#cbTes12isUsed" prefWidth="150.0" GridPane.rowIndex="13" />
+                                          <ComboBox fx:id="cbTes13" onAction="#cbTes13isUsed" prefWidth="150.0" GridPane.rowIndex="14" />
+                                          <ComboBox fx:id="cbTes14" onAction="#cbTes14isUsed" prefWidth="150.0" GridPane.rowIndex="15" />
+                                          <ComboBox fx:id="cbTes15" onAction="#cbTes15isUsed" prefWidth="150.0" GridPane.rowIndex="16" />
+                                          <ComboBox fx:id="cbTes16" onAction="#cbTes16isUsed" prefWidth="150.0" GridPane.rowIndex="17" />
                                           <TextField fx:id="tf15" GridPane.columnIndex="1" GridPane.rowIndex="16" />
                                           <TextField fx:id="tf16" GridPane.columnIndex="1" GridPane.rowIndex="17" />
                                           <TextField fx:id="tf31" GridPane.columnIndex="2" GridPane.rowIndex="16" />
@@ -169,7 +169,7 @@
                                     </GridPane>
                                  </content>
                             </TitledPane>
-                            <TitledPane animated="false" text="Baselines DCS MEPs">
+                            <TitledPane fx:id="DCSMEPPane" animated="false" text="Baselines DCS MEPs">
                                  <content>
                                     <GridPane>
                                       <columnConstraints>
@@ -253,7 +253,7 @@
                                     </GridPane>
                                  </content>
                             </TitledPane>
-                              <TitledPane animated="false" layoutX="10.0" layoutY="60.0" text="Baselines AEPs">
+                              <TitledPane fx:id="AEPPane" animated="false" layoutX="10.0" layoutY="60.0" text="Baselines AEPs">
                                  <content>
                                     <GridPane>
                                        <columnConstraints>
@@ -291,7 +291,7 @@
                                     </GridPane>
                                  </content>
                               </TitledPane>
-                              <TitledPane animated="false" layoutX="10.0" layoutY="196.0" text="Baselines VEPs">
+                              <TitledPane fx:id="VEPPane" animated="false" layoutX="10.0" layoutY="196.0" text="Baselines VEPs">
                                  <content>
                                     <GridPane>
                                        <columnConstraints>
@@ -313,7 +313,7 @@
                                     </GridPane>
                                  </content>
                               </TitledPane>
-                              <TitledPane animated="false" layoutX="10.0" layoutY="221.0" text="Reflexe">
+                              <TitledPane fx:id="reflexPane" animated="false" layoutX="10.0" layoutY="221.0" text="Reflexe">
                                  <content>
                                     <GridPane>
                                        <columnConstraints>
