@@ -59,10 +59,10 @@
                                           <TextField fx:id="tfMedRP" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                           <TextField fx:id="tfTibLP" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                                           <TextField fx:id="tfTibRP" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                          <TextField fx:id="tfMedLA" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                          <TextField fx:id="tfMedRA" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                          <TextField fx:id="tfTibLA" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                          <TextField fx:id="tfTibRA" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                                        </children>
                                     </GridPane>
                                  </content>
@@ -307,8 +307,8 @@
                                           <Label text="VEP" GridPane.rowIndex="1" />
                                           <Label text="L" GridPane.columnIndex="1" />
                                           <Label text="R" GridPane.columnIndex="2" />
-                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <ComboBox fx:id="cbVepL" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <ComboBox fx:id="cbVepR" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                        </children>
                                     </GridPane>
                                  </content>
@@ -333,12 +333,12 @@
                                           <Label text="BCR" GridPane.rowIndex="3" />
                                           <Label text="L" GridPane.columnIndex="1" />
                                           <Label text="R" GridPane.columnIndex="2" />
-                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <ComboBox fx:id="cbBrL" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <ComboBox fx:id="cbLarL" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <ComboBox fx:id="cbBcrL" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <ComboBox fx:id="cbBrR" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <ComboBox fx:id="cbLarR" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <ComboBox fx:id="cbBcrR" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                        </children>
                                     </GridPane>
                                  </content>

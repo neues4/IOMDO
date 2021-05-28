@@ -83,13 +83,20 @@ public class IOMRecordingController {
 	private TextField tfDcs1, tfDcs2, tfDcs3, tfDcs4, tfDcs5, tfDcs6, tfDcs7, tfDcs8, tfDcs9, tfDcs10, tfDcs11, tfDcs12, tfDcs13, tfDcs14, tfDcs15, tfDcs16, tfDcs17, tfDcs18, tfDcs19, tfDcs20,
 	tfDcs21, tfDcs22, tfDcs23, tfDcs24, tfDcs25, tfDcs26, tfDcs27, tfDcs28, tfDcs29, tfDcs30, tfDcs31, tfDcs32, tfDcs33, tfDcs34, tfDcs35, tfDcs36, tfDcs37, tfDcs38, tfDcs39, tfDcs40;
 
+	@FXML
+	private ComboBox<String> cbVepL, cbVepR;
 
 	@FXML
-	private TextField tfMedLN, tfMedRN, tfTibLN, tfTibRN, tfMedLP, tfMedRP, tfTibLP, tfTibRP;
+	private ComboBox<String> cbBrL, cbLarL, cbBcrL, cbBrR, cbLarR, cbBcrR;
+
+
+	@FXML
+	private TextField tfMedLN, tfMedRN, tfTibLN, tfTibRN, tfMedLP, tfMedRP, tfTibLP, tfTibRP, tfMedLA, tfMedRA, tfTibLA, tfTibRA;;
+
 
 	@FXML
 	private Button btnSaveTesMep, btnSaveSsep, btnSaveDcsMep;
-	
+
 	@FXML
 	private TitledPane SSEPPane, TESMEPPane, DCSMEPPane, AEPPane, VEPPane, reflexPane;
 
@@ -121,10 +128,10 @@ public class IOMRecordingController {
 
 	@FXML
 	private Label patientNameLbl, birthdayLbl,diagnoseLbl, surgeryLbl, dateLbl ;
-	
+
 	// a map for the tf in sep baselines
 	private Map<String, Node> nodeMapSepBaselines = new HashMap<String, Node>();
-	
+
 	// a map for the cb and tf in tes baselines
 	private Map<String, Node> nodeMapTesBaselines = new HashMap<String, Node>();
 
@@ -181,40 +188,40 @@ public class IOMRecordingController {
 		cbDcs8.setItems(muscleList);
 		cbDcs9.setItems(muscleList);
 		cbDcs10.setItems(muscleList);
-		
-		
+
+
 		//changes color of the Text of the TitlePane when at least one of the contained Textfields has an input.
 		tfMedLN.textProperty().addListener((Observable) -> {
-		if (tfMedLN.getText() != "") {
-			SSEPPane.setTextFill(Color.GREEN);}
-		else {
-			SSEPPane.setTextFill(Color.BLACK);}
+			if (tfMedLN.getText() != "") {
+				SSEPPane.setTextFill(Color.GREEN);}
+			else {
+				SSEPPane.setTextFill(Color.BLACK);}
 		});
 		tfMedRN.textProperty().addListener((Observable) -> {
 			if (tfMedLN.getText() != "") {
 				SSEPPane.setTextFill(Color.GREEN);}
 			else {
 				SSEPPane.setTextFill(Color.BLACK);}
-			});
+		});
 		tfTibLN.textProperty().addListener((Observable) -> {
 			if (tfMedLN.getText() != "") {
 				SSEPPane.setTextFill(Color.GREEN);}
 			else {
 				SSEPPane.setTextFill(Color.BLACK);}
-			});
+		});
 		tfTibRN.textProperty().addListener((Observable) -> {
 			if (tfMedLN.getText() != "") {
 				SSEPPane.setTextFill(Color.GREEN);}
 			else {
 				SSEPPane.setTextFill(Color.BLACK);}
-			});
+		});
 		//AEPPAne
-		
-		
-		
+
+
+
 		//, TESMEPPane, DCSMEPPane, AEPPane, VEPPane, reflexPane;
-		
-		
+
+
 		// Baseline end
 	}
 
@@ -279,252 +286,349 @@ public class IOMRecordingController {
 
 
 	// Baseline Start-----------------------------------------------------------------------------------------
-		// put all the labels of the muscles in a list
-		ObservableList<String> muscleList = FXCollections.observableArrayList(ontEdit.getAllMuscles().keySet());
+	// put all the labels of the muscles in a list
+	ObservableList<String> muscleList = FXCollections.observableArrayList(ontEdit.getAllMuscles().keySet());
 
-		public void getSepBaselineValues() {
-			
-		}
-		
-		
-		/**
-		 * a method to read all mA values in the text boxes of tes baseline and create instances of muscle, mA and data item
-		 *
-		 */
-		public void getTesBaselineValues() {
-			// put all the nodes of the TES grid in a map (Rownumber + Columnnumber)
-			nodeMapTesBaselines.put("20", cbTes1); nodeMapTesBaselines.put("21", tf1); nodeMapTesBaselines.put("22", tf17); nodeMapTesBaselines.put("23", tf33);
-			nodeMapTesBaselines.put("30", cbTes2); nodeMapTesBaselines.put("31", tf2); nodeMapTesBaselines.put("32", tf18); nodeMapTesBaselines.put("33", tf34);
-			nodeMapTesBaselines.put("40", cbTes3); nodeMapTesBaselines.put("41", tf3); nodeMapTesBaselines.put("42", tf19); nodeMapTesBaselines.put("43", tf35);
-			nodeMapTesBaselines.put("50", cbTes4); nodeMapTesBaselines.put("51", tf4); nodeMapTesBaselines.put("52", tf20); nodeMapTesBaselines.put("53", tf36);
-			nodeMapTesBaselines.put("60", cbTes5); nodeMapTesBaselines.put("61", tf5); nodeMapTesBaselines.put("62", tf21); nodeMapTesBaselines.put("63", tf37);
-			nodeMapTesBaselines.put("70", cbTes6); nodeMapTesBaselines.put("71", tf6); nodeMapTesBaselines.put("72", tf22); nodeMapTesBaselines.put("73", tf38);
-			nodeMapTesBaselines.put("80", cbTes7); nodeMapTesBaselines.put("81", tf7); nodeMapTesBaselines.put("82", tf23); nodeMapTesBaselines.put("83", tf39);
-			nodeMapTesBaselines.put("90", cbTes8); nodeMapTesBaselines.put("91", tf8); nodeMapTesBaselines.put("92", tf24); nodeMapTesBaselines.put("93", tf40);
-			nodeMapTesBaselines.put("100", cbTes9); nodeMapTesBaselines.put("101", tf9); nodeMapTesBaselines.put("102", tf25); nodeMapTesBaselines.put("103", tf41);
-			nodeMapTesBaselines.put("110", cbTes10); nodeMapTesBaselines.put("111", tf10); nodeMapTesBaselines.put("112", tf26); nodeMapTesBaselines.put("113", tf42);
-			nodeMapTesBaselines.put("120", cbTes11); nodeMapTesBaselines.put("121", tf11); nodeMapTesBaselines.put("122", tf27); nodeMapTesBaselines.put("123", tf43);
-			nodeMapTesBaselines.put("130", cbTes12); nodeMapTesBaselines.put("131", tf12); nodeMapTesBaselines.put("132", tf28); nodeMapTesBaselines.put("133", tf44);
-			nodeMapTesBaselines.put("140", cbTes13); nodeMapTesBaselines.put("141", tf13); nodeMapTesBaselines.put("142", tf29); nodeMapTesBaselines.put("143", tf45);
-			nodeMapTesBaselines.put("150", cbTes14); nodeMapTesBaselines.put("151", tf14); nodeMapTesBaselines.put("152", tf30); nodeMapTesBaselines.put("153", tf46);
-			nodeMapTesBaselines.put("160", cbTes15); nodeMapTesBaselines.put("161", tf15); nodeMapTesBaselines.put("162", tf31); nodeMapTesBaselines.put("163", tf47);
-			nodeMapTesBaselines.put("170", cbTes16); nodeMapTesBaselines.put("171", tf16); nodeMapTesBaselines.put("172", tf32); nodeMapTesBaselines.put("173", tf48);
+	//put all the possibilities for veo in a List
+	ObservableList<String> vepAndReflexList = FXCollections.observableArrayList("vorhanden", "mässig", "schlecht", "");
 
-			// create a new tes baseline measurement
-			String tesMepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("TES MEP Baseline Messung"), "TesMepMeasurement");
-			Counter muscleCounter = new Counter(1);
-			Counter mATesBaselineCounter = new Counter(1);
-			// go through all the rows of the grid
-			int rowsInTes = nodeMapTesBaselines.size()/4;
-			for(int i= 2; i <= rowsInTes + 1; i++) {
-				// see if muscle is chosen, read the value
-				if (getComboBox(nodeMapTesBaselines.get( i  +"" + 0)).getSelectionModel().getSelectedItem() != null) {
-					// get the chosen muscle out of the combobox
-					String muscleChosen = getComboBox(nodeMapTesBaselines.get(i +"" + 0)).getSelectionModel().getSelectedItem();
-					// create a new instance for muscle
-					String muscle = ontEdit.createNewIndividual(ontEdit.getAllMuscles().get(muscleChosen), "MuskelTesBaseline".concat(muscleCounter.toString()));
-					muscleCounter.increment();
-					// see if first text field is filled out, read the value, create new instances in ontology
-					if (getTextField(nodeMapTesBaselines.get( i  +"" + 1)).getText() != "") {
-						String maValue1 = getTextField(nodeMapTesBaselines.get( i  +"" + 1)).getText();
-						String mA1 = ontEdit.createNewMiliampere("mATesBaseline".concat(mATesBaselineCounter.toString()));
-						ontEdit.addPropertiesToMiliampere(mA1, maValue1);
-						ontEdit.addStatement(tesMepBaselineMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", mA1);
-						ontEdit.addStatement(mA1, "http://purl.obolibrary.org/obo/IAO_0000136", muscle);
-						mATesBaselineCounter.increment();
-					}
-					// see if the second text field is filled out, read the value, create new instances in ontology
-					if(getTextField(nodeMapTesBaselines.get( i  +"" + 2)).getText() != "") {
-						String maValue2 = getTextField(nodeMapTesBaselines.get( i  +"" + 2)).getText();
-						String mA2 = ontEdit.createNewMiliampere("mATesBasline".concat(mATesBaselineCounter.toString()));
-						ontEdit.addPropertiesToMiliampere(mA2, maValue2);
-						ontEdit.addStatement(tesMepBaselineMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", mA2);
-						ontEdit.addStatement(mA2, "http://purl.obolibrary.org/obo/IAO_0000136", muscle);
-						mATesBaselineCounter.increment();
-					}
-					// see if the third text field is filled out, read the value, create new instances in ontology
-					if (getTextField(nodeMapTesBaselines.get( i  +"" + 3)).getText() != "") {
-						String maValue3 = getTextField(nodeMapTesBaselines.get( i  +"" + 3)).getText();
-						String mA3 = ontEdit.createNewMiliampere("mATesBasline".concat(mATesBaselineCounter.toString()));
-						ontEdit.addPropertiesToMiliampere(mA3, maValue3);
-						ontEdit.addStatement(tesMepBaselineMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", mA3);
-						ontEdit.addStatement(mA3, "http://purl.obolibrary.org/obo/IAO_0000136", muscle);
-						mATesBaselineCounter.increment();
-					}
-				}
+	/**
+	 * a method to read all ms values in the text boxes of sep baseline and create instances of nerve, ms and data item
+	 * FEHLT NOCH VERBINDUNG ZUM IOM PROTOKOLL!
+	 */
+	public void getSepBaselineValues() {
+		nodeMapSepBaselines.put("21", tfMedLN); nodeMapSepBaselines.put("22", tfMedLP); nodeMapSepBaselines.put("23", tfMedLA);
+		nodeMapSepBaselines.put("31", tfMedRN); nodeMapSepBaselines.put("32", tfMedRP); nodeMapSepBaselines.put("33", tfMedRA);
+		nodeMapSepBaselines.put("41", tfTibLN); nodeMapSepBaselines.put("42", tfTibLP); nodeMapSepBaselines.put("43", tfTibLA);
+		nodeMapSepBaselines.put("51", tfTibRN); nodeMapSepBaselines.put("52", tfTibRP); nodeMapSepBaselines.put("53", tfTibRA);
+
+		// create a new sep baseline measurement
+		String sepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("SEP Baseline Messung"), "SepBaselineMeasurement");
+		String nerve = null;
+		Counter msCounter = new Counter(1);
+		// go through all the rows of the grid
+		int rowsInSep = nodeMapSepBaselines.size()/3;
+		for(int i= 2; i <= rowsInSep + 1; i++) {
+			// add the nerves to the rows
+			switch(i) {
+			case 2:
+				nerve = ontEdit.createNewIndividual("http://purl.obolibrary.org/obo/FMA_65328", "nerve1");
+				break;
+			case 3:
+				nerve = ontEdit.createNewIndividual("http://purl.obolibrary.org/obo/FMA_65327", "nerve2");
+				break;
+			case 4:
+				nerve = ontEdit.createNewIndividual("http://purl.obolibrary.org/obo/FMA_80064", "nerve3");
+				break;
+			case 5:
+				nerve = ontEdit.createNewIndividual("http://purl.obolibrary.org/obo/FMA_80063", "nerve4");
+				break;
+			}
+			// see if textfield is filled out, read the value, create new instances in the ontology
+			if(getTextField(nodeMapSepBaselines.get(i +"" + 1)).getText() != "") {
+				String ms1 = ontEdit.createNewMilisecond("ms".concat(msCounter.toString()));
+				String msValue1 = getTextField(  nodeMapSepBaselines.get( i  +"" + 1)).getText();
+				createSepBaselineStatement(ms1, msValue1, sepBaselineMeasurement, nerve);
+				msCounter.increment();
+			}
+			// see if textfield is filled out, read the value, create new instances in the ontology
+			if(getTextField(nodeMapSepBaselines.get(i +"" + 2)).getText() != "") {
+				String ms2 = ontEdit.createNewMilisecond("ms".concat(msCounter.toString()));
+				String msValue2 = getTextField(  nodeMapSepBaselines.get( i  +"" + 2)).getText();
+				createSepBaselineStatement(ms2, msValue2, sepBaselineMeasurement, nerve);
+				msCounter.increment();
+			}
+			// see if textfield is filled out, read the value, create new instances in the ontology
+			if(getTextField(nodeMapSepBaselines.get(i +"" + 3)).getText() != "") {
+				String ms3 = ontEdit.createNewMilisecond("ms".concat(msCounter.toString()));
+				String msValue3 = getTextField(  nodeMapSepBaselines.get( i  +"" + 3)).getText();
+				createSepBaselineStatement(ms3, msValue3, sepBaselineMeasurement, nerve);
+				msCounter.increment();
 			}
 		}
+	}
 
-		
-		/**
-		 * a method to read all mA values in the text boxes of dcs baseline and create instances of muscle, mA and data item
-		 *
-		 */
-		public void getDcsBaselineValues() {
-			nodeMapDcsBaselines.put("20", cbDcs1); nodeMapDcsBaselines.put("21", tfDcs1); nodeMapDcsBaselines.put("22", tfDcs11); nodeMapDcsBaselines.put("23", tfDcs21); nodeMapDcsBaselines.put("24", tfDcs31);
-			nodeMapDcsBaselines.put("30", cbDcs2); nodeMapDcsBaselines.put("31", tfDcs2); nodeMapDcsBaselines.put("32", tfDcs12); nodeMapDcsBaselines.put("33", tfDcs22); nodeMapDcsBaselines.put("34", tfDcs32);
-			nodeMapDcsBaselines.put("40", cbDcs3); nodeMapDcsBaselines.put("41", tfDcs3); nodeMapDcsBaselines.put("42", tfDcs13); nodeMapDcsBaselines.put("43", tfDcs23); nodeMapDcsBaselines.put("44", tfDcs33);
-			nodeMapDcsBaselines.put("50", cbDcs4); nodeMapDcsBaselines.put("51", tfDcs4); nodeMapDcsBaselines.put("52", tfDcs14); nodeMapDcsBaselines.put("53", tfDcs24); nodeMapDcsBaselines.put("54", tfDcs34);
-			nodeMapDcsBaselines.put("60", cbDcs5); nodeMapDcsBaselines.put("61", tfDcs5); nodeMapDcsBaselines.put("62", tfDcs15); nodeMapDcsBaselines.put("63", tfDcs25); nodeMapDcsBaselines.put("64", tfDcs35);
-			nodeMapDcsBaselines.put("70", cbDcs6); nodeMapDcsBaselines.put("71", tfDcs6); nodeMapDcsBaselines.put("72", tfDcs16); nodeMapDcsBaselines.put("73", tfDcs26); nodeMapDcsBaselines.put("74", tfDcs36);
-			nodeMapDcsBaselines.put("80", cbDcs7); nodeMapDcsBaselines.put("81", tfDcs7); nodeMapDcsBaselines.put("82", tfDcs17); nodeMapDcsBaselines.put("83", tfDcs27); nodeMapDcsBaselines.put("84", tfDcs37);
-			nodeMapDcsBaselines.put("90", cbDcs8); nodeMapDcsBaselines.put("91", tfDcs8); nodeMapDcsBaselines.put("92", tfDcs18); nodeMapDcsBaselines.put("93", tfDcs28); nodeMapDcsBaselines.put("94", tfDcs38);
-			nodeMapDcsBaselines.put("100", cbDcs9); nodeMapDcsBaselines.put("101", tfDcs9); nodeMapDcsBaselines.put("102", tfDcs19); nodeMapDcsBaselines.put("103", tfDcs29); nodeMapDcsBaselines.put("104", tfDcs39);
-			nodeMapDcsBaselines.put("110", cbDcs10); nodeMapDcsBaselines.put("111", tfDcs10); nodeMapDcsBaselines.put("112", tfDcs20); nodeMapDcsBaselines.put("113", tfDcs30); nodeMapDcsBaselines.put("114", tfDcs40);
+	/**
+	 * method to create a new sep baseline statement
+	 * @param ms the miliseconds individual
+	 * @param msValue the value of the miliseconds
+	 * @param sepBaselineMeasurement the sep baseline measurement individual
+	 * @param nerve the nerve individual
+	 */
+	public void createSepBaselineStatement(String ms, String msValue, String sepBaselineMeasurement, String nerve) {
+		ontEdit.addPropertiesToMilisecond(ms, msValue);
+		ontEdit.addStatement(sepBaselineMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", ms);
+		ontEdit.addStatement(ms, "http://purl.obolibrary.org/obo/IAO_0000136", nerve);
+	}
 
-			// create a new tes baseline measurement
-			String dcsMepMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("DCS MEP Baseline Messung"), "DcsMepMeasurement");
-			Counter muscleCounter = new Counter(1);
-			Counter mADcsBaselineCounter = new Counter(1);
-			// go through all the rows of the grid
-			int rowsInDcs = nodeMapDcsBaselines.size()/5;
-			for(int i= 2; i <= rowsInDcs + 1; i++) {
+
+	/**
+	 * a method to read all mA values in the text boxes of tes baseline and create instances of muscle, mA and data item
+	 * FEHLT NOCH VERBINDUNG ZUM IOM PROTOKOLL!
+	 */
+	public void getTesBaselineValues() {
+		// put all the nodes of the TES grid in a map (Rownumber + Columnnumber)
+		nodeMapTesBaselines.put("20", cbTes1); nodeMapTesBaselines.put("21", tf1); nodeMapTesBaselines.put("22", tf17); nodeMapTesBaselines.put("23", tf33);
+		nodeMapTesBaselines.put("30", cbTes2); nodeMapTesBaselines.put("31", tf2); nodeMapTesBaselines.put("32", tf18); nodeMapTesBaselines.put("33", tf34);
+		nodeMapTesBaselines.put("40", cbTes3); nodeMapTesBaselines.put("41", tf3); nodeMapTesBaselines.put("42", tf19); nodeMapTesBaselines.put("43", tf35);
+		nodeMapTesBaselines.put("50", cbTes4); nodeMapTesBaselines.put("51", tf4); nodeMapTesBaselines.put("52", tf20); nodeMapTesBaselines.put("53", tf36);
+		nodeMapTesBaselines.put("60", cbTes5); nodeMapTesBaselines.put("61", tf5); nodeMapTesBaselines.put("62", tf21); nodeMapTesBaselines.put("63", tf37);
+		nodeMapTesBaselines.put("70", cbTes6); nodeMapTesBaselines.put("71", tf6); nodeMapTesBaselines.put("72", tf22); nodeMapTesBaselines.put("73", tf38);
+		nodeMapTesBaselines.put("80", cbTes7); nodeMapTesBaselines.put("81", tf7); nodeMapTesBaselines.put("82", tf23); nodeMapTesBaselines.put("83", tf39);
+		nodeMapTesBaselines.put("90", cbTes8); nodeMapTesBaselines.put("91", tf8); nodeMapTesBaselines.put("92", tf24); nodeMapTesBaselines.put("93", tf40);
+		nodeMapTesBaselines.put("100", cbTes9); nodeMapTesBaselines.put("101", tf9); nodeMapTesBaselines.put("102", tf25); nodeMapTesBaselines.put("103", tf41);
+		nodeMapTesBaselines.put("110", cbTes10); nodeMapTesBaselines.put("111", tf10); nodeMapTesBaselines.put("112", tf26); nodeMapTesBaselines.put("113", tf42);
+		nodeMapTesBaselines.put("120", cbTes11); nodeMapTesBaselines.put("121", tf11); nodeMapTesBaselines.put("122", tf27); nodeMapTesBaselines.put("123", tf43);
+		nodeMapTesBaselines.put("130", cbTes12); nodeMapTesBaselines.put("131", tf12); nodeMapTesBaselines.put("132", tf28); nodeMapTesBaselines.put("133", tf44);
+		nodeMapTesBaselines.put("140", cbTes13); nodeMapTesBaselines.put("141", tf13); nodeMapTesBaselines.put("142", tf29); nodeMapTesBaselines.put("143", tf45);
+		nodeMapTesBaselines.put("150", cbTes14); nodeMapTesBaselines.put("151", tf14); nodeMapTesBaselines.put("152", tf30); nodeMapTesBaselines.put("153", tf46);
+		nodeMapTesBaselines.put("160", cbTes15); nodeMapTesBaselines.put("161", tf15); nodeMapTesBaselines.put("162", tf31); nodeMapTesBaselines.put("163", tf47);
+		nodeMapTesBaselines.put("170", cbTes16); nodeMapTesBaselines.put("171", tf16); nodeMapTesBaselines.put("172", tf32); nodeMapTesBaselines.put("173", tf48);
+
+		// create a new tes baseline measurement
+		String tesMepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("TES MEP Baseline Messung"), "TesMepBaselineMeasurement");
+		Counter muscleCounter = new Counter(1);
+		Counter mATesBaselineCounter = new Counter(1);
+		// go through all the rows of the grid
+		int rowsInTes = nodeMapTesBaselines.size()/4;
+		for(int i= 2; i <= rowsInTes + 1; i++) {
+			// see if muscle is chosen, read the value
+			if (getComboBox(nodeMapTesBaselines.get( i  +"" + 0)).getSelectionModel().getSelectedItem() != null) {
 				// get the chosen muscle out of the combobox
-				if (getComboBox(nodeMapDcsBaselines.get( i  +"" + 0)).getSelectionModel().getSelectedItem() != null) {
-					String muscleChosen = getComboBox(nodeMapDcsBaselines.get(i +"" + 0)).getSelectionModel().getSelectedItem();
-					String muscle = ontEdit.createNewIndividual(ontEdit.getAllMuscles().get(muscleChosen), "muskelDscBaseline".concat(muscleCounter.toString()));
-					muscleCounter.increment();
-					// see if first text field is filled out, read the value, create new instances in ontology
-					if (getTextField(nodeMapDcsBaselines.get( i  +"" + 1)).getText() != "") {
-						String maValue1 = getTextField(nodeMapDcsBaselines.get( i  +"" + 1)).getText();
-						String mA1 = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
-						ontEdit.addPropertiesToMiliampere(mA1, maValue1);
-						ontEdit.addStatement(dcsMepMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", mA1);
-						ontEdit.addStatement(mA1, "http://purl.obolibrary.org/obo/IAO_0000136", muscle);
-						mADcsBaselineCounter.increment();
-					}
-					// see if second text field is filled out, read the value, create new instances in ontology
-					if(getTextField(nodeMapDcsBaselines.get( i  +"" + 2)).getText() != "") {
-						String maValue2 = getTextField(nodeMapDcsBaselines.get( i  +"" + 2)).getText();
-						String mA2 = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
-						ontEdit.addPropertiesToMiliampere(mA2, maValue2);
-						ontEdit.addStatement(dcsMepMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", mA2);
-						ontEdit.addStatement(mA2, "http://purl.obolibrary.org/obo/IAO_0000136", muscle);
-						mADcsBaselineCounter.increment();
-					}
-					// see if third text field is filled out, read the value, create new instances in ontology
-					if (getTextField(nodeMapDcsBaselines.get( i  +"" + 3)).getText() != "") {
-						String maValue3 = getTextField(nodeMapDcsBaselines.get( i  +"" + 3)).getText();
-						String mA3 = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
-						ontEdit.addPropertiesToMiliampere(mA3, maValue3);
-						ontEdit.addStatement(dcsMepMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", mA3);
-						ontEdit.addStatement(mA3, "http://purl.obolibrary.org/obo/IAO_0000136", muscle);
-						mADcsBaselineCounter.increment();
-
-					}
-					// see if fourth text field is filled out, read the value, create new instances in ontology
-					if (getTextField(nodeMapDcsBaselines.get( i  +"" + 4)).getText() != "") {
-						String maValue4 = getTextField(nodeMapDcsBaselines.get( i  +"" + 4)).getText();
-						String mA4 = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
-						ontEdit.addPropertiesToMiliampere(mA4, maValue4);
-						ontEdit.addStatement(dcsMepMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", mA4);
-						ontEdit.addStatement(mA4, "http://purl.obolibrary.org/obo/IAO_0000136", muscle);	
-						mADcsBaselineCounter.increment();
-					}
+				String muscleChosen = getComboBox(nodeMapTesBaselines.get(i +"" + 0)).getSelectionModel().getSelectedItem();
+				// create a new instance for muscle
+				String muscle = ontEdit.createNewIndividual(ontEdit.getAllMuscles().get(muscleChosen), "MuskelTesBaseline".concat(muscleCounter.toString()));
+				muscleCounter.increment();
+				// see if first text field is filled out, read the value, create new instances in ontology
+				if (getTextField(nodeMapTesBaselines.get( i  +"" + 1)).getText() != "") {
+					String maValue = getTextField(nodeMapTesBaselines.get( i  +"" + 1)).getText();
+					String mA = ontEdit.createNewMiliampere("mATesBaseline".concat(mATesBaselineCounter.toString()));
+					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle);
+					mATesBaselineCounter.increment();
+				}
+				// see if the second text field is filled out, read the value, create new instances in ontology
+				if(getTextField(nodeMapTesBaselines.get( i  +"" + 2)).getText() != "") {
+					String maValue = getTextField(nodeMapTesBaselines.get( i  +"" + 2)).getText();
+					String mA = ontEdit.createNewMiliampere("mATesBasline".concat(mATesBaselineCounter.toString()));
+					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle);
+					mATesBaselineCounter.increment();
+				}
+				// see if the third text field is filled out, read the value, create new instances in ontology
+				if (getTextField(nodeMapTesBaselines.get( i  +"" + 3)).getText() != "") {
+					String maValue = getTextField(nodeMapTesBaselines.get( i  +"" + 3)).getText();
+					String mA = ontEdit.createNewMiliampere("mATesBasline".concat(mATesBaselineCounter.toString()));
+					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle);
+					mATesBaselineCounter.increment();
 				}
 			}
 		}
-		
-		
-		public void cbTes1isUsed(ActionEvent event) {
-			if (!cbTes1.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
+	}
+
+	/**
+	 * method to create a new tes mep baseline statement
+	 * @param mA the miliampere individual
+	 * @param maValue the value of the miliampere
+	 * @param tesMepBaselineMeasurement the tes mep baseline measurement individual
+	 * @param muscle the muscle individual
+	 */
+	public void createTesBaselineStatement(String mA, String maValue, String tesMepBaselineMeasurement, String muscle) {
+		ontEdit.addPropertiesToMiliampere(mA, maValue);
+		ontEdit.addStatement(tesMepBaselineMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", mA);
+		ontEdit.addStatement(mA, "http://purl.obolibrary.org/obo/IAO_0000136", muscle);
+	}
+
+
+	/**
+	 * a method to read all mA values in the text boxes of dcs baseline and create instances of muscle, mA and data item
+	 * FEHLT NOCH VERBINDUNG ZUM IOM PROTOKOLL!
+	 */
+	public void getDcsBaselineValues() {
+		nodeMapDcsBaselines.put("20", cbDcs1); nodeMapDcsBaselines.put("21", tfDcs1); nodeMapDcsBaselines.put("22", tfDcs11); nodeMapDcsBaselines.put("23", tfDcs21); nodeMapDcsBaselines.put("24", tfDcs31);
+		nodeMapDcsBaselines.put("30", cbDcs2); nodeMapDcsBaselines.put("31", tfDcs2); nodeMapDcsBaselines.put("32", tfDcs12); nodeMapDcsBaselines.put("33", tfDcs22); nodeMapDcsBaselines.put("34", tfDcs32);
+		nodeMapDcsBaselines.put("40", cbDcs3); nodeMapDcsBaselines.put("41", tfDcs3); nodeMapDcsBaselines.put("42", tfDcs13); nodeMapDcsBaselines.put("43", tfDcs23); nodeMapDcsBaselines.put("44", tfDcs33);
+		nodeMapDcsBaselines.put("50", cbDcs4); nodeMapDcsBaselines.put("51", tfDcs4); nodeMapDcsBaselines.put("52", tfDcs14); nodeMapDcsBaselines.put("53", tfDcs24); nodeMapDcsBaselines.put("54", tfDcs34);
+		nodeMapDcsBaselines.put("60", cbDcs5); nodeMapDcsBaselines.put("61", tfDcs5); nodeMapDcsBaselines.put("62", tfDcs15); nodeMapDcsBaselines.put("63", tfDcs25); nodeMapDcsBaselines.put("64", tfDcs35);
+		nodeMapDcsBaselines.put("70", cbDcs6); nodeMapDcsBaselines.put("71", tfDcs6); nodeMapDcsBaselines.put("72", tfDcs16); nodeMapDcsBaselines.put("73", tfDcs26); nodeMapDcsBaselines.put("74", tfDcs36);
+		nodeMapDcsBaselines.put("80", cbDcs7); nodeMapDcsBaselines.put("81", tfDcs7); nodeMapDcsBaselines.put("82", tfDcs17); nodeMapDcsBaselines.put("83", tfDcs27); nodeMapDcsBaselines.put("84", tfDcs37);
+		nodeMapDcsBaselines.put("90", cbDcs8); nodeMapDcsBaselines.put("91", tfDcs8); nodeMapDcsBaselines.put("92", tfDcs18); nodeMapDcsBaselines.put("93", tfDcs28); nodeMapDcsBaselines.put("94", tfDcs38);
+		nodeMapDcsBaselines.put("100", cbDcs9); nodeMapDcsBaselines.put("101", tfDcs9); nodeMapDcsBaselines.put("102", tfDcs19); nodeMapDcsBaselines.put("103", tfDcs29); nodeMapDcsBaselines.put("104", tfDcs39);
+		nodeMapDcsBaselines.put("110", cbDcs10); nodeMapDcsBaselines.put("111", tfDcs10); nodeMapDcsBaselines.put("112", tfDcs20); nodeMapDcsBaselines.put("113", tfDcs30); nodeMapDcsBaselines.put("114", tfDcs40);
+
+		// create a new tes baseline measurement
+		String dcsMepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("DCS MEP Baseline Messung"), "DcsMepBaselineMeasurement");
+		Counter muscleCounter = new Counter(1);
+		Counter mADcsBaselineCounter = new Counter(1);
+		// go through all the rows of the grid
+		int rowsInDcs = nodeMapDcsBaselines.size()/5;
+		for(int i= 2; i <= rowsInDcs + 1; i++) {
+			// get the chosen muscle out of the combobox
+			if (getComboBox(nodeMapDcsBaselines.get( i  +"" + 0)).getSelectionModel().getSelectedItem() != null) {
+				String muscleChosen = getComboBox(nodeMapDcsBaselines.get(i +"" + 0)).getSelectionModel().getSelectedItem();
+				String muscle = ontEdit.createNewIndividual(ontEdit.getAllMuscles().get(muscleChosen), "muskelDscBaseline".concat(muscleCounter.toString()));
+				muscleCounter.increment();
+				// see if first text field is filled out, read the value, create new instances in ontology
+				if (getTextField(nodeMapDcsBaselines.get( i  +"" + 1)).getText() != "") {
+					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 1)).getText();
+					String mA = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
+					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle);
+					mADcsBaselineCounter.increment();
+				}
+				// see if second text field is filled out, read the value, create new instances in ontology
+				if(getTextField(nodeMapDcsBaselines.get( i  +"" + 2)).getText() != "") {
+					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 2)).getText();
+					String mA = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
+					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle);
+					mADcsBaselineCounter.increment();
+				}
+				// see if third text field is filled out, read the value, create new instances in ontology
+				if (getTextField(nodeMapDcsBaselines.get( i  +"" + 3)).getText() != "") {
+					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 3)).getText();
+					String mA = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
+					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle);
+					mADcsBaselineCounter.increment();
+
+				}
+				// see if fourth text field is filled out, read the value, create new instances in ontology
+				if (getTextField(nodeMapDcsBaselines.get( i  +"" + 4)).getText() != "") {
+					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 4)).getText();
+					String mA = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
+					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle);
+					mADcsBaselineCounter.increment();
+				}
 			}
-		public void cbTes2isUsed(ActionEvent event) {
-			if (!cbTes2.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes3isUsed(ActionEvent event) {
-			if (!cbTes3.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes4isUsed(ActionEvent event) {
-			if (!cbTes4.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes5isUsed(ActionEvent event) {
-			if (!cbTes5.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes6isUsed(ActionEvent event) {
-			if (!cbTes6.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes7isUsed(ActionEvent event) {
-			if (!cbTes7.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes8isUsed(ActionEvent event) {
-			if (!cbTes8.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes9isUsed(ActionEvent event) {
-			if (!cbTes9.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes10isUsed(ActionEvent event) {
-			if (!cbTes10.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes11isUsed(ActionEvent event) {
-			if (!cbTes11.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes12isUsed(ActionEvent event) {
-			if (!cbTes12.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes13isUsed(ActionEvent event) {
-			if (!cbTes13.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes14isUsed(ActionEvent event) {
-			if (!cbTes14.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes15isUsed(ActionEvent event) {
-			if (!cbTes15.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-		public void cbTes16isUsed(ActionEvent event) {
-			if (!cbTes16.getSelectionModel().getSelectedItem().isBlank()) {
-				TESMEPPane.setTextFill(Color.GREEN);}
-			else {
-				TESMEPPane.setTextFill(Color.BLACK);}
-			}
-			
-		
-		//-------------------Baseline End
+		}
+	}
+	/**
+	 * method to create a new dcs mep baseline statement
+	 * @param mA
+	 * @param maValue
+	 * @param dcsMepBaselineMeasurement
+	 * @param muscle
+	 */
+	public void createDcsBaselineStatement(String mA, String maValue, String dcsMepBaselineMeasurement, String muscle) {
+		ontEdit.addPropertiesToMiliampere(mA, maValue);
+		ontEdit.addStatement(dcsMepBaselineMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", mA);
+		ontEdit.addStatement(mA, "http://purl.obolibrary.org/obo/IAO_0000136", muscle);
+	}
+
+
+	public void cbTes1isUsed(ActionEvent event) {
+		if (!cbTes1.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes2isUsed(ActionEvent event) {
+		if (!cbTes2.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes3isUsed(ActionEvent event) {
+		if (!cbTes3.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes4isUsed(ActionEvent event) {
+		if (!cbTes4.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes5isUsed(ActionEvent event) {
+		if (!cbTes5.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes6isUsed(ActionEvent event) {
+		if (!cbTes6.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes7isUsed(ActionEvent event) {
+		if (!cbTes7.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes8isUsed(ActionEvent event) {
+		if (!cbTes8.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes9isUsed(ActionEvent event) {
+		if (!cbTes9.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes10isUsed(ActionEvent event) {
+		if (!cbTes10.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes11isUsed(ActionEvent event) {
+		if (!cbTes11.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes12isUsed(ActionEvent event) {
+		if (!cbTes12.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes13isUsed(ActionEvent event) {
+		if (!cbTes13.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes14isUsed(ActionEvent event) {
+		if (!cbTes14.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes15isUsed(ActionEvent event) {
+		if (!cbTes15.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+	public void cbTes16isUsed(ActionEvent event) {
+		if (!cbTes16.getSelectionModel().getSelectedItem().isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);}
+		else {
+			TESMEPPane.setTextFill(Color.BLACK);}
+	}
+
+	public void getAepBaselineValues() {
+
+	}
+
+	public void getVepBaselineValues() {
+		if (cbVepL.getSelectionModel().getSelectedItem() != "") {
+			String vepL = cbVepL.getSelectionModel().getSelectedItem();
+		}
+		if (cbVepR.getSelectionModel().getSelectedItem() != "") {
+			String vepR = cbVepR.getSelectionModel().getSelectedItem();
+		}
+	}
+
+	public void getReflexBaselineValues() {
+
+		//cbBrL, cbLarL, cbBcrL, cbBrR, cbLarR, cbBcrR;
+
+	}
+
+	//-------------------Baseline End
 
 
 
@@ -578,10 +682,10 @@ public class IOMRecordingController {
 	// a map for the comboboxes in dcs mep
 	private Map<Integer, ComboBox<String>> cbDcsMap = new HashMap<Integer, ComboBox<String>>();
 
-	
 
-	
-	
+
+
+
 	/**
 	 * Adds a new Set of Nodes in the next empty Row of the GridPane.
 	 * @param event
@@ -596,31 +700,31 @@ public class IOMRecordingController {
 		timeTF.setTooltip(tp);
 		ComboBox<String> categoryCB = new ComboBox<String>();
 		categoryCB.setItems(categoryList);
-		
+
 		//categoryCB.setMaxHeight(Control.USE_COMPUTED_SIZE);
-		
+
 		ComboBox<String> entryCB = new ComboBox<String>();
-		
-		
+
+
 		TextField valueTF = new TextField();
 		TextField commentTF = new TextField();
 		Button deleteBtn = new Button();
-		
+
 		//Textfield for value is not visible by default
 		valueTF.setDisable(true);
 		valueTF.setVisible(false);
-		
+
 		//Texfield for value is only visible when a category with measurement selected. 
 		categoryCB.setOnAction ((selectedItem) -> {
-			   if(categoryCB.getSelectionModel().getSelectedItem().contains(I18n.getString("rec.measurement"))) {
-				   valueTF.setDisable(false);
-					valueTF.setVisible(true);
-			   }else {
-				   valueTF.setDisable(true);
-					valueTF.setVisible(false);
-			   }
-			});
-		
+			if(categoryCB.getSelectionModel().getSelectedItem().contains(I18n.getString("rec.measurement"))) {
+				valueTF.setDisable(false);
+				valueTF.setVisible(true);
+			}else {
+				valueTF.setDisable(true);
+				valueTF.setVisible(false);
+			}
+		});
+
 		//add nodes to HashMap, Key is ROW + Columnnumber. eg. Key = 21 for Node in ROW 2, Columne 1. 
 		nodeList.put(row + "1", timeTF );
 		nodeList.put(row + "2", categoryCB );
@@ -639,7 +743,7 @@ public class IOMRecordingController {
 		//add bin graphic for Delete Button
 		ImageView view = new ImageView(Main.class.getResource("173-bin.png").toExternalForm());
 		deleteBtn.setGraphic(view);
-		
+
 		//add delete event on delete Button
 		deleteBtn.addEventHandler(ActionEvent.ACTION,
 				new EventHandler<ActionEvent>() {
@@ -693,11 +797,14 @@ public class IOMRecordingController {
 		//getSepBaselineValues();
 		//getTesBaselineValues();
 		//getDcsBaselineValues();
+		//getAepBaselineValues();
+		//getVepBaselineValues();
+		//getReflexBaselineValues();
 		// Patient Data end
 
 
-		
-		
+
+
 
 
 		//IOM actual Recording------------------------------------------------
@@ -705,13 +812,13 @@ public class IOMRecordingController {
 		String document = ontEdit.createNewIOMDocument("IOMDocumentTest");
 		String NS = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/";
 		String has_data_item = "IOMO_0000282";
-		
+
 		String entry1= entryIOMStart.getSelectionModel().getSelectedItem();
-		
-		
+
+
 		EntryMap map = new EntryMap();
 
-		
+
 		//Only a Kategory with Meassurement will be saved into the Ontology.  new Baseline not included! Basline measurment can be removed 
 		String category1 =categoryIOMStart.getSelectionModel().getSelectedItem();
 		String category1Uri = map.getUri(category1);
@@ -724,20 +831,20 @@ public class IOMRecordingController {
 			//Add Value to measurement needs to be added!
 			ontEdit.saveNewOWLFile();
 		}; 
-		
-		
-		
+
+
+
 		int rowsToRead = nodeList.size()/4;
 		for(int i= 2; i <= rowsToRead + 1; i++) {
 			String time = getTextField(  nodeList.get( i  +"" + 1)).getText();
 			String category = getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().getSelectedItem();
-			
+
 			if(category1.contains(I18n.getString("rec.measurement"))) {
 				//uri fehlt noch!
 				ontEdit.addStatement(document, NS + has_data_item , category);
 				//ontEdit.addTimestampToEntity(category, time);
 				value.getText();
-				
+
 				//Add Value to measurement needs to be added!
 			}else {
 				String entry = getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem();
@@ -745,18 +852,18 @@ public class IOMRecordingController {
 				ontEdit.addStatement(document, NS + has_data_item , entryUri);
 				//ontEdit.addTimestampToEntity(entryUri, time);
 			}
-			
-			
-			
+
+
+
 			String comment = getTextField(nodeList.get( i  +"" + 5)).getText();
 			if(!comment.isEmpty()) {
 				//save comment
 			}
-			
+
 		}
-	
+
 		//ontEdit.saveNewOWLFile();
-		
+
 		//String has_document = "0000285";
 
 		/*
@@ -773,10 +880,10 @@ public class IOMRecordingController {
 			System.out.println("Eintrag" + i + ": "+getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem());
 			System.out.println("Kommentar" + i+ ": "+getTextField(nodeList.get( i  +"" + 5)).getText());
 			//IOM Documentation end
-				 
+
 		}
-		
-		*/
+
+		 */
 
 	}
 
@@ -883,8 +990,8 @@ public class IOMRecordingController {
 			}	
 		}
 	}
-	
-	
+
+
 	/**
 	 * a method to gather all the muscles which were chosen in the baseline (TES MEP) section and put them in a map
 	 */
