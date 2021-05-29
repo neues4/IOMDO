@@ -35,7 +35,7 @@ import org.apache.jena.util.iterator.ExtendedIterator;
 public class OntologyEditor {
 
 	//Namesspace
-	private String ns = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/";
+	private final static String NS = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/";
 
 
 	// a new instance of an ontology model // romap1: habe static rausgenommen, weil ich vorteil nicht gesehen habe
@@ -50,7 +50,7 @@ public class OntologyEditor {
 	{
 		if (editor == null)
 			//Windows
-			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_29.owl");
+			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_30.owl");
 		//mac
 		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_29.owl");
 
@@ -132,8 +132,8 @@ public class OntologyEditor {
 		indv.addLabel(indvLabel, "EN");
 		return indv.getURI();
 	}
-	
-	
+
+
 
 	public String createNewIndividual(String classURI, String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass(classURI);
@@ -141,7 +141,7 @@ public class OntologyEditor {
 		indv.addLabel(indvLabel, "EN");
 		return indv.getURI();
 	}
-	
+
 
 	public String createNewURI(String label) {
 		String iomoURI = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO#";
@@ -195,7 +195,7 @@ public class OntologyEditor {
 		indv.addProperty(datPropAssistant, assistant);
 		indv.addProperty(datPropIsisDevice, isisDevice);
 	}
-	
+
 	/**
 	 * Adds the data property timestamp to the given entity.
 	 * @author romap1
@@ -204,11 +204,12 @@ public class OntologyEditor {
 	 */
 	public void addTimestampToEntity(String entity, String timestamp) {
 		Individual indv = ontModel.getIndividual(entity);
-		DatatypeProperty datPropSurgeryDate = ontModel.getDatatypeProperty( ns + "IOMO_0000266");
+		//has_timestamp = 0000266
+		DatatypeProperty datPropSurgeryDate = ontModel.getDatatypeProperty( NS + "IOMO_0000266");
 		indv.addProperty(datPropSurgeryDate, timestamp);
 	} 
 
-	
+
 	public void addStatement(String subject, String property, String object ) {
 
 		Statement stmt = ontModel.createStatement
@@ -339,20 +340,18 @@ public class OntologyEditor {
 		OntClass dwaveFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000387");
 		OntClass emgFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000370");
 		OntClass mappingFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000376");
-		OntClass aepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000240");
 		OntClass cbtMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000371");
 		OntClass dwaveMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000369");
 		OntClass mappingMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000373");
 		//OntClass sepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242");
-		OntClass tesMepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000378");
-		OntClass dcsMepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000238");
+
 		//OntClass vepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000244");
 		OntClass anesthesiaProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000159");
 		OntClass surgicalProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058");
 		OntClass humanAction = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human");
 		OntClass technicalIssues = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000154");
 		OntClass iomProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000057");
-		
+
 
 		HashMap<String, String> showEntityMap = new HashMap<>();
 
@@ -365,22 +364,39 @@ public class OntologyEditor {
 		showEntityMap.put(dwaveFinding.getLabel("DE"), dwaveFinding.getURI());
 		showEntityMap.put(emgFinding.getLabel("DE"), emgFinding.getURI());
 		showEntityMap.put(mappingFinding.getLabel("DE"), mappingFinding.getURI());
-		showEntityMap.put(aepMeasurement.getLabel("DE"), aepMeasurement.getURI());
 		showEntityMap.put(cbtMeasurement.getLabel("DE"), cbtMeasurement.getURI());
 		showEntityMap.put(dwaveMeasurement.getLabel("DE"), dwaveMeasurement.getURI());
 		showEntityMap.put(mappingMeasurement.getLabel("DE"), mappingMeasurement.getURI());
 		//showEntityMap.put(sepMeasurement.getLabel("DE"), sepMeasurement.getURI());
-		showEntityMap.put(tesMepMeasurement.getLabel("DE"), tesMepMeasurement.getURI());
-		showEntityMap.put(dcsMepMeasurement.getLabel("DE"), tesMepMeasurement.getURI());
+
 		//showEntityMap.put(vepMeasurement.getLabel("DE"), vepMeasurement.getURI());
 		showEntityMap.put(anesthesiaProcess.getLabel("DE"), anesthesiaProcess.getURI());
 		showEntityMap.put(surgicalProcess.getLabel("DE"), surgicalProcess.getURI());
 		showEntityMap.put(humanAction.getLabel("DE"), humanAction.getURI());
 		showEntityMap.put(technicalIssues.getLabel("DE"), technicalIssues.getURI());
 		showEntityMap.put(iomProcess.getLabel("DE"), iomProcess.getURI());
-
 		return showEntityMap;
 	}
+
+
+	/**
+	 * Returns a Hasmap with Measurements in the intraoperative Neuromonitoring that are documented with a value. 
+	 * @return a Hashmap with label as key and uri as value
+	 */
+		public HashMap<String, String> getAllMeasurementsWithValues(){
+		OntClass tesMepMeasurement = ontModel.getOntClass(NS + "IOMO_0000378");
+		OntClass dcsMepMeasurement = ontModel.getOntClass(NS + "IOMO_0000238");
+		OntClass aepMeasurement = ontModel.getOntClass(NS + "IOMO_0000240");
+
+		HashMap<String, String> map = new HashMap<>();
+		map.put(tesMepMeasurement.getLabel("DE"), tesMepMeasurement.getURI());
+		map.put(dcsMepMeasurement.getLabel("DE"), tesMepMeasurement.getURI());
+		map.put(aepMeasurement.getLabel("DE"), aepMeasurement.getURI());
+		return map;
+
+	} 
+
+
 
 	/**
 	 * Method to get all the subclasses of a given class
@@ -397,7 +413,24 @@ public class OntologyEditor {
 		}
 		return subClassMap;
 	}
-	
+
+	/**
+	 * 
+	 * @author romap1
+	 * @param classURI
+	 * @return a hash map with the uri as key and the label as value
+	 */
+	public Map<String, String> getSubclassMapForLabel(String classURI) {
+		OntClass ontClass = ontModel.getOntClass(classURI);
+		HashMap<String, String> subClassMap = new HashMap<>();
+		Iterator iter = ontClass.listSubClasses();
+		while (iter.hasNext()) {
+			OntClass sub = (OntClass) iter.next();
+			subClassMap.put(sub.getURI(), sub.getLabel("DE"));
+		}
+		return subClassMap;
+	}
+
 
 	public String createNewIOMDocument(String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000277");
@@ -415,6 +448,7 @@ public class OntologyEditor {
 
 	public void addPropertiesToMiliampere(String miliampere, String value) {
 		Individual indv = ontModel.getIndividual(miliampere);
+		//has_measurement_value = IAO_0000004
 		DatatypeProperty miliAmpValue = ontModel.getDatatypeProperty("http://purl.obolibrary.org/obo/IAO_0000004");
 		indv.addProperty(miliAmpValue, value);
 
@@ -473,10 +507,12 @@ public class OntologyEditor {
 	public Map<String, String> test() {
 		//return ontModel.listClasses();
 		return ontModel.getNsPrefixMap();
-		
-	}
-	
 
-	
-	
+	}
+
+
+
+
+
+
 }

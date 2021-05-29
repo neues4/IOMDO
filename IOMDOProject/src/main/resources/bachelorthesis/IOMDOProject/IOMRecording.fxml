@@ -376,7 +376,7 @@
                               <VBox alignment="TOP_CENTER" spacing="4.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <children>
                                     <Label text="%lbl.category" />
-                                    <ComboBox fx:id="categoryIOMStart" onAction="#categoryIOMStartOnAction" />
+                                    <ComboBox fx:id="categoryIOMStart" />
                                  </children>
                               </VBox>
                               <VBox spacing="4.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
@@ -388,8 +388,7 @@
                               </VBox>
                               <VBox spacing="4.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                  <children>
-                                    <Label text="Label" />
-                                    <TextField fx:id="value" />
+                                    <Label text="%lbl.value" />
                                  </children>
                               </VBox>
                               <VBox spacing="4.0" GridPane.columnIndex="5" GridPane.rowIndex="1">

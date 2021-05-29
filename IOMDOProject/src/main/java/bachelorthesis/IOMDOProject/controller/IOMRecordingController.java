@@ -3,7 +3,9 @@ package bachelorthesis.IOMDOProject.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import bachelorthesis.IOMDOProject.I18n;
@@ -99,6 +101,11 @@ public class IOMRecordingController {
 
 	@FXML
 	private TitledPane SSEPPane, TESMEPPane, DCSMEPPane, AEPPane, VEPPane, reflexPane;
+	
+	//DummyString for a List
+	private static final String DUMMY = "dummyNode";
+	//Counter for the Rows in the GridPane. Row 0 is Empty and Row 1 already has Nodes. Therefore the counter starts at 2.
+
 
 
 	//-------------------------------------------------------Variables Baselines
@@ -118,7 +125,7 @@ public class IOMRecordingController {
 	private SplitPane splitpane;
 
 	@FXML
-	private TextField timeStartTF, commentIOMStart, value;
+	private TextField timeStartTF, commentIOMStart;
 
 	@FXML
 	private ComboBox<String> categoryIOMStart;
@@ -138,6 +145,9 @@ public class IOMRecordingController {
 	// a map for the cb and tf in dcs baselines
 	private Map<String, Node> nodeMapDcsBaselines = new HashMap<String, Node>();
 
+	private int row = 2;
+
+	private Map<String, Node> nodeList = new HashMap<String, Node>();
 
 	//---------------------------------------------------Variables IOM actual Recording
 
@@ -513,100 +523,155 @@ public class IOMRecordingController {
 
 
 	public void cbTes1isUsed(ActionEvent event) {
-		if (!cbTes1.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+		String selectedItem = cbTes1.getSelectionModel().getSelectedItem();
+		if (!selectedItem.isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(1, selectedItem);
+			categoryList.addAll(ontEdit.getAllMeasurementsWithValues().keySet());
+			
+			
+			
+		}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(1, DUMMY);}
 	}
 	public void cbTes2isUsed(ActionEvent event) {
+		String selectedItem = cbTes2.getSelectionModel().getSelectedItem();
 		if (!cbTes2.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(2, selectedItem);}
+		
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(2, DUMMY);}
 	}
 	public void cbTes3isUsed(ActionEvent event) {
+		String selectedItem = cbTes3.getSelectionModel().getSelectedItem();
 		if (!cbTes3.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(3, selectedItem);}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(3, DUMMY);}
 	}
 	public void cbTes4isUsed(ActionEvent event) {
+		String selectedItem = cbTes4.getSelectionModel().getSelectedItem();
 		if (!cbTes4.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(4, selectedItem);}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(4, DUMMY);}
 	}
 	public void cbTes5isUsed(ActionEvent event) {
+		String selectedItem = cbTes5.getSelectionModel().getSelectedItem();
 		if (!cbTes5.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(5, selectedItem);}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(5, DUMMY);}
 	}
 	public void cbTes6isUsed(ActionEvent event) {
+		String selectedItem = cbTes6.getSelectionModel().getSelectedItem();
 		if (!cbTes6.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(6, selectedItem);
+			}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(6, DUMMY);}
 	}
 	public void cbTes7isUsed(ActionEvent event) {
+		String selectedItem = cbTes7.getSelectionModel().getSelectedItem();
 		if (!cbTes7.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(7, selectedItem);}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(7, DUMMY);}
 	}
 	public void cbTes8isUsed(ActionEvent event) {
+		String selectedItem = cbTes8.getSelectionModel().getSelectedItem();
 		if (!cbTes8.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(8, selectedItem);}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(8, DUMMY);}
 	}
 	public void cbTes9isUsed(ActionEvent event) {
+		String selectedItem = cbTes9.getSelectionModel().getSelectedItem();
 		if (!cbTes9.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(9, selectedItem);}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(9, DUMMY);}
 	}
 	public void cbTes10isUsed(ActionEvent event) {
+		String selectedItem = cbTes10.getSelectionModel().getSelectedItem();
 		if (!cbTes10.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(10, selectedItem);}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(10, DUMMY);}
 	}
 	public void cbTes11isUsed(ActionEvent event) {
+		String selectedItem = cbTes11.getSelectionModel().getSelectedItem();
 		if (!cbTes11.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(11, selectedItem);}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(11, DUMMY);}
 	}
 	public void cbTes12isUsed(ActionEvent event) {
+		String selectedItem = cbTes12.getSelectionModel().getSelectedItem();
 		if (!cbTes12.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(12, selectedItem);}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(12, DUMMY);}
 	}
 	public void cbTes13isUsed(ActionEvent event) {
+		String selectedItem = cbTes13.getSelectionModel().getSelectedItem();
 		if (!cbTes13.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(13, selectedItem);}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(13, DUMMY);}
 	}
 	public void cbTes14isUsed(ActionEvent event) {
+		String selectedItem = cbTes14.getSelectionModel().getSelectedItem();
 		if (!cbTes14.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(14, selectedItem);}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(14, DUMMY);}
 	}
 	public void cbTes15isUsed(ActionEvent event) {
+		String selectedItem = cbTes15.getSelectionModel().getSelectedItem();
 		if (!cbTes15.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(15, selectedItem);}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(15, DUMMY);}
 	}
 	public void cbTes16isUsed(ActionEvent event) {
+		String selectedItem = cbTes16.getSelectionModel().getSelectedItem();
 		if (!cbTes16.getSelectionModel().getSelectedItem().isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);}
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(16, selectedItem);}
 		else {
-			TESMEPPane.setTextFill(Color.BLACK);}
+			TESMEPPane.setTextFill(Color.BLACK);
+			tesMepMuscleChoice.add(16, DUMMY);}
 	}
 
 	public void getAepBaselineValues() {
@@ -636,10 +701,7 @@ public class IOMRecordingController {
 
 	//IOM Recording Start-----------------------------------------------
 
-	//Counter for the Rows in the GridPane. Row 0 is Empty and Row 1 already has Nodes. Therefore the counter starts at 2.
-	private int row = 2;
 
-	private Map<String, Node> nodeList = new HashMap<String, Node>();
 
 	//private ObservableList<String> entryList = FXCollections.observableArrayList("entry1", "entry2");
 
@@ -671,16 +733,17 @@ public class IOMRecordingController {
 	private ObservableList<String> actionList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human").keySet());
 
 	// a list for the muscles chosen in tes mep baseline
-	private ObservableList<String> tesMepMuscleChoice = FXCollections.observableArrayList();
+	private ObservableList<String> tesMepMuscleChoice = FXCollections.observableArrayList(List.of(DUMMY));
 
 	// a list for the muscles chosen in dcs mep baseline
-	private ObservableList<String> dcsMepMuscleChoice = FXCollections.observableArrayList();
+	private ObservableList<String> dcsMepMuscleChoice = FXCollections.observableArrayList( List.of(DUMMY));
 
 	// a map for the comboboxes in tes mep
 	private Map<Integer, ComboBox<String>> cbTesMap = new HashMap<Integer, ComboBox<String>>();
 
 	// a map for the comboboxes in dcs mep
 	private Map<Integer, ComboBox<String>> cbDcsMap = new HashMap<Integer, ComboBox<String>>();
+
 
 
 
@@ -695,6 +758,7 @@ public class IOMRecordingController {
 	public  void addRow(ActionEvent event) throws IOException, URISyntaxException {
 		//create nessecary nodes
 		TextField timeTF = new TextField();	
+		timeTF.setPromptText("10:00");
 		Tooltip tp = new Tooltip();
 		tp.setText("this is a test");
 		timeTF.setTooltip(tp);
@@ -774,17 +838,7 @@ public class IOMRecordingController {
 
 
 
-	// IOM Documentation Category Combobox
-	// MUSS NOCH IM FXML HINZUGEFÜGT WERDEN!!
-	@FXML
-	void categoryIOMStartOnAction(ActionEvent event) {
-		showItem(categoryIOMStart, entryIOMStart);
 
-		gatherTesMuscles();
-
-		gatherDcsMuscles();
-
-	}
 
 	/**
 	 * 
@@ -843,7 +897,8 @@ public class IOMRecordingController {
 				//uri fehlt noch!
 				ontEdit.addStatement(document, NS + has_data_item , category);
 				//ontEdit.addTimestampToEntity(category, time);
-				value.getText();
+				String value = getTextField(  nodeList.get( i  +"" + 4)).getText();
+				
 
 				//Add Value to measurement needs to be added!
 			}else {
@@ -917,9 +972,11 @@ public class IOMRecordingController {
 			entry.setItems(dwaveMeasurementList);
 			break;
 		case "TES MEP Messung":
+			tesMepMuscleChoice.removeAll(DUMMY);
 			entry.setItems(tesMepMuscleChoice);
 			break;
 		case "DCS MEP Messung":
+			dcsMepMuscleChoice.removeAll(DUMMY);
 			entry.setItems(dcsMepMuscleChoice);
 			break;
 			/*
@@ -975,36 +1032,7 @@ public class IOMRecordingController {
 		}	
 	}
 
-	/**
-	 * a method to gather all the muscles which were chosen in the baseline (TES MEP) section 
-	 */
-	public void gatherTesMuscles() {
-		cbTesMap.put(1, cbTes1); cbTesMap.put(2, cbTes2); cbTesMap.put(3, cbTes3); cbTesMap.put(4, cbTes4); 
-		cbTesMap.put(5, cbTes5); cbTesMap.put(6, cbTes6); cbTesMap.put(7, cbTes7); cbTesMap.put(8, cbTes8);
-		cbTesMap.put(9, cbTes9); cbTesMap.put(10, cbTes10); cbTesMap.put(11, cbTes11); cbTesMap.put(12, cbTes12);
-		cbTesMap.put(13, cbTes13); cbTesMap.put(14, cbTes14); cbTesMap.put(15, cbTes15); cbTesMap.put(16, cbTes16);
-
-		for (int i = 1; i <= cbTesMap.size(); i ++) {
-			if (cbTesMap.get(i).getSelectionModel().getSelectedItem() != null) {
-				tesMepMuscleChoice.addAll(cbTesMap.get(i).getSelectionModel().getSelectedItem());
-			}	
-		}
-	}
-
-
-	/**
-	 * a method to gather all the muscles which were chosen in the baseline (TES MEP) section and put them in a map
-	 */
-	public void gatherDcsMuscles() {
-		cbDcsMap.put(1, cbDcs1); cbDcsMap.put(2, cbDcs2); cbDcsMap.put(3, cbDcs3); cbDcsMap.put(4, cbDcs4); cbDcsMap.put(5, cbDcs5);
-		cbDcsMap.put(6, cbDcs6); cbDcsMap.put(7, cbDcs7); cbDcsMap.put(8, cbDcs8); cbDcsMap.put(9, cbDcs9); cbDcsMap.put(10, cbDcs10);
-
-		for (int i = 1; i <= cbDcsMap.size(); i ++) {
-			if (cbDcsMap.get(i).getSelectionModel().getSelectedItem() != null) {
-				dcsMepMuscleChoice.addAll(cbDcsMap.get(i).getSelectionModel().getSelectedItem());
-			}	
-		}
-	}
+	
 
 
 	@SuppressWarnings("exports")

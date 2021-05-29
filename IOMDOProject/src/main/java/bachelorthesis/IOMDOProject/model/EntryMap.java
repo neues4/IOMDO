@@ -63,8 +63,8 @@ public class EntryMap {
 		HashMap<String, String> anesthesyProcessMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000159");
 		//Mapping Beobachtung = 376
 		HashMap<String, String> mappingFindingMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000376");
-		//IOM Prozess = 57, nötig?, hat noch unterkategorien
-		HashMap<String, String> iomProcessMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000057");
+		//IOM Prozess = 57, nötig? Nein
+		//HashMap<String, String> iomProcessMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000057");
 		//SEP Beobachtung= 401
 		HashMap<String, String> sepFindingMap = (HashMap<String, String>)ontEdit.getSubclasses(NS + "IOMO_0000401");
 		//SEP Veränderungen = 417
@@ -85,20 +85,24 @@ public class EntryMap {
 		HashMap<String, String> actionMap = (HashMap<String, String>) ontEdit.getSubclasses( "http://medicis/spm.owl/OntoSPM#manipulating_action_by_human");
 		//get all Entities that are shown as Category in the GUI
 		HashMap<String, String> categoryMap  = (HashMap<String, String>) ontEdit.getAllEntitiesToBeShown(); 
+		HashMap<String, String> measurementsWithValueMap  = (HashMap<String, String>) ontEdit.getAllMeasurementsWithValues(); 
+		
 		
 		
 		//Puts all maps into the entryMap
 		entryMap.putAll(vepFindingMap);entryMap.putAll(mappingMeasurementMap);entryMap.putAll(technicalIssuesMap);//entryMap.putAll(dwaveMeasurementMap);
 		entryMap.putAll(aepMeasurementMap);entryMap.putAll(cbtMeasurementMap);entryMap.putAll(surgeryProcessMap);entryMap.putAll(reflexFindingMap);
-		entryMap.putAll(eegFindingMap);entryMap.putAll(anesthesyProcessMap);entryMap.putAll(mappingFindingMap);entryMap.putAll(iomProcessMap);
+		entryMap.putAll(eegFindingMap);entryMap.putAll(anesthesyProcessMap);entryMap.putAll(mappingFindingMap);//entryMap.putAll(iomProcessMap);
 		entryMap.putAll(sepFindingMap);entryMap.putAll(aepFindingMap);entryMap.putAll(dwaveFindingMap);entryMap.putAll(emgFindingMap);entryMap.putAll(mepFindingMap);
 		entryMap.putAll(actionMap); entryMap.putAll(changeOfSEPMAP);entryMap.putAll(changeOfAEPMap);entryMap.putAll(changeOfMEPMap);
-		entryMap.putAll(categoryMap);
+		entryMap.putAll(categoryMap);entryMap.putAll(measurementsWithValueMap);
 		
 		
 		//put indivituadl Entities into the entryMAP
 		//entryMap.put();
 	
+		
+		// Hinzufügen! $surgery Prozes und Grid Positioning, IOM Start und IOM END
 		
 		
 	
