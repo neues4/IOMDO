@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,12 +34,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.ConstraintsBase;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
 
 /**
  * Controller for the recording durinig Intraoperative Neuromonitoring
@@ -97,14 +100,27 @@ public class IOMRecordingController {
 
 
 	@FXML
-	private Button btnSaveTesMep, btnSaveSsep, btnSaveDcsMep;
+	private Button btnSaveTesMep, btnSaveSsep, btnSaveDcsMep, resetTESMEPBtn, resetDCSMEPBtn;
 
 	@FXML
 	private TitledPane SSEPPane, TESMEPPane, DCSMEPPane, AEPPane, VEPPane, reflexPane;
-	
-	//DummyString for a List
-	private static final String DUMMY = "dummyNode";
+
 	//Counter for the Rows in the GridPane. Row 0 is Empty and Row 1 already has Nodes. Therefore the counter starts at 2.
+
+	// a list for the muscles chosen in tes mep baseline
+	private ObservableList<String> tesMepMuscleChoice = FXCollections.observableArrayList();
+
+	// a list for the muscles chosen in dcs mep baseline
+	private ObservableList<String> dcsMepMuscleChoice = FXCollections.observableArrayList();
+
+
+	//Löschen? romap1
+	// a map for the comboboxes in tes mep
+	private Map<Integer, ComboBox<String>> cbTesMap = new HashMap<Integer, ComboBox<String>>();
+
+	// a map for the comboboxes in dcs mep
+	private Map<Integer, ComboBox<String>> cbDcsMap = new HashMap<Integer, ComboBox<String>>();
+
 
 
 
@@ -149,12 +165,43 @@ public class IOMRecordingController {
 
 	private Map<String, Node> nodeList = new HashMap<String, Node>();
 
+	// new instance of Ontology Editor
+	private OntologyEditor ontEdit = OntologyEditor.getInstance();	
+
+
+	// create the list for the first dropdown
+	private ObservableList<String> categoryList = FXCollections.observableArrayList(ontEdit.getAllEntitiesToBeShown().keySet());
+
+	// create all the lists for the second dropdown of the IOM Documentation
+	private ObservableList<String> vepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000403").keySet());
+	private ObservableList<String> mappingMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000373").keySet());
+	private ObservableList<String> technicalIssuesList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000154").keySet());
+	private ObservableList<String> dwaveMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000369").keySet());
+	//private ObservableList<String> tesMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000378").keySet());
+	//private ObservableList<String> dcsMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000238").keySet());
+	//private ObservableList<String> vepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000244").keySet());
+	//private ObservableList<String> sepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242").keySet());
+	private ObservableList<String> aepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000240").keySet());
+	private ObservableList<String> cbtMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000371").keySet());
+	private ObservableList<String> surgeryProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058").keySet());
+	private ObservableList<String> reflexFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000234").keySet());
+	private ObservableList<String> eegFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000231").keySet());
+	private ObservableList<String> anesthesyProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000159").keySet());
+	private ObservableList<String> mappingFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000376").keySet());
+	private ObservableList<String> iomProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000057").keySet());
+	private ObservableList<String> sepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000401").keySet());
+	private ObservableList<String> aepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000402").keySet());
+	private ObservableList<String> dwaveFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000387").keySet());
+	private ObservableList<String> emgFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000370").keySet());
+	private ObservableList<String> mepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000400").keySet());
+	private ObservableList<String> actionList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human").keySet());
+
+
 	//---------------------------------------------------Variables IOM actual Recording
 
 
 
-	// new instance of Ontology Editor
-	private OntologyEditor ontEdit = OntologyEditor.getInstance();
+
 
 	public void initialize() {
 		// Patient data start
@@ -171,6 +218,8 @@ public class IOMRecordingController {
 		//IOM Documentation end
 
 		// Baseline start
+
+		Collections.sort(muscleList);
 		cbTes1.setItems(muscleList);
 		cbTes2.setItems(muscleList);
 		cbTes3.setItems(muscleList);
@@ -521,158 +570,274 @@ public class IOMRecordingController {
 		ontEdit.addStatement(mA, "http://purl.obolibrary.org/obo/IAO_0000136", muscle);
 	}
 
+	/**
+	 * Resets all selected Muscels in the Comboxes.
+	 * @param event
+	 */
+	@FXML
+	public void resetTESMEP(ActionEvent event) {
+		cbTes1.getSelectionModel().clearSelection();cbTes2.getSelectionModel().clearSelection();
+		cbTes3.getSelectionModel().clearSelection();cbTes4.getSelectionModel().clearSelection();
+		cbTes5.getSelectionModel().clearSelection();cbTes6.getSelectionModel().clearSelection();
+		cbTes7.getSelectionModel().clearSelection();cbTes8.getSelectionModel().clearSelection();
+		cbTes9.getSelectionModel().clearSelection();cbTes10.getSelectionModel().clearSelection();
+		cbTes11.getSelectionModel().clearSelection();cbTes12.getSelectionModel().clearSelection();
+		cbTes13.getSelectionModel().clearSelection();cbTes14.getSelectionModel().clearSelection();
+		cbTes15.getSelectionModel().clearSelection();cbTes16.getSelectionModel().clearSelection();
+		TESMEPPane.setTextFill(Color.BLACK);
+		tesMepMuscleChoice.remove(0, tesMepMuscleChoice.size());
+		//ToDo !! remove TES MEP Measurement from categoryList
 
-	public void cbTes1isUsed(ActionEvent event) {
-		String selectedItem = cbTes1.getSelectionModel().getSelectedItem();
-		if (!selectedItem.isBlank()) {
-			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(1, selectedItem);
-			categoryList.addAll(ontEdit.getAllMeasurementsWithValues().keySet());
-			
-			
-			
-		}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(1, DUMMY);}
 	}
+	/**
+	 * Checks if Combobox has a muscle selected. If a muscle is selected it will be displayed in the categories for the IOM Documentation.
+	 * @param event
+	 */
+	@FXML
+	private void cbTes1isUsed(ActionEvent event) {
+		String selectedItem = cbTes1.getSelectionModel().getSelectedItem();
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
+			TESMEPPane.setTextFill(Color.GREEN);
+			tesMepMuscleChoice.add(0, selectedItem);
+			categoryList.addAll(ontEdit.getAllMeasurementsWithValues().keySet());	
+		}
+	}
+	@FXML
 	public void cbTes2isUsed(ActionEvent event) {
 		String selectedItem = cbTes2.getSelectionModel().getSelectedItem();
-		if (!cbTes2.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(2, selectedItem);}
-		
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(2, DUMMY);}
+			tesMepMuscleChoice.add(1, selectedItem);}
 	}
+	@FXML
 	public void cbTes3isUsed(ActionEvent event) {
 		String selectedItem = cbTes3.getSelectionModel().getSelectedItem();
-		if (!cbTes3.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(3, selectedItem);}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(3, DUMMY);}
+			tesMepMuscleChoice.add(2, selectedItem);}
 	}
+	@FXML
 	public void cbTes4isUsed(ActionEvent event) {
 		String selectedItem = cbTes4.getSelectionModel().getSelectedItem();
-		if (!cbTes4.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(4, selectedItem);}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(4, DUMMY);}
+			tesMepMuscleChoice.add(3, selectedItem);}
 	}
+	@FXML
 	public void cbTes5isUsed(ActionEvent event) {
 		String selectedItem = cbTes5.getSelectionModel().getSelectedItem();
-		if (!cbTes5.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(5, selectedItem);}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(5, DUMMY);}
+			tesMepMuscleChoice.add(4, selectedItem);}
 	}
+	@FXML
 	public void cbTes6isUsed(ActionEvent event) {
 		String selectedItem = cbTes6.getSelectionModel().getSelectedItem();
-		if (!cbTes6.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(6, selectedItem);
-			}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(6, DUMMY);}
+			tesMepMuscleChoice.add(5, selectedItem);
+		}
 	}
+	@FXML
 	public void cbTes7isUsed(ActionEvent event) {
 		String selectedItem = cbTes7.getSelectionModel().getSelectedItem();
-		if (!cbTes7.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(7, selectedItem);}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(7, DUMMY);}
+			tesMepMuscleChoice.add(6, selectedItem);}
 	}
+	@FXML
 	public void cbTes8isUsed(ActionEvent event) {
 		String selectedItem = cbTes8.getSelectionModel().getSelectedItem();
-		if (!cbTes8.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(8, selectedItem);}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(8, DUMMY);}
+			tesMepMuscleChoice.add(7, selectedItem);}
 	}
+	@FXML
 	public void cbTes9isUsed(ActionEvent event) {
 		String selectedItem = cbTes9.getSelectionModel().getSelectedItem();
-		if (!cbTes9.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(9, selectedItem);}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(9, DUMMY);}
+			tesMepMuscleChoice.add(8, selectedItem);}
 	}
+	@FXML
 	public void cbTes10isUsed(ActionEvent event) {
 		String selectedItem = cbTes10.getSelectionModel().getSelectedItem();
-		if (!cbTes10.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(10, selectedItem);}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(10, DUMMY);}
+			tesMepMuscleChoice.add(9, selectedItem);}
 	}
+	@FXML
 	public void cbTes11isUsed(ActionEvent event) {
 		String selectedItem = cbTes11.getSelectionModel().getSelectedItem();
-		if (!cbTes11.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(11, selectedItem);}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(11, DUMMY);}
+			tesMepMuscleChoice.add(10, selectedItem);}
 	}
+	@FXML
 	public void cbTes12isUsed(ActionEvent event) {
 		String selectedItem = cbTes12.getSelectionModel().getSelectedItem();
-		if (!cbTes12.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(12, selectedItem);}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(12, DUMMY);}
+			tesMepMuscleChoice.add(11, selectedItem);}
 	}
+	@FXML
 	public void cbTes13isUsed(ActionEvent event) {
 		String selectedItem = cbTes13.getSelectionModel().getSelectedItem();
-		if (!cbTes13.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(13, selectedItem);}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(13, DUMMY);}
+			tesMepMuscleChoice.add(12, selectedItem);}
 	}
+	@FXML
 	public void cbTes14isUsed(ActionEvent event) {
 		String selectedItem = cbTes14.getSelectionModel().getSelectedItem();
-		if (!cbTes14.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(14, selectedItem);}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(14, DUMMY);}
+			tesMepMuscleChoice.add(13, selectedItem);}
 	}
+	@FXML
 	public void cbTes15isUsed(ActionEvent event) {
 		String selectedItem = cbTes15.getSelectionModel().getSelectedItem();
-		if (!cbTes15.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){//skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(15, selectedItem);}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(15, DUMMY);}
+			tesMepMuscleChoice.add(14, selectedItem);}
 	}
+	@FXML
 	public void cbTes16isUsed(ActionEvent event) {
 		String selectedItem = cbTes16.getSelectionModel().getSelectedItem();
-		if (!cbTes16.getSelectionModel().getSelectedItem().isBlank()) {
+		if (selectedItem == null){  //skip
+		}
+		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
-			tesMepMuscleChoice.add(16, selectedItem);}
-		else {
-			TESMEPPane.setTextFill(Color.BLACK);
-			tesMepMuscleChoice.add(16, DUMMY);}
+			tesMepMuscleChoice.add(15, selectedItem);}
 	}
+
+	/**
+	 * 
+	 * @param event
+	 */
+	@FXML
+	public void resetDCSMEP(ActionEvent event) {
+		cbDcs1.getSelectionModel().clearSelection();cbDcs2.getSelectionModel().clearSelection();
+		cbDcs3.getSelectionModel().clearSelection();cbDcs4.getSelectionModel().clearSelection();
+		cbDcs5.getSelectionModel().clearSelection();cbDcs6.getSelectionModel().clearSelection();
+		cbDcs7.getSelectionModel().clearSelection();cbDcs8.getSelectionModel().clearSelection();
+		cbDcs9.getSelectionModel().clearSelection();cbDcs10.getSelectionModel().clearSelection();
+		DCSMEPPane.setTextFill(Color.BLACK);
+		dcsMepMuscleChoice.remove(0, dcsMepMuscleChoice.size());	
+	}
+	@FXML
+	public void cbDcs1isUsed(ActionEvent event) {
+		String selectedItem = cbDcs1.getSelectionModel().getSelectedItem();
+		if (selectedItem == null){  //skip
+		}
+		else if (!selectedItem.isBlank()) {
+			DCSMEPPane.setTextFill(Color.GREEN);
+			dcsMepMuscleChoice.add(0, selectedItem);
+			categoryList.addAll(ontEdit.getAllMeasurementsWithValues().keySet());}
+	}
+	public void cbDcs2isUsed(ActionEvent event) {
+		String selectedItem = cbDcs2.getSelectionModel().getSelectedItem();
+		if (selectedItem == null){  //skip
+		}
+		else if (!selectedItem.isBlank()) {
+			DCSMEPPane.setTextFill(Color.GREEN);
+			dcsMepMuscleChoice.add(1, selectedItem);}	
+	}
+	public void cbDcs3isUsed(ActionEvent event) {
+		String selectedItem = cbDcs3.getSelectionModel().getSelectedItem();
+		if (selectedItem == null){  //skip
+		}
+		else if (!selectedItem.isBlank()) {
+			DCSMEPPane.setTextFill(Color.GREEN);
+			dcsMepMuscleChoice.add(2, selectedItem);}
+	}
+	public void cbDcs4isUsed(ActionEvent event) {
+		String selectedItem = cbDcs4.getSelectionModel().getSelectedItem();
+		if (selectedItem == null){  //skip
+		}
+		else if (!selectedItem.isBlank()) {
+			DCSMEPPane.setTextFill(Color.GREEN);
+			dcsMepMuscleChoice.add(3, selectedItem);}
+	}
+	public void cbDcs5isUsed(ActionEvent event) {
+		String selectedItem = cbDcs5.getSelectionModel().getSelectedItem();
+		if (selectedItem == null){  //skip
+		}
+		else if (!selectedItem.isBlank()) {
+			DCSMEPPane.setTextFill(Color.GREEN);
+			dcsMepMuscleChoice.add(4, selectedItem);}
+	}
+	public void cbDcs6isUsed(ActionEvent event) {
+		String selectedItem = cbDcs6.getSelectionModel().getSelectedItem();
+		if (selectedItem == null){  //skip
+		}
+		else if (!selectedItem.isBlank()) {
+			DCSMEPPane.setTextFill(Color.GREEN);
+			dcsMepMuscleChoice.add(5, selectedItem);}
+	}
+	public void cbDcs7isUsed(ActionEvent event) {
+		String selectedItem = cbDcs7.getSelectionModel().getSelectedItem();
+		if (selectedItem == null){  //skip
+		}
+		else if (!selectedItem.isBlank()) {
+			DCSMEPPane.setTextFill(Color.GREEN);
+			dcsMepMuscleChoice.add(6, selectedItem);}
+	}
+	public void cbDcs8isUsed(ActionEvent event) {
+		String selectedItem = cbDcs8.getSelectionModel().getSelectedItem();
+		if (selectedItem == null){  //skip
+		}
+		else if (!selectedItem.isBlank()) {
+			DCSMEPPane.setTextFill(Color.GREEN);
+			dcsMepMuscleChoice.add(7, selectedItem);}
+	}
+	public void cbDcs9isUsed(ActionEvent event) {
+		String selectedItem = cbDcs9.getSelectionModel().getSelectedItem();
+		if (selectedItem == null){  //skip
+		}
+		else if (!selectedItem.isBlank()) {
+			DCSMEPPane.setTextFill(Color.GREEN);
+			dcsMepMuscleChoice.add(8, selectedItem);}
+	}
+	public void cbDcs10isUsed(ActionEvent event) {
+		String selectedItem = cbDcs10.getSelectionModel().getSelectedItem();
+		if (selectedItem == null){  //skip
+		}
+		else if (!selectedItem.isBlank()) {
+			DCSMEPPane.setTextFill(Color.GREEN);
+			dcsMepMuscleChoice.add(9, selectedItem);}
+	}
+
 
 	public void getAepBaselineValues() {
 
@@ -705,44 +870,7 @@ public class IOMRecordingController {
 
 	//private ObservableList<String> entryList = FXCollections.observableArrayList("entry1", "entry2");
 
-	// create the list for the first dropdown
-	private ObservableList<String> categoryList = FXCollections.observableArrayList(ontEdit.getAllEntitiesToBeShown().keySet());
 
-	// create all the lists for the second dropdown of the IOM Documentation
-	private ObservableList<String> vepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000403").keySet());
-	private ObservableList<String> mappingMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000373").keySet());
-	private ObservableList<String> technicalIssuesList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000154").keySet());
-	private ObservableList<String> dwaveMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000369").keySet());
-	//private ObservableList<String> tesMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000378").keySet());
-	//private ObservableList<String> dcsMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000238").keySet());
-	//private ObservableList<String> vepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000244").keySet());
-	//private ObservableList<String> sepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242").keySet());
-	private ObservableList<String> aepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000240").keySet());
-	private ObservableList<String> cbtMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000371").keySet());
-	private ObservableList<String> surgeryProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058").keySet());
-	private ObservableList<String> reflexFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000234").keySet());
-	private ObservableList<String> eegFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000231").keySet());
-	private ObservableList<String> anesthesyProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000159").keySet());
-	private ObservableList<String> mappingFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000376").keySet());
-	private ObservableList<String> iomProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000057").keySet());
-	private ObservableList<String> sepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000401").keySet());
-	private ObservableList<String> aepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000402").keySet());
-	private ObservableList<String> dwaveFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000387").keySet());
-	private ObservableList<String> emgFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000370").keySet());
-	private ObservableList<String> mepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000400").keySet());
-	private ObservableList<String> actionList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human").keySet());
-
-	// a list for the muscles chosen in tes mep baseline
-	private ObservableList<String> tesMepMuscleChoice = FXCollections.observableArrayList(List.of(DUMMY));
-
-	// a list for the muscles chosen in dcs mep baseline
-	private ObservableList<String> dcsMepMuscleChoice = FXCollections.observableArrayList( List.of(DUMMY));
-
-	// a map for the comboboxes in tes mep
-	private Map<Integer, ComboBox<String>> cbTesMap = new HashMap<Integer, ComboBox<String>>();
-
-	// a map for the comboboxes in dcs mep
-	private Map<Integer, ComboBox<String>> cbDcsMap = new HashMap<Integer, ComboBox<String>>();
 
 
 
@@ -778,17 +906,128 @@ public class IOMRecordingController {
 		valueTF.setDisable(true);
 		valueTF.setVisible(false);
 
-		//Texfield for value is only visible when a category with measurement selected. 
+		//Adds new Rows with predeterment selection of Muscle or Nerves according to the filled Baselines. Affects the Selection of "TES MEP Messung", 
+		//"DCS MEP Messung" and "AEP Messung". 
+		//The Textfield for value input is only visible when a category with measurement is selected. 
 		categoryCB.setOnAction ((selectedItem) -> {
-			if(categoryCB.getSelectionModel().getSelectedItem().contains(I18n.getString("rec.measurement"))) {
+			if(categoryCB.getSelectionModel().getSelectedItem().contains("Messung")) {
+				if(categoryCB.getSelectionModel().getSelectedItem().equals("TES MEP Messung")) {
+					int size = tesMepMuscleChoice.size();
+
+					for(int i= 1; i< size; i++) {
+						//existing Combobox is preselected with the first String of the MEP Muscle List
+						entryCB.getSelectionModel().select(tesMepMuscleChoice.get(0));
+						//New Combobox with the matching String of the MEP Muscle List
+						ComboBox<String> addicionalCB = new ComboBox<String>();
+						addicionalCB.setItems(tesMepMuscleChoice);
+						addicionalCB.getSelectionModel().select(tesMepMuscleChoice.get(i));
+
+						TextField AddidionalValue = new TextField();
+						//Adding new Noddes to the NodeList, timeTF, CategoryCB and commentTF act as Dummys to not break the consistency of the List.
+						nodeList.put(row + "1", timeTF);
+						nodeList.put(row + "2", categoryCB);
+						nodeList.put(row + "3", addicionalCB) ;
+						nodeList.put(row + "4", AddidionalValue);
+						nodeList.put(row + "5", commentTF);
+						//nodeList.put(row + "2", new TextField());
+						infoGrid.add(addicionalCB, 3, row);
+						infoGrid.add(AddidionalValue, 4, row);
+						row++;
+						infoGrid.getChildren().remove(addRowBtn);
+						infoGrid.add(addRowBtn, 1, row);
+					}
+					//Delete Button deletes the Row it is in and all additional Rows that are specifically created for the Measurement Input. 
+					deleteBtn.addEventHandler(ActionEvent.ACTION,
+							new EventHandler<ActionEvent>() {
+						@Override public void handle(ActionEvent event) {
+							int index = GridPane.getRowIndex(deleteBtn);
+							System.out.println(index);
+							for(int i= index; i< (index + size); i++) {
+								infoGrid.getChildren().remove(nodeList.get(i + ""+ 1));
+								infoGrid.getChildren().remove(nodeList.get(i + ""+ 2));
+								infoGrid.getChildren().remove(nodeList.get(i + ""+ 3));
+								infoGrid.getChildren().remove(nodeList.get(i + ""+ 4));
+								infoGrid.getChildren().remove(nodeList.get(i + ""+ 5));
+								System.out.println(index + ""+ 1);
+								System.out.println(nodeList.get(index + ""+ 3).toString());
+							}
+							infoGrid.getChildren().remove(deleteBtn); 
+							infoGrid.getChildren().remove(timeTF);
+							infoGrid.getChildren().remove(categoryCB);
+							infoGrid.getChildren().remove(entryCB);
+							infoGrid.getChildren().remove(valueTF);
+							infoGrid.getChildren().remove(commentTF);
+							row--;
+							infoGrid.getChildren().remove(addRowBtn);
+							infoGrid.add(addRowBtn, 1, row);
+						}
+					});
+				}if(categoryCB.getSelectionModel().getSelectedItem().equals("DCS MEP Messung")) {
+					int size = dcsMepMuscleChoice.size();
+					for(int i= 1; i< size; i++) {
+						//existing Combobox is preselected with the first String of the MEP Muscle List
+						entryCB.getSelectionModel().select(dcsMepMuscleChoice.get(0));
+						//New Combobox with the matching String of the MEP Muscle List
+						ComboBox<String> addicionalCB = new ComboBox<String>();
+						addicionalCB.setItems(dcsMepMuscleChoice);
+						addicionalCB.getSelectionModel().select(dcsMepMuscleChoice.get(i));
+
+						TextField AddidionalValue = new TextField();
+						//Adding new Noddes to the NodeList, timeTF, CategoryCB and commentTF act as Dummys to not break the consistency of the List.
+						nodeList.put(row + "1", timeTF);
+						nodeList.put(row + "2", categoryCB);
+						nodeList.put(row + "3", addicionalCB) ;
+						nodeList.put(row + "4", AddidionalValue);
+						nodeList.put(row + "5", commentTF);
+						//nodeList.put(row + "2", new TextField());
+						infoGrid.add(addicionalCB, 3, row);
+						infoGrid.add(AddidionalValue, 4, row);
+						row++;
+						infoGrid.getChildren().remove(addRowBtn);
+						infoGrid.add(addRowBtn, 1, row);
+					}
+					//Delete Button deletes the Row it is in and all additional Rows that are specifically created for the Measurement Input. 
+					deleteBtn.addEventHandler(ActionEvent.ACTION,
+							new EventHandler<ActionEvent>() {
+						@Override public void handle(ActionEvent event) {
+							int index = GridPane.getRowIndex(deleteBtn);
+							System.out.println(index);
+							for(int i= index; i< (index + size); i++) {
+								infoGrid.getChildren().remove(nodeList.get(i + ""+ 1));
+								infoGrid.getChildren().remove(nodeList.get(i + ""+ 2));
+								infoGrid.getChildren().remove(nodeList.get(i + ""+ 3));
+								infoGrid.getChildren().remove(nodeList.get(i + ""+ 4));
+								infoGrid.getChildren().remove(nodeList.get(i + ""+ 5));
+								System.out.println(index + ""+ 1);
+								System.out.println(nodeList.get(index + ""+ 3).toString());
+							}
+							infoGrid.getChildren().remove(deleteBtn); 
+							infoGrid.getChildren().remove(timeTF);
+							infoGrid.getChildren().remove(categoryCB);
+							infoGrid.getChildren().remove(entryCB);
+							infoGrid.getChildren().remove(valueTF);
+							infoGrid.getChildren().remove(commentTF);
+							row--;
+							infoGrid.getChildren().remove(addRowBtn);
+							infoGrid.add(addRowBtn, 1, row);
+						}
+					});
+					
+				}if(categoryCB.getSelectionModel().getSelectedItem().equals("AEP Messung")) {
+
+				}
+				//Texfield for Valueis accessible for the user
 				valueTF.setDisable(false);
 				valueTF.setVisible(true);
+
 			}else {
+				//Texfield for Value is not accessible for the user because its not a Measurement Category
 				valueTF.setDisable(true);
 				valueTF.setVisible(false);
 			}
 		});
 
+		
 		//add nodes to HashMap, Key is ROW + Columnnumber. eg. Key = 21 for Node in ROW 2, Columne 1. 
 		nodeList.put(row + "1", timeTF );
 		nodeList.put(row + "2", categoryCB );
@@ -812,6 +1051,11 @@ public class IOMRecordingController {
 		deleteBtn.addEventHandler(ActionEvent.ACTION,
 				new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent event) {
+				int i = GridPane.getRowIndex(deleteBtn);
+				System.out.println(i);
+				infoGrid.getChildren().remove(nodeList.get(i + ""+ 1));
+				System.out.println(i + ""+ 1);
+				System.out.println(nodeList.get(i + ""+ 1).toString());
 				infoGrid.getChildren().remove(deleteBtn); 
 				infoGrid.getChildren().remove(timeTF);
 				infoGrid.getChildren().remove(categoryCB);
@@ -819,6 +1063,8 @@ public class IOMRecordingController {
 				infoGrid.getChildren().remove(valueTF);
 				infoGrid.getChildren().remove(commentTF);
 				row--;
+
+
 			}
 		});
 
@@ -898,7 +1144,7 @@ public class IOMRecordingController {
 				ontEdit.addStatement(document, NS + has_data_item , category);
 				//ontEdit.addTimestampToEntity(category, time);
 				String value = getTextField(  nodeList.get( i  +"" + 4)).getText();
-				
+
 
 				//Add Value to measurement needs to be added!
 			}else {
@@ -972,11 +1218,9 @@ public class IOMRecordingController {
 			entry.setItems(dwaveMeasurementList);
 			break;
 		case "TES MEP Messung":
-			tesMepMuscleChoice.removeAll(DUMMY);
 			entry.setItems(tesMepMuscleChoice);
 			break;
 		case "DCS MEP Messung":
-			dcsMepMuscleChoice.removeAll(DUMMY);
 			entry.setItems(dcsMepMuscleChoice);
 			break;
 			/*
@@ -1032,7 +1276,7 @@ public class IOMRecordingController {
 		}	
 	}
 
-	
+
 
 
 	@SuppressWarnings("exports")

@@ -98,7 +98,12 @@
                                       </rowConstraints>
                                        <children>
                                           <ComboBox fx:id="cbTes1" onAction="#cbTes1isUsed" prefWidth="150.0" GridPane.rowIndex="2" />
-                                          <Label text="Muskel" GridPane.rowIndex="1" />
+                                          <HBox spacing="40.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label text="Muskel" />
+                                                <Button fx:id="resetTESMEPBtn" mnemonicParsing="false" onAction="#resetTESMEP" text="%btn.reset" />
+                                             </children>
+                                          </HBox>
                                           <Label text="C1/C2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <Label text="C3/C4" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                           <Label text="Andere" GridPane.columnIndex="3" GridPane.rowIndex="1" />
@@ -194,21 +199,26 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Muskel" GridPane.rowIndex="1" />
+                                          <HBox spacing="40.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Muskel" />
+                                                <Button fx:id="resetDCSMEPBtn" mnemonicParsing="false" onAction="#resetDCSMEP" text="%btn.reset" />
+                                             </children>
+                                          </HBox>
                                           <Label alignment="CENTER" contentDisplay="CENTER" text="#1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <Label text="#2" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                           <Label text="#3" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                                           <Label text="#4" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                          <ComboBox fx:id="cbDcs1" prefWidth="150.0" GridPane.rowIndex="2" />
-                                          <ComboBox fx:id="cbDcs2" prefWidth="150.0" GridPane.rowIndex="3" />
-                                          <ComboBox fx:id="cbDcs3" prefWidth="150.0" GridPane.rowIndex="4" />
-                                          <ComboBox fx:id="cbDcs4" prefWidth="150.0" GridPane.rowIndex="5" />
-                                          <ComboBox fx:id="cbDcs5" prefWidth="150.0" GridPane.rowIndex="6" />
-                                          <ComboBox fx:id="cbDcs6" prefWidth="150.0" GridPane.rowIndex="7" />
-                                          <ComboBox fx:id="cbDcs7" prefWidth="150.0" GridPane.rowIndex="8" />
-                                          <ComboBox fx:id="cbDcs8" prefWidth="150.0" GridPane.rowIndex="9" />
-                                          <ComboBox fx:id="cbDcs9" prefWidth="150.0" GridPane.rowIndex="10" />
-                                          <ComboBox fx:id="cbDcs10" prefWidth="150.0" GridPane.rowIndex="11" />
+                                          <ComboBox fx:id="cbDcs1" onAction="#cbDcs1isUsed" prefWidth="150.0" GridPane.rowIndex="2" />
+                                          <ComboBox fx:id="cbDcs2" onAction="#cbDcs2isUsed" prefWidth="150.0" GridPane.rowIndex="3" />
+                                          <ComboBox fx:id="cbDcs3" onAction="#cbDcs3isUsed" prefWidth="150.0" GridPane.rowIndex="4" />
+                                          <ComboBox fx:id="cbDcs4" onAction="#cbDcs4isUsed" prefWidth="150.0" GridPane.rowIndex="5" />
+                                          <ComboBox fx:id="cbDcs5" onAction="#cbDcs5isUsed" prefWidth="150.0" GridPane.rowIndex="6" />
+                                          <ComboBox fx:id="cbDcs6" onAction="#cbDcs6isUsed" prefWidth="150.0" GridPane.rowIndex="7" />
+                                          <ComboBox fx:id="cbDcs7" onAction="#cbDcs7isUsed" prefWidth="150.0" GridPane.rowIndex="8" />
+                                          <ComboBox fx:id="cbDcs8" onAction="#cbDcs8isUsed" prefWidth="150.0" GridPane.rowIndex="9" />
+                                          <ComboBox fx:id="cbDcs9" onAction="#cbDcs9isUsed" prefWidth="150.0" GridPane.rowIndex="10" />
+                                          <ComboBox fx:id="cbDcs10" onAction="#cbDcs10isUsed" prefWidth="150.0" GridPane.rowIndex="11" />
                                           <TextField fx:id="tfDcs1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                           <TextField fx:id="tfDcs2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                           <TextField fx:id="tfDcs3" GridPane.columnIndex="1" GridPane.rowIndex="4" />
