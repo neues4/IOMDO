@@ -15,10 +15,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -59,11 +61,23 @@ public class MenuController {
 	public void openNewProtocol(ActionEvent event) throws IOException {
 		//changeCenter("RecordDocument_PatientData.fxml");
 		changeCenter("IOMRecording.fxml");
+		newProtocolBtn.setStyle("-fx-background-color: #629c9e");
+		protocolOverviewBtn.setStyle("-fx-background-color: white");
+		createQueryBtn.setStyle("-fx-background-color: white");
+		expandOntologyBtn.setStyle("-fx-background-color: white");
+		settingsBtn.setStyle("-fx-background-color: white");
+		
+	
 		
 	}
 
 	public  void openProtocolOverview(ActionEvent event) throws IOException {
 		changeCenter("ProtocolOverview.fxml");
+		newProtocolBtn.setStyle("-fx-background-color: white");
+		protocolOverviewBtn.setStyle("-fx-background-color: #629c9e");
+		createQueryBtn.setStyle("-fx-background-color: white");
+		expandOntologyBtn.setStyle("-fx-background-color: white");
+		settingsBtn.setStyle("-fx-background-color: white");
 		
 	}
 
@@ -84,12 +98,27 @@ public class MenuController {
 	}
 
 	public void openCreatQuery(ActionEvent event) throws IOException {
+		changeCenter("Query.fxml");
+		newProtocolBtn.setStyle("-fx-background-color: white");
+		protocolOverviewBtn.setStyle("-fx-background-color: white");
+		createQueryBtn.setStyle("-fx-background-color: #629c9e");
+		expandOntologyBtn.setStyle("-fx-background-color: white");
+		settingsBtn.setStyle("-fx-background-color: white");
 
 	}
 	public void openExpandOntology(ActionEvent event) throws IOException {
-
+		newProtocolBtn.setStyle("-fx-background-color: white");
+		protocolOverviewBtn.setStyle("-fx-background-color: white");
+		createQueryBtn.setStyle("-fx-background-color: white");
+		expandOntologyBtn.setStyle("-fx-background-color: #629c9e");
+		settingsBtn.setStyle("-fx-background-color: white");
 	}
 	public void openSettings(ActionEvent event) throws IOException {
+		newProtocolBtn.setStyle("-fx-background-color: white");
+		protocolOverviewBtn.setStyle("-fx-background-color: white");
+		createQueryBtn.setStyle("-fx-background-color: white");
+		expandOntologyBtn.setStyle("-fx-background-color: white");
+		settingsBtn.setStyle("-fx-background-color: #629c9e");
 
 	}
 

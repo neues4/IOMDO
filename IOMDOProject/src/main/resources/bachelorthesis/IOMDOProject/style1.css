@@ -3,6 +3,7 @@
     -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
 }
 
+
 .text-field:focused {
   -fx-font-family: "Quicksand";
    /*-fx-padding: 1,1,1,1;*/
@@ -16,7 +17,9 @@
 
 #menuBtn{
 	-fx-background-color: #234D74  , white , white;
-	-fx-text-fill:  #234D74;
+	-fx-text-fill:  #294F74;
+	-fx-font-size: 15px;
+	-fx-font-style: bold;
 }
 #logOutBtn{
 	-fx-background-color: #234D74  , white , white;
@@ -51,3 +54,8 @@
 {
 	-fx-background-image: "135-search"
 }
+
+.grid {
+    -fx-background-color: white;
+    }
+  
