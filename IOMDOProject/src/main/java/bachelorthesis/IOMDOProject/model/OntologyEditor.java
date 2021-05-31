@@ -44,7 +44,9 @@ public class OntologyEditor {
 
 	private static OntologyEditor editor;
 
+	private int counter = 500;
 	
+	private String id = "IOMO_0000000";
 
 
 	public static OntologyEditor getInstance()
@@ -82,6 +84,36 @@ public class OntologyEditor {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public String getId() {
+	String  counterAsString = Integer.toString(counter);
+	int sizeOfInt = counterAsString.length();
+	switch (sizeOfInt) {
+	
+	case 3:
+		id = "IOMO_0000" + counter;
+		System.out.println(id);
+		break;
+	case 4:
+		id = "IOMO_000" + counter;
+		System.out.println(id);
+		break;
+	case 5:
+		id = "IOMO_00" + counter;		
+		break;
+	case 6:
+		id = "IOMO_0" + counter;
+		break;
+	case 7:
+		id = "IOMO_" + counter;
+		break;
+	}
+	counter ++;
+	return id;
+	}
+	
+	
 
 
 	/**
@@ -160,11 +192,15 @@ public class OntologyEditor {
 	 */
 	public String createNewIndividual(String classURI, String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass(classURI);
-		Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
-		indv.addLabel(indvLabel, "EN");
+		Individual indv = ontClass.createIndividual(NS + getId());
+		//Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
+		indv.addLabel(indvLabel, "DE");
+		
 		return indv.getURI();
 	}
 
+	
+	//Deprecated? romap1
 	/**
 	 * Method to create a new URI with "#", used to create new individuals in the ontology
 	 * (this method is only used in OntologyEditor Class in every method where we want to create a new individual)
@@ -237,14 +273,17 @@ public class OntologyEditor {
 	/**
 	 * Adds the data property timestamp to the given entity.
 	 * @author romap1
-	 * @param entity The Label of the entity
+	 * @param entity The URI of the entity
 	 * @param timestamp the time as String
 	 */
-	public void addTimestampToEntity(String entity, String timestamp) {
-		Individual indv = ontModel.getIndividual(entity);
-		//has_timestamp = 0000266
-		DatatypeProperty datPropSurgeryDate = ontModel.getDatatypeProperty( NS + "IOMO_0000266");
+	public void addTimestampToEntity(String entityUri, String label, String timestamp) {
+		String indivUri= createNewIndividual(entityUri, label);
+		Individual indv = ontModel.getIndividual(indivUri);
+		String has_timestamp = "IOMO_0000266";
+		DatatypeProperty datPropSurgeryDate = ontModel.getDatatypeProperty( NS + has_timestamp);
 		indv.addProperty(datPropSurgeryDate, timestamp);
+		System.out.println(indivUri);
+		saveNewOWLFile();
 	} 
 
 	/**
@@ -413,10 +452,10 @@ public class OntologyEditor {
 		OntClass technicalIssues = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000154");
 		//OntClass iomProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000057");
 		OntClass gridPositioning = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000064");
-		String iOMStart = "IOMO_0000461";
 		String iOMEnd = "IOMO_0000462";
-		OntClass iOMStartClass = ontModel.getOntClass(NS + iOMStart);
 		OntClass iOMEndClass = ontModel.getOntClass(NS + iOMEnd);
+		String other = "IOMO_0000460";
+		OntClass otherClass = ontModel.getOntClass(NS + other);
 		
 		
 		HashMap<String, String> showEntityMap = new HashMap<>();
@@ -442,8 +481,9 @@ public class OntologyEditor {
 		showEntityMap.put(technicalIssues.getLabel("DE"), technicalIssues.getURI());
 		//showEntityMap.put(iomProcess.getLabel("DE"), iomProcess.getURI());
 		showEntityMap.put(gridPositioning.getLabel("DE"), gridPositioning.getURI());
-		showEntityMap.put(iOMStartClass.getLabel("DE"), iOMStartClass.getURI());
 		showEntityMap.put(iOMEndClass.getLabel("DE"), iOMEndClass.getURI());
+		showEntityMap.put(otherClass.getLabel("DE"), otherClass.getURI());
+		
 		return showEntityMap;
 	}
 
