@@ -21,7 +21,7 @@ import org.apache.jena.util.FileManager;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class PatientDataQuery {
-
+	
 	public static void main(String[] args) throws IOException {
 		System.out.println(sparqlTest());
 	}
@@ -103,5 +103,5 @@ public class PatientDataQuery {
 
 	}
 
-
+	
 }
