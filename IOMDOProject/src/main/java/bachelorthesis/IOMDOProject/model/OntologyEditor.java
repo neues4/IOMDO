@@ -50,9 +50,9 @@ public class OntologyEditor {
 	{
 		if (editor == null)
 			//Windows
-			//editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_30.owl");
+			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_30.owl");
 		//mac
-		editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_29.owl");
+		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_29.owl");
 
 		return editor;
 	}
@@ -229,7 +229,7 @@ public class OntologyEditor {
 	/**
 	 * Adds the data property timestamp to the given entity.
 	 * @author romap1
-	 * @param entity The Uri of the entity
+	 * @param entity The Label of the entity
 	 * @param timestamp the time as String
 	 */
 	public void addTimestampToEntity(String entity, String timestamp) {
@@ -394,7 +394,7 @@ public class OntologyEditor {
 		OntClass emgFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000370");
 		OntClass mappingFinding = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000376");
 		OntClass cbtMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000371");
-		OntClass dwaveMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000369");
+		//OntClass dwaveMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000369");
 		OntClass mappingMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000373");
 		//OntClass sepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242");
 
@@ -418,7 +418,7 @@ public class OntologyEditor {
 		showEntityMap.put(emgFinding.getLabel("DE"), emgFinding.getURI());
 		showEntityMap.put(mappingFinding.getLabel("DE"), mappingFinding.getURI());
 		showEntityMap.put(cbtMeasurement.getLabel("DE"), cbtMeasurement.getURI());
-		showEntityMap.put(dwaveMeasurement.getLabel("DE"), dwaveMeasurement.getURI());
+		//showEntityMap.put(dwaveMeasurement.getLabel("DE"), dwaveMeasurement.getURI());
 		showEntityMap.put(mappingMeasurement.getLabel("DE"), mappingMeasurement.getURI());
 		//showEntityMap.put(sepMeasurement.getLabel("DE"), sepMeasurement.getURI());
 
@@ -602,6 +602,12 @@ public class OntologyEditor {
 		//return ontModel.listClasses();
 		return ontModel.getNsPrefixMap();
 
+	}
+	
+	public String getOntClassName(String uri) {
+		OntClass ontClass = ontModel.getOntClass(uri);
+		String label = ontClass.getLabel("DE");
+		return label;
 	}
 
 
