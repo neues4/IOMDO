@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.query.Dataset;
+import org.apache.jena.query.ParameterizedSparqlString;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -22,8 +23,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class PatientDataQuery {
 	
+	static OntologyEditor oe = OntologyEditor.getInstance();
+
 	public static void main(String[] args) throws IOException {
-		System.out.println(sparqlTest());
+		System.out.println(sparqlTest("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000262"));
 	}
 	
 	/**
@@ -31,11 +34,14 @@ public class PatientDataQuery {
 	 * @return an arraylist with all the patient, their diagnosis and surgeries (e.g. [Patient1, Schwannom, Aufrichtung, Patient2, ...]
 	 * @throws IOException
 	 */
-	public static ArrayList<String>  sparqlTest() throws IOException {
-		FileManager.get().addLocatorClassLoader(QueryTester.class.getClassLoader());
+	public static ArrayList<String>  sparqlTest(String uri) throws IOException {
+		//FileManager.get().addLocatorClassLoader(QueryTester.class.getClassLoader());
 		// ACHTUNG, hier habe ich noch keine andere Möglichkeit gefunden wie ich laden kann! Da es ein Model sein muss
-		Model model = FileManager.get().loadModel("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/myModel.owl");
+		//Model model = FileManager.get().loadModel("/Users/stefanie/Desktop/SPARQLtest2.owl");
+		Model model = oe.getModel();
 		ArrayList<String> data;
+				//"http://www.semanticweb.org/ontologies/2021/1/24/IOMO#Patient1";
+		
 		String queryString =
 				"PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#> \n" +
 						"PREFIX  OntoSPM: <http://medicis/spm.owl/OntoSPM#> \n" +
@@ -58,6 +64,7 @@ public class PatientDataQuery {
 						"filter(langMatches(lang(?diagnosis),\"DE\"))\n" +
 						"?nameOfSurgery rdfs:label ?surgery .\n" +
 						"filter(langMatches(lang(?surgery),\"DE\")) .\n" +
+						" FILTER (?pat = <"+uri+">) \n" +
 						"  }";
 		// create the query
 		Query query = QueryFactory.create(queryString);
@@ -76,7 +83,7 @@ public class PatientDataQuery {
 
 			// and turn that into a String
 			String csv = new String(outputStream.toByteArray());
-			
+					
 			// we want to cut the results in comma and new line
 			String delimiters = ",\\s*|\\\n\\s*";
 			
