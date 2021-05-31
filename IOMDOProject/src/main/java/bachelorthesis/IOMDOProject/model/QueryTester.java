@@ -1,6 +1,6 @@
 package bachelorthesis.IOMDOProject.model;
 
-
+/**
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,6 +13,7 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.util.FileManager;
+*/
 
 /**
  * A Class to show how Queries with SPARQL work
@@ -21,7 +22,7 @@ import org.apache.jena.util.FileManager;
  *
  */
 public class QueryTester {
-
+/*
 	public static void main(String[] args) throws IOException {
 		sparqlTest();
 	}
@@ -102,5 +103,5 @@ public class QueryTester {
 
 
 	}
-
+*/
 }
