@@ -13,14 +13,14 @@
 
 <BorderPane fx:id="borderPaneMenu" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.MenuController">
    <top>
-      <HBox alignment="TOP_RIGHT" minHeight="80.0" BorderPane.alignment="CENTER">
+      <HBox alignment="TOP_RIGHT" minHeight="80.0" styleClass="hbox" stylesheets="@style1.css" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" />
             <VBox alignment="TOP_RIGHT">
                <children>
                   <Label text="%lbl.loggedInAs" />
                   <Label fx:id="userName" text="Label" />
-                  <Button fx:id="logOutBtn" mnemonicParsing="false" onAction="#logout" text="%btn.logout" />
+                  <Button id="logOutBtn" fx:id="logOutBtn" mnemonicParsing="false" onAction="#logout" stylesheets="@style1.css" text="%btn.logout" />
                </children>
                <HBox.margin>
                   <Insets right="8.0" top="8.0" />
@@ -47,13 +47,13 @@
       </GridPane>
    </center>
    <left>
-      <VBox focusTraversable="true" spacing="8.0" BorderPane.alignment="CENTER">
+      <VBox focusTraversable="true" spacing="8.0" stylesheets="@style1.css" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="newProtocolBtn" mnemonicParsing="false" onAction="#openNewProtocol" prefHeight="80.0" prefWidth="150.0" text="%btn.newProtocol" />
-            <Button fx:id="protocolOverviewBtn" mnemonicParsing="false" onAction="#openProtocolOverview" prefHeight="80.0" prefWidth="150.0" text="%btn.protocolOverview" />
-            <Button fx:id="createQueryBtn" mnemonicParsing="false" onAction="#openCreatQuery" prefHeight="80.0" prefWidth="150.0" text="%btn.createQuery" />
-            <Button fx:id="expandOntologyBtn" mnemonicParsing="false" onAction="#openExpandOntology" prefHeight="80.0" prefWidth="150.0" text="%btn.expandOntology" />
-            <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#openSettings" prefHeight="80.0" prefWidth="150.0" text="%btn.settings" />
+            <Button id="menuBtn" fx:id="newProtocolBtn" mnemonicParsing="false" onAction="#openNewProtocol" prefHeight="80.0" prefWidth="150.0" stylesheets="@style1.css" text="%btn.newProtocol" />
+            <Button id="menuBtn" fx:id="protocolOverviewBtn" mnemonicParsing="false" onAction="#openProtocolOverview" prefHeight="80.0" prefWidth="150.0" stylesheets="@style1.css" text="%btn.protocolOverview" />
+            <Button id="menuBtn" fx:id="createQueryBtn" mnemonicParsing="false" onAction="#openCreatQuery" prefHeight="80.0" prefWidth="150.0" stylesheets="@style1.css" text="%btn.createQuery" />
+            <Button id="menuBtn" fx:id="expandOntologyBtn" mnemonicParsing="false" onAction="#openExpandOntology" prefHeight="80.0" prefWidth="150.0" stylesheets="@style1.css" text="%btn.expandOntology" />
+            <Button id="menuBtn" fx:id="settingsBtn" mnemonicParsing="false" onAction="#openSettings" prefHeight="80.0" prefWidth="150.0" stylesheets="@style1.css" text="%btn.settings" />
          </children>
       </VBox>
    </left>

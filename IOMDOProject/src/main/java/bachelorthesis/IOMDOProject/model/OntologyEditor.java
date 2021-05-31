@@ -30,7 +30,7 @@ import org.apache.jena.util.iterator.ExtendedIterator;
 
 /**
  * 
- * @author neues4, romap1
+ * @author neues4
  * 
  */
 public class OntologyEditor {
@@ -411,9 +411,14 @@ public class OntologyEditor {
 		OntClass surgicalProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058");
 		OntClass humanAction = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human");
 		OntClass technicalIssues = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000154");
-		OntClass iomProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000057");
+		//OntClass iomProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000057");
 		OntClass gridPositioning = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000064");
-
+		String iOMStart = "IOMO_0000461";
+		String iOMEnd = "IOMO_0000462";
+		OntClass iOMStartClass = ontModel.getOntClass(NS + iOMStart);
+		OntClass iOMEndClass = ontModel.getOntClass(NS + iOMEnd);
+		
+		
 		HashMap<String, String> showEntityMap = new HashMap<>();
 
 		showEntityMap.put(mepFinding.getLabel("DE"), mepFinding.getURI());
@@ -435,8 +440,10 @@ public class OntologyEditor {
 		showEntityMap.put(surgicalProcess.getLabel("DE"), surgicalProcess.getURI());
 		showEntityMap.put(humanAction.getLabel("DE"), humanAction.getURI());
 		showEntityMap.put(technicalIssues.getLabel("DE"), technicalIssues.getURI());
-		showEntityMap.put(iomProcess.getLabel("DE"), iomProcess.getURI());
+		//showEntityMap.put(iomProcess.getLabel("DE"), iomProcess.getURI());
 		showEntityMap.put(gridPositioning.getLabel("DE"), gridPositioning.getURI());
+		showEntityMap.put(iOMStartClass.getLabel("DE"), iOMStartClass.getURI());
+		showEntityMap.put(iOMEndClass.getLabel("DE"), iOMEndClass.getURI());
 		return showEntityMap;
 	}
 
@@ -612,6 +619,12 @@ public class OntologyEditor {
 
 	}
 	
+	/**
+	 * Returns the Label of a given OntClassUri
+	 * @author romap1
+	 * @param uri
+	 * @return Label of a given OntClass
+	 */
 	public String getOntClassName(String uri) {
 		OntClass ontClass = ontModel.getOntClass(uri);
 		String label = ontClass.getLabel("DE");

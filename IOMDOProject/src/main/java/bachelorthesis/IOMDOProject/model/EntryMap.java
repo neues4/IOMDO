@@ -87,7 +87,8 @@ public class EntryMap {
 		HashMap<String, String> categoryMap  = (HashMap<String, String>) ontEdit.getAllEntitiesToBeShown(); 
 		HashMap<String, String> measurementsWithValueMap  = (HashMap<String, String>) ontEdit.getAllMeasurementsWithValues(); 
 		
-		
+		String gridPositioning ="IOMO_0000064";
+		HashMap<String, String> gridPositioningMap  = (HashMap<String, String>) ontEdit.getSubclasses(NS + gridPositioning); 
 		
 		//Puts all maps into the entryMap
 		entryMap.putAll(vepFindingMap);entryMap.putAll(mappingMeasurementMap);entryMap.putAll(technicalIssuesMap);//entryMap.putAll(dwaveMeasurementMap);
@@ -95,14 +96,14 @@ public class EntryMap {
 		entryMap.putAll(eegFindingMap);entryMap.putAll(anesthesyProcessMap);entryMap.putAll(mappingFindingMap);//entryMap.putAll(iomProcessMap);
 		entryMap.putAll(sepFindingMap);entryMap.putAll(aepFindingMap);entryMap.putAll(dwaveFindingMap);entryMap.putAll(emgFindingMap);entryMap.putAll(mepFindingMap);
 		entryMap.putAll(actionMap); entryMap.putAll(changeOfSEPMAP);entryMap.putAll(changeOfAEPMap);entryMap.putAll(changeOfMEPMap);
-		entryMap.putAll(categoryMap);entryMap.putAll(measurementsWithValueMap);
+		entryMap.putAll(categoryMap);entryMap.putAll(measurementsWithValueMap);entryMap.putAll(gridPositioningMap);
 		
 		
 		//put indivituadl Entities into the entryMAP
-		//entryMap.put();
-	
-		
-		// Hinzufügen! $surgery Prozes und Grid Positioning, IOM Start und IOM END
+		String iOMStart = "IOMO_0000461";
+		entryMap.put(ontEdit.getOntClassName(NS + iOMStart), NS + iOMStart);
+		String iOMEnd = "IOMO_0000462";
+		entryMap.put(ontEdit.getOntClassName(NS + iOMEnd), NS + iOMEnd);
 		
 		
 	

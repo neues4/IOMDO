@@ -162,6 +162,8 @@ public class IOMRecordingController {
 	private Map<String, Node> nodeMapDcsBaselines = new HashMap<String, Node>();
 
 	private int row = 2;
+	
+	private static final String NS = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/";
 
 	private Map<String, Node> nodeList = new HashMap<String, Node>();
 
@@ -176,26 +178,26 @@ public class IOMRecordingController {
 	private ObservableList<String> vepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000403").keySet());
 	private ObservableList<String> mappingMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000373").keySet());
 	private ObservableList<String> technicalIssuesList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000154").keySet());
-	private ObservableList<String> dwaveMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000369").keySet());
+	//private ObservableList<String> dwaveMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000369").keySet());
 	//private ObservableList<String> tesMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000378").keySet());
 	//private ObservableList<String> dcsMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000238").keySet());
 	//private ObservableList<String> vepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000244").keySet());
 	//private ObservableList<String> sepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242").keySet());
 	private ObservableList<String> aepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000240").keySet());
-	private ObservableList<String> cbtMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000371").keySet());
+	//private ObservableList<String> cbtMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000371").keySet());
 	private ObservableList<String> surgeryProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058").keySet());
 	private ObservableList<String> reflexFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000234").keySet());
 	private ObservableList<String> eegFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000231").keySet());
 	private ObservableList<String> anesthesyProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000159").keySet());
 	private ObservableList<String> mappingFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000376").keySet());
-	private ObservableList<String> iomProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000057").keySet());
+	//private ObservableList<String> iomProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000057").keySet());
 	private ObservableList<String> sepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000401").keySet());
 	private ObservableList<String> aepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000402").keySet());
 	private ObservableList<String> dwaveFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000387").keySet());
 	private ObservableList<String> emgFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000370").keySet());
 	private ObservableList<String> mepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000400").keySet());
 	private ObservableList<String> actionList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human").keySet());
-
+	private ObservableList<String> gridPositioningList = FXCollections.observableArrayList(ontEdit.getSubclasses(NS  + "IOMO_0000064").keySet());
 
 	//---------------------------------------------------Variables IOM actual Recording
 
@@ -213,7 +215,9 @@ public class IOMRecordingController {
 		// Patient data end
 
 		//IOM Documentation start
-		categoryIOMStart.setItems(categoryList);
+		Collections.sort(categoryList);
+		//
+		//categoryIOMStart.setItems(categoryList);
 		//entryIOMStart.setItems(entryList);
 		//IOM Documentation end
 
@@ -282,6 +286,11 @@ public class IOMRecordingController {
 
 
 		// Baseline end
+		
+		//Actual Patient Recording -----------------------
+		categoryIOMStart.getSelectionModel().select("IOM Start");
+		
+		
 	}
 
 
@@ -948,8 +957,8 @@ public class IOMRecordingController {
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 3));
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 4));
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 5));
-								System.out.println(index + ""+ 1);
-								System.out.println(nodeList.get(index + ""+ 3).toString());
+								//System.out.println(index + ""+ 1);
+								//System.out.println(nodeList.get(index + ""+ 3).toString());
 							}
 							infoGrid.getChildren().remove(deleteBtn); 
 							infoGrid.getChildren().remove(timeTF);
@@ -998,8 +1007,8 @@ public class IOMRecordingController {
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 3));
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 4));
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 5));
-								System.out.println(index + ""+ 1);
-								System.out.println(nodeList.get(index + ""+ 3).toString());
+								//System.out.println(index + ""+ 1);
+								//System.out.println(nodeList.get(index + ""+ 3).toString());
 							}
 							infoGrid.getChildren().remove(deleteBtn); 
 							infoGrid.getChildren().remove(timeTF);
@@ -1110,11 +1119,13 @@ public class IOMRecordingController {
 		//IOM actual Recording------------------------------------------------
 
 		String document = ontEdit.createNewIOMDocument("IOMDocumentTest");
-		String NS = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/";
+		
 		String has_data_item = "IOMO_0000282";
 
 		String entry1= entryIOMStart.getSelectionModel().getSelectedItem();
 
+		
+		
 
 		EntryMap map = new EntryMap();
 
@@ -1122,14 +1133,26 @@ public class IOMRecordingController {
 		//Only a Kategory with Meassurement will be saved into the Ontology.  new Baseline not included! Basline measurment can be removed 
 		String category1 =categoryIOMStart.getSelectionModel().getSelectedItem();
 		String category1Uri = map.getUri(category1);
-		System.out.println(category1Uri);
+		ontEdit.addTimestampToEntity(category1Uri, "label", "timestamp");
+		
+		//System.out.println(category1Uri);
 		if(category1.contains(I18n.getString("rec.measurement"))) {
 			ontEdit.addStatement(document, NS + has_data_item , category1Uri );
-			//value.getText();
-			//timestamp funktioniert noch nicht!
-			//ontEdit.addTimestampToEntity(category1Uri, "timestamp");
+			String mA= ontEdit.createNewMiliampere("mA");
+			ontEdit.addPropertiesToMiliampere(mA, "120" );
+			
+			//String indiv= ontEdit.createNewIndividual(category1Uri, category1);
+			//System.out.println(indiv);
+			//ontEdit.addTimestampToEntity(indiv, "timestamp");
+			ontEdit.addTimestampToEntity(category1Uri,"label",  "timestamp");
 			//Add Value to measurement needs to be added!
-			ontEdit.saveNewOWLFile();
+			//ontEdit.saveNewOWLFile();
+			
+			//Messung has Measurments unit mA and mA is About Muscle
+			
+			
+			
+			
 		}; 
 
 
@@ -1206,21 +1229,26 @@ public class IOMRecordingController {
 		String item = category.getSelectionModel().getSelectedItem();
 		switch (item) {
 		case "VEP Beobachtung":
+			entry.setVisible(true);
 			entry.setItems(vepFindingList);
 			break;
 		case "Mapping Messung":
+			entry.setVisible(true);
 			entry.setItems(mappingMeasurementList);
 			break;
 		case "Technische Probleme":
+			entry.setVisible(true);
 			entry.setItems(technicalIssuesList);
 			break;
-		case "D-Welle Messung":
-			entry.setItems(dwaveMeasurementList);
-			break;
+		//case "D-Welle Messung":
+			//entry.setItems(dwaveMeasurementList);
+			//break;
 		case "TES MEP Messung":
+			entry.setVisible(true);
 			entry.setItems(tesMepMuscleChoice);
 			break;
 		case "DCS MEP Messung":
+			entry.setVisible(true);
 			entry.setItems(dcsMepMuscleChoice);
 			break;
 			/*
@@ -1231,46 +1259,66 @@ public class IOMRecordingController {
 			break;
 			 */
 		case "AEP Messung":
+			entry.setVisible(true);
 			entry.setItems(aepMeasurementList);
 			break;
 		case "CBT Messung":
-			entry.setItems(cbtMeasurementList);
+			entry.setVisible(false);
+			//entry.setItems(cbtMeasurementList); gibts nicht
 			break;
 		case "Operationsprozess":
+			entry.setVisible(true);
 			entry.setItems(surgeryProcessList);
 			break;
 		case "Reflex Beobachtung":
+			entry.setVisible(true);
 			entry.setItems(reflexFindingList);
 			break;
 		case "EEG Beobachtung":
+			entry.setVisible(true);
 			entry.setItems(eegFindingList);
 			break;
 		case "Anästhesie Prozess":
+			entry.setVisible(true);
 			entry.setItems(anesthesyProcessList);
 			break;
 		case "Mapping Beobachtung":
+			entry.setVisible(true);
 			entry.setItems(mappingFindingList);
 			break;
-		case "IOM Prozess":
-			entry.setItems(iomProcessList);
-			break;
+		//case "IOM Prozess":
+			//entry.setItems(iomProcessList);
+			//break;
 		case "SEP Beobachtung":
+			entry.setVisible(true);
 			entry.setItems(sepFindingList);
 			break;
 		case "AEP Beobachtung":
+			entry.setVisible(true);
 			entry.setItems(aepFindingList);
 			break;
 		case "D-Welle Beobachtung":
+			entry.setVisible(true);
 			entry.setItems(dwaveFindingList);
 			break;
 		case "EMG Beobachtung":
+			entry.setVisible(true);
 			entry.setItems(emgFindingList);
 			break;
 		case "MEP Beobachtung":
+			entry.setVisible(true);
 			entry.setItems(mepFindingList);
 			break;
 		case "Aktion":
+			entry.setVisible(true);
 			entry.setItems(actionList);
+		case "Grid Positionierung":
+			entry.setVisible(true);
+			entry.setItems(gridPositioningList);
+		case "IOM Ende":
+			entry.setVisible(false);
+		case "Sonstiges":
+			entry.setVisible(false);
 		case " ":
 			break;
 		}	

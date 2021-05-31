@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="gridPaneProtocolOverview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="8.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ProtocolOverviewController">
+<GridPane fx:id="gridPaneProtocolOverview" vgap="8.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ProtocolOverviewController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="794.799951171875" minWidth="10.0" prefWidth="790.0000244140625" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.60003662109375" minWidth="4.800048828125" prefWidth="9.5999755859375" />
@@ -23,14 +23,14 @@
       <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <HBox alignment="BOTTOM_LEFT" prefHeight="38.0" prefWidth="792.0" spacing="8.0" GridPane.rowIndex="1">
+      <HBox alignment="BOTTOM_LEFT" spacing="8.0" GridPane.rowIndex="1">
          <children>
             <Label text="%lbl.search">
                <padding>
                   <Insets left="8.0" />
                </padding>
             </Label>
-            <TextField fx:id="searchTF" />
+            <TextField id="searchField" fx:id="searchTF" stylesheets="@style1.css" />
             <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="47.0" />
          </children>
          <opaqueInsets>
@@ -40,7 +40,7 @@
             <Insets />
          </GridPane.margin>
       </HBox>
-      <TableView fx:id="protocolTblView" prefHeight="379.0" prefWidth="792.0" GridPane.rowIndex="2">
+      <TableView fx:id="protocolTblView" GridPane.rowIndex="2">
         <columns>
           <TableColumn fx:id="caseNrColumn" prefWidth="40.800018310546875" text="%lbl.caseNr" />
           <TableColumn fx:id="firstnameColumn" prefWidth="84.80001831054688" text="%lbl.firstName" />
@@ -51,8 +51,8 @@
             <TableColumn fx:id="dateOfSurgeryColumn" prefWidth="75.0" text="%lbl.dateOfSurgery" />
             <TableColumn fx:id="FIDColumn" prefWidth="45.5999755859375" text="%lbl.FID" />
             <TableColumn fx:id="PIDColumn" prefWidth="75.20001220703125" text="%lbl.PID" />
-            <TableColumn fx:id="surgeonColumn" prefWidth="73.5999755859375" text="%lbl.surgeon" />
-            <TableColumn fx:id="assistantColumn" prefWidth="64.800048828125" text="%lbl.assistant" />
+            <TableColumn fx:id="surgeonColumn" prefWidth="73.5999755859375" text="%lbl.age" />
+            <TableColumn fx:id="assistantColumn" prefWidth="64.800048828125" text="%lbl.localization" />
         </columns>
       </TableView>
    </children>
