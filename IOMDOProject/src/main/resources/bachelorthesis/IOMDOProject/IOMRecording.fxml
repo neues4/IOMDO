@@ -9,12 +9,16 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="800.0" prefWidth="1000.0" styleClass="pane" stylesheets="@style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.IOMRecordingController">
    <center>
@@ -28,7 +32,7 @@
                           <panes>
                             <TitledPane fx:id="SSEPPane" animated="false" text="Baselines SSEPs">
                                  <content>
-                                    <GridPane prefWidth="983.0">
+                                    <GridPane prefWidth="983.0" styleClass="pane" stylesheets="@style1.css">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -44,32 +48,147 @@
                                           <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Label text="Medianus L" GridPane.rowIndex="2" />
-                                          <Label text="N" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label text="P" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <Label text="Amplitude" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                          <Label text="Medianus R" GridPane.rowIndex="3" />
-                                          <Label text="Tibialis L" GridPane.rowIndex="4" />
-                                          <Label text="Tibialis R" GridPane.rowIndex="5" />
-                                          <TextField fx:id="tfMedLN" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <TextField fx:id="tfMedRN" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <TextField fx:id="tfTibLN" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <TextField fx:id="tfTibRN" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                          <TextField fx:id="tfMedLP" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <TextField fx:id="tfMedRP" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <TextField fx:id="tfTibLP" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                          <TextField fx:id="tfTibRP" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                          <TextField fx:id="tfMedLA" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                          <TextField fx:id="tfMedRA" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                          <TextField fx:id="tfTibLA" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                          <TextField fx:id="tfTibRA" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                          <Label text="Medianus L" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="N" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="P" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font></Label>
+                                          <Label text="Amplitude" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="Medianus R" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="Tibialis L" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="Tibialis R" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <TextField fx:id="tfMedLN" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfMedRN" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfTibLN" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfTibRN" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfMedLP" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfMedRP" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfTibLP" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfTibRP" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfMedLA" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfMedRA" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfTibLA" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfTibRA" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="ms" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="461.0" layoutY="63.0" text="ms" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="264.0" layoutY="100.0" text="ms" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="264.0" layoutY="136.0" text="ms" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="264.0" layoutY="173.0" text="ms" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="264.0" layoutY="173.0" text="ms" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="704.0" layoutY="100.0" text="ms" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="704.0" layoutY="136.0" text="ms" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="704.0" layoutY="173.0" text="ms" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="704.0" layoutY="173.0" text="ms" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="704.0" layoutY="173.0" text="ms" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="751.0" layoutY="136.0" text="ms" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin>
+                                          </Label>
                                        </children>
                                     </GridPane>
                                  </content>
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
                             </TitledPane>
                             <TitledPane fx:id="TESMEPPane" animated="false" text="Baselines TES MEPs">
                                  <content>
-                                    <GridPane fx:id="tesMepGridpane">
+                                    <GridPane fx:id="tesMepGridpane" styleClass="pane" stylesheets="@style1.css">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -97,86 +216,440 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <ComboBox fx:id="cbTes1" onAction="#cbTes1isUsed" prefWidth="150.0" GridPane.rowIndex="2" />
+                                          <ComboBox fx:id="cbTes1" onAction="#cbTes1isUsed" GridPane.rowIndex="2" />
                                           <HBox spacing="40.0" GridPane.rowIndex="1">
                                              <children>
-                                                <Label text="Muskel" />
+                                                <Label text="Muskel">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font></Label>
                                                 <Button fx:id="resetTESMEPBtn" mnemonicParsing="false" onAction="#resetTESMEP" text="%btn.reset" />
                                              </children>
                                           </HBox>
-                                          <Label text="C1/C2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label text="C3/C4" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <Label text="Andere" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                          <TextField fx:id="tf1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <TextField fx:id="tf2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <TextField fx:id="tf3" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <TextField fx:id="tf4" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                          <TextField fx:id="tf5" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                          <TextField fx:id="tf6" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                          <TextField fx:id="tf7" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                          <TextField fx:id="tf8" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                          <TextField fx:id="tf9" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                                          <TextField fx:id="tf10" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                                          <TextField fx:id="tf11" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                                          <TextField fx:id="tf12" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                                          <TextField fx:id="tf13" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                                          <TextField fx:id="tf14" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-                                          <TextField fx:id="tf17" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <TextField fx:id="tf18" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <TextField fx:id="tf19" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                          <TextField fx:id="tf20" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                          <TextField fx:id="tf21" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                          <TextField fx:id="tf22" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                                          <TextField fx:id="tf23" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                                          <TextField fx:id="tf24" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                                          <TextField fx:id="tf25" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                                          <TextField fx:id="tf26" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-                                          <TextField fx:id="tf27" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-                                          <TextField fx:id="tf28" GridPane.columnIndex="2" GridPane.rowIndex="13" />
-                                          <TextField fx:id="tf29" GridPane.columnIndex="2" GridPane.rowIndex="14" />
-                                          <TextField fx:id="tf30" GridPane.columnIndex="2" GridPane.rowIndex="15" />
-                                          <TextField fx:id="tf33" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                          <TextField fx:id="tf34" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                          <TextField fx:id="tf35" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                          <TextField fx:id="tf36" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                          <TextField fx:id="tf37" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                                          <TextField fx:id="tf38" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                                          <TextField fx:id="tf39" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                                          <TextField fx:id="tf40" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-                                          <TextField fx:id="tf41" GridPane.columnIndex="3" GridPane.rowIndex="10" />
-                                          <TextField fx:id="tf42" GridPane.columnIndex="3" GridPane.rowIndex="11" />
-                                          <TextField fx:id="tf43" GridPane.columnIndex="3" GridPane.rowIndex="12" />
-                                          <TextField fx:id="tf44" GridPane.columnIndex="3" GridPane.rowIndex="13" />
-                                          <TextField fx:id="tf45" GridPane.columnIndex="3" GridPane.rowIndex="14" />
-                                          <TextField fx:id="tf46" GridPane.columnIndex="3" GridPane.rowIndex="15" />
-                                          <ComboBox fx:id="cbTes2" onAction="#cbTes2isUsed" prefWidth="150.0" GridPane.rowIndex="3" />
-                                          <ComboBox fx:id="cbTes3" onAction="#cbTes3isUsed" prefWidth="150.0" GridPane.rowIndex="4" />
-                                          <ComboBox fx:id="cbTes4" onAction="#cbTes4isUsed" prefWidth="150.0" GridPane.rowIndex="5" />
-                                          <ComboBox fx:id="cbTes5" onAction="#cbTes5isUsed" prefWidth="150.0" GridPane.rowIndex="6" />
-                                          <ComboBox fx:id="cbTes6" onAction="#cbTes6isUsed" prefWidth="150.0" GridPane.rowIndex="7" />
-                                          <ComboBox fx:id="cbTes7" onAction="#cbTes7isUsed" prefWidth="150.0" GridPane.rowIndex="8" />
-                                          <ComboBox fx:id="cbTes8" onAction="#cbTes8isUsed" prefWidth="150.0" GridPane.rowIndex="9" />
-                                          <ComboBox fx:id="cbTes9" onAction="#cbTes9isUsed" prefWidth="150.0" GridPane.rowIndex="10" />
-                                          <ComboBox fx:id="cbTes10" onAction="#cbTes10isUsed" prefWidth="150.0" GridPane.rowIndex="11" />
-                                          <ComboBox fx:id="cbTes11" onAction="#cbTes11isUsed" prefWidth="150.0" GridPane.rowIndex="12" />
-                                          <ComboBox fx:id="cbTes12" onAction="#cbTes12isUsed" prefWidth="150.0" GridPane.rowIndex="13" />
-                                          <ComboBox fx:id="cbTes13" onAction="#cbTes13isUsed" prefWidth="150.0" GridPane.rowIndex="14" />
-                                          <ComboBox fx:id="cbTes14" onAction="#cbTes14isUsed" prefWidth="150.0" GridPane.rowIndex="15" />
-                                          <ComboBox fx:id="cbTes15" onAction="#cbTes15isUsed" prefWidth="150.0" GridPane.rowIndex="16" />
-                                          <ComboBox fx:id="cbTes16" onAction="#cbTes16isUsed" prefWidth="150.0" GridPane.rowIndex="17" />
-                                          <TextField fx:id="tf15" GridPane.columnIndex="1" GridPane.rowIndex="16" />
-                                          <TextField fx:id="tf16" GridPane.columnIndex="1" GridPane.rowIndex="17" />
-                                          <TextField fx:id="tf31" GridPane.columnIndex="2" GridPane.rowIndex="16" />
-                                          <TextField fx:id="tf32" GridPane.columnIndex="2" GridPane.rowIndex="17" />
-                                          <TextField fx:id="tf47" GridPane.columnIndex="3" GridPane.rowIndex="16" />
-                                          <TextField fx:id="tf48" GridPane.columnIndex="3" GridPane.rowIndex="17" />
+                                          <Label text="C1/C2" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="C3/C4" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="Andere" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <TextField fx:id="tf1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf2" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf3" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf4" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf5" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf6" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf7" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf8" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf9" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf10" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf11" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf12" GridPane.columnIndex="1" GridPane.rowIndex="13">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf13" GridPane.columnIndex="1" GridPane.rowIndex="14">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf14" GridPane.columnIndex="1" GridPane.rowIndex="15">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf17" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf18" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf19" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf20" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf21" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf22" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf23" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf24" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf25" GridPane.columnIndex="2" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf26" GridPane.columnIndex="2" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf27" GridPane.columnIndex="2" GridPane.rowIndex="12">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf28" GridPane.columnIndex="2" GridPane.rowIndex="13">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf29" GridPane.columnIndex="2" GridPane.rowIndex="14">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf30" GridPane.columnIndex="2" GridPane.rowIndex="15">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf33" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf34" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf35" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf36" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf37" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf38" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf39" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf40" GridPane.columnIndex="3" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf41" GridPane.columnIndex="3" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf42" GridPane.columnIndex="3" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf43" GridPane.columnIndex="3" GridPane.rowIndex="12">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf44" GridPane.columnIndex="3" GridPane.rowIndex="13">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf45" GridPane.columnIndex="3" GridPane.rowIndex="14">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf46" GridPane.columnIndex="3" GridPane.rowIndex="15">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <ComboBox fx:id="cbTes2" onAction="#cbTes2isUsed" GridPane.rowIndex="3" />
+                                          <ComboBox fx:id="cbTes3" onAction="#cbTes3isUsed" GridPane.rowIndex="4" />
+                                          <ComboBox fx:id="cbTes4" onAction="#cbTes4isUsed" GridPane.rowIndex="5" />
+                                          <ComboBox fx:id="cbTes5" onAction="#cbTes5isUsed" GridPane.rowIndex="6" />
+                                          <ComboBox fx:id="cbTes6" onAction="#cbTes6isUsed" GridPane.rowIndex="7" />
+                                          <ComboBox fx:id="cbTes7" onAction="#cbTes7isUsed" GridPane.rowIndex="8" />
+                                          <ComboBox fx:id="cbTes8" onAction="#cbTes8isUsed" GridPane.rowIndex="9" />
+                                          <ComboBox fx:id="cbTes9" onAction="#cbTes9isUsed" GridPane.rowIndex="10" />
+                                          <ComboBox fx:id="cbTes10" onAction="#cbTes10isUsed" GridPane.rowIndex="11" />
+                                          <ComboBox fx:id="cbTes11" onAction="#cbTes11isUsed" GridPane.rowIndex="12" />
+                                          <ComboBox fx:id="cbTes12" onAction="#cbTes12isUsed" GridPane.rowIndex="13" />
+                                          <ComboBox fx:id="cbTes13" onAction="#cbTes13isUsed" GridPane.rowIndex="14" />
+                                          <ComboBox fx:id="cbTes14" onAction="#cbTes14isUsed" GridPane.rowIndex="15" />
+                                          <ComboBox fx:id="cbTes15" onAction="#cbTes15isUsed" GridPane.rowIndex="16" />
+                                          <ComboBox fx:id="cbTes16" onAction="#cbTes16isUsed" GridPane.rowIndex="17" />
+                                          <TextField fx:id="tf15" GridPane.columnIndex="1" GridPane.rowIndex="16">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf16" GridPane.columnIndex="1" GridPane.rowIndex="17">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf31" GridPane.columnIndex="2" GridPane.rowIndex="16">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf32" GridPane.columnIndex="2" GridPane.rowIndex="17">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf47" GridPane.columnIndex="3" GridPane.rowIndex="16">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tf48" GridPane.columnIndex="3" GridPane.rowIndex="17">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <Label text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label layoutX="451.0" layoutY="57.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="451.0" layoutY="57.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="451.0" layoutY="57.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="451.0" layoutY="57.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="177.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="207.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="237.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="267.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="297.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="327.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="12">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="357.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="13">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="387.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="14">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="417.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="15">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="447.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="16">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="477.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="17">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="507.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="507.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="507.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="507.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="260.0" layoutY="507.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="500.0" layoutY="177.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="500.0" layoutY="207.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="500.0" layoutY="237.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="500.0" layoutY="267.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="500.0" layoutY="297.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="500.0" layoutY="327.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="12">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="500.0" layoutY="357.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="13">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="500.0" layoutY="387.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="14">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="500.0" layoutY="417.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="15">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="500.0" layoutY="447.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="16">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="500.0" layoutY="477.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="17">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="500.0" layoutY="507.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="740.0" layoutY="57.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="740.0" layoutY="87.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="740.0" layoutY="117.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="931.0" layoutY="147.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label layoutX="740.0" layoutY="177.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label layoutX="740.0" layoutY="207.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="740.0" layoutY="237.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="740.0" layoutY="267.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="740.0" layoutY="297.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="740.0" layoutY="327.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="12">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="740.0" layoutY="357.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="13">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="740.0" layoutY="387.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="14">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="740.0" layoutY="417.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="15">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="740.0" layoutY="447.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="16">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="740.0" layoutY="477.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="17">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
                                        </children>
                                     </GridPane>
                                  </content>
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
                             </TitledPane>
                             <TitledPane fx:id="DCSMEPPane" animated="false" text="Baselines DCS MEPs">
                                  <content>
-                                    <GridPane>
+                                    <GridPane styleClass="pane">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -201,14 +674,29 @@
                                        <children>
                                           <HBox spacing="40.0" GridPane.rowIndex="1">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Muskel" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Muskel">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font></Label>
                                                 <Button fx:id="resetDCSMEPBtn" mnemonicParsing="false" onAction="#resetDCSMEP" text="%btn.reset" />
                                              </children>
                                           </HBox>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" text="#1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label text="#2" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <Label text="#3" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                          <Label text="#4" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="#1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="#2" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="#3" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="#4" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
                                           <ComboBox fx:id="cbDcs1" onAction="#cbDcs1isUsed" prefWidth="150.0" GridPane.rowIndex="2" />
                                           <ComboBox fx:id="cbDcs2" onAction="#cbDcs2isUsed" prefWidth="150.0" GridPane.rowIndex="3" />
                                           <ComboBox fx:id="cbDcs3" onAction="#cbDcs3isUsed" prefWidth="150.0" GridPane.rowIndex="4" />
@@ -219,53 +707,339 @@
                                           <ComboBox fx:id="cbDcs8" onAction="#cbDcs8isUsed" prefWidth="150.0" GridPane.rowIndex="9" />
                                           <ComboBox fx:id="cbDcs9" onAction="#cbDcs9isUsed" prefWidth="150.0" GridPane.rowIndex="10" />
                                           <ComboBox fx:id="cbDcs10" onAction="#cbDcs10isUsed" prefWidth="150.0" GridPane.rowIndex="11" />
-                                          <TextField fx:id="tfDcs1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <TextField fx:id="tfDcs2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <TextField fx:id="tfDcs3" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <TextField fx:id="tfDcs4" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                          <TextField fx:id="tfDcs5" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                          <TextField fx:id="tfDcs6" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                          <TextField fx:id="tfDcs7" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                          <TextField fx:id="tfDcs8" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                          <TextField fx:id="tfDcs9" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                                          <TextField fx:id="tfDcs10" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                                          <TextField fx:id="tfDcs11" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <TextField fx:id="tfDcs12" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <TextField fx:id="tfDcs13" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                          <TextField fx:id="tfDcs14" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                          <TextField fx:id="tfDcs15" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                          <TextField fx:id="tfDcs16" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                                          <TextField fx:id="tfDcs17" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                                          <TextField fx:id="tfDcs18" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                                          <TextField fx:id="tfDcs19" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                                          <TextField fx:id="tfDcs20" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-                                          <TextField fx:id="tfDcs21" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                          <TextField fx:id="tfDcs22" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                          <TextField fx:id="tfDcs23" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                          <TextField fx:id="tfDcs24" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                          <TextField fx:id="tfDcs25" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                                          <TextField fx:id="tfDcs26" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                                          <TextField fx:id="tfDcs27" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                                          <TextField fx:id="tfDcs28" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-                                          <TextField fx:id="tfDcs29" GridPane.columnIndex="3" GridPane.rowIndex="10" />
-                                          <TextField fx:id="tfDcs30" GridPane.columnIndex="3" GridPane.rowIndex="11" />
-                                          <TextField fx:id="tfDcs31" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                          <TextField fx:id="tfDcs32" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                          <TextField fx:id="tfDcs33" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                          <TextField fx:id="tfDcs34" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                          <TextField fx:id="tfDcs35" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                                          <TextField fx:id="tfDcs36" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                                          <TextField fx:id="tfDcs37" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-                                          <TextField fx:id="tfDcs38" GridPane.columnIndex="4" GridPane.rowIndex="9" />
-                                          <TextField fx:id="tfDcs39" GridPane.columnIndex="4" GridPane.rowIndex="10" />
-                                          <TextField fx:id="tfDcs40" GridPane.columnIndex="4" GridPane.rowIndex="11" />
+                                          <TextField fx:id="tfDcs1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs2" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs3" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs4" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs5" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs6" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs7" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs8" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs9" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs10" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs11" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs12" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs13" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs14" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs15" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs16" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs17" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs18" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs19" GridPane.columnIndex="2" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs20" GridPane.columnIndex="2" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs21" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs22" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs23" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs24" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs25" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs26" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs27" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs28" GridPane.columnIndex="3" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs29" GridPane.columnIndex="3" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs30" GridPane.columnIndex="3" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs31" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs32" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs33" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs34" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs35" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs36" GridPane.columnIndex="4" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs37" GridPane.columnIndex="4" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs38" GridPane.columnIndex="4" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs39" GridPane.columnIndex="4" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField fx:id="tfDcs40" GridPane.columnIndex="4" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <Label text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="212.0" layoutY="64.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="212.0" layoutY="102.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="212.0" layoutY="136.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="212.0" layoutY="170.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="212.0" layoutY="204.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="212.0" layoutY="237.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="212.0" layoutY="267.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="212.0" layoutY="297.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="212.0" layoutY="327.0" text="mA" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="212.0" layoutY="357.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="212.0" layoutY="357.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="404.0" layoutY="102.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="404.0" layoutY="136.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="404.0" layoutY="170.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="404.0" layoutY="204.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="404.0" layoutY="237.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="404.0" layoutY="267.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="404.0" layoutY="297.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="404.0" layoutY="327.0" text="mA" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="404.0" layoutY="357.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="404.0" layoutY="357.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="102.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="136.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="170.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="204.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="237.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="267.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="297.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="327.0" text="mA" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="357.0" text="mA" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="357.0" text="mA" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="357.0" text="mA" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="357.0" text="mA" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="357.0" text="mA" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="357.0" text="mA" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="596.0" layoutY="357.0" text="mA" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="788.0" layoutY="267.0" text="mA" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label layoutX="788.0" layoutY="297.0" text="mA" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label layoutX="788.0" layoutY="327.0" text="mA" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin>
+                                          </Label>
                                        </children>
                                     </GridPane>
                                  </content>
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
                             </TitledPane>
                               <TitledPane fx:id="AEPPane" animated="false" layoutX="10.0" layoutY="60.0" text="Baselines AEPs">
                                  <content>
-                                    <GridPane>
+                                    <GridPane styleClass="pane">
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -280,30 +1054,124 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <Label text="AEP L" GridPane.rowIndex="1" />
-                                          <Label text="AEP R" GridPane.rowIndex="2" />
-                                          <Label text="I" GridPane.columnIndex="1" />
-                                          <Label text="II" GridPane.columnIndex="2" />
-                                          <Label text="III" GridPane.columnIndex="3" />
-                                          <Label text="IV" GridPane.columnIndex="4" />
-                                          <Label text="V" GridPane.columnIndex="5" />
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                          <TextField GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                          <TextField GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                                          <Label text="AEP L" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="AEP R" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="I" GridPane.columnIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="II" GridPane.columnIndex="2">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="III" GridPane.columnIndex="3">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="IV" GridPane.columnIndex="4">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="V" GridPane.columnIndex="5">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <TextField GridPane.columnIndex="5" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="20.0" />
+                                             </GridPane.margin></TextField>
+                                          <Label text="ms" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="299.0" layoutY="59.0" text="ms" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="184.0" layoutY="89.0" text="ms" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="346.0" layoutY="59.0" text="ms" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="346.0" layoutY="89.0" text="ms" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="508.0" layoutY="59.0" text="ms" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="508.0" layoutY="89.0" text="ms" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="670.0" layoutY="59.0" text="ms" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="670.0" layoutY="89.0" text="ms" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
+                                          <Label layoutX="831.0" layoutY="59.0" text="ms" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="30.0" />
+                                             </GridPane.margin></Label>
                                        </children>
                                     </GridPane>
                                  </content>
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
                               </TitledPane>
                               <TitledPane fx:id="VEPPane" animated="false" layoutX="10.0" layoutY="196.0" text="Baselines VEPs">
                                  <content>
-                                    <GridPane>
+                                    <GridPane styleClass="pane">
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -314,18 +1182,30 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <Label text="VEP" GridPane.rowIndex="1" />
-                                          <Label text="L" GridPane.columnIndex="1" />
-                                          <Label text="R" GridPane.columnIndex="2" />
+                                          <Label text="VEP" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="L" GridPane.columnIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="R" GridPane.columnIndex="2">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
                                           <ComboBox fx:id="cbVepL" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <ComboBox fx:id="cbVepR" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                        </children>
                                     </GridPane>
                                  </content>
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
                               </TitledPane>
                               <TitledPane fx:id="reflexPane" animated="false" layoutX="10.0" layoutY="221.0" text="Reflexe">
                                  <content>
-                                    <GridPane>
+                                    <GridPane styleClass="pane">
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -339,11 +1219,26 @@
                                           <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <Label text="BR" GridPane.rowIndex="2" />
-                                          <Label text="LAR" GridPane.rowIndex="3" />
-                                          <Label text="BCR" GridPane.rowIndex="4" />
-                                          <Label text="L" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label text="R" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <Label text="BR" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="LAR" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="BCR" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="L" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                          <Label text="R" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
                                           <ComboBox fx:id="cbBrL" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                           <ComboBox fx:id="cbLarL" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                           <ComboBox fx:id="cbBcrL" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -353,12 +1248,15 @@
                                        </children>
                                     </GridPane>
                                  </content>
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
                               </TitledPane>
                           </panes>
                         </Accordion>
                      </top>
                      <center>
-                        <GridPane fx:id="infoGrid" hgap="8.0" vgap="8.0" BorderPane.alignment="TOP_LEFT">
+                        <GridPane fx:id="infoGrid" hgap="8.0" styleClass="pane" vgap="8.0" BorderPane.alignment="TOP_LEFT">
                           <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -380,7 +1278,17 @@
                                  <children>
                                     <Label text="%lbl.time" />
                                     <TextField fx:id="timeStartTF" promptText="10:00" />
-                                    <Button fx:id="addRowBtn" mnemonicParsing="false" onAction="#addRow" text="Add" />
+                                    <Button fx:id="addRowBtn" mnemonicParsing="false" onAction="#addRow">
+                                       <graphic>
+                                          <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@267-plus.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="1.0" />
+                                             </effect>
+                                          </ImageView>
+                                       </graphic></Button>
                                  </children>
                               </VBox>
                               <VBox alignment="TOP_CENTER" spacing="4.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -426,7 +1334,7 @@
       </ScrollPane>
    </center>
    <top>
-      <GridPane hgap="8.0" vgap="8.0" BorderPane.alignment="CENTER">
+      <GridPane hgap="8.0" stylesheets="@style1.css" vgap="8.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" />
@@ -444,7 +1352,10 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="%lbl.nr" wrapText="true" />
+            <Label text="%lbl.nr" wrapText="true">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
             <TextField fx:id="caseNrTF" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets right="24.0" />
@@ -454,6 +1365,9 @@
                <GridPane.margin>
                   <Insets left="8.0" />
                </GridPane.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Label>
             <TextField fx:id="surnameTF" prefWidth="150.0" GridPane.columnIndex="3">
                <GridPane.margin>
@@ -464,19 +1378,28 @@
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Label>
             <ComboBox fx:id="diagnosisCB" prefWidth="150.0" GridPane.columnIndex="6">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </ComboBox>
-            <Label text="%lbl.dateOfSurgery" wrapText="true" GridPane.columnIndex="7" />
+            <Label text="%lbl.dateOfSurgery" wrapText="true" GridPane.columnIndex="7">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
             <TextField fx:id="dateOfSurgeryTF" maxWidth="-Infinity" GridPane.columnIndex="8">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <Label text="%lbl.FID" wrapText="true" GridPane.rowIndex="1" />
+            <Label text="%lbl.FID" wrapText="true" GridPane.rowIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
             <TextField fx:id="fidTF" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="24.0" />
@@ -486,6 +1409,9 @@
                <GridPane.margin>
                   <Insets left="8.0" />
                </GridPane.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Label>
             <TextField fx:id="firstNameTF" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
@@ -496,15 +1422,24 @@
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Label>
             <ComboBox fx:id="surgeryCB" prefWidth="150.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </ComboBox>
-            <Label text="%lbl.surgeon" wrapText="true" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <Label text="%lbl.surgeon" wrapText="true" GridPane.columnIndex="7" GridPane.rowIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
             <ComboBox fx:id="surgeonCB" prefWidth="150.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-            <Label text="%lbl.PID" wrapText="true" GridPane.rowIndex="2" />
+            <Label text="%lbl.PID" wrapText="true" GridPane.rowIndex="2">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
             <TextField fx:id="pidTF" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="24.0" />
@@ -514,6 +1449,9 @@
                <GridPane.margin>
                   <Insets left="8.0" />
                </GridPane.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Label>
             <TextField fx:id="birthdayTF" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <GridPane.margin>
@@ -524,13 +1462,19 @@
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Label>
             <ComboBox fx:id="deviceCB" prefWidth="150.0" GridPane.columnIndex="6" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </ComboBox>
-            <Label text="%lbl.assistant" wrapText="true" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+            <Label text="%lbl.assistant" wrapText="true" GridPane.columnIndex="7" GridPane.rowIndex="2">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
             <ComboBox fx:id="assistantCB" prefWidth="150.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
          </children>
          <padding>
