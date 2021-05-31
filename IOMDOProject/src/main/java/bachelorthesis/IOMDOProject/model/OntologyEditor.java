@@ -19,6 +19,7 @@ import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.ontology.Ontology;
 import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
@@ -56,6 +57,13 @@ public class OntologyEditor {
 
 		return editor;
 	}
+	
+	@SuppressWarnings("exports")
+	public Model getModel() {
+		Model model = OntologyEditor.getInstance().ontModel;
+		return model;
+	}
+	
 
 	/**
 	 * Constructor to create a new Ontology Editor.
