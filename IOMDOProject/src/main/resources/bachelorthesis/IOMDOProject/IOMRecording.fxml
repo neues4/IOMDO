@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.IOMRecordingController">
+<BorderPane prefHeight="800.0" prefWidth="1000.0" styleClass="pane" stylesheets="@style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.IOMRecordingController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
          <content>
@@ -380,7 +380,7 @@
                                  <children>
                                     <Label text="%lbl.time" />
                                     <TextField fx:id="timeStartTF" promptText="10:00" />
-                                    <Button id="test" fx:id="addRowBtn" mnemonicParsing="false" onAction="#addRow" text="Add" />
+                                    <Button fx:id="addRowBtn" mnemonicParsing="false" onAction="#addRow" text="Add" />
                                  </children>
                               </VBox>
                               <VBox alignment="TOP_CENTER" spacing="4.0" GridPane.columnIndex="2" GridPane.rowIndex="1">

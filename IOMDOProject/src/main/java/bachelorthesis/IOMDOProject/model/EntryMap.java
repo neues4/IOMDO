@@ -104,6 +104,8 @@ public class EntryMap {
 		entryMap.put(ontEdit.getOntClassName(NS + iOMStart), NS + iOMStart);
 		String iOMEnd = "IOMO_0000462";
 		entryMap.put(ontEdit.getOntClassName(NS + iOMEnd), NS + iOMEnd);
+		String other = "IOMO_0000460";
+		entryMap.put(ontEdit.getOntClassName(NS + other), NS + other);
 		
 		
 	
