@@ -1133,18 +1133,26 @@ public class IOMRecordingController {
 		//Only a Kategory with Meassurement will be saved into the Ontology.  new Baseline not included! Basline measurment can be removed 
 		String category1 =categoryIOMStart.getSelectionModel().getSelectedItem();
 		String category1Uri = map.getUri(category1);
-		ontEdit.addTimestampToEntity(category1Uri, "label", "timestamp");
+		//ontEdit.addTimestampToEntity(category1Uri, "IOM Start", timeStartTF.getText());
+		//ontEdit.addCommentToEntity(category1Uri, "Kommentar", commentIOMStart.getText());
 		
+		ontEdit.addFindings(category1Uri, "IOM Start", timeStartTF.getText(),commentIOMStart.getText(), document);
+		
+		//ontEdit.addMeasurement(category1Uri, "Messung", timeStartTF.getText(), commentIOMStart.getText(), document, "120");
+		ontEdit.addMeasurement(category1Uri, "Messung", timeStartTF.getText(), commentIOMStart.getText(), document, "150", 
+				"http://purl.obolibrary.org/obo/FMA_48998", "Masseter links" );
+		
+		//ontEdit.addStatement(document, NS + has_data_item , category1Uri );
 		//System.out.println(category1Uri);
-		if(category1.contains(I18n.getString("rec.measurement"))) {
-			ontEdit.addStatement(document, NS + has_data_item , category1Uri );
-			String mA= ontEdit.createNewMiliampere("mA");
-			ontEdit.addPropertiesToMiliampere(mA, "120" );
+	
+			//ontEdit.addStatement(document, NS + has_data_item , category1Uri );
+			//String mA= ontEdit.createNewMiliampere("mA");
+			//ontEdit.addPropertiesToMiliampere(mA, "120" );
 			
 			//String indiv= ontEdit.createNewIndividual(category1Uri, category1);
 			//System.out.println(indiv);
 			//ontEdit.addTimestampToEntity(indiv, "timestamp");
-			ontEdit.addTimestampToEntity(category1Uri,"label",  "timestamp");
+			//ontEdit.addTimestampToEntity(category1Uri,"label",  "timestamp");
 			//Add Value to measurement needs to be added!
 			//ontEdit.saveNewOWLFile();
 			
@@ -1153,7 +1161,7 @@ public class IOMRecordingController {
 			
 			
 			
-		}; 
+		
 
 
 

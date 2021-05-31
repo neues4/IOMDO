@@ -45,9 +45,15 @@ public class OntologyEditor {
 	private static OntologyEditor editor;
 
 	private int counter = 500;
-	
+
 	private String id = "IOMO_0000000";
 
+	//Object Properties IDs
+	private String measurement_unit_of = "IOMO_0000386";
+	private String has_measurement_unit = "IOMO_0000275";
+	private String has_data_item = "IOMO_0000282";
+	private String has_comment = "IOMO_0000459";
+	private String has_timestamp = "IOMO_0000266";
 
 	public static OntologyEditor getInstance()
 	{
@@ -59,13 +65,13 @@ public class OntologyEditor {
 
 		return editor;
 	}
-	
+
 	@SuppressWarnings("exports")
 	public Model getModel() {
 		Model model = OntologyEditor.getInstance().ontModel;
 		return model;
 	}
-	
+
 
 	/**
 	 * Constructor to create a new Ontology Editor.
@@ -84,36 +90,51 @@ public class OntologyEditor {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
 	public String getId() {
-	String  counterAsString = Integer.toString(counter);
-	int sizeOfInt = counterAsString.length();
-	switch (sizeOfInt) {
-	
-	case 3:
-		id = "IOMO_0000" + counter;
-		System.out.println(id);
-		break;
-	case 4:
-		id = "IOMO_000" + counter;
-		System.out.println(id);
-		break;
-	case 5:
-		id = "IOMO_00" + counter;		
-		break;
-	case 6:
-		id = "IOMO_0" + counter;
-		break;
-	case 7:
-		id = "IOMO_" + counter;
-		break;
+		String  counterAsString = Integer.toString(counter);
+		int sizeOfInt = counterAsString.length();
+		switch (sizeOfInt) {
+
+		case 3:
+			id = "IOMO_0000" + counter;
+			System.out.println(id);
+			break;
+		case 4:
+			id = "IOMO_000" + counter;
+			System.out.println(id);
+			break;
+		case 5:
+			id = "IOMO_00" + counter;		
+			break;
+		case 6:
+			id = "IOMO_0" + counter;
+			break;
+		case 7:
+			id = "IOMO_" + counter;
+			break;
+		}
+		counter ++;
+		return id;
 	}
-	counter ++;
-	return id;
+
+
+
+
+	public ArrayList<OntClass> getAllOntologyClasses() {
+		Iterator classIter = ontModel.listClasses();
+		ArrayList<OntClass> list= new ArrayList<OntClass>();
+		while (classIter.hasNext()) {
+			OntClass ontClass = (OntClass) classIter.next();
+			//String uri = ontClass.getURI();
+			
+			if (ontClass.getURI() != null)
+				list.add(ontClass);
+		}
+		return list;
 	}
-	
-	
+
 
 
 	/**
@@ -195,11 +216,11 @@ public class OntologyEditor {
 		Individual indv = ontClass.createIndividual(NS + getId());
 		//Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
 		indv.addLabel(indvLabel, "DE");
-		
+
 		return indv.getURI();
 	}
 
-	
+
 	//Deprecated? romap1
 	/**
 	 * Method to create a new URI with "#", used to create new individuals in the ontology
@@ -214,7 +235,7 @@ public class OntologyEditor {
 		return newURI;
 	}
 
-	
+
 	/**
 	 * method to add the dataproperties to the patient
 	 * @author neues4
@@ -271,7 +292,8 @@ public class OntologyEditor {
 	}
 
 	/**
-	 * Adds the data property timestamp to the given entity.
+	 * ToDelete
+	 * Adds the data property timestamp to the given entity and saves it into the ontology.
 	 * @author romap1
 	 * @param entity The URI of the entity
 	 * @param timestamp the time as String
@@ -283,8 +305,128 @@ public class OntologyEditor {
 		DatatypeProperty datPropSurgeryDate = ontModel.getDatatypeProperty( NS + has_timestamp);
 		indv.addProperty(datPropSurgeryDate, timestamp);
 		System.out.println(indivUri);
+
+	} 
+
+	/**
+	 * ToDElete
+	 * @author romap1
+	 * @param entityUri
+	 * @param label
+	 * @param comment
+	 */
+	public void addCommentToEntity(String entityUri, String label, String comment) {
+		String indivUri= createNewIndividual(entityUri, label);
+		Individual indv = ontModel.getIndividual(indivUri);
+		DatatypeProperty datPropComment = ontModel.getDatatypeProperty( NS + has_comment);
+		indv.addProperty(datPropComment, comment);
+		System.out.println(indivUri);
 		saveNewOWLFile();
 	} 
+
+	/**
+	 * Adds a Finding to Document and saves it into the Ontology.
+	 * @author romap1
+	 * @param entityUri
+	 * @param label
+	 * @param timestamp
+	 * @param comment
+	 * @param doccumentUri
+	 */
+	public void addFindings(String entityUri, String label,String timestamp, String comment, String doccumentUri) {
+		String indivUri= createNewIndividual(entityUri, label);
+		Individual indv = ontModel.getIndividual(indivUri);
+		DatatypeProperty datPropTimeStamp = ontModel.getDatatypeProperty( NS + has_timestamp);
+		indv.addProperty(datPropTimeStamp, timestamp);
+		//Only writtes comment if something is written
+		if(!comment.equals("")){
+			DatatypeProperty datPropComment = ontModel.getDatatypeProperty( NS + has_comment);
+			indv.addProperty(datPropComment, comment);
+		}
+		addStatement(doccumentUri, NS + has_data_item , indivUri);
+
+		saveNewOWLFile();
+	}
+
+	/**
+	 * 
+	 * @param entityUri
+	 * @param label
+	 * @param timestamp
+	 * @param comment
+	 * @param doccumentUri
+	 * @param MeasurementValue
+	 */
+	public void addMeasurement(String entityUri, String label,String timestamp, String comment, String doccumentUri, String MeasurementValue) {
+		String indivUri= createNewIndividual(entityUri, label);
+		Individual indv = ontModel.getIndividual(indivUri);
+		DatatypeProperty datPropTimeStamp = ontModel.getDatatypeProperty( NS + has_timestamp);
+		indv.addProperty(datPropTimeStamp, timestamp);
+
+		//Only writtes comment if something is written
+		if(!comment.equals("")){
+			DatatypeProperty datPropComment = ontModel.getDatatypeProperty( NS + has_comment);
+			indv.addProperty(datPropComment, comment);
+		}
+
+		addStatement(doccumentUri, NS + has_data_item , indivUri);
+
+		String maUri = createNewMiliampere("mA");
+		addPropertiesToMiliampere(maUri, MeasurementValue );
+
+		addStatement(indivUri, NS + has_measurement_unit, maUri);
+		addStatement(maUri, NS + measurement_unit_of, indivUri);
+
+		saveNewOWLFile();
+	}
+
+	/**
+	 * FOR DCS MEP and TES MEP Measurement
+	 * @param entityUri
+	 * @param label
+	 * @param timestamp
+	 * @param comment
+	 * @param doccumentUri
+	 * @param MeasurementValue
+	 * @param muscleUri
+	 * @param muscleLabel
+	 */
+	public void addMeasurement(String entityUri, String label,String timestamp, String comment, 
+			String doccumentUri, String MeasurementValue, String muscleUri, String muscleLabel) {
+		String indivUri= createNewIndividual(entityUri, label);
+		Individual indv = ontModel.getIndividual(indivUri);
+		DatatypeProperty datPropTimeStamp = ontModel.getDatatypeProperty( NS + has_timestamp);
+		indv.addProperty(datPropTimeStamp, timestamp);
+
+		//Only writtes comment if something is written
+		if(!comment.equals("")){
+			DatatypeProperty datPropComment = ontModel.getDatatypeProperty( NS + has_comment);
+			indv.addProperty(datPropComment, comment);
+		}
+
+		addStatement(doccumentUri, NS + has_data_item , indivUri);
+
+		String maUri = createNewMiliampere("mA");
+		addPropertiesToMiliampere(maUri, MeasurementValue );
+
+		addStatement(indivUri, NS + has_measurement_unit, maUri);
+		addStatement(maUri, NS + measurement_unit_of, indivUri);
+
+		//add muscle, later will get a list or map instead of a String since more than 1 muscle
+
+		OntClass ontClass = ontModel.getOntClass(muscleUri);
+		Individual indv2 = ontClass.createIndividual(NS + getId());
+		//Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
+		indv2.addLabel(muscleLabel, "DE");
+
+
+		String muscle= createNewIndividual(muscleUri, muscleLabel);
+		//Individual muscleIndv = ontModel.getIndividual(muscle);
+		addStatement(maUri, "http://purl.obolibrary.org/obo/IAO_0000136" , muscle);
+
+		saveNewOWLFile();
+	}
+
 
 	/**
 	 * Method to create a new rdf triple statement
@@ -456,8 +598,8 @@ public class OntologyEditor {
 		OntClass iOMEndClass = ontModel.getOntClass(NS + iOMEnd);
 		String other = "IOMO_0000460";
 		OntClass otherClass = ontModel.getOntClass(NS + other);
-		
-		
+
+
 		HashMap<String, String> showEntityMap = new HashMap<>();
 
 		showEntityMap.put(mepFinding.getLabel("DE"), mepFinding.getURI());
@@ -483,7 +625,7 @@ public class OntologyEditor {
 		showEntityMap.put(gridPositioning.getLabel("DE"), gridPositioning.getURI());
 		showEntityMap.put(iOMEndClass.getLabel("DE"), iOMEndClass.getURI());
 		showEntityMap.put(otherClass.getLabel("DE"), otherClass.getURI());
-		
+
 		return showEntityMap;
 	}
 
@@ -492,7 +634,7 @@ public class OntologyEditor {
 	 * Returns a Hasmap with Measurements in the intraoperative Neuromonitoring that are documented with a value. 
 	 * @return a Hashmap with label as key and uri as value
 	 */
-		public HashMap<String, String> getAllMeasurementsWithValues(){
+	public HashMap<String, String> getAllMeasurementsWithValues(){
 		OntClass tesMepMeasurement = ontModel.getOntClass(NS + "IOMO_0000378");
 		OntClass dcsMepMeasurement = ontModel.getOntClass(NS + "IOMO_0000238");
 		OntClass aepMeasurement = ontModel.getOntClass(NS + "IOMO_0000240");
@@ -549,7 +691,8 @@ public class OntologyEditor {
 	 */
 	public String createNewIOMDocument(String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000277");
-		Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
+		//Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
+		Individual indv = ontClass.createIndividual( NS + getId());
 		indv.addLabel(indvLabel, "EN");
 		return indv.getURI();
 	}
@@ -562,8 +705,9 @@ public class OntologyEditor {
 	 */
 	public String createNewMiliampere(String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000268");
-		Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
-		indv.addLabel(indvLabel, "EN");
+		//Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
+		Individual indv = ontClass.createIndividual(NS + getId());
+		indv.addLabel(indvLabel, "DE");
 		return indv.getURI();
 	}
 
@@ -658,7 +802,7 @@ public class OntologyEditor {
 		return ontModel.getNsPrefixMap();
 
 	}
-	
+
 	/**
 	 * Returns the Label of a given OntClassUri
 	 * @author romap1
