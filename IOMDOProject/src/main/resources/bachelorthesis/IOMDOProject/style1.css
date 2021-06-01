@@ -19,7 +19,7 @@
 	-fx-background-color: #234D74  , white , white;
 	-fx-text-fill:  #294F74;
 	-fx-font-size: 15px;
-	-fx-font-style: bold;
+	-fx-font-weight: bold;
 }
 #logOutBtn{
 	-fx-background-color: #234D74  , white , white;
@@ -47,7 +47,10 @@
     -fx-background-insets: 0 0 -1 0, 0, 1, 2;
     -fx-background-radius: 3px, 3px, 2px, 1px;
     -fx-text-fill: -fx-text-base-color;
+}
 
+.combo-box .list-cell:hover{
+-fx-background-color:#4F888A;
 }
 
 #searchBtn
