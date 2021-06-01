@@ -123,7 +123,11 @@ public class QueryController {
 			// and turn that into a String
 			String csv = new String(outputStream.toByteArray());
 
-			FileWriter csvWriter = new FileWriter("changeInMiliamperDCS.csv");
+			//mac
+			//FileWriter csvWriter = new FileWriter("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/changeInMiliamper.csv");
+			//windows
+			FileWriter csvWriter = new FileWriter("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\changeInMiliamper.csv");
+			
 
 			csvWriter.append(csv);
 
@@ -207,7 +211,10 @@ public class QueryController {
 
 			test.setText(csv);
 
-			FileWriter csvWriter = new FileWriter("mappingThreshold.csv");
+			//mac
+			//FileWriter csvWriter = new FileWriter("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/mappingThreshold.csv");
+			//windows
+			FileWriter csvWriter = new FileWriter("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\mappingThreshold.csv");
 
 			csvWriter.append(csv);
 
