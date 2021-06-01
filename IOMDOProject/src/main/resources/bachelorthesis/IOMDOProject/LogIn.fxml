@@ -60,7 +60,7 @@
             </Label>
             <AnchorPane prefHeight="48.0" prefWidth="397.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="3">
                <children>
-                  <ImageView fitHeight="226.0" fitWidth="550.0" layoutX="5.0" layoutY="2.0">
+                  <ImageView fitHeight="226.0" fitWidth="550.0" layoutX="78.0" layoutY="11.0">
                      <image>
                         <Image url="@Logo.jpg" />
                      </image>
