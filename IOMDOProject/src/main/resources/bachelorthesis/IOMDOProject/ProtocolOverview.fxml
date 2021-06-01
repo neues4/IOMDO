@@ -6,54 +6,63 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="gridPaneProtocolOverview" vgap="8.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ProtocolOverviewController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="794.799951171875" minWidth="10.0" prefWidth="790.0000244140625" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.60003662109375" minWidth="4.800048828125" prefWidth="9.5999755859375" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="104.00000114440918" minHeight="10.0" prefHeight="57.59999580383301" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="406.39995117187505" minHeight="0.0" prefHeight="372.00001831054686" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <HBox alignment="BOTTOM_LEFT" spacing="8.0" GridPane.rowIndex="1">
+
+<BorderPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ProtocolOverviewController">
+   <center>
+      <GridPane fx:id="gridPaneProtocolOverview" vgap="8.0" BorderPane.alignment="TOP_LEFT">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1280.0" minWidth="10.0" prefWidth="790.0000244140625" />
+          <ColumnConstraints />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints fillHeight="false" />
+          <RowConstraints />
+          <RowConstraints maxHeight="406.39995117187505" minHeight="0.0" prefHeight="372.00001831054686" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Label text="%lbl.search">
+            <HBox alignment="BOTTOM_LEFT" spacing="8.0" GridPane.rowIndex="1">
+               <children>
+                  <Label text="%lbl.search">
+                     <padding>
+                        <Insets left="8.0" />
+                     </padding>
+                  </Label>
+                  <TextField id="searchField" fx:id="searchTF" stylesheets="@style1.css" />
+                  <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="47.0" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </HBox>
+            <TableView fx:id="protocolTblView" prefHeight="800.0" prefWidth="1000.0" GridPane.rowIndex="2">
+              <columns>
+                <TableColumn fx:id="caseNrColumn" minWidth="-Infinity" prefWidth="40.800018310546875" text="%lbl.caseNr" />
+                <TableColumn fx:id="firstnameColumn" prefWidth="88.0" text="%lbl.firstName" />
+                  <TableColumn fx:id="surnameColumn" prefWidth="88.0" text="%lbl.surname" />
+                  <TableColumn fx:id="dateOfBirthColumn" prefWidth="88.0" text="%lbl.dateOfBirth" />
+                  <TableColumn fx:id="diagnosisColumn" prefWidth="88.0" text="%lbl.diagnosis" />
+                  <TableColumn fx:id="surgeryColumn" prefWidth="88.0" text="%lbl.surgery" />
+                  <TableColumn fx:id="dateOfSurgeryColumn" minWidth="-Infinity" prefWidth="160.0" text="%lbl.dateOfSurgery" />
+                  <TableColumn fx:id="FIDColumn" text="%lbl.FID" />
+                  <TableColumn fx:id="PIDColumn" text="%lbl.PID" />
+                  <TableColumn fx:id="surgeonColumn" minWidth="-Infinity" text="%lbl.age" />
+                  <TableColumn fx:id="assistantColumn" prefWidth="88.0" text="%lbl.localization" />
+              </columns>
                <padding>
                   <Insets left="8.0" />
                </padding>
-            </Label>
-            <TextField id="searchField" fx:id="searchTF" stylesheets="@style1.css" />
-            <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="47.0" />
+            </TableView>
          </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
-      </HBox>
-      <TableView fx:id="protocolTblView" GridPane.rowIndex="2">
-        <columns>
-          <TableColumn fx:id="caseNrColumn" prefWidth="40.800018310546875" text="%lbl.caseNr" />
-          <TableColumn fx:id="firstnameColumn" prefWidth="84.80001831054688" text="%lbl.firstName" />
-            <TableColumn fx:id="surnameColumn" prefWidth="79.199951171875" text="%lbl.surname" />
-            <TableColumn fx:id="dateOfBirthColumn" prefWidth="96.800048828125" text="%lbl.dateOfBirth" />
-            <TableColumn fx:id="diagnosisColumn" prefWidth="75.0" text="%lbl.diagnosis" />
-            <TableColumn fx:id="surgeryColumn" prefWidth="75.0" text="%lbl.surgery" />
-            <TableColumn fx:id="dateOfSurgeryColumn" prefWidth="75.0" text="%lbl.dateOfSurgery" />
-            <TableColumn fx:id="FIDColumn" prefWidth="45.5999755859375" text="%lbl.FID" />
-            <TableColumn fx:id="PIDColumn" prefWidth="75.20001220703125" text="%lbl.PID" />
-            <TableColumn fx:id="surgeonColumn" prefWidth="73.5999755859375" text="%lbl.age" />
-            <TableColumn fx:id="assistantColumn" prefWidth="64.800048828125" text="%lbl.localization" />
-        </columns>
-      </TableView>
-   </children>
-</GridPane>
+      </GridPane>
+   </center>
+</BorderPane>

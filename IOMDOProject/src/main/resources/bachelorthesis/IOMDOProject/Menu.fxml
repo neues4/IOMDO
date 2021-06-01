@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPaneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.MenuController">
+<BorderPane fx:id="borderPaneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.MenuController">
    <top>
       <HBox alignment="TOP_RIGHT" minHeight="80.0" styleClass="hbox" stylesheets="@style1.css" BorderPane.alignment="CENTER">
          <children>
@@ -48,27 +48,27 @@
       </GridPane>
    </center>
    <left>
-      <VBox focusTraversable="true" spacing="8.0" stylesheets="@style1.css" BorderPane.alignment="CENTER">
+      <VBox focusTraversable="true" spacing="8.0" styleClass="vbox" stylesheets="@style1.css" BorderPane.alignment="CENTER">
          <children>
-            <Button id="menuBtn" fx:id="newProtocolBtn" mnemonicParsing="false" onAction="#openNewProtocol" prefHeight="80.0" prefWidth="150.0" stylesheets="@style1.css" text="%btn.newProtocol">
+            <Button id="menuBtn" fx:id="newProtocolBtn" mnemonicParsing="false" onAction="#openNewProtocol" prefHeight="80.0" prefWidth="180.0" stylesheets="@style1.css" text="%btn.newProtocol">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Button id="menuBtn" fx:id="protocolOverviewBtn" mnemonicParsing="false" onAction="#openProtocolOverview" prefHeight="80.0" prefWidth="150.0" stylesheets="@style1.css" text="%btn.protocolOverview">
+            <Button id="menuBtn" fx:id="protocolOverviewBtn" mnemonicParsing="false" onAction="#openProtocolOverview" prefHeight="80.0" prefWidth="180.0" stylesheets="@style1.css" text="%btn.protocolOverview">
                <font>
                   <Font size="17.0" />
                </font>
             </Button>
-            <Button id="menuBtn" fx:id="createQueryBtn" mnemonicParsing="false" onAction="#openCreatQuery" prefHeight="80.0" prefWidth="150.0" stylesheets="@style1.css" text="%btn.createQuery">
+            <Button id="menuBtn" fx:id="createQueryBtn" mnemonicParsing="false" onAction="#openCreatQuery" prefHeight="80.0" prefWidth="180.0" stylesheets="@style1.css" text="%btn.createQuery">
                <font>
                   <Font size="17.0" />
                </font></Button>
-            <Button id="menuBtn" fx:id="expandOntologyBtn" mnemonicParsing="false" onAction="#openExpandOntology" prefHeight="80.0" prefWidth="150.0" stylesheets="@style1.css" text="%btn.expandOntology">
+            <Button id="menuBtn" fx:id="expandOntologyBtn" mnemonicParsing="false" onAction="#openExpandOntology" prefHeight="80.0" prefWidth="180.0" stylesheets="@style1.css" text="%btn.expandOntology">
                <font>
                   <Font size="17.0" />
                </font></Button>
-            <Button id="menuBtn" fx:id="settingsBtn" mnemonicParsing="false" onAction="#openSettings" prefHeight="80.0" prefWidth="150.0" stylesheets="@style1.css" text="%btn.settings">
+            <Button id="menuBtn" fx:id="settingsBtn" mnemonicParsing="false" onAction="#openSettings" prefHeight="80.0" prefWidth="180.0" stylesheets="@style1.css" text="%btn.settings">
                <font>
                   <Font size="17.0" />
                </font></Button>

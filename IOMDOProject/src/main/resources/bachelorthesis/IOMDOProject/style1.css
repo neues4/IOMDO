@@ -41,6 +41,10 @@
 	-fx-background-color: #294F74;
 	
 }
+.vbox{
+	-fx-background-color: #294F74;
+	
+}
 
 .combo-box-base {
     -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, white;
