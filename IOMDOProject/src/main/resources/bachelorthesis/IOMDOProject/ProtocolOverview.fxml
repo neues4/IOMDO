@@ -6,12 +6,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-
 
 <BorderPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ProtocolOverviewController">
    <center>
@@ -35,7 +37,17 @@
                      </padding>
                   </Label>
                   <TextField id="searchField" fx:id="searchTF" stylesheets="@style1.css" />
-                  <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="47.0" />
+                  <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="47.0" stylesheets="@TestStyle.css">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@272-cross.png" />
+                           </image>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                        </ImageView>
+                     </graphic></Button>
                </children>
                <opaqueInsets>
                   <Insets />
