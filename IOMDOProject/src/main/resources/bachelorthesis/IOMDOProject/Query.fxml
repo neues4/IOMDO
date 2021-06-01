@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane styleClass="pane" stylesheets="@style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.QueryController">
+   <top>
+      <GridPane BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints fillHeight="false" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="40.0" minHeight="35.0" prefHeight="40.0" vgrow="NEVER" />
+            <RowConstraints fillHeight="false" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="146.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="Query3" mnemonicParsing="false" onAction="#executeQuery3" stylesheets="@TestStyle.css" text="%btn.executeQuery" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="query2" mnemonicParsing="false" onAction="#executeQuery2" stylesheets="@TestStyle.css" text="%btn.executeQuery" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="query1" mnemonicParsing="false" onAction="#executeQuery" stylesheets="@TestStyle.css" text="%btn.executeQuery" GridPane.columnIndex="2" />
+            <TextArea fx:id="test" editable="false" GridPane.columnSpan="5" GridPane.rowIndex="3" />
+            <Label text="%lbl.query1" GridPane.columnSpan="2147483647">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="17.0" text="label" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="47.0" text="%lbl.query3" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+   </top>
+</BorderPane>
