@@ -107,6 +107,7 @@ public class MenuController {
 
 	}
 	public void openExpandOntology(ActionEvent event) throws IOException {
+		changeCenter("ExpandOntology.fxml");
 		newProtocolBtn.setStyle("-fx-background-color: white");
 		protocolOverviewBtn.setStyle("-fx-background-color: white");
 		createQueryBtn.setStyle("-fx-background-color: white");
@@ -114,6 +115,7 @@ public class MenuController {
 		settingsBtn.setStyle("-fx-background-color: white");
 	}
 	public void openSettings(ActionEvent event) throws IOException {
+		changeCenter("Settings.fxml");
 		newProtocolBtn.setStyle("-fx-background-color: white");
 		protocolOverviewBtn.setStyle("-fx-background-color: white");
 		createQueryBtn.setStyle("-fx-background-color: white");
