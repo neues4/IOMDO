@@ -65,4 +65,14 @@
 .grid {
     -fx-background-color: white;
     }
+    
+.split-pane-divider {
+   -fx-background-color: transparent;
+}
   
+.split-pane {
+   -fx-background-color: white;
+} 
+.split-pane-selected {
+   -fx-background-color: white;
+} 

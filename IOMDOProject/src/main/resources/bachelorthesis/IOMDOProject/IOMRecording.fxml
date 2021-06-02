@@ -24,7 +24,7 @@
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
          <content>
-            <SplitPane dividerPositions="0.39429928741092624" orientation="VERTICAL">
+            <SplitPane dividerPositions="0.39429928741092624" orientation="VERTICAL" stylesheets="@style1.css">
                <items>
                   <BorderPane>
                      <top>
@@ -1258,12 +1258,12 @@
                      <center>
                         <GridPane fx:id="infoGrid" hgap="8.0" styleClass="pane" vgap="8.0" BorderPane.alignment="TOP_LEFT">
                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="108.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="138.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="138.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="108.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="138.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
@@ -1291,16 +1291,15 @@
                                        </graphic></Button>
                                  </children>
                               </VBox>
-                              <VBox alignment="TOP_CENTER" spacing="4.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                              <VBox spacing="4.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <children>
                                     <Label text="%lbl.category" />
-                                    <ComboBox fx:id="categoryIOMStart" />
+                                    <ComboBox fx:id="categoryIOMStart" minWidth="138.0" prefWidth="160.0" />
                                  </children>
                               </VBox>
                               <VBox spacing="4.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                  <children>
                                     <Label text="%lbl.entry" />
-                                    <ComboBox fx:id="entryIOMStart" />
                                     <Button mnemonicParsing="false" text="Button" visible="false" />
                                  </children>
                               </VBox>

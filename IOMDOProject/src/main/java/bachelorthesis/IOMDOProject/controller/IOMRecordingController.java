@@ -146,8 +146,9 @@ public class IOMRecordingController {
 	@FXML
 	private ComboBox<String> categoryIOMStart;
 
-	@FXML
-	private ComboBox<String> entryIOMStart;
+	//löschen romap1
+	//@FXML
+	//private ComboBox<String> entryIOMStart;
 
 	@FXML
 	private Label patientNameLbl, birthdayLbl,diagnoseLbl, surgeryLbl, dateLbl ;
@@ -215,7 +216,7 @@ public class IOMRecordingController {
 		// Patient data end
 
 		//IOM Documentation start
-		Collections.sort(categoryList);
+		//Collections.sort(categoryList);
 		//
 		//categoryIOMStart.setItems(categoryList);
 		//entryIOMStart.setItems(entryList);
@@ -900,6 +901,7 @@ public class IOMRecordingController {
 		tp.setText("this is a test");
 		timeTF.setTooltip(tp);
 		ComboBox<String> categoryCB = new ComboBox<String>();
+		Collections.sort(categoryList);
 		categoryCB.setItems(categoryList);
 
 		//categoryCB.setMaxHeight(Control.USE_COMPUTED_SIZE);
@@ -1112,9 +1114,7 @@ public class IOMRecordingController {
 		// Patient Data end
 
 
-
-
-
+		
 
 		//IOM actual Recording------------------------------------------------
 
@@ -1122,14 +1122,10 @@ public class IOMRecordingController {
 		
 		String has_data_item = "IOMO_0000282";
 
-		String entry1= entryIOMStart.getSelectionModel().getSelectedItem();
-
-		
-		
+		//String entry1= entryIOMStart.getSelectionModel().getSelectedItem();
 
 		EntryMap map = new EntryMap();
-
-
+		
 		//Only a Kategory with Meassurement will be saved into the Ontology.  new Baseline not included! Basline measurment can be removed 
 		String category1 =categoryIOMStart.getSelectionModel().getSelectedItem();
 		String category1Uri = map.getUri(category1);
@@ -1139,8 +1135,8 @@ public class IOMRecordingController {
 		ontEdit.addFindings(category1Uri, "IOM Start", timeStartTF.getText(),commentIOMStart.getText(), document);
 		
 		//ontEdit.addMeasurement(category1Uri, "Messung", timeStartTF.getText(), commentIOMStart.getText(), document, "120");
-		ontEdit.addMeasurement(category1Uri, "Messung", timeStartTF.getText(), commentIOMStart.getText(), document, "150", 
-				"http://purl.obolibrary.org/obo/FMA_48998", "Masseter links" );
+		//ontEdit.addMeasurement(category1Uri, "Messung", timeStartTF.getText(), commentIOMStart.getText(), document, "150", 
+		//		"http://purl.obolibrary.org/obo/FMA_48998", "Masseter links" );
 		
 		//ontEdit.addStatement(document, NS + has_data_item , category1Uri );
 		//System.out.println(category1Uri);
@@ -1158,18 +1154,54 @@ public class IOMRecordingController {
 			
 			//Messung has Measurments unit mA and mA is About Muscle
 			
-			
-			
-			
-		
-
-
-
 		int rowsToRead = nodeList.size()/4;
 		for(int i= 2; i <= rowsToRead + 1; i++) {
 			String time = getTextField(  nodeList.get( i  +"" + 1)).getText();
 			String category = getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().getSelectedItem();
-
+			String entry = getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem();
+			String categoryUri = map.getUri(category);
+			String comment = getTextField(nodeList.get( i  +"" + 5)).getText();
+			
+			ontEdit.addFindings(categoryUri,  category, time ,comment, document);
+		}
+		
+		
+		
+		//alles zurücksetzen
+		caseNrTF.setText("");
+		fidTF.setText("");
+		pidTF.setText("");
+		surnameTF.setText("");
+		firstNameTF.setText("");
+		timeStartTF.setText("");
+		birthdayTF.setText("");
+		
+		diagnosisCB.getSelectionModel().clearSelection();
+		surgeryCB.getSelectionModel().clearSelection();
+		deviceCB.getSelectionModel().clearSelection();
+		dateOfSurgeryTF.setText("");
+		surgeonCB.getSelectionModel().clearSelection();
+		assistantCB.getSelectionModel().clearSelection();
+		
+		
+		commentIOMStart.setText("");
+		int rowsToRead1 = nodeList.size()/4;
+		for(int i= 2; i <= rowsToRead1 + 1; i++) {
+			getTextField(  nodeList.get( i  +"" + 1)).setText("");;
+			getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().clearSelection();;
+			getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().clearSelection();
+			
+			TextField valueTF = getTextField(  nodeList.get( i  +"" + 4));
+			if(valueTF != null) {
+				getTextField(  nodeList.get( i  +"" + 4)).setText("");;
+			}
+			
+			getTextField(nodeList.get( i  +"" + 5)).setText("");
+			//IOM Documentation end
+		}
+		
+		
+			/*
 			if(category1.contains(I18n.getString("rec.measurement"))) {
 				//uri fehlt noch!
 				ontEdit.addStatement(document, NS + has_data_item , category);
@@ -1187,10 +1219,10 @@ public class IOMRecordingController {
 
 
 
-			String comment = getTextField(nodeList.get( i  +"" + 5)).getText();
-			if(!comment.isEmpty()) {
+			
+			//if(!comment.isEmpty()) {
 				//save comment
-			}
+			//}
 
 		}
 
