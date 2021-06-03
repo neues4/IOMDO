@@ -17,6 +17,7 @@ import bachelorthesis.IOMDOProject.model.Counter;
 import bachelorthesis.IOMDOProject.model.EntryMap;
 import bachelorthesis.IOMDOProject.model.OntologyEditor;
 import bachelorthesis.IOMDOProject.model.PatientSurgeryData;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +26,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -34,6 +36,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
@@ -1081,6 +1084,9 @@ public class IOMRecordingController {
 
 		//add bin graphic for Delete Button
 		ImageView view = new ImageView(Main.class.getResource("173-bin.png").toExternalForm());
+		ColorAdjust colorAdjust = new ColorAdjust();
+		colorAdjust.setBrightness(1.0);
+		view.setEffect(colorAdjust);
 		deleteBtn.setGraphic(view);
 
 		//add delete event on delete Button
@@ -1146,8 +1152,9 @@ public class IOMRecordingController {
 	 * 
 	 * @param event
 	 * @throws IOException
+	 * @throws InterruptedException 
 	 */
-	public  void save(ActionEvent event) throws IOException {
+	public  void save(ActionEvent event) throws IOException, InterruptedException {
 		// Patient Data start
 		//savePatient();
 		//getSepBaselineValues();
@@ -1198,9 +1205,9 @@ public class IOMRecordingController {
 		//ontEdit.saveNewOWLFile();
 
 		//Messung has Measurments unit mA and mA is About Muscle
-		
-		
-/*Fürs speichen, für usability test ausgeklammert
+
+
+		/*Fürs speichen, für usability test ausgeklammert
 		int rowsToRead = nodeList.size()/4;
 		for(int i= 2; i <= rowsToRead + 1; i++) {
 			String time = getTextField(  nodeList.get( i  +"" + 1)).getText();
@@ -1211,7 +1218,13 @@ public class IOMRecordingController {
 
 			ontEdit.addFindings(categoryUri,  category, time ,comment, document);
 		}
-*/
+		 */
+
+		// a new alert to inform the user that the data was saved successfully
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setHeaderText("gespeichert");
+		alert.setContentText("Daten erfolgreich abgespeichert!");
+		alert.showAndWait();
 
 
 		//alles zurücksetzen
@@ -1418,7 +1431,7 @@ public class IOMRecordingController {
 			Collections.sort(actionList);
 			entry.setItems(actionList);
 			break;
-			*/
+			 */
 		case "Grid Positionierung":
 			entry.setVisible(true);
 			Collections.sort(gridPositioningList);
