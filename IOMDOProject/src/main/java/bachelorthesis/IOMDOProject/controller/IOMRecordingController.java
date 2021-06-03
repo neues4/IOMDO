@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
@@ -24,9 +23,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
@@ -34,7 +31,6 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.Tooltip;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
@@ -203,7 +199,7 @@ public class IOMRecordingController {
 	private ObservableList<String> emgFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000370").keySet());
 	private ObservableList<String> mepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000400").keySet());
 	private ObservableList<String> actionList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human").keySet());
-	private ObservableList<String> gridPositioningList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000064").keySet());
+	private ObservableList<String> gridPositioningList = FXCollections.observableArrayList(ontEdit.getSubclasses(NS  + "IOMO_0000064").keySet());
 	//private ObservableList<String> surgeryProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058").keySet());
 	//Es gibt noch keine Lösung wie man Unterkategorien von Unterkategorie abfragt. romap1
 	private ObservableList<String> surgeryProcessList = FXCollections.observableArrayList(Arrays.asList("Dura zu", "Duraplastik", "Exstirpation", "Knochendeckel einsetzen", "Kortikotomie", 
@@ -923,7 +919,6 @@ public class IOMRecordingController {
 		Collections.sort(categoryList);
 		categoryCB.setItems(categoryList);
 
-		
 
 		//categoryCB.setMaxHeight(Control.USE_COMPUTED_SIZE);
 
@@ -1083,48 +1078,24 @@ public class IOMRecordingController {
 
 		//add bin graphic for Delete Button
 		ImageView view = new ImageView(Main.class.getResource("173-bin.png").toExternalForm());
-		ColorAdjust colorAdjust = new ColorAdjust();
-		colorAdjust.setBrightness(1.0);
-		view.setEffect(colorAdjust);
 		deleteBtn.setGraphic(view);
 
 		//add delete event on delete Button
 		deleteBtn.addEventHandler(ActionEvent.ACTION,
 				new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent event) {
-				// alert to ask if the user is sure to delete
-				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-				alert.setTitle("Eintrag löschen?");
-				alert.setHeaderText("Eintrag wirklich löschen?");
-
-				// Set the available buttons for the alert
-				ButtonType btnYes = new ButtonType("Ja");
-				ButtonType btnNo = new ButtonType("Nein");
-
-				alert.getButtonTypes().setAll(btnYes, btnNo);
-
-				// This allows you to get the response back from the user
-				Optional<ButtonType> result = alert.showAndWait();
-
-				// delete if the user chooses yes, don't delete if otherwise
-				if (result.isPresent()) {
-					if (result.get() == btnYes) {
-						int i = GridPane.getRowIndex(deleteBtn);
-						System.out.println(i);
-						infoGrid.getChildren().remove(nodeList.get(i + ""+ 1));
-						System.out.println(i + ""+ 1);
-						System.out.println(nodeList.get(i + ""+ 1).toString());
-						infoGrid.getChildren().remove(deleteBtn); 
-						infoGrid.getChildren().remove(timeTF);
-						infoGrid.getChildren().remove(categoryCB);
-						infoGrid.getChildren().remove(entryCB);
-						infoGrid.getChildren().remove(valueTF);
-						infoGrid.getChildren().remove(commentTF);
-						row--;
-					} else if (result.get() == btnNo) {
-						alert.close();
-					}
-				}
+				int i = GridPane.getRowIndex(deleteBtn);
+				System.out.println(i);
+				infoGrid.getChildren().remove(nodeList.get(i + ""+ 1));
+				System.out.println(i + ""+ 1);
+				System.out.println(nodeList.get(i + ""+ 1).toString());
+				infoGrid.getChildren().remove(deleteBtn); 
+				infoGrid.getChildren().remove(timeTF);
+				infoGrid.getChildren().remove(categoryCB);
+				infoGrid.getChildren().remove(entryCB);
+				infoGrid.getChildren().remove(valueTF);
+				infoGrid.getChildren().remove(commentTF);
+				row--;
 
 
 			}
@@ -1396,11 +1367,11 @@ public class IOMRecordingController {
 			Collections.sort(sepFindingList);
 			entry.setItems(sepFindingList);
 			break;
-		//case "AEP Beobachtung":
-			//entry.setVisible(true);
-			//Collections.sort(aepFindingList);
-			//entry.setItems(aepFindingList);
-			//break;
+		case "AEP Beobachtung":
+			entry.setVisible(true);
+			Collections.sort(aepFindingList);
+			entry.setItems(aepFindingList);
+			break;
 		case "D-Welle Beobachtung":
 			entry.setVisible(true);
 			Collections.sort(dwaveFindingList);
