@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -186,7 +187,7 @@ public class IOMRecordingController {
 	//private ObservableList<String> sepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242").keySet());
 	private ObservableList<String> aepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000240").keySet());
 	//private ObservableList<String> cbtMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000371").keySet());
-	private ObservableList<String> surgeryProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058").keySet());
+	
 	private ObservableList<String> reflexFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000234").keySet());
 	private ObservableList<String> eegFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000231").keySet());
 	private ObservableList<String> anesthesyProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000159").keySet());
@@ -199,7 +200,11 @@ public class IOMRecordingController {
 	private ObservableList<String> mepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000400").keySet());
 	private ObservableList<String> actionList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human").keySet());
 	private ObservableList<String> gridPositioningList = FXCollections.observableArrayList(ontEdit.getSubclasses(NS  + "IOMO_0000064").keySet());
-
+	//private ObservableList<String> surgeryProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058").keySet());
+	//Es gibt noch keine Lösung wie man Unterkategorien von Unterkategorie abfragt. romap1
+	private ObservableList<String> surgeryProcessList = FXCollections.observableArrayList(Arrays.asList("Dura zu", "Duraplastik", "Exstirpation", "Knochendeckel einsetzen", "Kortikotomie", 
+			"Knochendeckel entfernen", "Kortikotomie Erweiterung", "Kurze Pause", "Naht", "Resektion", "Teilresektion", "Schnitt", 
+			"Dura öffnung", "Hämostase", "Lokalisation", "Zugang", "Navigation"));
 	//---------------------------------------------------Variables IOM actual Recording
 
 
@@ -290,7 +295,15 @@ public class IOMRecordingController {
 		
 		//Actual Patient Recording -----------------------
 		categoryIOMStart.getSelectionModel().select("IOM Start");
-		
+		//Undercategory from "change of AEP, SSEP, MEP, VEP" added. 
+		String change_of_aep = "IOMO_0000429";
+		String change_of_ssep = "IOMO_0000417";
+		String change_of_vep = "IOMO_0000134";
+		String change_of_mep = "IOMO_0000405";
+		aepFindingList.addAll(ontEdit.getSubclasses(NS + change_of_aep).keySet());
+		sepFindingList.addAll(ontEdit.getSubclasses(NS + change_of_ssep).keySet());
+		vepFindingList.addAll(ontEdit.getSubclasses(NS + change_of_vep).keySet());
+		mepFindingList.addAll(ontEdit.getSubclasses(NS + change_of_mep).keySet());
 		
 	}
 
@@ -611,7 +624,8 @@ public class IOMRecordingController {
 		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
 			tesMepMuscleChoice.add(0, selectedItem);
-			categoryList.addAll(ontEdit.getAllMeasurementsWithValues().keySet());	
+			//categoryList.addAll(ontEdit.getAllMeasurementsWithValues().keySet());	
+			categoryList.add("TES MEP Messung");
 		}
 	}
 	@FXML
@@ -773,7 +787,8 @@ public class IOMRecordingController {
 		else if (!selectedItem.isBlank()) {
 			DCSMEPPane.setTextFill(Color.GREEN);
 			dcsMepMuscleChoice.add(0, selectedItem);
-			categoryList.addAll(ontEdit.getAllMeasurementsWithValues().keySet());}
+			//categoryList.addAll(ontEdit.getAllMeasurementsWithValues().keySet());
+			categoryList.add("DCS MEP Messung");}
 	}
 	public void cbDcs2isUsed(ActionEvent event) {
 		String selectedItem = cbDcs2.getSelectionModel().getSelectedItem();
@@ -899,10 +914,11 @@ public class IOMRecordingController {
 		timeTF.setPromptText("10:00");
 		Tooltip tp = new Tooltip();
 		tp.setText("this is a test");
-		timeTF.setTooltip(tp);
+		//timeTF.setTooltip(tp);
 		ComboBox<String> categoryCB = new ComboBox<String>();
 		Collections.sort(categoryList);
 		categoryCB.setItems(categoryList);
+
 
 		//categoryCB.setMaxHeight(Control.USE_COMPUTED_SIZE);
 
@@ -932,6 +948,8 @@ public class IOMRecordingController {
 						ComboBox<String> addicionalCB = new ComboBox<String>();
 						addicionalCB.setItems(tesMepMuscleChoice);
 						addicionalCB.getSelectionModel().select(tesMepMuscleChoice.get(i));
+						
+						//categoryCB.setDisable(true);
 
 						TextField AddidionalValue = new TextField();
 						//Adding new Noddes to the NodeList, timeTF, CategoryCB and commentTF act as Dummys to not break the consistency of the List.
@@ -982,7 +1000,11 @@ public class IOMRecordingController {
 						ComboBox<String> addicionalCB = new ComboBox<String>();
 						addicionalCB.setItems(dcsMepMuscleChoice);
 						addicionalCB.getSelectionModel().select(dcsMepMuscleChoice.get(i));
-
+						
+						//categoryCB.setDisable(true);
+						
+					
+						
 						TextField AddidionalValue = new TextField();
 						//Adding new Noddes to the NodeList, timeTF, CategoryCB and commentTF act as Dummys to not break the consistency of the List.
 						nodeList.put(row + "1", timeTF);
@@ -1270,14 +1292,17 @@ public class IOMRecordingController {
 		switch (item) {
 		case "VEP Beobachtung":
 			entry.setVisible(true);
+			Collections.sort(vepFindingList);
 			entry.setItems(vepFindingList);
 			break;
 		case "Mapping Messung":
 			entry.setVisible(true);
+			Collections.sort(mappingMeasurementList);
 			entry.setItems(mappingMeasurementList);
 			break;
 		case "Technische Probleme":
 			entry.setVisible(true);
+			Collections.sort(technicalIssuesList);
 			entry.setItems(technicalIssuesList);
 			break;
 		//case "D-Welle Messung":
@@ -1285,10 +1310,12 @@ public class IOMRecordingController {
 			//break;
 		case "TES MEP Messung":
 			entry.setVisible(true);
+			Collections.sort(tesMepMuscleChoice);
 			entry.setItems(tesMepMuscleChoice);
 			break;
 		case "DCS MEP Messung":
 			entry.setVisible(true);
+			Collections.sort(dcsMepMuscleChoice);
 			entry.setItems(dcsMepMuscleChoice);
 			break;
 			/*
@@ -1300,6 +1327,7 @@ public class IOMRecordingController {
 			 */
 		case "AEP Messung":
 			entry.setVisible(true);
+			Collections.sort(aepMeasurementList);
 			entry.setItems(aepMeasurementList);
 			break;
 		case "CBT Messung":
@@ -1308,22 +1336,27 @@ public class IOMRecordingController {
 			break;
 		case "Operationsprozess":
 			entry.setVisible(true);
+			Collections.sort(surgeryProcessList);
 			entry.setItems(surgeryProcessList);
 			break;
 		case "Reflex Beobachtung":
 			entry.setVisible(true);
+			Collections.sort(reflexFindingList);
 			entry.setItems(reflexFindingList);
 			break;
 		case "EEG Beobachtung":
 			entry.setVisible(true);
+			Collections.sort(eegFindingList);
 			entry.setItems(eegFindingList);
 			break;
 		case "Anästhesie Prozess":
 			entry.setVisible(true);
+			Collections.sort(anesthesyProcessList);
 			entry.setItems(anesthesyProcessList);
 			break;
 		case "Mapping Beobachtung":
 			entry.setVisible(true);
+			Collections.sort(mappingFindingList);
 			entry.setItems(mappingFindingList);
 			break;
 		//case "IOM Prozess":
@@ -1331,33 +1364,40 @@ public class IOMRecordingController {
 			//break;
 		case "SEP Beobachtung":
 			entry.setVisible(true);
+			Collections.sort(sepFindingList);
 			entry.setItems(sepFindingList);
 			break;
 		case "AEP Beobachtung":
 			entry.setVisible(true);
+			Collections.sort(aepFindingList);
 			entry.setItems(aepFindingList);
 			break;
 		case "D-Welle Beobachtung":
 			entry.setVisible(true);
+			Collections.sort(dwaveFindingList);
 			entry.setItems(dwaveFindingList);
 			break;
 		case "EMG Beobachtung":
 			entry.setVisible(true);
+			Collections.sort(emgFindingList);
 			entry.setItems(emgFindingList);
 			break;
 		case "MEP Beobachtung":
 			entry.setVisible(true);
+			Collections.sort(mepFindingList);
 			entry.setItems(mepFindingList);
 			break;
 		case "Aktion":
 			entry.setVisible(true);
+			Collections.sort(actionList);
 			entry.setItems(actionList);
 		case "Grid Positionierung":
 			entry.setVisible(true);
+			Collections.sort(gridPositioningList);
 			entry.setItems(gridPositioningList);
 		case "IOM Ende":
 			entry.setVisible(false);
-		case "Sonstiges":
+		case "sonstiges":
 			entry.setVisible(false);
 		case " ":
 			break;
