@@ -20,7 +20,6 @@
 	-fx-background-color: #234D74  , white , white;
 	-fx-text-fill:  #294F74;
 	-fx-font-size: 15px;
-	-fx-font-weight: bold;
 }
 #logOutBtn{
 	-fx-background-color: #234D74  , white , white;
@@ -53,15 +52,22 @@
     -fx-background-radius: 3px, 3px, 2px, 1px;
     -fx-text-fill: -fx-text-base-color;
     -fx-font-size: 15px;
+    
 }
 
 .combo-box .list-cell:hover{
 -fx-background-color:#4F888A;
 }
+.combo-box:disabled, .combo-box:disabled > *  {
+  -fx-cursor: not-allowed;
+  -fx-background-color: #eee;
+-fx-text-fill: black;
+-fx-opacity: 0.8;
+}
 
 #searchBtn
 {
-	-fx-background-image: "135-search"
+	
 }
 
 .grid {
@@ -78,3 +84,4 @@
 .split-pane-selected {
    -fx-background-color: white;
 } 
+

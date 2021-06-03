@@ -22,7 +22,7 @@
 
 <BorderPane prefHeight="800.0" prefWidth="1000.0" styleClass="pane" stylesheets="@style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.IOMRecordingController">
    <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
          <content>
             <SplitPane dividerPositions="0.39429928741092624" orientation="VERTICAL" stylesheets="@style1.css">
                <items>
@@ -647,7 +647,7 @@
                                     <Font size="15.0" />
                                  </font>
                             </TitledPane>
-                            <TitledPane fx:id="DCSMEPPane" animated="false" text="Baselines DCS MEPs">
+                            <TitledPane fx:id="DCSMEPPane" animated="false" maxHeight="-Infinity" text="Baselines DCS MEPs">
                                  <content>
                                     <GridPane styleClass="pane">
                                       <columnConstraints>
