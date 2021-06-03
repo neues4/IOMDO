@@ -1276,7 +1276,10 @@
                            <children>
                               <VBox spacing="4.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <Label text="%lbl.time" />
+                                    <Label text="%lbl.time">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></Label>
                                     <TextField fx:id="timeStartTF" promptText="10:00" />
                                     <Button fx:id="addRowBtn" mnemonicParsing="false" onAction="#addRow">
                                        <graphic>
@@ -1293,24 +1296,36 @@
                               </VBox>
                               <VBox spacing="4.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <children>
-                                    <Label text="%lbl.category" />
+                                    <Label text="%lbl.category">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></Label>
                                     <ComboBox fx:id="categoryIOMStart" minWidth="138.0" prefWidth="160.0" />
                                  </children>
                               </VBox>
                               <VBox spacing="4.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                  <children>
-                                    <Label text="%lbl.entry" />
+                                    <Label text="%lbl.entry">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></Label>
                                     <Button mnemonicParsing="false" text="Button" visible="false" />
                                  </children>
                               </VBox>
                               <VBox spacing="4.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                  <children>
-                                    <Label text="%lbl.value" />
+                                    <Label text="%lbl.value">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></Label>
                                  </children>
                               </VBox>
                               <VBox spacing="4.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
                                  <children>
-                                    <Label text="%lbl.comment" />
+                                    <Label text="%lbl.comment">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></Label>
                                     <TextField fx:id="commentIOMStart" />
                                  </children>
                               </VBox>

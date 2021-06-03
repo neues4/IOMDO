@@ -39,7 +39,7 @@
                   <TextField id="searchField" fx:id="searchTF" stylesheets="@style1.css" />
                   <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="47.0" stylesheets="@TestStyle.css">
                      <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@272-cross.png" />
                            </image>
