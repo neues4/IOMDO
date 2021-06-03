@@ -168,7 +168,7 @@ public class IOMRecordingController {
 	private Map<String, Node> nodeMapDcsBaselines = new HashMap<String, Node>();
 
 	private int row = 2;
-	
+
 	private static final String NS = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/";
 
 	private Map<String, Node> nodeList = new HashMap<String, Node>();
@@ -191,7 +191,7 @@ public class IOMRecordingController {
 	//private ObservableList<String> sepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242").keySet());
 	private ObservableList<String> aepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000240").keySet());
 	//private ObservableList<String> cbtMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000371").keySet());
-	
+
 	private ObservableList<String> reflexFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000234").keySet());
 	private ObservableList<String> eegFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000231").keySet());
 	private ObservableList<String> anesthesyProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000159").keySet());
@@ -225,7 +225,7 @@ public class IOMRecordingController {
 		// Patient data end
 
 		//IOM Documentation start
-		//Collections.sort(categoryList);
+		Collections.sort(categoryList);
 		//
 		//categoryIOMStart.setItems(categoryList);
 		//entryIOMStart.setItems(entryList);
@@ -296,7 +296,7 @@ public class IOMRecordingController {
 
 
 		// Baseline end
-		
+
 		//Actual Patient Recording -----------------------
 		categoryIOMStart.getSelectionModel().select("IOM Start");
 		//Undercategory from "change of AEP, SSEP, MEP, VEP" added. 
@@ -308,7 +308,7 @@ public class IOMRecordingController {
 		sepFindingList.addAll(ontEdit.getSubclasses(NS + change_of_ssep).keySet());
 		vepFindingList.addAll(ontEdit.getSubclasses(NS + change_of_vep).keySet());
 		mepFindingList.addAll(ontEdit.getSubclasses(NS + change_of_mep).keySet());
-		
+
 	}
 
 
@@ -920,10 +920,9 @@ public class IOMRecordingController {
 		tp.setText("this is a test");
 		//timeTF.setTooltip(tp);
 		ComboBox<String> categoryCB = new ComboBox<String>();
-		Collections.sort(categoryList);
 		categoryCB.setItems(categoryList);
 
-		
+
 
 		//categoryCB.setMaxHeight(Control.USE_COMPUTED_SIZE);
 
@@ -953,7 +952,7 @@ public class IOMRecordingController {
 						ComboBox<String> addicionalCB = new ComboBox<String>();
 						addicionalCB.setItems(tesMepMuscleChoice);
 						addicionalCB.getSelectionModel().select(tesMepMuscleChoice.get(i));
-						
+
 						//categoryCB.setDisable(true);
 
 						TextField AddidionalValue = new TextField();
@@ -1005,11 +1004,11 @@ public class IOMRecordingController {
 						ComboBox<String> addicionalCB = new ComboBox<String>();
 						addicionalCB.setItems(dcsMepMuscleChoice);
 						addicionalCB.getSelectionModel().select(dcsMepMuscleChoice.get(i));
-						
+
 						//categoryCB.setDisable(true);
-						
-					
-						
+
+
+
 						TextField AddidionalValue = new TextField();
 						//Adding new Noddes to the NodeList, timeTF, CategoryCB and commentTF act as Dummys to not break the consistency of the List.
 						nodeList.put(row + "1", timeTF);
@@ -1050,7 +1049,7 @@ public class IOMRecordingController {
 							infoGrid.add(addRowBtn, 1, row);
 						}
 					});
-					
+
 				}if(categoryCB.getSelectionModel().getSelectedItem().equals("AEP Messung")) {
 
 				}
@@ -1065,7 +1064,7 @@ public class IOMRecordingController {
 			}
 		});
 
-		
+
 		//add nodes to HashMap, Key is ROW + Columnnumber. eg. Key = 21 for Node in ROW 2, Columne 1. 
 		nodeList.put(row + "1", timeTF );
 		nodeList.put(row + "2", categoryCB );
@@ -1092,6 +1091,7 @@ public class IOMRecordingController {
 		deleteBtn.addEventHandler(ActionEvent.ACTION,
 				new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent event) {
+
 				// alert to ask if the user is sure to delete
 				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 				alert.setTitle("Eintrag löschen?");
@@ -1108,25 +1108,23 @@ public class IOMRecordingController {
 
 				// delete if the user chooses yes, don't delete if otherwise
 				if (result.isPresent()) {
-					if (result.get() == btnYes) {
-						int i = GridPane.getRowIndex(deleteBtn);
-						System.out.println(i);
-						infoGrid.getChildren().remove(nodeList.get(i + ""+ 1));
-						System.out.println(i + ""+ 1);
-						System.out.println(nodeList.get(i + ""+ 1).toString());
-						infoGrid.getChildren().remove(deleteBtn); 
-						infoGrid.getChildren().remove(timeTF);
-						infoGrid.getChildren().remove(categoryCB);
-						infoGrid.getChildren().remove(entryCB);
-						infoGrid.getChildren().remove(valueTF);
-						infoGrid.getChildren().remove(commentTF);
-						row--;
-					} else if (result.get() == btnNo) {
-						alert.close();
-					}
+					int i = GridPane.getRowIndex(deleteBtn);
+					System.out.println(i);
+					infoGrid.getChildren().remove(nodeList.get(i + ""+ 1));
+					System.out.println(i + ""+ 1);
+					System.out.println(nodeList.get(i + ""+ 1).toString());
+					infoGrid.getChildren().remove(deleteBtn); 
+					infoGrid.getChildren().remove(timeTF);
+					infoGrid.getChildren().remove(categoryCB);
+					infoGrid.getChildren().remove(entryCB);
+					infoGrid.getChildren().remove(valueTF);
+					infoGrid.getChildren().remove(commentTF);
+					row--;
 				}
-
-
+				if (result.get() == btnYes) {
+				} else if (result.get() == btnNo) {
+					alert.close();
+				}
 			}
 		});
 
@@ -1165,46 +1163,46 @@ public class IOMRecordingController {
 		// Patient Data end
 
 
-		
+
 
 		//IOM actual Recording------------------------------------------------
 
 		String document = ontEdit.createNewIOMDocument("IOMDocumentTest");
-		
+
 		String has_data_item = "IOMO_0000282";
 
 		//String entry1= entryIOMStart.getSelectionModel().getSelectedItem();
 
 		EntryMap map = new EntryMap();
-		
+
 		//Only a Kategory with Meassurement will be saved into the Ontology.  new Baseline not included! Basline measurment can be removed 
 		String category1 =categoryIOMStart.getSelectionModel().getSelectedItem();
 		String category1Uri = map.getUri(category1);
 		//ontEdit.addTimestampToEntity(category1Uri, "IOM Start", timeStartTF.getText());
 		//ontEdit.addCommentToEntity(category1Uri, "Kommentar", commentIOMStart.getText());
-		
+
 		ontEdit.addFindings(category1Uri, "IOM Start", timeStartTF.getText(),commentIOMStart.getText(), document);
-		
+
 		//ontEdit.addMeasurement(category1Uri, "Messung", timeStartTF.getText(), commentIOMStart.getText(), document, "120");
 		//ontEdit.addMeasurement(category1Uri, "Messung", timeStartTF.getText(), commentIOMStart.getText(), document, "150", 
 		//		"http://purl.obolibrary.org/obo/FMA_48998", "Masseter links" );
-		
+
 		//ontEdit.addStatement(document, NS + has_data_item , category1Uri );
 		//System.out.println(category1Uri);
-	
-			//ontEdit.addStatement(document, NS + has_data_item , category1Uri );
-			//String mA= ontEdit.createNewMiliampere("mA");
-			//ontEdit.addPropertiesToMiliampere(mA, "120" );
-			
-			//String indiv= ontEdit.createNewIndividual(category1Uri, category1);
-			//System.out.println(indiv);
-			//ontEdit.addTimestampToEntity(indiv, "timestamp");
-			//ontEdit.addTimestampToEntity(category1Uri,"label",  "timestamp");
-			//Add Value to measurement needs to be added!
-			//ontEdit.saveNewOWLFile();
-			
-			//Messung has Measurments unit mA and mA is About Muscle
-			
+
+		//ontEdit.addStatement(document, NS + has_data_item , category1Uri );
+		//String mA= ontEdit.createNewMiliampere("mA");
+		//ontEdit.addPropertiesToMiliampere(mA, "120" );
+
+		//String indiv= ontEdit.createNewIndividual(category1Uri, category1);
+		//System.out.println(indiv);
+		//ontEdit.addTimestampToEntity(indiv, "timestamp");
+		//ontEdit.addTimestampToEntity(category1Uri,"label",  "timestamp");
+		//Add Value to measurement needs to be added!
+		//ontEdit.saveNewOWLFile();
+
+		//Messung has Measurments unit mA and mA is About Muscle
+
 		int rowsToRead = nodeList.size()/4;
 		for(int i= 2; i <= rowsToRead + 1; i++) {
 			String time = getTextField(  nodeList.get( i  +"" + 1)).getText();
@@ -1212,12 +1210,12 @@ public class IOMRecordingController {
 			String entry = getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem();
 			String categoryUri = map.getUri(category);
 			String comment = getTextField(nodeList.get( i  +"" + 5)).getText();
-			
+
 			ontEdit.addFindings(categoryUri,  category, time ,comment, document);
 		}
-		
-		
-		
+
+
+
 		//alles zurücksetzen
 		caseNrTF.setText("");
 		fidTF.setText("");
@@ -1226,33 +1224,33 @@ public class IOMRecordingController {
 		firstNameTF.setText("");
 		timeStartTF.setText("");
 		birthdayTF.setText("");
-		
+
 		diagnosisCB.getSelectionModel().clearSelection();
 		surgeryCB.getSelectionModel().clearSelection();
 		deviceCB.getSelectionModel().clearSelection();
 		dateOfSurgeryTF.setText("");
 		surgeonCB.getSelectionModel().clearSelection();
 		assistantCB.getSelectionModel().clearSelection();
-		
-		
+
+
 		commentIOMStart.setText("");
 		int rowsToRead1 = nodeList.size()/4;
 		for(int i= 2; i <= rowsToRead1 + 1; i++) {
 			getTextField(  nodeList.get( i  +"" + 1)).setText("");;
 			getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().clearSelection();;
 			getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().clearSelection();
-			
+
 			TextField valueTF = getTextField(  nodeList.get( i  +"" + 4));
 			if(valueTF != null) {
 				getTextField(  nodeList.get( i  +"" + 4)).setText("");;
 			}
-			
+
 			getTextField(nodeList.get( i  +"" + 5)).setText("");
 			//IOM Documentation end
 		}
-		
-		
-			/*
+
+
+		/*
 			if(category1.contains(I18n.getString("rec.measurement"))) {
 				//uri fehlt noch!
 				ontEdit.addStatement(document, NS + has_data_item , category);
@@ -1270,7 +1268,7 @@ public class IOMRecordingController {
 
 
 
-			
+
 			//if(!comment.isEmpty()) {
 				//save comment
 			//}
@@ -1334,7 +1332,7 @@ public class IOMRecordingController {
 			Collections.sort(technicalIssuesList);
 			entry.setItems(technicalIssuesList);
 			break;
-		//case "D-Welle Messung":
+			//case "D-Welle Messung":
 			//entry.setItems(dwaveMeasurementList);
 			//break;
 		case "TES MEP Messung":
@@ -1388,7 +1386,7 @@ public class IOMRecordingController {
 			Collections.sort(mappingFindingList);
 			entry.setItems(mappingFindingList);
 			break;
-		//case "IOM Prozess":
+			//case "IOM Prozess":
 			//entry.setItems(iomProcessList);
 			//break;
 		case "SEP Beobachtung":
@@ -1396,7 +1394,7 @@ public class IOMRecordingController {
 			Collections.sort(sepFindingList);
 			entry.setItems(sepFindingList);
 			break;
-		//case "AEP Beobachtung":
+			//case "AEP Beobachtung":
 			//entry.setVisible(true);
 			//Collections.sort(aepFindingList);
 			//entry.setItems(aepFindingList);
@@ -1416,18 +1414,24 @@ public class IOMRecordingController {
 			Collections.sort(mepFindingList);
 			entry.setItems(mepFindingList);
 			break;
+			/*
 		case "Aktion":
 			entry.setVisible(true);
 			Collections.sort(actionList);
 			entry.setItems(actionList);
+			break;
+			*/
 		case "Grid Positionierung":
 			entry.setVisible(true);
 			Collections.sort(gridPositioningList);
 			entry.setItems(gridPositioningList);
+			break;
 		case "IOM Ende":
 			entry.setVisible(false);
+			break;
 		case "sonstiges":
 			entry.setVisible(false);
+			break;
 		case " ":
 			break;
 		}	
