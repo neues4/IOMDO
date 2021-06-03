@@ -952,7 +952,7 @@ public class IOMRecordingController {
 						addicionalCB.setItems(tesMepMuscleChoice);
 						addicionalCB.getSelectionModel().select(tesMepMuscleChoice.get(i));
 
-						//categoryCB.setDisable(true);
+						categoryCB.setDisable(true);
 
 						TextField AddidionalValue = new TextField();
 						//Adding new Noddes to the NodeList, timeTF, CategoryCB and commentTF act as Dummys to not break the consistency of the List.
@@ -1004,7 +1004,7 @@ public class IOMRecordingController {
 						addicionalCB.setItems(dcsMepMuscleChoice);
 						addicionalCB.getSelectionModel().select(dcsMepMuscleChoice.get(i));
 
-						//categoryCB.setDisable(true);
+						categoryCB.setDisable(true);
 
 
 
