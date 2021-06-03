@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
@@ -23,7 +24,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
@@ -1195,7 +1198,9 @@ public class IOMRecordingController {
 		//ontEdit.saveNewOWLFile();
 
 		//Messung has Measurments unit mA and mA is About Muscle
-
+		
+		
+/*Fürs speichen, für usability test ausgeklammert
 		int rowsToRead = nodeList.size()/4;
 		for(int i= 2; i <= rowsToRead + 1; i++) {
 			String time = getTextField(  nodeList.get( i  +"" + 1)).getText();
@@ -1206,7 +1211,7 @@ public class IOMRecordingController {
 
 			ontEdit.addFindings(categoryUri,  category, time ,comment, document);
 		}
-
+*/
 
 
 		//alles zurücksetzen

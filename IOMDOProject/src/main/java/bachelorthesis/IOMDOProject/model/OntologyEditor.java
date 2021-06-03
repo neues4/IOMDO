@@ -59,9 +59,9 @@ public class OntologyEditor {
 	{
 		if (editor == null)
 			//Windows
-			//editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_30.owl");
+			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_32.owl");
 		//mac
-		editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_32.owl");
+		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_32.owl");
 
 		return editor;
 	}
@@ -590,7 +590,7 @@ public class OntologyEditor {
 		//OntClass vepMeasurement = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000244");
 		OntClass anesthesiaProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000159");
 		OntClass surgicalProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058");
-		OntClass humanAction = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human");
+		//OntClass humanAction = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human");
 		OntClass technicalIssues = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000154");
 		//OntClass iomProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000057");
 		OntClass gridPositioning = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000064");
@@ -619,7 +619,7 @@ public class OntologyEditor {
 		//showEntityMap.put(vepMeasurement.getLabel("DE"), vepMeasurement.getURI());
 		showEntityMap.put(anesthesiaProcess.getLabel("DE"), anesthesiaProcess.getURI());
 		showEntityMap.put(surgicalProcess.getLabel("DE"), surgicalProcess.getURI());
-		showEntityMap.put(humanAction.getLabel("DE"), humanAction.getURI());
+		//showEntityMap.put(humanAction.getLabel("DE"), humanAction.getURI());
 		showEntityMap.put(technicalIssues.getLabel("DE"), technicalIssues.getURI());
 		//showEntityMap.put(iomProcess.getLabel("DE"), iomProcess.getURI());
 		showEntityMap.put(gridPositioning.getLabel("DE"), gridPositioning.getURI());
