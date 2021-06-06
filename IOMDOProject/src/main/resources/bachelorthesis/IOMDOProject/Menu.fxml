@@ -3,7 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,9 +16,17 @@
 
 <BorderPane fx:id="borderPaneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.MenuController">
    <top>
-      <HBox alignment="TOP_RIGHT" minHeight="80.0" styleClass="hbox" stylesheets="@style1.css" BorderPane.alignment="CENTER">
+      <HBox alignment="TOP_RIGHT" minHeight="80.0" prefHeight="94.0" prefWidth="1280.0" styleClass="hbox" stylesheets="@style1.css" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" />
+            <AnchorPane prefHeight="112.0" prefWidth="196.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="93.0" fitWidth="212.0" layoutX="1.0">
+                     <image>
+                        <Image url="@Logo.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
             <VBox alignment="TOP_RIGHT">
                <children>
                   <Label text="%lbl.loggedInAs" textFill="WHITE" />
