@@ -188,7 +188,7 @@
                             </TitledPane>
                             <TitledPane fx:id="TESMEPPane" animated="false" text="Baselines TES MEPs">
                                  <content>
-                                    <GridPane fx:id="tesMepGridpane" styleClass="pane" stylesheets="@style1.css">
+                                    <GridPane fx:id="tesMepGridpane" hgap="2.0" styleClass="pane" stylesheets="@style1.css" vgap="2.0">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -647,9 +647,9 @@
                                     <Font size="15.0" />
                                  </font>
                             </TitledPane>
-                            <TitledPane fx:id="DCSMEPPane" animated="false" maxHeight="-Infinity" text="Baselines DCS MEPs">
+                            <TitledPane fx:id="DCSMEPPane" animated="false" text="Baselines DCS MEPs">
                                  <content>
-                                    <GridPane styleClass="pane">
+                                    <GridPane hgap="2.0" styleClass="pane" vgap="2.0">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

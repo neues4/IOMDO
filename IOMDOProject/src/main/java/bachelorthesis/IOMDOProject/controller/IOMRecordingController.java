@@ -219,6 +219,8 @@ public class IOMRecordingController {
 
 	public void initialize() {
 		// Patient data start
+		Collections.sort(diagnosisList);
+		Collections.sort(surgeryList);
 		diagnosisCB.setItems(diagnosisList);
 		surgeryCB.setItems(surgeryList);
 		surgeonCB.setItems(surgeonList);
@@ -1221,44 +1223,45 @@ public class IOMRecordingController {
 		 */
 
 		// a new alert to inform the user that the data was saved successfully
+		//Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setHeaderText("gespeichert");
+		alert.setHeaderText("Gespeichert");
 		alert.setContentText("Daten erfolgreich abgespeichert!");
-		alert.showAndWait();
-
+		alert.show();
+		//alert.showAndWait();
 
 		//alles zurücksetzen
-		caseNrTF.setText("");
-		fidTF.setText("");
-		pidTF.setText("");
-		surnameTF.setText("");
-		firstNameTF.setText("");
-		timeStartTF.setText("");
-		birthdayTF.setText("");
+		//caseNrTF.setText("");
+		//fidTF.setText("");
+		//pidTF.setText("");
+		//surnameTF.setText("");
+		//firstNameTF.setText("");
+		//timeStartTF.setText("");
+		//birthdayTF.setText("");
 
-		diagnosisCB.getSelectionModel().clearSelection();
-		surgeryCB.getSelectionModel().clearSelection();
-		deviceCB.getSelectionModel().clearSelection();
-		dateOfSurgeryTF.setText("");
-		surgeonCB.getSelectionModel().clearSelection();
-		assistantCB.getSelectionModel().clearSelection();
+		//diagnosisCB.getSelectionModel().clearSelection();
+		//surgeryCB.getSelectionModel().clearSelection();
+		//deviceCB.getSelectionModel().clearSelection();
+		//dateOfSurgeryTF.setText("");
+		//surgeonCB.getSelectionModel().clearSelection();
+		//assistantCB.getSelectionModel().clearSelection();
 
 
-		commentIOMStart.setText("");
-		int rowsToRead1 = nodeList.size()/4;
-		for(int i= 2; i <= rowsToRead1 + 1; i++) {
-			getTextField(  nodeList.get( i  +"" + 1)).setText("");;
-			getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().clearSelection();;
-			getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().clearSelection();
+		//commentIOMStart.setText("");
+		//int rowsToRead1 = nodeList.size()/4;
+		//for(int i= 2; i <= rowsToRead1 + 1; i++) {
+			//getTextField(  nodeList.get( i  +"" + 1)).setText("");;
+			//getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().clearSelection();;
+			//getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().clearSelection();
 
-			TextField valueTF = getTextField(  nodeList.get( i  +"" + 4));
-			if(valueTF != null) {
-				getTextField(  nodeList.get( i  +"" + 4)).setText("");;
-			}
+			//TextField valueTF = getTextField(  nodeList.get( i  +"" + 4));
+			//if(valueTF != null) {
+			//	getTextField(  nodeList.get( i  +"" + 4)).setText("");;
+			//}
 
-			getTextField(nodeList.get( i  +"" + 5)).setText("");
+			//getTextField(nodeList.get( i  +"" + 5)).setText("");
 			//IOM Documentation end
-		}
+		//}
 
 
 		/*

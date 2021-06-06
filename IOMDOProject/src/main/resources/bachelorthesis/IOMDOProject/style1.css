@@ -34,6 +34,17 @@
   -fx-background-radius: 7px;
 }
 
+.button:hover{
+-fx-border-color:white;
+-fx-border-radius: 5px;
+ -fx-background-color:#294F90;
+}
+
+.button:active{
+	 -fx-background-color: #294F90;
+
+}
+
 .pane {
 	-fx-background-color: #FFFFFF;
 }
