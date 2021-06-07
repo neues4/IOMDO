@@ -1333,15 +1333,40 @@
                         </GridPane>
                      </center>
                   </BorderPane>
-                  <HBox alignment="TOP_RIGHT" prefWidth="965.0" SplitPane.resizableWithParent="false">
+                  <GridPane SplitPane.resizableWithParent="false">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints prefHeight="30.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                        <RowConstraints vgrow="NEVER" />
+                        <RowConstraints vgrow="NEVER" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                     </rowConstraints>
                      <children>
-                        <Button fx:id="save" mnemonicParsing="false" onAction="#save" text="%lbl.save">
-                           <HBox.margin>
-                              <Insets right="24.0" />
-                           </HBox.margin>
-                        </Button>
+                        <Button fx:id="save" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#save" text="%lbl.save" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <TextField fx:id="outcomeCommentTF" stylesheets="@style1.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="outcomeCB" stylesheets="@style1.css" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="8.0" />
+                           </GridPane.margin>
+                        </ComboBox>
+                        <Label stylesheets="@style1.css" text="%lbl.comment" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label stylesheets="@style1.css" text="%lbl.outcome" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="8.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label disable="true" GridPane.rowIndex="4" />
                      </children>
-                  </HBox>
+                  </GridPane>
                </items>
             </SplitPane>
          </content>

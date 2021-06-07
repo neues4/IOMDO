@@ -29,18 +29,18 @@ import javafx.collections.ObservableList;
 public class OntClassMap {
 
 	private OntologyEditor ontEdit = OntologyEditor.getInstance();
-	private ArrayList<OntClass>  list= new ArrayList<OntClass>();
+	private List<OntClass>  OntClassList= new ArrayList<OntClass>();
 	private HashMap<String, String> ontClassUriMap = new HashMap<String, String>(); 
 	private HashMap<String, String> ontClassLabelMap = new HashMap<String, String>(); 
 	
 	public OntClassMap() {
-		list = ontEdit.getAllOntologyClasses();
+		OntClassList = ontEdit.getAllOntologyClasses();
 		fillUriMap();
 		fillLabelMap();
 	}
 	
 	private void fillUriMap() {
-		Iterator<OntClass> iter = list.iterator();
+		Iterator<OntClass> iter = OntClassList.iterator();
 		while (iter.hasNext()) {
 			OntClass ontClass =  (OntClass) iter.next();
 			if(ontClass.getLabel("DE") != null) {
@@ -59,8 +59,8 @@ public class OntClassMap {
 	}
 	
 	private void fillLabelMap() {
-		list = ontEdit.getAllOntologyClasses();
-		Iterator<OntClass> iter = list.iterator();
+		OntClassList = ontEdit.getAllOntologyClasses();
+		Iterator<OntClass> iter = OntClassList.iterator();
 		while (iter.hasNext()) {
 			OntClass ontClass =  (OntClass) iter.next();
 			if(ontClass.getLabel("DE") != null) {
@@ -93,6 +93,19 @@ public class OntClassMap {
 	 */
 	public String getLabelFromURI(String uri) {
 		return ontClassLabelMap.get(uri);
+	}
+	
+	public List<OntClass> getOntClassList() {
+		return OntClassList;
+	}
+	
+	//not finished!!!
+	public OntClass getOntClass(String label) {
+		for(int i = 0; i < OntClassList.size(); i++)
+		if (OntClassList.get(i).toString() ==(label));
+		
+		
+		return null;
 	}
 		
 }

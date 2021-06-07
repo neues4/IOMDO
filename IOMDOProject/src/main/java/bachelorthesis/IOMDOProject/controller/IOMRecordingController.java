@@ -15,6 +15,7 @@ import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
 import bachelorthesis.IOMDOProject.model.Counter;
 import bachelorthesis.IOMDOProject.model.EntryMap;
+import bachelorthesis.IOMDOProject.model.OntClassMap;
 import bachelorthesis.IOMDOProject.model.OntologyEditor;
 import bachelorthesis.IOMDOProject.model.PatientSurgeryData;
 import javafx.application.Platform;
@@ -148,10 +149,10 @@ public class IOMRecordingController {
 	private SplitPane splitpane;
 
 	@FXML
-	private TextField timeStartTF, commentIOMStart;
+	private TextField timeStartTF, commentIOMStart, outcomeCommentTF;
 
 	@FXML
-	private ComboBox<String> categoryIOMStart;
+	private ComboBox<String> categoryIOMStart, outcomeCB;
 
 	//löschen romap1
 	//@FXML
@@ -1172,21 +1173,23 @@ public class IOMRecordingController {
 
 		//IOM actual Recording------------------------------------------------
 
-		String document = ontEdit.createNewIOMDocument("IOMDocumentTest");
+		String documentUri = ontEdit.createNewIOMDocument("IOMDocumentTest");
 
 		String has_data_item = "IOMO_0000282";
 
 		//String entry1= entryIOMStart.getSelectionModel().getSelectedItem();
 
-		EntryMap map = new EntryMap();
+		//EntryMap map = new EntryMap();
+		OntClassMap ontClassMap = new OntClassMap();
+		
 
 		//Only a Kategory with Meassurement will be saved into the Ontology.  new Baseline not included! Basline measurment can be removed 
 		String category1 =categoryIOMStart.getSelectionModel().getSelectedItem();
-		String category1Uri = map.getUri(category1);
+		String category1Uri = ontClassMap.getUriFromLabel(category1);
 		//ontEdit.addTimestampToEntity(category1Uri, "IOM Start", timeStartTF.getText());
 		//ontEdit.addCommentToEntity(category1Uri, "Kommentar", commentIOMStart.getText());
 
-		ontEdit.addFindings(category1Uri, "IOM Start", timeStartTF.getText(),commentIOMStart.getText(), document);
+		ontEdit.addFindings(category1Uri, "IOM Start", timeStartTF.getText(),commentIOMStart.getText(), documentUri);
 
 		//ontEdit.addMeasurement(category1Uri, "Messung", timeStartTF.getText(), commentIOMStart.getText(), document, "120");
 		//ontEdit.addMeasurement(category1Uri, "Messung", timeStartTF.getText(), commentIOMStart.getText(), document, "150", 
@@ -1209,18 +1212,40 @@ public class IOMRecordingController {
 		//Messung has Measurments unit mA and mA is About Muscle
 
 
-		/*Fürs speichen, für usability test ausgeklammert
+		//Fürs speichen, für usability test ausgeklammert
 		int rowsToRead = nodeList.size()/4;
 		for(int i= 2; i <= rowsToRead + 1; i++) {
 			String time = getTextField(  nodeList.get( i  +"" + 1)).getText();
 			String category = getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().getSelectedItem();
 			String entry = getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem();
-			String categoryUri = map.getUri(category);
+			String categoryUri = ontClassMap.getUriFromLabel(category);
 			String comment = getTextField(nodeList.get( i  +"" + 5)).getText();
 
-			ontEdit.addFindings(categoryUri,  category, time ,comment, document);
+			if (category == "sonstiges" || category == "IOM Ende")
+			ontEdit.addFindings(categoryUri,  category, time ,comment, documentUri);
+			if (category == "Operationsprozess") {
+				//Methode fehlt noch
+			}
+			if (category.contains("Messung")){
+				if(category == "TES MEP Messung") {
+					String value = getTextField(nodeList.get(i  +"" + 4)).getText();
+					String entryUri = ontClassMap.getUriFromLabel(entry);
+					//methode umänderder so das es eine liste von muskel gibt
+					int numberOfMuscles = tesMepMuscleChoice.size();
+					List<String> muscleList = new ArrayList<String>();
+					for(int z= 0; z <= numberOfMuscles; z++) {
+						String entrytemp = getComboBox(nodeList.get( ((i+z)  +"" + 3))).getSelectionModel().getSelectedItem();
+						muscleList.add(entrytemp);
+					}
+					ontEdit.addMeasurement(category1Uri, category, time, comment, documentUri, value, categoryUri, entry);
+					int linesToSkip = tesMepMuscleChoice.size() ;
+					System.out.println("lines to skip: " + linesToSkip );
+					i = i + linesToSkip;
+
+				}
+			}
 		}
-		 */
+		 
 
 		// a new alert to inform the user that the data was saved successfully
 		//Alert alert = new Alert(Alert.AlertType.INFORMATION);
