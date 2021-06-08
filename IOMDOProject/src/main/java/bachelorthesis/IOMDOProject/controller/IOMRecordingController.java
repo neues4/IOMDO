@@ -1168,85 +1168,60 @@ public class IOMRecordingController {
 		//getReflexBaselineValues();
 		// Patient Data end
 
-
-
-
 		//IOM actual Recording------------------------------------------------
 
 		String documentUri = ontEdit.createNewIOMDocument("IOMDocumentTest");
 
-		String has_data_item = "IOMO_0000282";
-
-		//String entry1= entryIOMStart.getSelectionModel().getSelectedItem();
-
-		//EntryMap map = new EntryMap();
 		OntClassMap ontClassMap = new OntClassMap();
 		
-
 		//Only a Kategory with Meassurement will be saved into the Ontology.  new Baseline not included! Basline measurment can be removed 
 		String category1 =categoryIOMStart.getSelectionModel().getSelectedItem();
 		String category1Uri = ontClassMap.getUriFromLabel(category1);
-		//ontEdit.addTimestampToEntity(category1Uri, "IOM Start", timeStartTF.getText());
-		//ontEdit.addCommentToEntity(category1Uri, "Kommentar", commentIOMStart.getText());
-
+		
 		ontEdit.addFindings(category1Uri, "IOM Start", timeStartTF.getText(),commentIOMStart.getText(), documentUri);
-
-		//ontEdit.addMeasurement(category1Uri, "Messung", timeStartTF.getText(), commentIOMStart.getText(), document, "120");
-		//ontEdit.addMeasurement(category1Uri, "Messung", timeStartTF.getText(), commentIOMStart.getText(), document, "150", 
-		//		"http://purl.obolibrary.org/obo/FMA_48998", "Masseter links" );
-
-		//ontEdit.addStatement(document, NS + has_data_item , category1Uri );
-		//System.out.println(category1Uri);
-
-		//ontEdit.addStatement(document, NS + has_data_item , category1Uri );
-		//String mA= ontEdit.createNewMiliampere("mA");
-		//ontEdit.addPropertiesToMiliampere(mA, "120" );
-
-		//String indiv= ontEdit.createNewIndividual(category1Uri, category1);
-		//System.out.println(indiv);
-		//ontEdit.addTimestampToEntity(indiv, "timestamp");
-		//ontEdit.addTimestampToEntity(category1Uri,"label",  "timestamp");
-		//Add Value to measurement needs to be added!
-		//ontEdit.saveNewOWLFile();
-
-		//Messung has Measurments unit mA and mA is About Muscle
-
-
 		//Fürs speichen, für usability test ausgeklammert
 		int rowsToRead = nodeList.size()/4;
-		for(int i= 2; i <= rowsToRead + 1; i++) {
+		for(int i= 2; i < rowsToRead + 1; i++) {
+			System.out.println(i+ "" + 1);
 			String time = getTextField(  nodeList.get( i  +"" + 1)).getText();
+			
 			String category = getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().getSelectedItem();
 			String entry = getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem();
 			String categoryUri = ontClassMap.getUriFromLabel(category);
 			String comment = getTextField(nodeList.get( i  +"" + 5)).getText();
 
-			if (category == "sonstiges" || category == "IOM Ende")
+			if (category.equalsIgnoreCase("sonstiges") || category.equalsIgnoreCase("IOM Ende"))
 			ontEdit.addFindings(categoryUri,  category, time ,comment, documentUri);
 			if (category == "Operationsprozess") {
 				//Methode fehlt noch
 			}
-			if (category.contains("Messung")){
+			
+			if(category.contains("MEP Messung")) {
+				int numberOfMuscles = 0;
 				if(category == "TES MEP Messung") {
-					String value = getTextField(nodeList.get(i  +"" + 4)).getText();
+					numberOfMuscles = tesMepMuscleChoice.size();
+				}if(category == "DCS MEP Messung") {
+					numberOfMuscles = dcsMepMuscleChoice.size();
+				}
 					String entryUri = ontClassMap.getUriFromLabel(entry);
 					//methode umänderder so das es eine liste von muskel gibt
-					int numberOfMuscles = tesMepMuscleChoice.size();
-					List<String> muscleList = new ArrayList<String>();
-					for(int z= 0; z <= numberOfMuscles; z++) {
-						String entrytemp = getComboBox(nodeList.get( ((i+z)  +"" + 3))).getSelectionModel().getSelectedItem();
-						muscleList.add(entrytemp);
-					}
-					ontEdit.addMeasurement(category1Uri, category, time, comment, documentUri, value, categoryUri, entry);
-					int linesToSkip = tesMepMuscleChoice.size() ;
-					System.out.println("lines to skip: " + linesToSkip );
-					i = i + linesToSkip;
-
-				}
-			}
+					List<String> muscleUriList = new ArrayList<String>();
+					List<String> muscleLabelList = new ArrayList<String>();
+					List<String> valueList = new ArrayList<String>();
+					for(int z= 0; z < numberOfMuscles; z++) {
+						String entryTemp = getComboBox(nodeList.get( ((i+z)  +"" + 3))).getSelectionModel().getSelectedItem();
+						String valueTemp = getTextField(nodeList.get((i+z)  + "" + 4)).getText();
+						String muscleUri = ontClassMap.getUriFromLabel(entryTemp);
+						muscleUriList.add(muscleUri);
+						muscleLabelList.add(entryTemp);
+						valueList.add(valueTemp);
+					}	
+					ontEdit.addMeasurement(category1Uri, category, time, comment, documentUri, valueList, muscleUriList, muscleLabelList);
+					//System.out.println("lines to skip: " + numberOfMuscles );
+					i = i + (numberOfMuscles -1);	
+		}
 		}
 		 
-
 		// a new alert to inform the user that the data was saved successfully
 		//Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -1319,18 +1294,8 @@ public class IOMRecordingController {
 		//String has_document = "0000285";
 
 		/*
-		System.out.println("Zeit: " + timeStartTF.getText());
-		System.out.println("Kategorie: " + categoryIOMStart.getSelectionModel().getSelectedItem());
-		System.out.println("Eintrag: " + entryIOMStart.getSelectionModel().getSelectedItem());
-		System.out.println("Kommentar: " + commentIOMStart.getText());
+	
 
-
-		int rowsToRead = nodeList.size()/4;
-		for(int i= 2; i <= rowsToRead + 1; i++) {
-			System.out.println("Zeit" + i + ": "+ getTextField(  nodeList.get( i  +"" + 1)).getText());
-			System.out.println("Kategorie"+ i +": "+ getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().getSelectedItem());
-			System.out.println("Eintrag" + i + ": "+getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem());
-			System.out.println("Kommentar" + i+ ": "+getTextField(nodeList.get( i  +"" + 5)).getText());
 			//IOM Documentation end
 
 		}

@@ -9,6 +9,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.jena.datatypes.xsd.XSDDatatype;
@@ -59,7 +60,7 @@ public class OntologyEditor {
 	{
 		if (editor == null)
 			//Windows
-			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_32.owl");
+			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_33.owl");
 		//mac
 		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_32.owl");
 
@@ -349,7 +350,7 @@ public class OntologyEditor {
 	}
 
 	/**
-	 * 
+	 * @author romap1
 	 * @param entityUri
 	 * @param label
 	 * @param timestamp
@@ -382,17 +383,18 @@ public class OntologyEditor {
 
 	/**
 	 * FOR DCS MEP and TES MEP Measurement
+	 * @author romap1
 	 * @param entityUri
 	 * @param label
 	 * @param timestamp
 	 * @param comment
 	 * @param doccumentUri
-	 * @param MeasurementValue
+	 * @param measurementValue
 	 * @param muscleUri
 	 * @param muscleLabel
 	 */
 	public void addMeasurement(String entityUri, String label,String timestamp, String comment, 
-			String doccumentUri, String MeasurementValue, String muscleUri, String muscleLabel) {
+			String doccumentUri, List<String> measurementValue, List<String> muscleUri, List<String> muscleLabel) {
 		String indivUri= createNewIndividual(entityUri, label);
 		Individual indv = ontModel.getIndividual(indivUri);
 		DatatypeProperty datPropTimeStamp = ontModel.getDatatypeProperty( NS + has_timestamp);
@@ -405,25 +407,24 @@ public class OntologyEditor {
 		}
 
 		addStatement(doccumentUri, NS + has_data_item , indivUri);
-
-		String maUri = createNewMiliampere("mA");
-		addPropertiesToMiliampere(maUri, MeasurementValue );
-
-		addStatement(indivUri, NS + has_measurement_unit, maUri);
-		addStatement(maUri, NS + measurement_unit_of, indivUri);
-
-		//add muscle, later will get a list or map instead of a String since more than 1 muscle
-
-		OntClass ontClass = ontModel.getOntClass(muscleUri);
-		Individual indv2 = ontClass.createIndividual(NS + getId());
-		//Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
-		indv2.addLabel(muscleLabel, "DE");
-
-
-		String muscle= createNewIndividual(muscleUri, muscleLabel);
-		//Individual muscleIndv = ontModel.getIndividual(muscle);
-		addStatement(maUri, "http://purl.obolibrary.org/obo/IAO_0000136" , muscle);
-
+		
+		
+		Iterator<String> valueIter = measurementValue.iterator();
+		Iterator<String> muscleIter = muscleLabel.iterator();
+		Iterator<String> muscleUriIter = muscleUri.iterator();
+		
+		//add values und muscles
+		while (muscleIter.hasNext()) {
+			String maUri = createNewMiliampere("mA");
+			addPropertiesToMiliampere(maUri, valueIter.next());
+			addStatement(indivUri, NS + has_measurement_unit, maUri);
+			addStatement(maUri, NS + measurement_unit_of, indivUri);
+			String muscle= createNewIndividual(muscleUriIter.next(), muscleIter.next());
+			String is_answer_about = "IOMO_0000468";
+			addStatement(maUri, NS + is_answer_about , muscle);	
+			String gives_answer_in = "IOMO_0000469";
+			addStatement(muscle, NS + is_answer_about , maUri);
+		}	
 		saveNewOWLFile();
 	}
 
