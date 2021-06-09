@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -1351,7 +1352,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="save" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#save" text="%lbl.save" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <Button fx:id="save" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#save" text="%lbl.save" GridPane.columnIndex="6" />
                         <TextField fx:id="outcomeCommentTF" stylesheets="@style1.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <ComboBox fx:id="outcomeCB" stylesheets="@style1.css" GridPane.rowIndex="3">
                            <GridPane.margin>
@@ -1365,6 +1366,7 @@
                            </GridPane.margin>
                         </Label>
                         <Label disable="true" GridPane.rowIndex="4" />
+                        <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </items>

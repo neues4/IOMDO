@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -26,6 +27,9 @@ import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.util.iterator.ExtendedIterator;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 
@@ -55,12 +59,15 @@ public class OntologyEditor {
 	private String has_data_item = "IOMO_0000282";
 	private String has_comment = "IOMO_0000459";
 	private String has_timestamp = "IOMO_0000266";
+	private String is_answer_about = "IOMO_0000468";
+	private String gives_answer_in = "IOMO_0000469";
+	private String has_document = "IOMO_0000285";
 
 	public static OntologyEditor getInstance()
 	{
 		if (editor == null)
 			//Windows
-			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_33.owl");
+			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_34.owl");
 		//mac
 		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_32.owl");
 
@@ -129,7 +136,7 @@ public class OntologyEditor {
 		while (classIter.hasNext()) {
 			OntClass ontClass = (OntClass) classIter.next();
 			//String uri = ontClass.getURI();
-			
+
 			if (ontClass.getURI() != null)
 				list.add(ontClass);
 		}
@@ -200,7 +207,7 @@ public class OntologyEditor {
 	public String createNewPatient(String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#patient");
 		Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
-		indv.addLabel(indvLabel, "EN");
+		indv.addLabel(indvLabel, "DE");
 		return indv.getURI();
 	}
 
@@ -240,7 +247,7 @@ public class OntologyEditor {
 	/**
 	 * method to add the dataproperties to the patient
 	 * @author neues4
-	 * @param pat the label of the patient individual
+	 * @param pat the uri of the patient individual
 	 * @param nr the case number to add to the patient
 	 * @param PID the PID to add to the patient
 	 * @param FID the FID to add to the patient
@@ -407,12 +414,12 @@ public class OntologyEditor {
 		}
 
 		addStatement(doccumentUri, NS + has_data_item , indivUri);
-		
-		
+
+
 		Iterator<String> valueIter = measurementValue.iterator();
 		Iterator<String> muscleIter = muscleLabel.iterator();
 		Iterator<String> muscleUriIter = muscleUri.iterator();
-		
+
 		//add values und muscles
 		while (muscleIter.hasNext()) {
 			String maUri = createNewMiliampere("mA");
@@ -420,12 +427,65 @@ public class OntologyEditor {
 			addStatement(indivUri, NS + has_measurement_unit, maUri);
 			addStatement(maUri, NS + measurement_unit_of, indivUri);
 			String muscle= createNewIndividual(muscleUriIter.next(), muscleIter.next());
-			String is_answer_about = "IOMO_0000468";
 			addStatement(maUri, NS + is_answer_about , muscle);	
-			String gives_answer_in = "IOMO_0000469";
-			addStatement(muscle, NS + is_answer_about , maUri);
+			addStatement(muscle, NS + gives_answer_in , maUri);
 		}	
 		saveNewOWLFile();
+	}
+	
+	//im aufbau
+	public void addPatient(String caseNumber, String pid, String fid, String firstname, String surname, String birthday, String documentUri) {
+		
+		//Integer patNum = patNumber.getValue();
+		//String patLabel = "Patient".concat(patNum.toString());
+
+		//es fehlt noch nummerierung!
+		String patientUri = createNewPatient("patient"); 
+
+		addPatientProperties(patientUri, caseNumber, pid , fid, firstname, surname, birthday);
+
+		//String surgery= ontEdit.createNewIndividual(ontEdit.getAllSurgeries().get(surgeryCB.getSelectionModel().getSelectedItem()), "Surgery");
+
+		//ontEdit.addSurgeryProperties(surgery, dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem());
+
+		//String diagnosis = ontEdit.createNewIndividual(ontEdit.getAllDiagnosis().get(diagnosisCB.getSelectionModel().getSelectedItem()), "Diagnosis");
+
+	
+
+		addStatement(patientUri, NS + has_document, documentUri);
+		//addStatement(iomDocument, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", surgery);
+		//addStatement(iomDocument, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", diagnosis);
+
+saveNewOWLFile(); 
+	}
+
+	/**
+	 * @author romap1
+	 * @return
+	 */
+	public ObservableList<String> getPostoperativeDisposition() {
+		String abnormalNervousSystemPhysiologyHP = "http://purl.obolibrary.org/obo/HP_0012638";
+		String postoperativeDisposition = "IOMO_0000381";
+		String cerebrospinalFluidLeak = "http://purl.obolibrary.org/obo/MONDO_0043327";
+		//add Subclasses of postoperative Disposition
+		Map<String, String> map = getSubclasses(NS + postoperativeDisposition);
+		//add SubSubclass of postoperative Disposition
+		Map<String, String> map2 = getSubclasses(abnormalNervousSystemPhysiologyHP);
+
+		ObservableList<String> list = FXCollections.observableArrayList();
+
+		OntClassMap ontClassMap = new OntClassMap();
+		//add a stand alone subsubclass of postoperative Disposition
+		list.add(ontClassMap.getLabelFromURI(cerebrospinalFluidLeak));
+		
+		list.addAll(map.keySet());
+		list.addAll(map2.keySet());
+		//remove Entities without German label
+		list.remove(null);
+		Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+		//add empty String, so that the user can undo his selection
+		list.add("");
+		return list;
 	}
 
 

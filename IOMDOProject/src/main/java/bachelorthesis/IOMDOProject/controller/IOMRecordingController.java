@@ -135,7 +135,9 @@ public class IOMRecordingController {
 	//-------------------------------------------------------Variables Baselines
 
 	//Variables IOM actual Recording-------------------------------------------------
-
+	
+	
+	
 	@FXML
 	private Button addRowBtn, save;
 
@@ -302,7 +304,10 @@ public class IOMRecordingController {
 
 		// Baseline end
 
-		//Actual Patient Recording -----------------------
+		//Actual Patient Recording Initialize-----------------------
+		
+		
+		
 		categoryIOMStart.getSelectionModel().select("IOM Start");
 		//Undercategory from "change of AEP, SSEP, MEP, VEP" added. 
 		String change_of_aep = "IOMO_0000429";
@@ -313,6 +318,11 @@ public class IOMRecordingController {
 		sepFindingList.addAll(ontEdit.getSubclasses(NS + change_of_ssep).keySet());
 		vepFindingList.addAll(ontEdit.getSubclasses(NS + change_of_vep).keySet());
 		mepFindingList.addAll(ontEdit.getSubclasses(NS + change_of_mep).keySet());
+		
+		
+		outcomeCB.setItems(ontEdit.getPostoperativeDisposition());
+		
+		//-----------------------Actual Patient Recording Initialize End
 
 	}
 
@@ -342,7 +352,13 @@ public class IOMRecordingController {
 	 * a method to save a new patient instance to the ontology, his diagnosis and his surgery with all the dataproperties
 	 */
 
-	public void savePatient () {
+	public void savePatient (String documentUri) {
+		
+		
+		ontEdit.addPatient( caseNrTF.getText(), pidTF.getText(), fidTF.getText(), firstNameTF.getText(), surnameTF.getText(), birthdayTF.getText(), documentUri );
+		
+		
+		/*
 		Integer patNum = patNumber.getValue();
 		String patLabel = "Patient".concat(patNum.toString());
 
@@ -367,6 +383,7 @@ public class IOMRecordingController {
 
 		ontEdit.saveNewOWLFile(); 	
 		patNumber.increment();
+		*/
 	}
 
 	// -------------------------------------------------------------Patient Data End
@@ -1158,8 +1175,10 @@ public class IOMRecordingController {
 	 * @throws InterruptedException 
 	 */
 	public  void save(ActionEvent event) throws IOException, InterruptedException {
+		
+		 String documentUri = ontEdit.createNewIOMDocument("IOMDocumentTest");
 		// Patient Data start
-		//savePatient();
+		savePatient(documentUri);
 		//getSepBaselineValues();
 		//getTesBaselineValues();
 		//getDcsBaselineValues();
@@ -1170,7 +1189,7 @@ public class IOMRecordingController {
 
 		//IOM actual Recording------------------------------------------------
 
-		String documentUri = ontEdit.createNewIOMDocument("IOMDocumentTest");
+		
 
 		OntClassMap ontClassMap = new OntClassMap();
 		
@@ -1231,6 +1250,8 @@ public class IOMRecordingController {
 		//alert.showAndWait();
 
 		//alles zurücksetzen
+		//documenturi auf null oder nächste id?
+		//String documentUri = "";
 		//caseNrTF.setText("");
 		//fidTF.setText("");
 		//pidTF.setText("");
