@@ -509,14 +509,10 @@ public class OntologyEditor {
 			indv.addProperty(datPropComment, comment);
 		}
 		
-		
 		String indivUri= createNewIndividual(processUri, label);
 		addStatement(observationIndvUri, NS + documents_process, indivUri);
 		addStatement(indivUri, NS + documented_in, observationIndvUri);
-		
-		
-		
-		
+	
 		saveNewOWLFile(); 
 	}
 

@@ -1255,6 +1255,13 @@ public class IOMRecordingController {
 			ontEdit.addFindings(ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri);
 		}
 		}
+		
+		//speichern der intraoperativen Dispositionen
+		String outcome = outcomeCB.getSelectionModel().getSelectedItem();
+		String outcomeComment = outcomeCommentTF.getText();
+		//addDisposition Methode is missing!!
+		
+		
 		 
 		// a new alert to inform the user that the data was saved successfully
 		//Alert alert = new Alert(Alert.AlertType.INFORMATION);
