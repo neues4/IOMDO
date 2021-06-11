@@ -136,7 +136,7 @@ public class IOMRecordingController {
 
 	//Variables IOM actual Recording-------------------------------------------------
 	
-	
+	private OntClassMap ontClassMap = new OntClassMap();
 	
 	@FXML
 	private Button addRowBtn, save;
@@ -356,8 +356,10 @@ public class IOMRecordingController {
 		
 		
 		ontEdit.addPatient( caseNrTF.getText(), pidTF.getText(), fidTF.getText(), firstNameTF.getText(), surnameTF.getText(), birthdayTF.getText(), documentUri );
-		
-		
+		String surgery= surgeryCB.getSelectionModel().getSelectedItem();
+		ontEdit.addSurgery(ontClassMap.getUriFromLabel(surgery), surgery , dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem(), documentUri);
+		String diagnosis= diagnosisCB.getSelectionModel().getSelectedItem();
+		ontEdit.addDiagnosis(ontClassMap.getUriFromLabel(diagnosis), diagnosis, documentUri);
 		/*
 		Integer patNum = patNumber.getValue();
 		String patLabel = "Patient".concat(patNum.toString());
@@ -1191,7 +1193,7 @@ public class IOMRecordingController {
 
 		
 
-		OntClassMap ontClassMap = new OntClassMap();
+		
 		
 		//Only a Kategory with Meassurement will be saved into the Ontology.  new Baseline not included! Basline measurment can be removed 
 		String category1 =categoryIOMStart.getSelectionModel().getSelectedItem();
@@ -1209,21 +1211,32 @@ public class IOMRecordingController {
 			String categoryUri = ontClassMap.getUriFromLabel(category);
 			String comment = getTextField(nodeList.get( i  +"" + 5)).getText();
 
-			if (category.equalsIgnoreCase("sonstiges") || category.equalsIgnoreCase("IOM Ende"))
-			ontEdit.addFindings(categoryUri,  category, time ,comment, documentUri);
-			if (category == "Operationsprozess") {
-				//Methode fehlt noch
+			if (category.equalsIgnoreCase("sonstiges") || category.equalsIgnoreCase("IOM Ende")) {
+			ontEdit.addFindings(categoryUri,  category, time , comment, documentUri);
 			}
-			
-			if(category.contains("MEP Messung")) {
+			else if (category.equalsIgnoreCase("Operationsprozess") || category.equalsIgnoreCase("Anästhesie Prozess") 
+					|| category.equalsIgnoreCase("Technische Probleme") ) {
+				ontEdit.addProcessObservationDatum(ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri);
+			}
+			else if(category.equalsIgnoreCase("intraoperative Disposition")) {
+				//fehlt noch
+			}
+			else if (category.equals("Mapping Messung")){
+				//unterkategorie und wert
+				ontEdit.addMeasurement( ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri, getTextField(nodeList.get(i  + "" + 4)).getText());
+			} 
+			else if (category.equals("CBT Messung")) {
+				//kategory und wert
+				ontEdit.addMeasurement(categoryUri, category, time, comment, documentUri, getTextField(nodeList.get(i  + "" + 4)).getText());
+			}
+			else if(category.contains("MEP Messung")) {
 				int numberOfMuscles = 0;
-				if(category == "TES MEP Messung") {
+				if(category.equals("TES MEP Messung")) {
 					numberOfMuscles = tesMepMuscleChoice.size();
-				}if(category == "DCS MEP Messung") {
+				}if(category.equals("DCS MEP Messung")) {
 					numberOfMuscles = dcsMepMuscleChoice.size();
 				}
 					String entryUri = ontClassMap.getUriFromLabel(entry);
-					//methode umänderder so das es eine liste von muskel gibt
 					List<String> muscleUriList = new ArrayList<String>();
 					List<String> muscleLabelList = new ArrayList<String>();
 					List<String> valueList = new ArrayList<String>();
@@ -1238,6 +1251,8 @@ public class IOMRecordingController {
 					ontEdit.addMeasurement(category1Uri, category, time, comment, documentUri, valueList, muscleUriList, muscleLabelList);
 					//System.out.println("lines to skip: " + numberOfMuscles );
 					i = i + (numberOfMuscles -1);	
+		}else {
+			ontEdit.addFindings(ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri);
 		}
 		}
 		 
@@ -1419,11 +1434,11 @@ public class IOMRecordingController {
 			Collections.sort(sepFindingList);
 			entry.setItems(sepFindingList);
 			break;
-			//case "AEP Beobachtung":
-			//entry.setVisible(true);
-			//Collections.sort(aepFindingList);
-			//entry.setItems(aepFindingList);
-			//break;
+			case "AEP Beobachtung":
+			entry.setVisible(true);
+			Collections.sort(aepFindingList);
+			entry.setItems(aepFindingList);
+			break;
 		case "D-Welle Beobachtung":
 			entry.setVisible(true);
 			Collections.sort(dwaveFindingList);

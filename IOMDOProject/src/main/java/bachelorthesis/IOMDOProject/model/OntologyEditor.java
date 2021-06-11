@@ -54,14 +54,33 @@ public class OntologyEditor {
 	private String id = "IOMO_0000000";
 
 	//Object Properties IDs
-	private String measurement_unit_of = "IOMO_0000386";
+	private String has_timestamp = "IOMO_0000266";
+	private String has_document = "IOMO_0000285";
 	private String has_measurement_unit = "IOMO_0000275";
 	private String has_data_item = "IOMO_0000282";
-	private String has_comment = "IOMO_0000459";
-	private String has_timestamp = "IOMO_0000266";
+	
+	private String documents_process = "IOMO_0000283";
+	//is_documented_in ODER documented_in löschen!!!!
+	private String is_documented_in = "IOMO_0000284";
+	private String documented_in ="IOMO_0000236";
+	
+	private String data_item_of = "IOMO_0000367";
+	private String document_of = "IOMO_0000368";
+	private String measurement_unit_of = "IOMO_0000386";
 	private String is_answer_about = "IOMO_0000468";
 	private String gives_answer_in = "IOMO_0000469";
-	private String has_document = "IOMO_0000285";
+	private String concretized_by_at_some_time = "http://purl.obolibrary.org/obo/BFO_0000058";
+	private String concretizes_at_some_time ="http://purl.obolibrary.org/obo/BFO_0000059";
+
+	
+
+
+	//Data Properties IDs
+	private String has_surgeon = "IOMO_0000363";
+	private String has_assistant = "IOMO_0000364";
+	private String has_date_of_surgery = "IOMO_0000365";
+	private String has_device = "IOMO_0000366";
+	private String has_comment = "IOMO_0000459";
 
 	public static OntologyEditor getInstance()
 	{
@@ -206,7 +225,8 @@ public class OntologyEditor {
 	 */
 	public String createNewPatient(String indvLabel) {
 		OntClass ontClass = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#patient");
-		Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
+		Individual indv = ontClass.createIndividual(NS + getId());
+		//Individual indv = ontClass.createIndividual(createNewURI(indvLabel));
 		indv.addLabel(indvLabel, "DE");
 		return indv.getURI();
 	}
@@ -309,7 +329,7 @@ public class OntologyEditor {
 	public void addTimestampToEntity(String entityUri, String label, String timestamp) {
 		String indivUri= createNewIndividual(entityUri, label);
 		Individual indv = ontModel.getIndividual(indivUri);
-		String has_timestamp = "IOMO_0000266";
+		//String has_timestamp = "IOMO_0000266";
 		DatatypeProperty datPropSurgeryDate = ontModel.getDatatypeProperty( NS + has_timestamp);
 		indv.addProperty(datPropSurgeryDate, timestamp);
 		System.out.println(indivUri);
@@ -352,6 +372,7 @@ public class OntologyEditor {
 			indv.addProperty(datPropComment, comment);
 		}
 		addStatement(doccumentUri, NS + has_data_item , indivUri);
+		addStatement(indivUri, NS + data_item_of , doccumentUri);
 
 		saveNewOWLFile();
 	}
@@ -432,31 +453,71 @@ public class OntologyEditor {
 		}	
 		saveNewOWLFile();
 	}
-	
+
 	//im aufbau
 	public void addPatient(String caseNumber, String pid, String fid, String firstname, String surname, String birthday, String documentUri) {
-		
-		//Integer patNum = patNumber.getValue();
-		//String patLabel = "Patient".concat(patNum.toString());
 
-		//es fehlt noch nummerierung!
 		String patientUri = createNewPatient("patient"); 
-
 		addPatientProperties(patientUri, caseNumber, pid , fid, firstname, surname, birthday);
-
-		//String surgery= ontEdit.createNewIndividual(ontEdit.getAllSurgeries().get(surgeryCB.getSelectionModel().getSelectedItem()), "Surgery");
-
-		//ontEdit.addSurgeryProperties(surgery, dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem());
-
-		//String diagnosis = ontEdit.createNewIndividual(ontEdit.getAllDiagnosis().get(diagnosisCB.getSelectionModel().getSelectedItem()), "Diagnosis");
-
-	
-
 		addStatement(patientUri, NS + has_document, documentUri);
-		//addStatement(iomDocument, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", surgery);
-		//addStatement(iomDocument, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", diagnosis);
+		addStatement(documentUri, NS + document_of, patientUri);
+		saveNewOWLFile(); 
+	}
 
-saveNewOWLFile(); 
+	public void addSurgery(String surgeryUri,String label,  String dateOfSurgery, String surgeon, String assistant, String device, String documentUri) {
+		String indivUri= createNewIndividual(surgeryUri, label);
+		Individual indv = ontModel.getIndividual(indivUri);
+		//addSurgeryProperties(surgery, dateOfSurgery, surgeon, assistant, device);
+		DatatypeProperty datPropSurgeryDate = ontModel.getDatatypeProperty(NS + has_date_of_surgery);
+		DatatypeProperty datPropSurgeon = ontModel.getDatatypeProperty(NS + has_surgeon);
+		DatatypeProperty datPropAssistant = ontModel.getDatatypeProperty(NS + has_assistant);
+		DatatypeProperty datPropIsisDevice = ontModel.getDatatypeProperty(NS + has_device);
+		indv.addProperty(datPropSurgeryDate, dateOfSurgery);
+		indv.addProperty(datPropSurgeon, surgeon);
+		indv.addProperty(datPropAssistant, assistant);
+		indv.addProperty(datPropIsisDevice, device);
+		addStatement(documentUri, NS +  has_data_item, indivUri);
+		addStatement(indivUri, NS +  data_item_of, documentUri);
+		saveNewOWLFile(); 
+	}
+
+	/**
+	 * @author romap1
+	 * @param diagnosisUri
+	 * @param label
+	 * @param documentUri
+	 */
+	public void addDiagnosis(String diagnosisUri, String label,String documentUri) {
+		String indivUri= createNewIndividual(diagnosisUri, label);
+		//Individual indv = ontModel.getIndividual(indivUri);
+		addStatement(documentUri, NS + has_data_item, indivUri);
+		addStatement(indivUri, NS + data_item_of, documentUri);
+
+	}
+	
+	public void addProcessObservationDatum (String processUri, String label,String timestamp, String comment, String documentUri) {
+		String processObservationDatumUri = NS + "IOMO_0000287";
+		String observationIndvUri= createNewIndividual(processObservationDatumUri, "Observation");
+		Individual indv = ontModel.getIndividual(observationIndvUri);
+		addStatement(documentUri, NS + has_data_item, observationIndvUri);
+		addStatement(observationIndvUri, NS + data_item_of, documentUri);
+		
+		DatatypeProperty datPropTimeStamp = ontModel.getDatatypeProperty( NS + has_timestamp);
+		indv.addProperty(datPropTimeStamp, timestamp);
+		if(!comment.equals("")){
+			DatatypeProperty datPropComment = ontModel.getDatatypeProperty( NS + has_comment);
+			indv.addProperty(datPropComment, comment);
+		}
+		
+		
+		String indivUri= createNewIndividual(processUri, label);
+		addStatement(observationIndvUri, NS + documents_process, indivUri);
+		addStatement(indivUri, NS + documented_in, observationIndvUri);
+		
+		
+		
+		
+		saveNewOWLFile(); 
 	}
 
 	/**
@@ -466,20 +527,22 @@ saveNewOWLFile();
 	public ObservableList<String> getPostoperativeDisposition() {
 		String abnormalNervousSystemPhysiologyHP = "http://purl.obolibrary.org/obo/HP_0012638";
 		String postoperativeDisposition = "IOMO_0000381";
-		String cerebrospinalFluidLeak = "http://purl.obolibrary.org/obo/MONDO_0043327";
+		String centralNervousSystemDisease = "http://purl.obolibrary.org/obo/MONDO_0002602";
 		//add Subclasses of postoperative Disposition
+		
 		Map<String, String> map = getSubclasses(NS + postoperativeDisposition);
 		//add SubSubclass of postoperative Disposition
 		Map<String, String> map2 = getSubclasses(abnormalNervousSystemPhysiologyHP);
-
+		Map<String, String> map3 = getSubclasses(centralNervousSystemDisease);
 		ObservableList<String> list = FXCollections.observableArrayList();
 
 		OntClassMap ontClassMap = new OntClassMap();
 		//add a stand alone subsubclass of postoperative Disposition
-		list.add(ontClassMap.getLabelFromURI(cerebrospinalFluidLeak));
-		
+		//list.add(ontClassMap.getLabelFromURI(cerebrospinalFluidLeak));
+
 		list.addAll(map.keySet());
 		list.addAll(map2.keySet());
+		list.addAll(map3.keySet());
 		//remove Entities without German label
 		list.remove(null);
 		Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
