@@ -1260,7 +1260,9 @@ public class IOMRecordingController {
 		String outcome = outcomeCB.getSelectionModel().getSelectedItem();
 		String outcomeComment = outcomeCommentTF.getText();
 		//addDisposition Methode is missing!!
-		
+		if(outcome != null) {
+		ontEdit.addDisposition(ontClassMap.getUriFromLabel(outcome), outcome, outcomeComment, documentUri);
+		}
 		
 		 
 		// a new alert to inform the user that the data was saved successfully

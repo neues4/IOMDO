@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ProtocolOverviewController">
-   <center>
-      <GridPane fx:id="gridPaneProtocolOverview" vgap="8.0" BorderPane.alignment="TOP_LEFT">
+<BorderPane prefHeight="800.0" prefWidth="1000.0" styleClass="pane" stylesheets="@style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ProtocolOverviewController">
+   <top>
+      <GridPane fx:id="gridPaneProtocolOverview" vgap="8.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="1280.0" minWidth="10.0" prefWidth="790.0000244140625" />
           <ColumnConstraints />
@@ -29,15 +29,15 @@
             <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <HBox alignment="BOTTOM_LEFT" spacing="8.0" GridPane.rowIndex="1">
+            <HBox alignment="BOTTOM_LEFT" GridPane.rowIndex="1">
                <children>
                   <Label text="%lbl.search">
                      <padding>
-                        <Insets left="8.0" />
+                        <Insets left="8.0" right="8.0" />
                      </padding>
                   </Label>
                   <TextField id="searchField" fx:id="searchTF" stylesheets="@style1.css" />
-                  <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="47.0" stylesheets="@TestStyle.css">
+                  <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#reset" stylesheets="@TestStyle.css">
                      <graphic>
                         <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -76,5 +76,5 @@
             </TableView>
          </children>
       </GridPane>
-   </center>
+   </top>
 </BorderPane>

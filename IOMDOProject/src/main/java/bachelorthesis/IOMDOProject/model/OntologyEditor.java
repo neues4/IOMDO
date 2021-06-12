@@ -86,7 +86,7 @@ public class OntologyEditor {
 	{
 		if (editor == null)
 			//Windows
-			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_34.owl");
+			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_35.owl");
 		//mac
 		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_32.owl");
 
@@ -454,7 +454,17 @@ public class OntologyEditor {
 		saveNewOWLFile();
 	}
 
-	//im aufbau
+	/**
+	 * Creates a Patient Individual with its Data Properties and adds it to the existing Ontologymodel
+	 * @author romap1
+	 * @param caseNumber
+	 * @param pid
+	 * @param fid
+	 * @param firstname
+	 * @param surname
+	 * @param birthday
+	 * @param documentUri
+	 */
 	public void addPatient(String caseNumber, String pid, String fid, String firstname, String surname, String birthday, String documentUri) {
 
 		String patientUri = createNewPatient("patient"); 
@@ -464,6 +474,16 @@ public class OntologyEditor {
 		saveNewOWLFile(); 
 	}
 
+	/**
+	 * Creates a Individual of a Surgery Subclass
+	 * @param surgeryUri
+	 * @param label
+	 * @param dateOfSurgery
+	 * @param surgeon
+	 * @param assistant
+	 * @param device
+	 * @param documentUri
+	 */
 	public void addSurgery(String surgeryUri,String label,  String dateOfSurgery, String surgeon, String assistant, String device, String documentUri) {
 		String indivUri= createNewIndividual(surgeryUri, label);
 		Individual indv = ontModel.getIndividual(indivUri);
@@ -514,6 +534,26 @@ public class OntologyEditor {
 		addStatement(indivUri, NS + documented_in, observationIndvUri);
 	
 		saveNewOWLFile(); 
+	}
+	
+	public void addDisposition(String dispositionUri, String label, String comment, String documentUri) {
+		String clinicalDataItem = "http://purl.obolibrary.org/obo/OGMS_0000123";
+		String clinicalDataIndvUri= createNewIndividual(clinicalDataItem, "ClinicalDataItem");
+		addStatement(documentUri, NS + has_data_item, clinicalDataIndvUri);
+		addStatement(clinicalDataIndvUri, NS + data_item_of, documentUri);
+		Individual indv = ontModel.getIndividual(clinicalDataIndvUri);
+		if(!comment.equals("")){
+			DatatypeProperty datPropComment = ontModel.getDatatypeProperty( NS + has_comment);
+			indv.addProperty(datPropComment, comment);
+		}
+			String indivUri= createNewIndividual(dispositionUri, label);
+			addStatement(clinicalDataIndvUri, concretized_by_at_some_time, indivUri);
+			addStatement(indivUri, concretizes_at_some_time, clinicalDataIndvUri);
+		
+			saveNewOWLFile(); 
+		
+		
+		
 	}
 
 	/**
