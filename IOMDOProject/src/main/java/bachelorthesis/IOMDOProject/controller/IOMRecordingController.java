@@ -476,7 +476,7 @@ public class IOMRecordingController {
 	 * a method to read all mA values in the text boxes of tes baseline and create instances of muscle, mA and data item
 	 * FEHLT NOCH VERBINDUNG ZUM IOM PROTOKOLL!
 	 */
-	public void getTesBaselineValues() {
+	public void getTesBaselineValues(String document) {
 		// put all the nodes of the TES grid in a map (Rownumber + Columnnumber)
 		nodeMapTesBaselines.put("20", cbTes1); nodeMapTesBaselines.put("21", tf1); nodeMapTesBaselines.put("22", tf17); nodeMapTesBaselines.put("23", tf33);
 		nodeMapTesBaselines.put("30", cbTes2); nodeMapTesBaselines.put("31", tf2); nodeMapTesBaselines.put("32", tf18); nodeMapTesBaselines.put("33", tf34);
@@ -496,7 +496,7 @@ public class IOMRecordingController {
 		nodeMapTesBaselines.put("170", cbTes16); nodeMapTesBaselines.put("171", tf16); nodeMapTesBaselines.put("172", tf32); nodeMapTesBaselines.put("173", tf48);
 
 		// create a new tes baseline measurement
-		String tesMepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("TES MEP Baseline Messung"), "TesMepBaselineMeasurement");
+		String tesMepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("TES MEP Baseline Messung"), "TesMepBaselineMessung");
 		Counter muscleCounter = new Counter(1);
 		Counter mATesBaselineCounter = new Counter(1);
 		// go through all the rows of the grid
@@ -513,21 +513,21 @@ public class IOMRecordingController {
 				if (getTextField(nodeMapTesBaselines.get( i  +"" + 1)).getText() != "") {
 					String maValue = getTextField(nodeMapTesBaselines.get( i  +"" + 1)).getText();
 					String mA = ontEdit.createNewMiliampere("mATesBaseline".concat(mATesBaselineCounter.toString()));
-					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle);
+					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle, document);
 					mATesBaselineCounter.increment();
 				}
 				// see if the second text field is filled out, read the value, create new instances in ontology
 				if(getTextField(nodeMapTesBaselines.get( i  +"" + 2)).getText() != "") {
 					String maValue = getTextField(nodeMapTesBaselines.get( i  +"" + 2)).getText();
 					String mA = ontEdit.createNewMiliampere("mATesBasline".concat(mATesBaselineCounter.toString()));
-					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle);
+					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle, document);
 					mATesBaselineCounter.increment();
 				}
 				// see if the third text field is filled out, read the value, create new instances in ontology
 				if (getTextField(nodeMapTesBaselines.get( i  +"" + 3)).getText() != "") {
 					String maValue = getTextField(nodeMapTesBaselines.get( i  +"" + 3)).getText();
 					String mA = ontEdit.createNewMiliampere("mATesBasline".concat(mATesBaselineCounter.toString()));
-					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle);
+					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle, document);
 					mATesBaselineCounter.increment();
 				}
 			}
@@ -541,10 +541,11 @@ public class IOMRecordingController {
 	 * @param tesMepBaselineMeasurement the tes mep baseline measurement individual
 	 * @param muscle the muscle individual
 	 */
-	public void createTesBaselineStatement(String mA, String maValue, String tesMepBaselineMeasurement, String muscle) {
+	public void createTesBaselineStatement(String mA, String maValue, String tesMepBaselineMeasurement, String muscle, String document) {
 		ontEdit.addPropertiesToMiliampere(mA, maValue);
 		ontEdit.addStatement(tesMepBaselineMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", mA);
-		ontEdit.addStatement(mA, "http://purl.obolibrary.org/obo/IAO_0000136", muscle);
+		ontEdit.addStatement(mA, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000468", muscle);
+		ontEdit.addStatement(document, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000285", tesMepBaselineMeasurement);
 	}
 
 
@@ -552,7 +553,7 @@ public class IOMRecordingController {
 	 * a method to read all mA values in the text boxes of dcs baseline and create instances of muscle, mA and data item
 	 * FEHLT NOCH VERBINDUNG ZUM IOM PROTOKOLL!
 	 */
-	public void getDcsBaselineValues() {
+	public void getDcsBaselineValues(String document) {
 		nodeMapDcsBaselines.put("20", cbDcs1); nodeMapDcsBaselines.put("21", tfDcs1); nodeMapDcsBaselines.put("22", tfDcs11); nodeMapDcsBaselines.put("23", tfDcs21); nodeMapDcsBaselines.put("24", tfDcs31);
 		nodeMapDcsBaselines.put("30", cbDcs2); nodeMapDcsBaselines.put("31", tfDcs2); nodeMapDcsBaselines.put("32", tfDcs12); nodeMapDcsBaselines.put("33", tfDcs22); nodeMapDcsBaselines.put("34", tfDcs32);
 		nodeMapDcsBaselines.put("40", cbDcs3); nodeMapDcsBaselines.put("41", tfDcs3); nodeMapDcsBaselines.put("42", tfDcs13); nodeMapDcsBaselines.put("43", tfDcs23); nodeMapDcsBaselines.put("44", tfDcs33);
@@ -565,7 +566,7 @@ public class IOMRecordingController {
 		nodeMapDcsBaselines.put("110", cbDcs10); nodeMapDcsBaselines.put("111", tfDcs10); nodeMapDcsBaselines.put("112", tfDcs20); nodeMapDcsBaselines.put("113", tfDcs30); nodeMapDcsBaselines.put("114", tfDcs40);
 
 		// create a new tes baseline measurement
-		String dcsMepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("DCS MEP Baseline Messung"), "DcsMepBaselineMeasurement");
+		String dcsMepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("DCS MEP Baseline Messung"), "DcsMepBaselineMessung");
 		Counter muscleCounter = new Counter(1);
 		Counter mADcsBaselineCounter = new Counter(1);
 		// go through all the rows of the grid
@@ -580,21 +581,21 @@ public class IOMRecordingController {
 				if (getTextField(nodeMapDcsBaselines.get( i  +"" + 1)).getText() != "") {
 					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 1)).getText();
 					String mA = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
-					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle);
+					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
 					mADcsBaselineCounter.increment();
 				}
 				// see if second text field is filled out, read the value, create new instances in ontology
 				if(getTextField(nodeMapDcsBaselines.get( i  +"" + 2)).getText() != "") {
 					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 2)).getText();
 					String mA = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
-					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle);
+					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
 					mADcsBaselineCounter.increment();
 				}
 				// see if third text field is filled out, read the value, create new instances in ontology
 				if (getTextField(nodeMapDcsBaselines.get( i  +"" + 3)).getText() != "") {
 					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 3)).getText();
 					String mA = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
-					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle);
+					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
 					mADcsBaselineCounter.increment();
 
 				}
@@ -602,7 +603,7 @@ public class IOMRecordingController {
 				if (getTextField(nodeMapDcsBaselines.get( i  +"" + 4)).getText() != "") {
 					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 4)).getText();
 					String mA = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
-					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle);
+					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
 					mADcsBaselineCounter.increment();
 				}
 			}
@@ -615,10 +616,11 @@ public class IOMRecordingController {
 	 * @param dcsMepBaselineMeasurement
 	 * @param muscle
 	 */
-	public void createDcsBaselineStatement(String mA, String maValue, String dcsMepBaselineMeasurement, String muscle) {
+	public void createDcsBaselineStatement(String mA, String maValue, String dcsMepBaselineMeasurement, String muscle, String document) {
 		ontEdit.addPropertiesToMiliampere(mA, maValue);
 		ontEdit.addStatement(dcsMepBaselineMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", mA);
-		ontEdit.addStatement(mA, "http://purl.obolibrary.org/obo/IAO_0000136", muscle);
+		ontEdit.addStatement(mA, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000468", muscle);
+		ontEdit.addStatement(document, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000285", dcsMepBaselineMeasurement);
 	}
 
 	/**
@@ -1188,6 +1190,12 @@ public class IOMRecordingController {
 		//getVepBaselineValues();
 		//getReflexBaselineValues();
 		// Patient Data end
+		
+		// SAVE BASELINES START
+		
+		getDcsBaselineValues(documentUri);
+		getTesBaselineValues(documentUri);
+		// SAVE BASELINES END
 
 		//IOM actual Recording------------------------------------------------
 
