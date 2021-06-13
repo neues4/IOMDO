@@ -1248,7 +1248,7 @@ public class IOMRecordingController {
 						muscleLabelList.add(entryTemp);
 						valueList.add(valueTemp);
 					}	
-					ontEdit.addMeasurement(category1Uri, category, time, comment, documentUri, valueList, muscleUriList, muscleLabelList);
+					ontEdit.addMeasurement(categoryUri, category, time, comment, documentUri, valueList, muscleUriList, muscleLabelList);
 					//System.out.println("lines to skip: " + numberOfMuscles );
 					i = i + (numberOfMuscles -1);	
 		}else {

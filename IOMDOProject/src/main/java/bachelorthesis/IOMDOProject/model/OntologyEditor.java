@@ -49,7 +49,7 @@ public class OntologyEditor {
 
 	private static OntologyEditor editor;
 
-	private int counter = 500;
+	private int counter = 550;
 
 	private String id = "IOMO_0000000";
 
@@ -86,9 +86,9 @@ public class OntologyEditor {
 	{
 		if (editor == null)
 			//Windows
-			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_35.owl");
+			//editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_35.owl");
 		//mac
-		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_32.owl");
+		editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_36.owl");
 
 		return editor;
 	}
@@ -881,8 +881,7 @@ public class OntologyEditor {
 		Individual indv = ontModel.getIndividual(miliampere);
 		//has_measurement_value = IAO_0000004
 		DatatypeProperty miliAmpValue = ontModel.getDatatypeProperty("http://purl.obolibrary.org/obo/IAO_0000004");
-		indv.addProperty(miliAmpValue, value);
-
+		indv.addProperty(miliAmpValue, value, XSDDatatype.XSDint);
 	}
 
 	/**
