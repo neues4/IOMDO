@@ -56,7 +56,7 @@
                   <Insets />
                </GridPane.margin>
             </HBox>
-            <TableView fx:id="protocolTblView" prefHeight="800.0" prefWidth="1000.0" GridPane.rowIndex="2">
+            <TableView fx:id="protocolTblView" prefHeight="800.0" prefWidth="1000.0" styleClass="column-header-background" stylesheets="@style1.css" GridPane.rowIndex="2">
               <columns>
                 <TableColumn fx:id="caseNrColumn" minWidth="-Infinity" prefWidth="40.800018310546875" text="%lbl.caseNr" />
                 <TableColumn fx:id="firstnameColumn" prefWidth="88.0" text="%lbl.firstName" />
