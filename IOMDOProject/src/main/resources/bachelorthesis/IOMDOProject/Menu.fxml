@@ -25,6 +25,16 @@
                         <Image url="@Logo.jpg" />
                      </image>
                   </ImageView>
+                  <Label fx:id="labelEn" layoutX="1101.0" layoutY="20.0" onMouseClicked="#setLanguageEn" text="EN" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelDe" layoutX="1033.0" layoutY="20.0" onMouseClicked="#setLanguageDe" text="DE" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <VBox alignment="TOP_RIGHT">
@@ -74,11 +84,11 @@
                <font>
                   <Font size="17.0" />
                </font></Button>
-            <Button id="menuBtn" fx:id="expandOntologyBtn" mnemonicParsing="false" onAction="#openExpandOntology" prefHeight="80.0" prefWidth="180.0" stylesheets="@style1.css" text="%btn.expandOntology">
+            <Button id="menuBtn" fx:id="expandOntologyBtn" mnemonicParsing="false" onAction="#openExpandOntology" prefHeight="80.0" prefWidth="180.0" stylesheets="@style1.css" text="%btn.ontologyOverview">
                <font>
                   <Font size="17.0" />
                </font></Button>
-            <Button id="menuBtn" fx:id="settingsBtn" mnemonicParsing="false" onAction="#openSettings" prefHeight="80.0" prefWidth="180.0" stylesheets="@style1.css" text="%btn.settings">
+            <Button id="menuBtn" fx:id="settingsBtn" mnemonicParsing="false" onAction="#openSettings" prefHeight="80.0" prefWidth="180.0" stylesheets="@style1.css" text="%btn.userManual">
                <font>
                   <Font size="17.0" />
                </font></Button>
