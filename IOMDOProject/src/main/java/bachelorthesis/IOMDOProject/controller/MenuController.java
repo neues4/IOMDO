@@ -2,8 +2,9 @@ package bachelorthesis.IOMDOProject.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
-
+import javafx.scene.effect.Glow;
 import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
 import bachelorthesis.IOMDOProject.model.PatientSurgeryData;
@@ -16,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Effect;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -46,6 +48,12 @@ public class MenuController {
 	
 	@FXML
 	private Label userName;
+	
+	@FXML
+    private Label labelEn;
+
+    @FXML
+    private Label labelDe;
 
 
 	@FXML public BorderPane borderPaneMenu;
@@ -137,7 +145,17 @@ public class MenuController {
 	private void changeCenter(String url) throws IOException {
 		borderPaneMenu.setCenter(FXMLLoader.load(Main.class.getResource(url),  I18n.getResourceBundle()));
 	}
+	
+	@FXML
+    void setLanguageDe(MouseEvent event) {
+		I18n.setLocale(new Locale("de_CH"));
+	
+    }
 
-
+    @FXML
+    void setLanguageEn(MouseEvent event) {
+    	I18n.setLocale(new Locale("en"));
+   
+    }
 
 }
