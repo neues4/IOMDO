@@ -38,6 +38,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -52,7 +53,16 @@ public class QueryController {
 	private TextArea test;
 
 	@FXML
+	private TextArea inputQuery;
+
+	@FXML
+	private TextArea ownQueryResult;
+
+	@FXML
 	private Button query1, query2, query3;
+
+	@FXML
+	private Button ownQuery;
 
 	Integer y;
 
@@ -60,7 +70,7 @@ public class QueryController {
 
 	@SuppressWarnings({ "unused", "deprecation" })
 	@FXML
-	void executeQuery(ActionEvent event) throws QueryException, IOException {
+	void executeQuery(ActionEvent event) throws IOException {
 		//FileManager.get().addLocatorClassLoader(QueryTester.class.getClassLoader());
 		//Model model = FileManager.get().loadModel("/Users/stefanie/Desktop/SPARQLtest2.owl");
 		Model model = oe.getReaderModel();
@@ -72,13 +82,13 @@ public class QueryController {
 						"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n" +   
 						"PREFIX  owl:  <http://www.w3.org/2002/07/owl#>    \n" +
 
-					"SELECT  DISTINCT ?surname ?firstName ?birthday ?diagnosis ?disposition ?measu ?muscle ?value \n"+
+					"SELECT  DISTINCT ?Nachname ?Vorname ?Geburtsdatum ?Diagnose ?PostopOutcome ?ArtDerMessung ?Muskel ?mA \n"+
 					"WHERE    \n"+
 					"{ ?pat rdf:type OntoSPM:patient .    \n"+
 					"?pat rdfs:label ?patient .    \n"+
-					"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000254> ?surname .   \n"+
-					"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000253> ?firstName .   \n"+
-					"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000255> ?birthday .   \n"+
+					"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000254> ?Nachname .   \n"+
+					"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000253> ?Vorname .   \n"+
+					"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000255> ?Geburtsdatum .   \n"+
 					"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000285> ?doc .    \n"+
 					"?diag rdf:type/(rdfs:subClassOf)* <http://purl.obolibrary.org/obo/OGMS_0000073> .  \n"  +
 					"?surg rdf:type/(rdfs:subClassOf)* <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000333> .   \n" +
@@ -94,29 +104,29 @@ public class QueryController {
 					"?surg rdf:type ?nameOfSurgery .   \n"+
 					"?mes rdf:type ?nameOfMes .   \n"+
 					"?disp rdf:type ?nameOfDisposition . \n"+
-					"?nameOfMes rdfs:label ?measu .   \n"+
+					"?nameOfMes rdfs:label ?ArtDerMessung .   \n"+
 
-					"filter(langMatches(lang(?measu),\"DE\"))  \n"  +
+					"filter(langMatches(lang(?ArtDerMessung),\"DE\"))  \n"  +
 
 					"?doc rdfs:label ?iomdoc .    \n"+
 
-					"?nameOfDiagnosis rdfs:label ?diagnosis .   \n" +
+					"?nameOfDiagnosis rdfs:label ?Diagnose .   \n" +
 
-					"filter(langMatches(lang(?diagnosis), \"DE\"))    \n"+
+					"filter(langMatches(lang(?Diagnose), \"DE\"))    \n"+
 
 					"?nameOfSurgery rdfs:label ?surgery .    \n"+
 
 					"filter(langMatches(lang(?surgery),\"DE\")) .  \n"  +
 
-					"?nameOfDisposition rdfs:label ?disposition . \n"+
+					"?nameOfDisposition rdfs:label ?PostopOutcome . \n"+
 
-					"filter(langMatches(lang(?disposition),\"DE\"))  \n"+
+					"filter(langMatches(lang(?PostopOutcome),\"DE\"))  \n"+
 
 					"?measurement rdf:type <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000268> .   \n"+
 
 					"?mes <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275> ?measurement .   \n"+
 
-					"?measurement <http://purl.obolibrary.org/obo/IAO_0000004> ?value .   \n"+
+					"?measurement <http://purl.obolibrary.org/obo/IAO_0000004> ?mA .   \n"+
 
 					"?musc rdf:type/(rdfs:subClassOf)* <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000227> .    \n"+
 
@@ -124,9 +134,9 @@ public class QueryController {
 
 					"?musc rdf:type ?nameOfMusc .   \n"+
 
-					"?nameOfMusc rdfs:label ?muscle . \n"  +
+					"?nameOfMusc rdfs:label ?Muskel . \n"  +
 
-					"filter(langMatches(lang(?muscle),\"DE\"))    \n"+
+					"filter(langMatches(lang(?Muskel),\"DE\"))    \n"+
 
 					 " } ";
 		// create the query
@@ -159,6 +169,8 @@ public class QueryController {
 			csvWriter.close();
 
 			test.setText(csv);
+			
+			showAlert();
 
 		} finally {
 			qexec.close();
@@ -186,13 +198,13 @@ public class QueryController {
 						"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"  +
 						"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"  +
 						"PREFIX  owl:  <http://www.w3.org/2002/07/owl#>   \n" +
-						"SELECT ?surname ?firstName ?birthday ?diagnosis ?disposition ?map ?value \n"+
+						"SELECT ?Nachname ?Vorname ?Geburtstag ?Diagnose ?PostopOutcome ?ArtDesMappings ?mA \n"+
 						"WHERE   \n"  +
 						"{ ?pat rdf:type OntoSPM:patient . \n"   +
 						"?pat rdfs:label ?patient .  \n"+
-						"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000254> ?surname .  \n"+
-						"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000253> ?firstName . \n" +
-						"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000255> ?birthday .  \n" +
+						"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000254> ?Nachname .  \n"+
+						"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000253> ?Vorname . \n" +
+						"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000255> ?Geburtstag .  \n" +
 						"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000285> ?doc .    \n" +
 						"?diag rdf:type/(rdfs:subClassOf)* <http://purl.obolibrary.org/obo/OGMS_0000073> .   \n"  +
 						"?surg rdf:type/(rdfs:subClassOf)* <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000333> . \n"  +  
@@ -208,18 +220,18 @@ public class QueryController {
 						"?surg rdf:type ?nameOfSurgery .   \n"  +
 						"?disp rdf:type ?nameOfDisposition . \n"+
 						"?mapping rdf:type ?nameOfMapping .  \n" +
-						"?nameOfMapping rdfs:label ?map .  \n" +
-						"filter(langMatches(lang(?map),\"DE\"))  \n" +
+						"?nameOfMapping rdfs:label ?ArtDesMappings .  \n" +
+						"filter(langMatches(lang(?ArtDesMappings),\"DE\"))  \n" +
 						"?doc rdfs:label ?iomdoc .    \n" +
-						"?nameOfDiagnosis rdfs:label ?diagnosis . \n" +
-						"filter(langMatches(lang(?diagnosis),\"DE\"))    \n" 	  +
-						"?nameOfDisposition rdfs:label ?disposition . \n"+
-						"filter(langMatches(lang(?disposition),\"DE\"))  \n"+
+						"?nameOfDiagnosis rdfs:label ?Diagnose . \n" +
+						"filter(langMatches(lang(?Diagnose),\"DE\"))    \n" 	  +
+						"?nameOfDisposition rdfs:label ?PostopOutcome . \n"+
+						"filter(langMatches(lang(?PostopOutcome),\"DE\"))  \n"+
 						"?nameOfSurgery rdfs:label ?surgery .    \n" +
 						"filter(langMatches(lang(?surgery),\"DE\")) .    \n" +
 						"?measurement rdf:type <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000268> .  \n"  +
 						"?mapping <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275> ?measurement . \n" +
-						"?measurement <http://purl.obolibrary.org/obo/IAO_0000004> ?value .     \n" +
+						"?measurement <http://purl.obolibrary.org/obo/IAO_0000004> ?mA .     \n" +
 						"} \n" +
 						"ORDER BY ?value \n" +		
 						"LIMIT " + countPatientsWithMapping();
@@ -240,8 +252,7 @@ public class QueryController {
 
 			// and turn that into a String
 			String csv = new String(outputStream.toByteArray());
-
-			test.setText(csv);
+	
 
 			//mac
 			//FileWriter csvWriter = new FileWriter("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/mappingThreshold.csv");
@@ -252,6 +263,10 @@ public class QueryController {
 
 			csvWriter.flush();
 			csvWriter.close();
+			
+			test.setText(csv);
+			
+			showAlert();
 
 		} finally {
 			// close the query execution
@@ -307,4 +322,59 @@ public class QueryController {
 
 
 	}
+
+	@FXML
+	void executeOwnQuery(ActionEvent event) throws IOException {
+		Model model = oe.getReaderModel();
+
+		//String queryString = inputQuery.getText();
+
+		// create the query
+		Query query = QueryFactory.create(inputQuery.getText());
+		// execute the query
+		QueryExecution qexec = QueryExecutionFactory.create(query, model);
+
+		try {
+			// create a new result set
+			ResultSet results = qexec.execSelect();
+
+			// write to a ByteArrayOutputStream
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+			ResultSetFormatter.outputAsCSV(outputStream, results);
+
+
+			// and turn that into a String
+			String csv = new String(outputStream.toByteArray());
+
+
+			//mac
+			//FileWriter csvWriter = new FileWriter("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/mappingThreshold.csv");
+			//windows
+			FileWriter csvWriter = new FileWriter("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\ownQuery.csv");
+
+			csvWriter.append(csv);
+
+			csvWriter.flush();
+			csvWriter.close();
+			
+			ownQueryResult.setText(csv);
+			showAlert();
+
+		} finally {
+			// close the query execution
+			qexec.close();
+
+		}
+	}
+	
+	public void showAlert() {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("CSV Export");
+		alert.setHeaderText("Das Ergebnis der Abfrage wurde erfolgreich als CSV-Datei exportiert!");
+		alert.show();
+	}
+	
+
+
 }
