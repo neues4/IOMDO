@@ -24,7 +24,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="267.0" prefWidth="530.0" GridPane.columnIndex="1">
                <children>
-                  <Button fx:id="btnUserManual" mnemonicParsing="false" onAction="#openUserManual" text="Benutzerhandbuch öffnen">
+                  <Button fx:id="btnUserManual" mnemonicParsing="false" onAction="#openUserManual" text="%btn.openUserManual">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
