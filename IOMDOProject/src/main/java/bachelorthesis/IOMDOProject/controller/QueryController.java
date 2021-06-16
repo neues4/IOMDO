@@ -233,7 +233,7 @@ public class QueryController {
 						"?mapping <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275> ?measurement . \n" +
 						"?measurement <http://purl.obolibrary.org/obo/IAO_0000004> ?mA .     \n" +
 						"} \n" +
-						"ORDER BY ?value \n" +		
+						"ORDER BY ?mA \n" +		
 						"LIMIT " + countPatientsWithMapping();
 		// create the query
 		Query query = QueryFactory.create(queryString);
