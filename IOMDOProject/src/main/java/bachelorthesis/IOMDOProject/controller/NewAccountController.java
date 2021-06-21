@@ -15,6 +15,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -24,7 +25,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * Registers new Users and saves the Information to a file
+ * Registers new Users and saves the information to a file
  * @author romap1
  *
  */
@@ -50,10 +51,14 @@ public class NewAccountController {
 
 
 	public NewAccountController(){
-		file = new File("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\loginInfo.txt");
+		file = new File("src\\main\\resources\\bachelorthesis\\IOMDOProject\\loginInfo.txt");
 	}
 
-
+	/**
+	 * Returns to the logIn Screen
+	 * @param event
+	 * @throws IOException
+	 */
 	public void cancel(ActionEvent event) throws IOException{
 
 		Parent root = FXMLLoader.load(Main.class.getResource("LogIn.fxml"),  I18n.getResourceBundle());
@@ -61,49 +66,37 @@ public class NewAccountController {
 		Stage window =  (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
-		
+
 	}
 
+	/**
+	 * Creates a new account if user name is new.  
+	 * @param event
+	 * @throws IOException
+	 */
 	public void signIn(ActionEvent event) throws IOException{
+		//Checks if input data is not empty 
 		if(usernameTF.getText().isEmpty() || passwordTF.getText().isEmpty()) {
 			errorTextLbl.setText(I18n.getString("errorMsg.emptyFileds"));
 		}
+		//Checks if user name already exists
 		else if(hasUsername(usernameTF.getText().toString())) {
 			errorTextLbl.setText(I18n.getString("errorMsg.usernameExists"));
+			//saves user input into file and confirms that the registration was successful
 		}else{
 			errorTextLbl.setText("");
 			saveFile();
 			cancel(event);	
-			UserConfirmation();
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setHeaderText(I18n.getString("confirmationMsg.succsess"));
+			alert.setContentText(I18n.getString("confirmationMsg.userCreated"));
+			alert.show();
 
 		}
 	}
 
-
-
 	/**
-	 * 	
-	 */
-	private void UserConfirmation() {
-		//Creating a dialog
-		Stage dialogStage = new Stage();
-		dialogStage.setMinWidth(500);
-		dialogStage.setMinHeight(200);
-		Button okButton = new Button( "OK" );
-		VBox vbox = new VBox(new Text(I18n.getString("confirmationMsg.userCreated")), okButton);
-		vbox.setAlignment(Pos.CENTER);
-		vbox.setPadding(new Insets(15));
-		dialogStage.setScene(new Scene(vbox));
-		dialogStage.show();
-		okButton.setOnAction( new EventHandler<ActionEvent>() {
-			@Override public void handle( ActionEvent e ) {
-				dialogStage.close();
-			}
-		} );
-	}
-
-	/**
-	 * 
+	 * Saves user name and passwort into a file
 	 * @throws IOException
 	 */
 	private void saveFile() throws IOException {
@@ -118,9 +111,9 @@ public class NewAccountController {
 	}
 
 	/**
-	 * Returns True if Username is in the file.
+	 * Returns true if user name already exists in the file.
 	 * @param name
-	 * @return
+	 * @return true if user name exists, false otherwise
 	 * @throws IOException
 	 */
 	private boolean hasUsername(String name) throws IOException {
@@ -135,6 +128,5 @@ public class NewAccountController {
 		sc.close();
 		return false;
 	}
-
 
 }
