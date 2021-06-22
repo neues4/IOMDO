@@ -193,48 +193,58 @@ public class QueryController {
 		// the SPARQL query
 		// the SPARQL query
 		String queryString = 
-				"PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#> \n"   +
-						"PREFIX  OntoSPM: <http://medicis/spm.owl/OntoSPM#> \n"   +
-						"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"  +
-						"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n"  +
-						"PREFIX  owl:  <http://www.w3.org/2002/07/owl#>   \n" +
-						"SELECT ?Nachname ?Vorname ?Geburtstag ?Diagnose ?PostopOutcome ?ArtDesMappings ?mA \n"+
-						"WHERE   \n"  +
-						"{ ?pat rdf:type OntoSPM:patient . \n"   +
-						"?pat rdfs:label ?patient .  \n"+
-						"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000254> ?Nachname .  \n"+
-						"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000253> ?Vorname . \n" +
-						"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000255> ?Geburtstag .  \n" +
-						"?pat <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000285> ?doc .    \n" +
-						"?diag rdf:type/(rdfs:subClassOf)* <http://purl.obolibrary.org/obo/OGMS_0000073> .   \n"  +
-						"?surg rdf:type/(rdfs:subClassOf)* <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000333> . \n"  +  
-						"?clinDataItem rdf:type <http://purl.obolibrary.org/obo/OGMS_0000123> . \n"+
-						"?disp rdf:type/(rdfs:subClassOf)* <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000381> .  \n"+
-						"?mapping rdf:type/(rdfs:subClassOf)* <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000373> .  \n"  +
-						"?doc <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282>  ?surg .    \n" +
-						"?doc<http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282>  ?diag .  \n"   +
-						"?doc<http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282>  ?mapping .    \n" +
-						"?doc<http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282>  ?clinDataItem .    \n"+
-						"?clinDataItem <http://purl.obolibrary.org/obo/BFO_0000058> ?disp . \n"+
-						"?diag rdf:type ?nameOfDiagnosis .  \n"   +
-						"?surg rdf:type ?nameOfSurgery .   \n"  +
-						"?disp rdf:type ?nameOfDisposition . \n"+
-						"?mapping rdf:type ?nameOfMapping .  \n" +
-						"?nameOfMapping rdfs:label ?ArtDesMappings .  \n" +
-						"filter(langMatches(lang(?ArtDesMappings),\"DE\"))  \n" +
-						"?doc rdfs:label ?iomdoc .    \n" +
-						"?nameOfDiagnosis rdfs:label ?Diagnose . \n" +
-						"filter(langMatches(lang(?Diagnose),\"DE\"))    \n" 	  +
-						"?nameOfDisposition rdfs:label ?PostopOutcome . \n"+
-						"filter(langMatches(lang(?PostopOutcome),\"DE\"))  \n"+
-						"?nameOfSurgery rdfs:label ?surgery .    \n" +
-						"filter(langMatches(lang(?surgery),\"DE\")) .    \n" +
-						"?measurement rdf:type <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000268> .  \n"  +
-						"?mapping <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275> ?measurement . \n" +
-						"?measurement <http://purl.obolibrary.org/obo/IAO_0000004> ?mA .     \n" +
-						"} \n" +
-						"ORDER BY ?mA \n" +		
-						"LIMIT " + countPatientsWithMapping();
+				"PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>    \n "+
+					"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>   \n "+
+					"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>    \n" +
+					"PREFIX  owl:  <http://www.w3.org/2002/07/owl#>    \n" +
+					"PREFIX  OntoSPM: <http://medicis/spm.owl/OntoSPM#>    \n" +
+					"PREFIX IOMO: <http://www.semanticweb.org/ontologies/2021/1/24/IOMO/> \n" +
+					"PREFIX obo: <http://purl.obolibrary.org/obo/> \n" +
+					"SELECT DISTINCT ?Name ?Vorname ?Geburtsdatum ?Diagnose ?PostopOutcome ?kleinsterMappingwert \n" +
+					"WHERE    \n" +
+					"{ ?pat rdf:type OntoSPM:patient .    \n" +
+					"?pat rdfs:label ?patient .    \n" +
+					"?pat IOMO:IOMO_0000254 ?Name .  \n" +
+					"?pat IOMO:IOMO_0000253 ?Vorname .  \n" +
+					"?pat IOMO:IOMO_0000255 ?Geburtsdatum .  \n" +
+					"?pat IOMO:IOMO_0000285 ?doc .    \n" +
+					"?diag rdf:type/(rdfs:subClassOf)* obo:OGMS_0000073 .    \n" +
+					"?surg rdf:type/(rdfs:subClassOf)* IOMO:IOMO_0000333 .    \n" +
+					"?clinDataItem rdf:type obo:OGMS_0000123 . \n" +
+					"?disp rdf:type/(rdfs:subClassOf)* IOMO:IOMO_0000381 .   \n" +
+					"?mapping rdf:type/(rdfs:subClassOf)* IOMO:IOMO_0000373 .   \n" +
+					"?doc IOMO:IOMO_0000282  ?surg .    \n" +
+					"?doc IOMO:IOMO_0000282  ?diag .    \n" +
+					"?doc IOMO:IOMO_0000282  ?mapping .    \n" +
+					"?doc IOMO:IOMO_0000282  ?clinDataItem .     \n" +
+					"?clinDataItem obo:BFO_0000058 ?disp . \n" +
+					"?diag rdf:type ?nameOfDiagnosis .    \n" +
+					"?surg rdf:type ?nameOfSurgery .    \n"+ 
+					"?mapping rdf:type ?nameOfMapping .  \n" +
+					"?nameOfMapping rdfs:label ?map .  \n" +
+					"filter(langMatches(lang(?map),\"DE\"))  \n" +
+					"?doc rdfs:label ?iomdoc .    \n" +
+					"?nameOfDiagnosis rdfs:label ?Diagnose .  \n  " +
+					"filter(langMatches(lang(?Diagnose),\"DE\"))    \n" +
+					"?nameOfSurgery rdfs:label ?surgery .    \n" +
+					"filter(langMatches(lang(?surgery),\"DE\")) .   \n " +
+					"?disp rdf:type ?nameOfDisposition . \n" +
+					"?nameOfDisposition rdfs:label ?PostopOutcome .  \n" +
+					"filter(langMatches(lang(?PostopOutcome),\"DE\"))    \n" +
+					"?measurement rdf:type IOMO:IOMO_0000268 .   \n" +
+					"?mapping IOMO:IOMO_0000275 ?measurement . \n" +
+					"?measurement obo:IAO_0000004 ?value .   \n" +
+					"{ \n" +
+					"SELECT  ?pat (MIN(?value) as ?kleinsterMappingwert) \n" +
+					"WHERE { \n" +
+					"?pat rdf:type OntoSPM:patient . \n" +
+					"?pat IOMO:IOMO_0000285 ?doc .    \n" +
+					"?doc IOMO:IOMO_0000282 ?mapping .     \n" +
+					"?mapping IOMO:IOMO_0000275 ?measurement .  \n" +
+					"?measurement obo:IAO_0000004 ?value .   \n"  +
+					"} GROUP BY ?pat \n" +
+					"} \n"  +
+					"}";
 		// create the query
 		Query query = QueryFactory.create(queryString);
 		// execute the query
