@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ExpandOntologyController">
+<BorderPane prefHeight="800.0" prefWidth="1000.0" styleClass="pane" stylesheets="@style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ExpandOntologyController">
    <center>
-      <GridPane prefHeight="800.0" prefWidth="1000.0" styleClass="pane" stylesheets="@style1.css">
+      <GridPane styleClass="pane" stylesheets="@style1.css">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" />
             <ColumnConstraints hgrow="SOMETIMES" />
@@ -21,7 +21,7 @@
             <RowConstraints vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnProtege" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#openProtege" style="-fx-font-size: 15;" stylesheets="@TestStyle.css" text="%btn.openOntology" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <Button fx:id="btnProtege" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#openProtege" style="-fx-font-size: 15;" stylesheets="@style1.css" text="%btn.openOntology" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <font>
                   <Font size="23.0" />
                </font>

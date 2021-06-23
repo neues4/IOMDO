@@ -70,9 +70,9 @@
                   <TableColumn fx:id="surgeonColumn" minWidth="-Infinity" text="%lbl.age" />
                   <TableColumn fx:id="assistantColumn" prefWidth="88.0" text="%lbl.localization" />
               </columns>
-               <padding>
+               <GridPane.margin>
                   <Insets left="8.0" />
-               </padding>
+               </GridPane.margin>
             </TableView>
          </children>
       </GridPane>
