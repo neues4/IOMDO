@@ -3,16 +3,13 @@ package bachelorthesis.IOMDOProject.controller;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
-
 import bachelorthesis.IOMDOProject.model.OntClassMap;
 import bachelorthesis.IOMDOProject.model.OntologyEditor;
 import javafx.collections.FXCollections;
@@ -191,9 +188,9 @@ public class IOMRecordingController {
 	private ObservableList<String> dwaveFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000387").keySet());
 	private ObservableList<String> emgFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000370").keySet());
 	private ObservableList<String> mepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000400").keySet());
-	private ObservableList<String> actionList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human").keySet());
 	private ObservableList<String> gridPositioningList = FXCollections.observableArrayList(ontEdit.getSubclasses(NS  + "IOMO_0000064").keySet());
 	private ObservableList<String> surgeryProcessList = ontEdit.getSurgicalProcesses();
+	private ObservableList<String> intraoperativeDispositionList = ontEdit.getIntraoperativeDisposition();
 
 	//---------------------------------------------------Variables IOM actual Recording
 
@@ -1047,8 +1044,8 @@ public class IOMRecordingController {
 					|| category.equalsIgnoreCase("Technische Probleme") ) {
 				ontEdit.addProcessObservationDatum(ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri);
 			}
-			else if(category.equalsIgnoreCase("intraoperative Disposition")) {
-				//fehlt noch
+			else if(category.equalsIgnoreCase("Intraoperative Disposition")) {
+				ontEdit.addDisposition(ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri);
 			}
 			else if (category.equals("Mapping Messung")){
 				//unterkategorie und wert
@@ -1091,7 +1088,7 @@ public class IOMRecordingController {
 		String outcomeComment = outcomeCommentTF.getText();
 		if(outcome != null) {
 			if (outcome.equals(I18n.getString("text.noDisposition"))) {
-				ontEdit.addDisposition(ontClassMap.getUriFromLabel("postoperative Disposition"), outcome, outcomeComment, documentUri);
+				ontEdit.addDisposition(ontClassMap.getUriFromLabel("Postoperative Disposition"), outcome, outcomeComment, documentUri);
 			}else {
 				ontEdit.addDisposition(ontClassMap.getUriFromLabel(outcome), outcome, outcomeComment, documentUri);
 			}
@@ -1206,6 +1203,10 @@ public class IOMRecordingController {
 			break;
 		case "sonstiges":
 			entry.setVisible(false);
+			break;
+		case "Intraoperative Disposition":
+			entry.setVisible(true);
+			entry.setItems(intraoperativeDispositionList);
 			break;
 		case " ":
 			break;

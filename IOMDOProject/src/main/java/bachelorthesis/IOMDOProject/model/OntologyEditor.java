@@ -71,7 +71,7 @@ public class OntologyEditor {
 		
 		if (editor == null)
 			//Windows
-			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_39.owl");
+			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_40.owl");
 		//mac
 		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_36.owl");
 
@@ -465,6 +465,25 @@ public class OntologyEditor {
 			addStatement(indivUri, concretizes_at_some_time, clinicalDataIndvUri);
 			saveNewOWLFile(); 
 	}
+	
+	public void addDisposition(String dispositionUri, String label, String timestamp, String comment, String documentUri) {
+		String clinicalDataItem = "http://purl.obolibrary.org/obo/OGMS_0000123";
+		String clinicalDataIndvUri= createNewIndividual(clinicalDataItem, "ClinicalDataItem");
+		addStatement(documentUri, NS + has_data_item, clinicalDataIndvUri);
+		addStatement(clinicalDataIndvUri, NS + data_item_of, documentUri);
+		Individual indv = ontModel.getIndividual(clinicalDataIndvUri);
+		//adds timestamp
+		DatatypeProperty datPropTimeStamp = ontModel.getDatatypeProperty( NS + has_timestamp);
+		indv.addProperty(datPropTimeStamp, timestamp);
+		if(!comment.equals("")){
+			DatatypeProperty datPropComment = ontModel.getDatatypeProperty( NS + has_comment);
+			indv.addProperty(datPropComment, comment);
+		}
+			String indivUri= createNewIndividual(dispositionUri, label);
+			addStatement(clinicalDataIndvUri, concretized_by_at_some_time, indivUri);
+			addStatement(indivUri, concretizes_at_some_time, clinicalDataIndvUri);
+			saveNewOWLFile(); 
+	}
 
 	/**
 	 * @author romap1
@@ -516,7 +535,36 @@ public class OntologyEditor {
 		Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
 		return list;
 		
+	}
+	
+	public ObservableList<String> getIntraoperativeDisposition() {
+		String intraoperativeDisposition = NS + "IOMO_0000382";
+		String AbnormalCardiovascularSystemPhysiology =  "http://purl.obolibrary.org/obo/HP_0011025";
+		String AbnormalSystemicBloodPressure = "http://purl.obolibrary.org/obo/HP_0030972";
+		String AbnormalityOfTheVasculature = "http://purl.obolibrary.org/obo/HP_0002597";
+		String AbnormalityOfTheNervousSystem = "http://purl.obolibrary.org/obo/HP_0000707";
+		String AbnormalityOfTheRespiratorySystem = "http://purl.obolibrary.org/obo/HP_0002086";
+		String cardiacRhythmDisease = "http://purl.obolibrary.org/obo/MONDO_0007263";
+		String nervousSystemInjury = "http://purl.obolibrary.org/obo/MONDO_0044745";
 		
+		ObservableList<String> list = FXCollections.observableArrayList();
+		Map<String, String> map = getSubclasses(intraoperativeDisposition);
+		Map<String, String> map2 = getSubclasses(AbnormalCardiovascularSystemPhysiology);
+		Map<String, String> map3 = getSubclasses(AbnormalSystemicBloodPressure);
+		Map<String, String> map4 = getSubclasses(AbnormalityOfTheVasculature);
+		Map<String, String> map5 = getSubclasses(AbnormalityOfTheNervousSystem);
+		Map<String, String> map6 = getSubclasses(AbnormalityOfTheRespiratorySystem);
+		Map<String, String> map7 = getSubclasses(cardiacRhythmDisease);
+		Map<String, String> map8 = getSubclasses(nervousSystemInjury);
+
+		
+		list.addAll(map.keySet());list.addAll(map2.keySet());list.addAll(map3.keySet());
+		list.addAll(map4.keySet());list.addAll(map5.keySet());list.addAll(map6.keySet());
+		list.addAll(map7.keySet());list.addAll(map8.keySet());
+		
+		list.remove(null);
+		Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+		return list;
 	}
 	
 
@@ -666,10 +714,13 @@ public class OntologyEditor {
 		OntClass surgicalProcess = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058");
 		OntClass technicalIssues = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000154");
 		OntClass gridPositioning = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000064");
-		String iOMEnd = "IOMO_0000462";
-		OntClass iOMEndClass = ontModel.getOntClass(NS + iOMEnd);
-		String other = "IOMO_0000460";
-		OntClass otherClass = ontModel.getOntClass(NS + other);
+		
+		String iOMEnd = NS + "IOMO_0000462";
+		OntClass iOMEndClass = ontModel.getOntClass(iOMEnd);
+		String other = NS + "IOMO_0000460";
+		OntClass otherClass = ontModel.getOntClass(other);
+		String intraoperativeDisposition = NS + "IOMO_0000382";
+		OntClass intraoperativeDispositionClass = ontModel.getOntClass(intraoperativeDisposition);
 
 		HashMap<String, String> showEntityMap = new HashMap<>();
 		showEntityMap.put(mepFinding.getLabel("DE"), mepFinding.getURI());
@@ -689,6 +740,7 @@ public class OntologyEditor {
 		showEntityMap.put(gridPositioning.getLabel("DE"), gridPositioning.getURI());
 		showEntityMap.put(iOMEndClass.getLabel("DE"), iOMEndClass.getURI());
 		showEntityMap.put(otherClass.getLabel("DE"), otherClass.getURI());
+		showEntityMap.put(intraoperativeDispositionClass.getLabel("DE"), otherClass.getURI());
 		return showEntityMap;
 	}
 

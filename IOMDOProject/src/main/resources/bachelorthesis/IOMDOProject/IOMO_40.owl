@@ -7362,7 +7362,7 @@ Previous. An information content entity is a non-realizable information entity t
     <!-- http://purl.obolibrary.org/obo/MONDO_0005621 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/MONDO_0005621">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/MONDO_0043510"/>
+        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/MONDO_0044745"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Damage to the blood vessels of the brain</obo:IAO_0000115>
         <obo:IAO_0000412 rdf:resource="http://purl.obolibrary.org/obo/mondo.owl"/>
         <rdfs:label xml:lang="de">Vaskuläre Hirnverletzung</rdfs:label>
@@ -7792,21 +7792,9 @@ Previous. An information content entity is a non-realizable information entity t
     
 
 
-    <!-- http://purl.obolibrary.org/obo/MONDO_0043510 -->
-
-    <owl:Class rdf:about="http://purl.obolibrary.org/obo/MONDO_0043510">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/MONDO_0044745"/>
-        <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Acute and chronic (see also brain INJURIES, CHRONIC) injuries to the brain, including the cerebral hemispheres, CEREBELLUM, and brain STEM. Clinical manifestations depend on the nature of injury. Diffuse trauma to the brain is frequently associated with DIFFUSE AXONAL INJURY or COMA, POST-TRAUMATIC. Localized injuries may be associated with NEUROBEHAVIORAL MANIFESTATIONS; HEMIPARESIS, or other focal neurologic deficits.</obo:IAO_0000115>
-        <obo:IAO_0000412 rdf:resource="http://purl.obolibrary.org/obo/mondo.owl"/>
-        <rdfs:label xml:lang="en">brain injury</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://purl.obolibrary.org/obo/MONDO_0043797 -->
 
     <owl:Class rdf:about="http://purl.obolibrary.org/obo/MONDO_0043797">
-        <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/MONDO_0021178"/>
         <rdfs:subClassOf rdf:resource="http://purl.obolibrary.org/obo/MONDO_0044745"/>
         <obo:IAO_0000115 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Penetrating and non-penetrating injuries to the spinal cord resulting from traumatic external forces (e.g., WOUNDS, GUNSHOT; WHIPLASH INJURIES; etc.).</obo:IAO_0000115>
         <obo:IAO_0000412 rdf:resource="http://purl.obolibrary.org/obo/mondo.owl"/>
