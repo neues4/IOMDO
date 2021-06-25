@@ -12,7 +12,7 @@ import java.util.Optional;
 
 import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
-import bachelorthesis.IOMDOProject.model.Counter;
+
 import bachelorthesis.IOMDOProject.model.OntClassMap;
 import bachelorthesis.IOMDOProject.model.OntologyEditor;
 import javafx.collections.FXCollections;
@@ -311,7 +311,7 @@ public class IOMRecordingController {
 		// create a new sep baseline measurement
 		String sepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("SEP Baseline Messung"), "SepBaselineMeasurement");
 		String nerve = null;
-		Counter msCounter = new Counter(1);
+		int msCounter = 1;
 		// go through all the rows of the grid
 		int rowsInSep = nodeMapSepBaselines.size()/3;
 		for(int i= 2; i <= rowsInSep + 1; i++) {
@@ -332,24 +332,24 @@ public class IOMRecordingController {
 			}
 			// see if textfield is filled out, read the value, create new instances in the ontology
 			if(getTextField(nodeMapSepBaselines.get(i +"" + 1)).getText() != "") {
-				String ms1 = ontEdit.createNewMilisecond("ms".concat(msCounter.toString()));
+				String ms1 = ontEdit.createNewMilisecond("ms" + msCounter);
 				String msValue1 = getTextField(  nodeMapSepBaselines.get( i  +"" + 1)).getText();
 				createSepBaselineStatement(ms1, msValue1, sepBaselineMeasurement, nerve);
-				msCounter.increment();
+				msCounter ++;
 			}
 			// see if textfield is filled out, read the value, create new instances in the ontology
 			if(getTextField(nodeMapSepBaselines.get(i +"" + 2)).getText() != "") {
-				String ms2 = ontEdit.createNewMilisecond("ms".concat(msCounter.toString()));
+				String ms2 = ontEdit.createNewMilisecond("ms" + msCounter);
 				String msValue2 = getTextField(  nodeMapSepBaselines.get( i  +"" + 2)).getText();
 				createSepBaselineStatement(ms2, msValue2, sepBaselineMeasurement, nerve);
-				msCounter.increment();
+				msCounter ++;
 			}
 			// see if textfield is filled out, read the value, create new instances in the ontology
 			if(getTextField(nodeMapSepBaselines.get(i +"" + 3)).getText() != "") {
-				String ms3 = ontEdit.createNewMilisecond("ms".concat(msCounter.toString()));
+				String ms3 = ontEdit.createNewMilisecond("ms" + msCounter);
 				String msValue3 = getTextField(  nodeMapSepBaselines.get( i  +"" + 3)).getText();
 				createSepBaselineStatement(ms3, msValue3, sepBaselineMeasurement, nerve);
-				msCounter.increment();
+				msCounter ++;
 			}
 		}
 	}
@@ -392,8 +392,8 @@ public class IOMRecordingController {
 
 		// create a new tes baseline measurement
 		String tesMepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("TES MEP Baseline Messung"), "TesMepBaselineMessung");
-		Counter muscleCounter = new Counter(1);
-		Counter mATesBaselineCounter = new Counter(1);
+		int muscleCounter = 1;
+		int mATesBaselineCounter = 1;
 		// go through all the rows of the grid
 		int rowsInTes = nodeMapTesBaselines.size()/4;
 		for(int i= 2; i <= rowsInTes + 1; i++) {
@@ -402,28 +402,28 @@ public class IOMRecordingController {
 				// get the chosen muscle out of the combobox
 				String muscleChosen = getComboBox(nodeMapTesBaselines.get(i +"" + 0)).getSelectionModel().getSelectedItem();
 				// create a new instance for muscle
-				String muscle = ontEdit.createNewIndividual(ontEdit.getAllMuscles().get(muscleChosen), "MuskelTesBaseline".concat(muscleCounter.toString()));
-				muscleCounter.increment();
+				String muscle = ontEdit.createNewIndividual(ontEdit.getAllMuscles().get(muscleChosen), "MuskelTesBaseline" + muscleCounter );
+				muscleCounter ++;
 				// see if first text field is filled out, read the value, create new instances in ontology
 				if (getTextField(nodeMapTesBaselines.get( i  +"" + 1)).getText() != "") {
 					String maValue = getTextField(nodeMapTesBaselines.get( i  +"" + 1)).getText();
-					String mA = ontEdit.createNewMiliampere("mATesBaseline".concat(mATesBaselineCounter.toString()));
+					String mA = ontEdit.createNewMiliampere("mATesBaseline" + muscleCounter );
 					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle, document);
-					mATesBaselineCounter.increment();
+					mATesBaselineCounter ++;
 				}
 				// see if the second text field is filled out, read the value, create new instances in ontology
 				if(getTextField(nodeMapTesBaselines.get( i  +"" + 2)).getText() != "") {
 					String maValue = getTextField(nodeMapTesBaselines.get( i  +"" + 2)).getText();
-					String mA = ontEdit.createNewMiliampere("mATesBasline".concat(mATesBaselineCounter.toString()));
+					String mA = ontEdit.createNewMiliampere("mATesBasline" + muscleCounter );
 					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle, document);
-					mATesBaselineCounter.increment();
+					mATesBaselineCounter ++;
 				}
 				// see if the third text field is filled out, read the value, create new instances in ontology
 				if (getTextField(nodeMapTesBaselines.get( i  +"" + 3)).getText() != "") {
 					String maValue = getTextField(nodeMapTesBaselines.get( i  +"" + 3)).getText();
-					String mA = ontEdit.createNewMiliampere("mATesBasline".concat(mATesBaselineCounter.toString()));
+					String mA = ontEdit.createNewMiliampere("mATesBasline" + muscleCounter );
 					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle, document);
-					mATesBaselineCounter.increment();
+					mATesBaselineCounter  ++;
 				}
 			}
 		}
@@ -443,7 +443,7 @@ public class IOMRecordingController {
 		ontEdit.addStatement(document, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000285", tesMepBaselineMeasurement);
 	}
 
-
+/*
 	/**
 	 * a method to read all mA values in the text boxes of dcs baseline and create instances of muscle, mA and data item
 	 */
@@ -461,48 +461,50 @@ public class IOMRecordingController {
 
 		// create a new tes baseline measurement
 		String dcsMepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("DCS MEP Baseline Messung"), "DcsMepBaselineMessung");
-		Counter muscleCounter = new Counter(1);
-		Counter mADcsBaselineCounter = new Counter(1);
+		int muscleCounter = 1;
+		int  mADcsBaselineCounter = 1;
 		// go through all the rows of the grid
 		int rowsInDcs = nodeMapDcsBaselines.size()/5;
 		for(int i= 2; i <= rowsInDcs + 1; i++) {
 			// get the chosen muscle out of the combobox
 			if (getComboBox(nodeMapDcsBaselines.get( i  +"" + 0)).getSelectionModel().getSelectedItem() != null) {
 				String muscleChosen = getComboBox(nodeMapDcsBaselines.get(i +"" + 0)).getSelectionModel().getSelectedItem();
-				String muscle = ontEdit.createNewIndividual(ontEdit.getAllMuscles().get(muscleChosen), "muskelDscBaseline".concat(muscleCounter.toString()));
-				muscleCounter.increment();
+				//String muscle = ontEdit.createNewIndividual(ontEdit.getAllMuscles().get(muscleChosen), "muskelDscBaseline".concat(muscleCounter.toString()));
+				muscleCounter ++;
 				// see if first text field is filled out, read the value, create new instances in ontology
 				if (getTextField(nodeMapDcsBaselines.get( i  +"" + 1)).getText() != "") {
 					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 1)).getText();
-					String mA = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
-					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
-					mADcsBaselineCounter.increment();
+					String mA = ontEdit.createNewMiliampere("mADcsBaseline" +  muscleCounter);
+					//createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
+					mADcsBaselineCounter ++;
 				}
 				// see if second text field is filled out, read the value, create new instances in ontology
 				if(getTextField(nodeMapDcsBaselines.get( i  +"" + 2)).getText() != "") {
 					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 2)).getText();
-					String mA = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
-					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
-					mADcsBaselineCounter.increment();
+					String mA = ontEdit.createNewMiliampere("mADcsBaseline" + muscleCounter);
+				//	createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
+					mADcsBaselineCounter ++;
 				}
 				// see if third text field is filled out, read the value, create new instances in ontology
 				if (getTextField(nodeMapDcsBaselines.get( i  +"" + 3)).getText() != "") {
 					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 3)).getText();
-					String mA = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
-					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
-					mADcsBaselineCounter.increment();
+					String mA = ontEdit.createNewMiliampere("mADcsBaseline" + muscleCounter);
+					//createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
+					mADcsBaselineCounter ++;
 
 				}
 				// see if fourth text field is filled out, read the value, create new instances in ontology
 				if (getTextField(nodeMapDcsBaselines.get( i  +"" + 4)).getText() != "") {
 					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 4)).getText();
-					String mA = ontEdit.createNewMiliampere("mADcsBaseline".concat(mADcsBaselineCounter.toString()));
-					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
-					mADcsBaselineCounter.increment();
+					String mA = ontEdit.createNewMiliampere("mADcsBaseline" + muscleCounter);
+					//createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
+					mADcsBaselineCounter ++;
 				}
 			}
 		}
 	}
+
+	
 	/**
 	 * method to create a new dcs mep baseline statement
 	 * @param mA
@@ -547,6 +549,7 @@ public class IOMRecordingController {
 		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
 			tesMepMuscleChoice.add(0, selectedItem);
+			
 			categoryList.add("TES MEP Messung");
 		}
 	}

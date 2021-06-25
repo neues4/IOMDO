@@ -51,7 +51,7 @@ public class OntologyReader {
 
 	private static OntologyReader editor;
 	// a new counter to count the URIs
-	Counter uriCounter = new Counter(500);
+	
 
 
 	public static OntologyReader getInstance()
@@ -177,27 +177,6 @@ public class OntologyReader {
 		return patAl;
 	}
 
-	public String createNewPatient(String indvLabel) {
-		OntClass ontClass = ontModel.getOntClass("http://medicis/spm.owl/OntoSPM#patient");
-		Individual indv = ontClass.createIndividual(createNewURI());
-		indv.addLabel(indvLabel, "EN");
-		return indv.getURI();
-	}
-
-	public String createNewIndividual(String classURI, String indvLabel) {
-		OntClass ontClass = ontModel.getOntClass(classURI);
-		Individual indv = ontClass.createIndividual(createNewURI());
-		indv.addLabel(indvLabel, "EN");
-		return indv.getURI();
-	}
-
-	public String createNewURI() {
-		String iomoURI = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000";
-		Integer count = uriCounter.getValue();
-		String newURI = iomoURI.concat(count.toString());
-		uriCounter.increment();	
-		return newURI;
-	}
 
 	public String getIndividualURI() {
 		String indiURI = null;
@@ -235,46 +214,6 @@ public class OntologyReader {
 	}
 
 
-
-	public String createDiagnosis(String classURI, String indvLabel) {
-		OntClass ontClass = ontModel.getOntClass(classURI);
-		Individual indv = ontClass.createIndividual(createNewURI());
-		indv.addLabel(indvLabel, "EN");
-		//ObjectProperty obProp = ontModel.getObjectProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282");
-		//indv.addProperty(obProp, "");
-		return indv.getURI();
-
-	}
-
-	public String createMuscle(String classURI, String indvLabel) {
-		OntClass ontClass = ontModel.getOntClass(classURI);
-		Individual indv = ontClass.createIndividual(createNewURI());
-		indv.addLabel(indvLabel, "EN");
-		//ObjectProperty obProp = ontModel.getObjectProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282");
-		//indv.addProperty(obProp, "");
-		return indv.getURI();
-
-	}
-
-	public String createNewMeasurement(String classURI, String indvLabel) {
-		OntClass ontClass = ontModel.getOntClass(classURI);
-		Individual indv = ontClass.createIndividual(createNewURI());
-		indv.addLabel(indvLabel, "EN");
-		//ObjectProperty obProp = ontModel.getObjectProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282");
-		//indv.addProperty(obProp, "");
-		return indv.getURI();
-
-	}
-
-	public String createSurgery(String classURI, String indvLabel) {
-		OntClass ontClass = ontModel.getOntClass(classURI);
-		Individual indv = ontClass.createIndividual(createNewURI());
-		indv.addLabel(indvLabel, "EN");
-		//ObjectProperty obProp = ontModel.getObjectProperty("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282");
-		//indv.addProperty(obProp, "");
-		return indv.getURI();
-
-	}
 
 	public void addPropertiesToSurgery(String surgery, String surgeryDate, String surgeon, String assistant, String isisDevice) {
 		Individual indv = ontModel.getIndividual(surgery);
@@ -460,42 +399,6 @@ public class OntologyReader {
 		showEntityMap.put(iomProcess.getLabel("DE"), iomProcess.getURI());
 
 		return showEntityMap;
-	}
-
-
-	public String createNewIOMDocument(String indvLabel) {
-		OntClass ontClass = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000277");
-		Individual indv = ontClass.createIndividual(createNewURI());
-		indv.addLabel(indvLabel, "EN");
-		return indv.getURI();
-	}
-
-	public String createNewMiliampere(String indvLabel) {
-		OntClass ontClass = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000268");
-		Individual indv = ontClass.createIndividual(createNewURI());
-		indv.addLabel(indvLabel, "EN");
-		return indv.getURI();
-	}
-
-	public void addPropertiesToMiliampere(String miliampere, String value) {
-		Individual indv = ontModel.getIndividual(miliampere);
-		DatatypeProperty miliAmpValue = ontModel.getDatatypeProperty("http://purl.obolibrary.org/obo/IAO_0000004");
-		indv.addProperty(miliAmpValue, value);
-
-	}
-
-	public String createNewMilisecond(String indvLabel) {
-		OntClass ontClass = ontModel.getOntClass("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000384");
-		Individual indv = ontClass.createIndividual(createNewURI());
-		indv.addLabel(indvLabel, "EN");
-		return indv.getURI();
-	}
-
-	public void addPropertiesToMilisecond(String miliampere, String value) {
-		Individual indv = ontModel.getIndividual(miliampere);
-		DatatypeProperty miliSecValue = ontModel.getDatatypeProperty("http://purl.obolibrary.org/obo/IAO_0000004");
-		indv.addProperty(miliSecValue, value);
-
 	}
 
 
