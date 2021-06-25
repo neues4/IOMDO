@@ -16,11 +16,11 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage stage) throws IOException {
-		//Defaut language is german.
+		//Setting German as defaut language
 		I18n.setLocale(new Locale("de_CH"));
-		//I18n.setLocale(new Locale("en"));
 		Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"),I18n.getResourceBundle());
 		Scene scene = new Scene(root);
+		//loading the css stylesheet
 		scene.getStylesheets().add(getClass().getResource("style1.css").toExternalForm());
 		stage.setTitle(I18n.getString("start.titel"));
 		stage.setScene(scene);
