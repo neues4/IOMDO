@@ -67,7 +67,7 @@ public class OntologyReader {
 	
 	@SuppressWarnings("exports")
 	public static Model getReaderModel() {
-		Model model = OntologyEditor.getInstance().getModel();
+		Model model = OntologyReader.getInstance().ontModel;
 		return model;
 	}
 

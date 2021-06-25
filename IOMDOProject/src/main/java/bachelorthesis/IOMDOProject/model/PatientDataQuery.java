@@ -23,7 +23,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class PatientDataQuery {
 	
-	static OntologyEditor oe = OntologyEditor.getInstance();
 	
 	/**
 	 * 
@@ -31,8 +30,8 @@ public class PatientDataQuery {
 	 * @return a Array List with the label of the patient, his diagnosis and his surgery (e.g. [patient 1, HGG, Dekompression HWK]
 	 * @throws IOException
 	 */
-	public static ArrayList<String>  sparqlTest(String uri) throws IOException {
-		Model model = oe.getModel();
+	public static ArrayList<String> sparqlTest(String uri) throws IOException {
+		Model model = OntologyReader.getReaderModel();
 		ArrayList<String> data;
 		String queryString =
 				"PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#> \n" +
@@ -40,7 +39,7 @@ public class PatientDataQuery {
 						"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n" +
 						"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n" +
 						"PREFIX  owl:  <http://www.w3.org/2002/07/owl#> \n" +
-						"SELECT DISTINCT  ?patient ?diagnosis ?surgery\n" +
+						"SELECT DISTINCT  ?patient ?diagnosis ?surgery \n" +
 						"WHERE\n" +
 						"{?pat rdf:type OntoSPM:patient .\n" +
 						"?pat rdfs:label ?patient .\n" +
