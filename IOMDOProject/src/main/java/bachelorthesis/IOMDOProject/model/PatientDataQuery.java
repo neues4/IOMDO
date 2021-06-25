@@ -24,24 +24,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class PatientDataQuery {
 	
 	static OntologyEditor oe = OntologyEditor.getInstance();
-
-	public static void main(String[] args) throws IOException {
-		System.out.println(sparqlTest("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000262"));
-	}
 	
 	/**
-	 * a method to query the patient, his diagnosis and his surgery
-	 * @return an arraylist with all the patient, their diagnosis and surgeries (e.g. [Patient1, Schwannom, Aufrichtung, Patient2, ...]
+	 * 
+	 * @param uri the URI of the patient instance
+	 * @return a Array List with the label of the patient, his diagnosis and his surgery (e.g. [patient 1, HGG, Dekompression HWK]
 	 * @throws IOException
 	 */
 	public static ArrayList<String>  sparqlTest(String uri) throws IOException {
-		//FileManager.get().addLocatorClassLoader(QueryTester.class.getClassLoader());
-		// ACHTUNG, hier habe ich noch keine andere Möglichkeit gefunden wie ich laden kann! Da es ein Model sein muss
-		//Model model = FileManager.get().loadModel("/Users/stefanie/Desktop/SPARQLtest2.owl");
 		Model model = oe.getModel();
 		ArrayList<String> data;
-				//"http://www.semanticweb.org/ontologies/2021/1/24/IOMO#Patient1";
-		
 		String queryString =
 				"PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#> \n" +
 						"PREFIX  OntoSPM: <http://medicis/spm.owl/OntoSPM#> \n" +
@@ -74,10 +66,11 @@ public class PatientDataQuery {
 		try {
 			// create a new result set
 			ResultSet results = qexec.execSelect();
-
+			
 			// write to a ByteArrayOutputStream
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
+			//System.out.println(ResultSetFormatter.asText(results));
 			// as CSV (comma seperated)
 			ResultSetFormatter.outputAsCSV(outputStream, results);
 
@@ -106,9 +99,6 @@ public class PatientDataQuery {
 		}
 		return data;
 
-
-
 	}
-
 	
 }
