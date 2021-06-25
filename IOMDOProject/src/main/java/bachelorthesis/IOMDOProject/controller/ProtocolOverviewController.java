@@ -4,8 +4,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
-import bachelorthesis.IOMDOProject.model.OntologyEditor;
 import bachelorthesis.IOMDOProject.model.OntologyReader;
+import bachelorthesis.IOMDOProject.model.PatientDataQuery;
 import bachelorthesis.IOMDOProject.model.IOMCase;
 import bachelorthesis.IOMDOProject.model.Surgery;
 import javafx.collections.FXCollections;
@@ -21,7 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
 /**
- * 
+ * Contoller for the Protocol Overview View
  * @author romap1
  *
  */
@@ -32,16 +32,12 @@ public class ProtocolOverviewController  {
 	
 	@FXML
 	private TextField searchTF;
-	
 	@FXML
 	private Button resetBtn;
-	
 	@FXML
 	private TableView<IOMCase> protocolTblView;
-	
 	@FXML
 	private TableColumn<IOMCase, String> surnameColumn;
-	
 	@FXML
 	private TableColumn<IOMCase, String> firstnameColumn;
 	@FXML
@@ -53,15 +49,10 @@ public class ProtocolOverviewController  {
 	@FXML
 	private TableColumn<Surgery, String> surgeryColumn;
 	@FXML
-	private TableColumn<Surgery, String> dateOfSurgeryColumn;
-	@FXML
 	private TableColumn<IOMCase, String> FIDColumn;
 	@FXML
 	private TableColumn<IOMCase, String> PIDColumn;
-	@FXML
-	private TableColumn<Surgery, String> surgeonColumn;
-	@FXML
-	private TableColumn<Surgery, String> assistantColumn;
+
 	
 	
 	//private OntologyEditor oe = new OntologyEditor("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IOMO_28.owl");
@@ -73,14 +64,14 @@ public class ProtocolOverviewController  {
 	
 	
 	 @FXML
-	    public void initialize() throws ParseException {
+	    public void initialize() throws ParseException, IOException {
 		 
 		 caseNrColumn.setCellValueFactory(new PropertyValueFactory<>("caseNr"));
 			surnameColumn.setCellValueFactory(new PropertyValueFactory<IOMCase, String>("surname"));
 			firstnameColumn.setCellValueFactory(new PropertyValueFactory<IOMCase, String>("firstname"));
 			dateOfBirthColumn.setCellValueFactory(new PropertyValueFactory<IOMCase, String>("birthday"));
-			//diagnosisColumn.setCellValueFactory(new PropertyValueFactory<Surgery, String>("diagnosis"));
-			//surgeryColumn.setCellValueFactory(new PropertyValueFactory<Surgery, String>("surgery"));
+			diagnosisColumn.setCellValueFactory(new PropertyValueFactory<Surgery, String>("diagnosis"));
+			surgeryColumn.setCellValueFactory(new PropertyValueFactory<Surgery, String>("surgery"));
 			//dateOfSurgeryColumn.setCellValueFactory(new PropertyValueFactory<Surgery, String>("surgerydate"));
 			//surgeonColumn.setCellValueFactory(new PropertyValueFactory<Surgery, String>("surgeon"));
 			//assistantColumn.setCellValueFactory(new PropertyValueFactory<Surgery, String>("assistant"));
@@ -135,8 +126,9 @@ public class ProtocolOverviewController  {
 	 * @param indvUri
 	 * @return
 	 * @throws ParseException 
+	 * @throws IOException 
 	 */
-	public IOMCase loadPatient(OntologyReader oe, String indvUri) throws ParseException {
+	public IOMCase loadPatient(OntologyReader oe, String indvUri) throws ParseException, IOException {
 		//System.out.println(oe.getBirthday(indvUri).toString().replace("^^" + XSDDatatype.XSDdate.getURI(), ""));
 		//System.out.println(XSDDatatype.XSDdate.getURI());
 		//System.out.println(XSDDatatype.XSDdate.unparse(oe.getBirthday(indvUri)));
@@ -145,9 +137,37 @@ public class ProtocolOverviewController  {
 		
 		//.replace("^^" + XSDDatatype.XSDint.getURI(), "eger").toString()
 		//^^http://www.w3.org/2001/XMLSchema#integer
-		return new IOMCase(oe.getSurname(indvUri).toString(), oe.getFirstName(indvUri).toString(), 
-				oe.getBirthdayValue(indvUri), oe.getPID(indvUri).toString(), oe.getFID(indvUri).toString(), 
-				Integer.parseInt(oe.getCaseNumber(indvUri).toString().replace("^^" + XSDDatatype.XSDint.getURI(), "").toString()));
+		
+		//gib alle Individuen die diese uri haben (indvUri)(sollte nur 1 sein), und gibe dessen Surgery, surgerydate,  usw. 
+		
+		//aus Array lesen und setter Methode von IOMCase anvenden
+		
+		
+		
+		
+		ArrayList<String> list = PatientDataQuery.sparqlTest(indvUri);
+		String diagnosis = "";
+		String surgery = "";
+		if (!list.isEmpty()) {
+			
+		ArrayList<String> list2 = PatientDataQuery.sparqlTest("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000276");
+		System.out.println(indvUri);
+		diagnosis = list.get(1);
+		surgery = list.get(2);
+		}
+		
+		String surname = oe.getSurname(indvUri).toString();
+		String firstname = oe.getFirstName(indvUri).toString();
+		String birthday = oe.getBirthdayValue(indvUri);
+		String PID = oe.getPID(indvUri).toString();
+		String FID = oe.getFID(indvUri).toString();
+		int caseNumber = Integer.parseInt(oe.getCaseNumber(indvUri).toString().replace("^^" + XSDDatatype.XSDint.getURI(), "").toString());
+		
+		IOMCase iomCase = new IOMCase(surname, firstname, birthday,PID, FID, caseNumber, diagnosis, surgery);
+		
+		
+		//iomcase.setSurgeryDate
+		return iomCase;
 	}
 	
 	/**
@@ -156,13 +176,14 @@ public class ProtocolOverviewController  {
 	 * @param searchText
 	 * @return
 	 */
-	private boolean searchFindsPatient(IOMCase iOMCase, String searchText) {
+	private boolean filterCaseData(IOMCase iOMCase, String searchText) {
 		return (iOMCase.getSurname().toLowerCase().contains(searchText.toLowerCase())) ||
 		            (iOMCase.getFirstname().toLowerCase().contains(searchText.toLowerCase())) ||
 		            iOMCase.getBirthday().toLowerCase().contains(searchText.toLowerCase()) ||
 		            iOMCase.getFID().toLowerCase().contains(searchText.toLowerCase()) ||
-		            iOMCase.getPID().toLowerCase().contains(searchText.toLowerCase()) ;
-		          //  Integer.valueOf(patient.getFID()).toString().equals(searchText.toLowerCase());
+		            iOMCase.getPID().toLowerCase().contains(searchText.toLowerCase()) ||
+		            iOMCase.getSurgery().toLowerCase().contains(searchText.toLowerCase())
+		            || iOMCase.getDiagnosis().toLowerCase().contains(searchText.toLowerCase());
 		}
 	
 	/**
@@ -173,7 +194,7 @@ public class ProtocolOverviewController  {
 	private Predicate<IOMCase> createPredicate(String searchText){
 	    return patient -> {
 	        if (searchText == null || searchText.isEmpty()) return true;
-	        return searchFindsPatient(patient, searchText);
+	        return filterCaseData(patient, searchText);
 	    };
 	}
 		

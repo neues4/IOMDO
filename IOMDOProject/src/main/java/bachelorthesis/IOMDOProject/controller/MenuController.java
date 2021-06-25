@@ -40,7 +40,7 @@ public class MenuController {
 	@FXML
 	private Button createQueryBtn;
 	@FXML
-	private Button expandOntologyBtn;
+	private Button showOntologyBtn;
 	@FXML
 	private Button settingsBtn;
 	@FXML
@@ -72,7 +72,7 @@ public class MenuController {
 		newProtocolBtn.setStyle("-fx-background-color: #629c9e");
 		protocolOverviewBtn.setStyle("-fx-background-color: white");
 		createQueryBtn.setStyle("-fx-background-color: white");
-		expandOntologyBtn.setStyle("-fx-background-color: white");
+		showOntologyBtn.setStyle("-fx-background-color: white");
 		settingsBtn.setStyle("-fx-background-color: white");
 		
 	
@@ -84,7 +84,7 @@ public class MenuController {
 		newProtocolBtn.setStyle("-fx-background-color: white");
 		protocolOverviewBtn.setStyle("-fx-background-color: #629c9e");
 		createQueryBtn.setStyle("-fx-background-color: white");
-		expandOntologyBtn.setStyle("-fx-background-color: white");
+		showOntologyBtn.setStyle("-fx-background-color: white");
 		settingsBtn.setStyle("-fx-background-color: white");
 		
 	}
@@ -110,16 +110,16 @@ public class MenuController {
 		newProtocolBtn.setStyle("-fx-background-color: white");
 		protocolOverviewBtn.setStyle("-fx-background-color: white");
 		createQueryBtn.setStyle("-fx-background-color: #629c9e");
-		expandOntologyBtn.setStyle("-fx-background-color: white");
+		showOntologyBtn.setStyle("-fx-background-color: white");
 		settingsBtn.setStyle("-fx-background-color: white");
 
 	}
-	public void openExpandOntology(ActionEvent event) throws IOException {
-		changeCenter("ExpandOntology.fxml");
+	public void openShowOntology(ActionEvent event) throws IOException {
+		changeCenter("ShowOntology.fxml");
 		newProtocolBtn.setStyle("-fx-background-color: white");
 		protocolOverviewBtn.setStyle("-fx-background-color: white");
 		createQueryBtn.setStyle("-fx-background-color: white");
-		expandOntologyBtn.setStyle("-fx-background-color: #629c9e");
+		showOntologyBtn.setStyle("-fx-background-color: #629c9e");
 		settingsBtn.setStyle("-fx-background-color: white");
 	}
 	public void openSettings(ActionEvent event) throws IOException {
@@ -127,7 +127,7 @@ public class MenuController {
 		newProtocolBtn.setStyle("-fx-background-color: white");
 		protocolOverviewBtn.setStyle("-fx-background-color: white");
 		createQueryBtn.setStyle("-fx-background-color: white");
-		expandOntologyBtn.setStyle("-fx-background-color: white");
+		showOntologyBtn.setStyle("-fx-background-color: white");
 		settingsBtn.setStyle("-fx-background-color: #629c9e");
 
 	}

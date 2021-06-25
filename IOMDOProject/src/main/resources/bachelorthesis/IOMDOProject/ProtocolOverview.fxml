@@ -56,23 +56,23 @@
                   <Insets />
                </GridPane.margin>
             </HBox>
-            <TableView fx:id="protocolTblView" prefHeight="800.0" prefWidth="1000.0" styleClass="column-header-background" stylesheets="@style1.css" GridPane.rowIndex="2">
+            <TableView fx:id="protocolTblView" styleClass="column-header-background" stylesheets="@style1.css" tableMenuButtonVisible="true" GridPane.rowIndex="2">
               <columns>
-                <TableColumn fx:id="caseNrColumn" minWidth="-Infinity" prefWidth="40.800018310546875" text="%lbl.caseNr" />
-                <TableColumn fx:id="firstnameColumn" prefWidth="88.0" text="%lbl.firstName" />
-                  <TableColumn fx:id="surnameColumn" prefWidth="88.0" text="%lbl.surname" />
-                  <TableColumn fx:id="dateOfBirthColumn" prefWidth="88.0" text="%lbl.dateOfBirth" />
-                  <TableColumn fx:id="diagnosisColumn" prefWidth="88.0" text="%lbl.diagnosis" />
-                  <TableColumn fx:id="surgeryColumn" prefWidth="88.0" text="%lbl.surgery" />
-                  <TableColumn fx:id="dateOfSurgeryColumn" minWidth="-Infinity" prefWidth="160.0" text="%lbl.dateOfSurgery" />
-                  <TableColumn fx:id="FIDColumn" text="%lbl.FID" />
-                  <TableColumn fx:id="PIDColumn" text="%lbl.PID" />
-                  <TableColumn fx:id="surgeonColumn" minWidth="-Infinity" text="%lbl.age" />
-                  <TableColumn fx:id="assistantColumn" prefWidth="88.0" text="%lbl.localization" />
+                <TableColumn fx:id="caseNrColumn" minWidth="-Infinity" prefWidth="-1.0" text="%lbl.caseNr" />
+                <TableColumn fx:id="firstnameColumn" prefWidth="-1.0" text="%lbl.firstName" />
+                  <TableColumn fx:id="surnameColumn" prefWidth="-1.0" text="%lbl.surname" />
+                  <TableColumn fx:id="dateOfBirthColumn" prefWidth="-1.0" text="%lbl.dateOfBirth" />
+                  <TableColumn fx:id="diagnosisColumn" prefWidth="-1.0" text="%lbl.diagnosis" />
+                  <TableColumn fx:id="surgeryColumn" prefWidth="-1.0" text="%lbl.surgery" />
+                  <TableColumn fx:id="FIDColumn" prefWidth="-1.0" text="%lbl.FID" />
+                  <TableColumn fx:id="PIDColumn" prefWidth="-1.0" text="%lbl.PID" />
               </columns>
                <GridPane.margin>
-                  <Insets left="8.0" />
+                  <Insets left="8.0" right="8.0" />
                </GridPane.margin>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
          </children>
       </GridPane>

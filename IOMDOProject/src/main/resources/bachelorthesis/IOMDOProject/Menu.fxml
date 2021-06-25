@@ -98,7 +98,7 @@
                <font>
                   <Font size="17.0" />
                </font></Button>
-            <Button id="menuBtn" fx:id="expandOntologyBtn" mnemonicParsing="false" onAction="#openExpandOntology" prefHeight="80.0" prefWidth="180.0" stylesheets="@style1.css" text="%btn.ontologyOverview">
+            <Button id="menuBtn" fx:id="showOntologyBtn" mnemonicParsing="false" onAction="#openShowOntology" prefHeight="80.0" prefWidth="180.0" stylesheets="@style1.css" text="%btn.ontologyOverview">
                <font>
                   <Font size="17.0" />
                </font></Button>

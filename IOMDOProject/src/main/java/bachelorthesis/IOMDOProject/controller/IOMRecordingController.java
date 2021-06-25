@@ -1,6 +1,5 @@
 package bachelorthesis.IOMDOProject.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -14,11 +13,8 @@ import java.util.Optional;
 import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
 import bachelorthesis.IOMDOProject.model.Counter;
-import bachelorthesis.IOMDOProject.model.EntryMap;
 import bachelorthesis.IOMDOProject.model.OntClassMap;
 import bachelorthesis.IOMDOProject.model.OntologyEditor;
-import bachelorthesis.IOMDOProject.model.PatientSurgeryData;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,32 +23,23 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.ConstraintsBase;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 
 /**
- * Controller for the recording durinig Intraoperative Neuromonitoring
+ * Controller for the recording during Intraoperative Neuromonitoring
  * @author romap1, neues4
  *
  */
@@ -60,7 +47,12 @@ public class IOMRecordingController {
 
 	//This class is split in 3 Parts for a better Overview: Part1: Patient/Surgery Data, Part2: Baselines, Part3: IOM actual Recording
 
+
+
 	//Variables Patient/Surgery Data-----------------------------------
+
+	// new instance of Ontology Editor
+	private OntologyEditor ontEdit = OntologyEditor.getInstance();	
 
 	@FXML
 	private TextField caseNrTF, surnameTF, pidTF , firstNameTF, fidTF, birthdayTF, dateOfSurgeryTF;
@@ -71,8 +63,23 @@ public class IOMRecordingController {
 	@FXML
 	private Button nextBtn;
 
-	//-----------------------------------Variables Patient/Surgery Data
+	// Diagnosis
+	private ObservableList<String> diagnosisList = FXCollections.observableArrayList(ontEdit.getAllDiagnosis().keySet());
+	// Surgeries
+	private ObservableList<String> surgeryList = FXCollections.observableArrayList(ontEdit.getAllSurgeries().keySet());
 
+	// Surgeons
+	private ObservableList<String> surgeonList = FXCollections.observableArrayList("Abu Isa", "Bervini", "Fichtner", "Finkenstädt", "Krähenbühl", "Lutz",
+			"Murek", "Pollo", "Raabe", "Schär", "Schläppi", "Schucht", "Seidel", "Ulrich", "Vulcu");
+	// Devices
+	private ObservableList<String> deviceList = FXCollections.observableArrayList("Einstein", "Mieze", "Napoleon", "Rosalinde");
+	// Assistants
+	private ObservableList<String> assistantList = FXCollections.observableArrayList("Consuegra", "Finkenstädt", "Goldberg", "Häni", "Hlavica", "Jesse", 
+			"Lutz", "Mija", "Montalbetti", "Müller", "Nowacki", "Osmanagic", "Redeker", "Ropelato", "Schütz", "Tashi", "Zubak");
+
+
+
+	//-----------------------------------Variables Patient/Surgery Data
 
 	//Variables Baselines ---------------------------------------------
 
@@ -102,10 +109,8 @@ public class IOMRecordingController {
 	@FXML
 	private ComboBox<String> cbBrL, cbLarL, cbBcrL, cbBrR, cbLarR, cbBcrR;
 
-
 	@FXML
-	private TextField tfMedLN, tfMedRN, tfTibLN, tfTibRN, tfMedLP, tfMedRP, tfTibLP, tfTibRP, tfMedLA, tfMedRA, tfTibLA, tfTibRA;;
-
+	private TextField tfMedLN, tfMedRN, tfTibLN, tfTibRN, tfMedLP, tfMedRP, tfTibLP, tfTibRP, tfMedLA, tfMedRA, tfTibLA, tfTibRA, tfAEP1L, tfAEP1R;
 
 	@FXML
 	private Button btnSaveTesMep, btnSaveSsep, btnSaveDcsMep, resetTESMEPBtn, resetDCSMEPBtn;
@@ -113,31 +118,25 @@ public class IOMRecordingController {
 	@FXML
 	private TitledPane SSEPPane, TESMEPPane, DCSMEPPane, AEPPane, VEPPane, reflexPane;
 
-	//Counter for the Rows in the GridPane. Row 0 is Empty and Row 1 already has Nodes. Therefore the counter starts at 2.
-
 	// a list for the muscles chosen in tes mep baseline
 	private ObservableList<String> tesMepMuscleChoice = FXCollections.observableArrayList();
 
 	// a list for the muscles chosen in dcs mep baseline
 	private ObservableList<String> dcsMepMuscleChoice = FXCollections.observableArrayList();
 
+	private ObservableList<String> muscleList = FXCollections.observableArrayList(ontEdit.getAllMuscles().keySet());
 
-	//Löschen? romap1
-	// a map for the comboboxes in tes mep
-	private Map<Integer, ComboBox<String>> cbTesMap = new HashMap<Integer, ComboBox<String>>();
-
-	// a map for the comboboxes in dcs mep
-	private Map<Integer, ComboBox<String>> cbDcsMap = new HashMap<Integer, ComboBox<String>>();
+	//put all the possibilities for veo in a List
+	private ObservableList<String> vepAndReflexList = FXCollections.observableArrayList(I18n.getString("text.available"), I18n.getString("text.moderate"), I18n.getString("text.bad"), "");
 
 
+	//-------------------------------------------------------Variables Baselines End
 
-
-	//-------------------------------------------------------Variables Baselines
 
 	//Variables IOM actual Recording-------------------------------------------------
-	
+
 	private OntClassMap ontClassMap = new OntClassMap();
-	
+
 	@FXML
 	private Button addRowBtn, save;
 
@@ -156,14 +155,10 @@ public class IOMRecordingController {
 	@FXML
 	private ComboBox<String> categoryIOMStart, outcomeCB;
 
-	//löschen romap1
-	//@FXML
-	//private ComboBox<String> entryIOMStart;
-
 	@FXML
 	private Label patientNameLbl, birthdayLbl,diagnoseLbl, surgeryLbl, dateLbl ;
 
-	// a map for the tf in sep baselines
+	// a map for the textfield in sep baselines
 	private Map<String, Node> nodeMapSepBaselines = new HashMap<String, Node>();
 
 	// a map for the cb and tf in tes baselines
@@ -172,15 +167,12 @@ public class IOMRecordingController {
 	// a map for the cb and tf in dcs baselines
 	private Map<String, Node> nodeMapDcsBaselines = new HashMap<String, Node>();
 
+	//Counter for the Rows in the GridPane. Row 0 is Empty and Row 1 already has Nodes. Therefore the counter starts at 2.
 	private int row = 2;
 
 	private static final String NS = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/";
 
 	private Map<String, Node> nodeList = new HashMap<String, Node>();
-
-	// new instance of Ontology Editor
-	private OntologyEditor ontEdit = OntologyEditor.getInstance();	
-
 
 	// create the list for the first dropdown
 	private ObservableList<String> categoryList = FXCollections.observableArrayList(ontEdit.getAllEntitiesToBeShown().keySet());
@@ -189,19 +181,11 @@ public class IOMRecordingController {
 	private ObservableList<String> vepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000403").keySet());
 	private ObservableList<String> mappingMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000373").keySet());
 	private ObservableList<String> technicalIssuesList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000154").keySet());
-	//private ObservableList<String> dwaveMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000369").keySet());
-	//private ObservableList<String> tesMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000378").keySet());
-	//private ObservableList<String> dcsMepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000238").keySet());
-	//private ObservableList<String> vepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000244").keySet());
-	//private ObservableList<String> sepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000242").keySet());
 	private ObservableList<String> aepMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000240").keySet());
-	//private ObservableList<String> cbtMeasurementList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000371").keySet());
-
 	private ObservableList<String> reflexFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000234").keySet());
 	private ObservableList<String> eegFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000231").keySet());
 	private ObservableList<String> anesthesyProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000159").keySet());
 	private ObservableList<String> mappingFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000376").keySet());
-	//private ObservableList<String> iomProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000057").keySet());
 	private ObservableList<String> sepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000401").keySet());
 	private ObservableList<String> aepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000402").keySet());
 	private ObservableList<String> dwaveFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000387").keySet());
@@ -209,19 +193,12 @@ public class IOMRecordingController {
 	private ObservableList<String> mepFindingList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000400").keySet());
 	private ObservableList<String> actionList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://medicis/spm.owl/OntoSPM#manipulating_action_by_human").keySet());
 	private ObservableList<String> gridPositioningList = FXCollections.observableArrayList(ontEdit.getSubclasses(NS  + "IOMO_0000064").keySet());
-	//private ObservableList<String> surgeryProcessList = FXCollections.observableArrayList(ontEdit.getSubclasses("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000058").keySet());
-	//Es gibt noch keine Lösung wie man Unterkategorien von Unterkategorie abfragt. romap1
-	private ObservableList<String> surgeryProcessList = FXCollections.observableArrayList(Arrays.asList("Dura zu", "Duraplastik", "Exstirpation", "Knochendeckel einsetzen", "Kortikotomie", 
-			"Knochendeckel entfernen", "Kortikotomie Erweiterung", "Kurze Pause", "Naht", "Resektion", "Teilresektion", "Schnitt", 
-			"Dura öffnung", "Hämostase", "Lokalisation", "Zugang", "Navigation"));
+	private ObservableList<String> surgeryProcessList = ontEdit.getSurgicalProcesses();
+
 	//---------------------------------------------------Variables IOM actual Recording
 
-
-
-
-
 	public void initialize() {
-		// Patient data start
+		//Patient/Surgery Data--------------------------------
 		Collections.sort(diagnosisList);
 		Collections.sort(surgeryList);
 		diagnosisCB.setItems(diagnosisList);
@@ -229,46 +206,30 @@ public class IOMRecordingController {
 		surgeonCB.setItems(surgeonList);
 		deviceCB.setItems(deviceList);
 		assistantCB.setItems(assistantList);
-		// Patient data end
+		// Patient/Surgery Data End---------------------------------
 
-		//IOM Documentation start
-		Collections.sort(categoryList);
-		//
-		//categoryIOMStart.setItems(categoryList);
-		//entryIOMStart.setItems(entryList);
-		//IOM Documentation end
-
-		// Baseline start
-
+		// Baselines Initialize-------------------------------
 		Collections.sort(muscleList);
-		cbTes1.setItems(muscleList);
-		cbTes2.setItems(muscleList);
-		cbTes3.setItems(muscleList);
-		cbTes4.setItems(muscleList);
-		cbTes5.setItems(muscleList);
-		cbTes6.setItems(muscleList);
-		cbTes7.setItems(muscleList);
-		cbTes8.setItems(muscleList);
-		cbTes9.setItems(muscleList);
-		cbTes10.setItems(muscleList);
-		cbTes11.setItems(muscleList);
-		cbTes12.setItems(muscleList);
-		cbTes13.setItems(muscleList);
-		cbTes14.setItems(muscleList);
-		cbTes15.setItems(muscleList);
-		cbTes16.setItems(muscleList);
+		cbTes1.setItems(muscleList);cbTes2.setItems(muscleList);
+		cbTes3.setItems(muscleList);cbTes4.setItems(muscleList);
+		cbTes5.setItems(muscleList);cbTes6.setItems(muscleList);
+		cbTes7.setItems(muscleList);cbTes8.setItems(muscleList);
+		cbTes9.setItems(muscleList);cbTes10.setItems(muscleList);
+		cbTes11.setItems(muscleList);cbTes12.setItems(muscleList);
+		cbTes13.setItems(muscleList);cbTes14.setItems(muscleList);
+		cbTes15.setItems(muscleList);cbTes16.setItems(muscleList);
 
-		cbDcs1.setItems(muscleList);
-		cbDcs2.setItems(muscleList);
-		cbDcs3.setItems(muscleList);
-		cbDcs4.setItems(muscleList);
-		cbDcs5.setItems(muscleList);
-		cbDcs6.setItems(muscleList);
-		cbDcs7.setItems(muscleList);
-		cbDcs8.setItems(muscleList);
-		cbDcs9.setItems(muscleList);
-		cbDcs10.setItems(muscleList);
+		cbDcs1.setItems(muscleList);cbDcs2.setItems(muscleList);
+		cbDcs3.setItems(muscleList);cbDcs4.setItems(muscleList);
+		cbDcs5.setItems(muscleList);cbDcs6.setItems(muscleList);
+		cbDcs7.setItems(muscleList);cbDcs8.setItems(muscleList);
+		cbDcs9.setItems(muscleList);cbDcs10.setItems(muscleList);
 
+		cbBrL.setItems(vepAndReflexList);cbBrR.setItems(vepAndReflexList);
+		cbLarL.setItems(vepAndReflexList);cbLarR.setItems(vepAndReflexList);
+		cbBcrL.setItems(vepAndReflexList);cbBcrR.setItems(vepAndReflexList);
+
+		cbVepL.setItems(vepAndReflexList);cbVepR.setItems(vepAndReflexList);
 
 		//changes color of the Text of the TitlePane when at least one of the contained Textfields has an input.
 		tfMedLN.textProperty().addListener((Observable) -> {
@@ -295,19 +256,25 @@ public class IOMRecordingController {
 			else {
 				SSEPPane.setTextFill(Color.BLACK);}
 		});
-		//AEPPAne
+
+		tfAEP1L.textProperty().addListener((Observable) -> {
+			if (tfAEP1L.getText() != "") {
+				AEPPane.setTextFill(Color.GREEN);}
+			else {
+				AEPPane.setTextFill(Color.BLACK);}
+		});
+		tfAEP1R.textProperty().addListener((Observable) -> {
+			if (tfAEP1R.getText() != "") {
+				AEPPane.setTextFill(Color.GREEN);}
+			else {
+				AEPPane.setTextFill(Color.BLACK);}
+		});
+
+		// Baselines End-------------------------------------------------
 
 
-
-		//, TESMEPPane, DCSMEPPane, AEPPane, VEPPane, reflexPane;
-
-
-		// Baseline end
-
-		//Actual Patient Recording Initialize-----------------------
-		
-		
-		
+		//IOM actual Recording Initialize--------------------------
+		Collections.sort(categoryList);
 		categoryIOMStart.getSelectionModel().select("IOM Start");
 		//Undercategory from "change of AEP, SSEP, MEP, VEP" added. 
 		String change_of_aep = "IOMO_0000429";
@@ -318,90 +285,19 @@ public class IOMRecordingController {
 		sepFindingList.addAll(ontEdit.getSubclasses(NS + change_of_ssep).keySet());
 		vepFindingList.addAll(ontEdit.getSubclasses(NS + change_of_vep).keySet());
 		mepFindingList.addAll(ontEdit.getSubclasses(NS + change_of_mep).keySet());
-		
-		
 		outcomeCB.setItems(ontEdit.getPostoperativeDisposition());
-		
+
 		//-----------------------Actual Patient Recording Initialize End
 
 	}
 
-
-
-
-
-
-	// Patient Data Start---------------------------------------------------------------
-
-	Counter patNumber = new Counter(1);
-
-	// Diagnosis
-	ObservableList<String> diagnosisList = FXCollections.observableArrayList(ontEdit.getAllDiagnosis().keySet());
-	// Surgeries
-	ObservableList<String> surgeryList = FXCollections.observableArrayList(ontEdit.getAllSurgeries().keySet());
-	// Surgeons
-	ObservableList<String> surgeonList = FXCollections.observableArrayList("Abu Isa", "Bervini", "Fichtner", "Finkenstädt", "Krähenbühl", "Lutz",
-			"Murek", "Pollo", "Raabe", "Schär", "Schläppi", "Schucht", "Seidel", "Ulrich", "Vulcu");
-	// Devices
-	ObservableList<String> deviceList = FXCollections.observableArrayList("Einstein", "Mieze", "Napoleon", "Rosalinde");
-	// Assistants
-	ObservableList<String> assistantList = FXCollections.observableArrayList("Consuegra", "Finkenstädt", "Goldberg", "Häni", "Hlavica", "Jesse", 
-			"Lutz", "Mija", "Montalbetti", "Müller", "Nowacki", "Osmanagic", "Redeker", "Ropelato", "Schütz", "Tashi", "Zubak");
-
-	/*
-	 * a method to save a new patient instance to the ontology, his diagnosis and his surgery with all the dataproperties
-	 */
-
-	public void savePatient (String documentUri) {
-		
-		
-		ontEdit.addPatient( caseNrTF.getText(), pidTF.getText(), fidTF.getText(), firstNameTF.getText(), surnameTF.getText(), birthdayTF.getText(), documentUri );
-		String surgery= surgeryCB.getSelectionModel().getSelectedItem();
-		ontEdit.addSurgery(ontClassMap.getUriFromLabel(surgery), surgery , dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem(), documentUri);
-		String diagnosis= diagnosisCB.getSelectionModel().getSelectedItem();
-		ontEdit.addDiagnosis(ontClassMap.getUriFromLabel(diagnosis), diagnosis, documentUri);
-		/*
-		Integer patNum = patNumber.getValue();
-		String patLabel = "Patient".concat(patNum.toString());
-
-		String pat = ontEdit.createNewPatient(patLabel); 
-
-		ontEdit.addPatientProperties(pat, caseNrTF.getText(), pidTF.getText(), fidTF.getText(), firstNameTF.getText(), surnameTF.getText(), birthdayTF.getText());
-
-		String surgery= ontEdit.createNewIndividual(ontEdit.getAllSurgeries().get(surgeryCB.getSelectionModel().getSelectedItem()), "Surgery");
-
-		ontEdit.addSurgeryProperties(surgery, dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem());
-
-		String diagnosis = ontEdit.createNewIndividual(ontEdit.getAllDiagnosis().get(diagnosisCB.getSelectionModel().getSelectedItem()), "Diagnosis");
-
-		String iomDocument = ontEdit.createNewIOMDocument("Document");
-
-		ontEdit.addStatement(pat, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000285", iomDocument);
-		ontEdit.addStatement(iomDocument, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", surgery);
-		ontEdit.addStatement(iomDocument, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", diagnosis);
-
-		System.out.println(ontEdit.getAllDiagnosis().get(diagnosisCB.getSelectionModel().getSelectedItem()));
-		System.out.println(surgeryCB.getSelectionModel().getSelectedItem());
-
-		ontEdit.saveNewOWLFile(); 	
-		patNumber.increment();
-		*/
-	}
-
-	// -------------------------------------------------------------Patient Data End
-
-
-
-
+	// Patient/Surgery Data ---------------------------------------------------------------
+	//has no Methode
+	// -------------------------------------------------------------Patient/Surgery Data End
 
 
 	// Baseline Start-----------------------------------------------------------------------------------------
 	// put all the labels of the muscles in a list
-	ObservableList<String> muscleList = FXCollections.observableArrayList(ontEdit.getAllMuscles().keySet());
-
-	//put all the possibilities for veo in a List
-	ObservableList<String> vepAndReflexList = FXCollections.observableArrayList("vorhanden", "mässig", "schlecht", "");
-
 	/**
 	 * a method to read all ms values in the text boxes of sep baseline and create instances of nerve, ms and data item
 	 * FEHLT NOCH VERBINDUNG ZUM IOM PROTOKOLL!
@@ -474,7 +370,6 @@ public class IOMRecordingController {
 
 	/**
 	 * a method to read all mA values in the text boxes of tes baseline and create instances of muscle, mA and data item
-	 * FEHLT NOCH VERBINDUNG ZUM IOM PROTOKOLL!
 	 */
 	public void getTesBaselineValues(String document) {
 		// put all the nodes of the TES grid in a map (Rownumber + Columnnumber)
@@ -551,7 +446,6 @@ public class IOMRecordingController {
 
 	/**
 	 * a method to read all mA values in the text boxes of dcs baseline and create instances of muscle, mA and data item
-	 * FEHLT NOCH VERBINDUNG ZUM IOM PROTOKOLL!
 	 */
 	public void getDcsBaselineValues(String document) {
 		nodeMapDcsBaselines.put("20", cbDcs1); nodeMapDcsBaselines.put("21", tfDcs1); nodeMapDcsBaselines.put("22", tfDcs11); nodeMapDcsBaselines.put("23", tfDcs21); nodeMapDcsBaselines.put("24", tfDcs31);
@@ -639,7 +533,6 @@ public class IOMRecordingController {
 		cbTes15.getSelectionModel().clearSelection();cbTes16.getSelectionModel().clearSelection();
 		TESMEPPane.setTextFill(Color.BLACK);
 		tesMepMuscleChoice.remove(0, tesMepMuscleChoice.size());
-		//ToDo !! remove TES MEP Measurement from categoryList
 
 	}
 	/**
@@ -817,7 +710,6 @@ public class IOMRecordingController {
 		else if (!selectedItem.isBlank()) {
 			DCSMEPPane.setTextFill(Color.GREEN);
 			dcsMepMuscleChoice.add(0, selectedItem);
-			//categoryList.addAll(ontEdit.getAllMeasurementsWithValues().keySet());
 			categoryList.add("DCS MEP Messung");}
 	}
 	public void cbDcs2isUsed(ActionEvent event) {
@@ -893,44 +785,9 @@ public class IOMRecordingController {
 			dcsMepMuscleChoice.add(9, selectedItem);}
 	}
 
-
-	public void getAepBaselineValues() {
-
-	}
-
-	public void getVepBaselineValues() {
-		if (cbVepL.getSelectionModel().getSelectedItem() != "") {
-			String vepL = cbVepL.getSelectionModel().getSelectedItem();
-		}
-		if (cbVepR.getSelectionModel().getSelectedItem() != "") {
-			String vepR = cbVepR.getSelectionModel().getSelectedItem();
-		}
-	}
-
-	public void getReflexBaselineValues() {
-
-		//cbBrL, cbLarL, cbBcrL, cbBrR, cbLarR, cbBcrR;
-
-	}
-
-	//-------------------Baseline End
-
-
-
-
+	//-------------------Baselines End
 
 	//IOM Recording Start-----------------------------------------------
-
-
-
-	//private ObservableList<String> entryList = FXCollections.observableArrayList("entry1", "entry2");
-
-
-
-
-
-
-
 
 	/**
 	 * Adds a new Set of Nodes in the next empty Row of the GridPane.
@@ -939,22 +796,13 @@ public class IOMRecordingController {
 	 * @throws URISyntaxException 
 	 */
 	public  void addRow(ActionEvent event) throws IOException, URISyntaxException {
-		//create nessecary nodes
+		//create necessary nodes
 		TextField timeTF = new TextField();	
 		timeTF.setPromptText("10:00");
-		Tooltip tp = new Tooltip();
-		tp.setText("this is a test");
-		//timeTF.setTooltip(tp);
 		ComboBox<String> categoryCB = new ComboBox<String>();
 		categoryCB.setItems(categoryList);
 
-
-
-		//categoryCB.setMaxHeight(Control.USE_COMPUTED_SIZE);
-
 		ComboBox<String> entryCB = new ComboBox<String>();
-
-
 		TextField valueTF = new TextField();
 		TextField commentTF = new TextField();
 		Button deleteBtn = new Button();
@@ -988,7 +836,7 @@ public class IOMRecordingController {
 						nodeList.put(row + "3", addicionalCB) ;
 						nodeList.put(row + "4", AddidionalValue);
 						nodeList.put(row + "5", commentTF);
-						//nodeList.put(row + "2", new TextField());
+
 						infoGrid.add(addicionalCB, 3, row);
 						infoGrid.add(AddidionalValue, 4, row);
 						row++;
@@ -1000,15 +848,12 @@ public class IOMRecordingController {
 							new EventHandler<ActionEvent>() {
 						@Override public void handle(ActionEvent event) {
 							int index = GridPane.getRowIndex(deleteBtn);
-							System.out.println(index);
 							for(int i= index; i< (index + size); i++) {
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 1));
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 2));
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 3));
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 4));
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 5));
-								//System.out.println(index + ""+ 1);
-								//System.out.println(nodeList.get(index + ""+ 3).toString());
 							}
 							infoGrid.getChildren().remove(deleteBtn); 
 							infoGrid.getChildren().remove(timeTF);
@@ -1030,10 +875,7 @@ public class IOMRecordingController {
 						ComboBox<String> addicionalCB = new ComboBox<String>();
 						addicionalCB.setItems(dcsMepMuscleChoice);
 						addicionalCB.getSelectionModel().select(dcsMepMuscleChoice.get(i));
-
 						categoryCB.setDisable(true);
-
-
 
 						TextField AddidionalValue = new TextField();
 						//Adding new Noddes to the NodeList, timeTF, CategoryCB and commentTF act as Dummys to not break the consistency of the List.
@@ -1042,7 +884,6 @@ public class IOMRecordingController {
 						nodeList.put(row + "3", addicionalCB) ;
 						nodeList.put(row + "4", AddidionalValue);
 						nodeList.put(row + "5", commentTF);
-						//nodeList.put(row + "2", new TextField());
 						infoGrid.add(addicionalCB, 3, row);
 						infoGrid.add(AddidionalValue, 4, row);
 						row++;
@@ -1054,15 +895,12 @@ public class IOMRecordingController {
 							new EventHandler<ActionEvent>() {
 						@Override public void handle(ActionEvent event) {
 							int index = GridPane.getRowIndex(deleteBtn);
-							System.out.println(index);
 							for(int i= index; i< (index + size); i++) {
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 1));
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 2));
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 3));
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 4));
 								infoGrid.getChildren().remove(nodeList.get(i + ""+ 5));
-								//System.out.println(index + ""+ 1);
-								//System.out.println(nodeList.get(index + ""+ 3).toString());
 							}
 							infoGrid.getChildren().remove(deleteBtn); 
 							infoGrid.getChildren().remove(timeTF);
@@ -1075,21 +913,16 @@ public class IOMRecordingController {
 							infoGrid.add(addRowBtn, 1, row);
 						}
 					});
-
-				}if(categoryCB.getSelectionModel().getSelectedItem().equals("AEP Messung")) {
-
 				}
-				//Texfield for Valueis accessible for the user
+				//Texfield for Values accessible for the user
 				valueTF.setDisable(false);
 				valueTF.setVisible(true);
-
 			}else {
 				//Texfield for Value is not accessible for the user because its not a Measurement Category
 				valueTF.setDisable(true);
 				valueTF.setVisible(false);
 			}
 		});
-
 
 		//add nodes to HashMap, Key is ROW + Columnnumber. eg. Key = 21 for Node in ROW 2, Columne 1. 
 		nodeList.put(row + "1", timeTF );
@@ -1106,7 +939,7 @@ public class IOMRecordingController {
 			}
 		});
 
-		//add bin graphic for Delete Button
+		//add bin graphicfor Delete Button
 		ImageView view = new ImageView(Main.class.getResource("173-bin.png").toExternalForm());
 		ColorAdjust colorAdjust = new ColorAdjust();
 		colorAdjust.setBrightness(1.0);
@@ -1117,28 +950,20 @@ public class IOMRecordingController {
 		deleteBtn.addEventHandler(ActionEvent.ACTION,
 				new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent event) {
-
 				// alert to ask if the user is sure to delete
 				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 				alert.setTitle("Eintrag löschen?");
 				alert.setHeaderText("Eintrag wirklich löschen?");
-
 				// Set the available buttons for the alert
 				ButtonType btnYes = new ButtonType("Ja");
 				ButtonType btnNo = new ButtonType("Nein");
-
 				alert.getButtonTypes().setAll(btnYes, btnNo);
-
 				// This allows you to get the response back from the user
 				Optional<ButtonType> result = alert.showAndWait();
-
 				// delete if the user chooses yes, don't delete if otherwise
 				if (result.isPresent()) {
 					int i = GridPane.getRowIndex(deleteBtn);
-					System.out.println(i);
 					infoGrid.getChildren().remove(nodeList.get(i + ""+ 1));
-					System.out.println(i + ""+ 1);
-					System.out.println(nodeList.get(i + ""+ 1).toString());
 					infoGrid.getChildren().remove(deleteBtn); 
 					infoGrid.getChildren().remove(timeTF);
 					infoGrid.getChildren().remove(categoryCB);
@@ -1165,12 +990,7 @@ public class IOMRecordingController {
 		infoGrid.getChildren().remove(addRowBtn);
 		row++;
 		infoGrid.add(addRowBtn, 1, row);
-
 	}
-
-
-
-
 
 	/**
 	 * 
@@ -1179,48 +999,47 @@ public class IOMRecordingController {
 	 * @throws InterruptedException 
 	 */
 	public  void save(ActionEvent event) throws IOException, InterruptedException {
-		
-		 String documentUri = ontEdit.createNewIOMDocument("IOMDocumentTest");
-		// Patient Data start
-		savePatient(documentUri);
-		//getSepBaselineValues();
-		//getTesBaselineValues();
-		//getDcsBaselineValues();
-		//getAepBaselineValues();
-		//getVepBaselineValues();
-		//getReflexBaselineValues();
-		// Patient Data end
-		
-		// SAVE BASELINES START
-		
+
+		if (caseNrTF.getText().isEmpty() || fidTF.getText().isEmpty() || pidTF.getText().isEmpty() || surnameTF.getText().isEmpty() ||
+				firstNameTF.getText().isEmpty() || birthdayTF.getText().isEmpty() || 
+				diagnosisCB.getSelectionModel().isEmpty() || surgeryCB.getSelectionModel().isEmpty() ||
+				deviceCB.getSelectionModel().isEmpty() || dateOfSurgeryTF.getText().isEmpty()|| surgeonCB.getSelectionModel().isEmpty() ||
+				assistantCB.getSelectionModel().isEmpty() 
+				) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setHeaderText("Achtung");
+			alert.setContentText("Bitte alle Patienten und Operationsdaten angeben");
+			alert.show();
+
+		}else {
+
+		String documentUri = ontEdit.createNewIOMDocument("IOMDocumentTest");
+
+		ontEdit.addPatient( caseNrTF.getText(), pidTF.getText(), fidTF.getText(), firstNameTF.getText(), surnameTF.getText(), birthdayTF.getText(), documentUri );
+		String surgery= surgeryCB.getSelectionModel().getSelectedItem();
+		ontEdit.addSurgery(ontClassMap.getUriFromLabel(surgery), surgery , dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem(), documentUri);
+		String diagnosis= diagnosisCB.getSelectionModel().getSelectedItem();
+		ontEdit.addDiagnosis(ontClassMap.getUriFromLabel(diagnosis), diagnosis, documentUri);
+
 		getDcsBaselineValues(documentUri);
 		getTesBaselineValues(documentUri);
-		// SAVE BASELINES END
 
-		//IOM actual Recording------------------------------------------------
-
-		
-
-		
-		
-		//Only a Kategory with Meassurement will be saved into the Ontology.  new Baseline not included! Basline measurment can be removed 
+		//Only a Category with Measurement will be saved into the Ontology.  new Baseline not included! Baslines measurment can be removed 
 		String category1 =categoryIOMStart.getSelectionModel().getSelectedItem();
 		String category1Uri = ontClassMap.getUriFromLabel(category1);
-		
+
 		ontEdit.addFindings(category1Uri, "IOM Start", timeStartTF.getText(),commentIOMStart.getText(), documentUri);
-		//Fürs speichen, für usability test ausgeklammert
+
 		int rowsToRead = nodeList.size()/4;
 		for(int i= 2; i < rowsToRead + 1; i++) {
-			System.out.println(i+ "" + 1);
 			String time = getTextField(  nodeList.get( i  +"" + 1)).getText();
-			
 			String category = getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().getSelectedItem();
 			String entry = getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem();
 			String categoryUri = ontClassMap.getUriFromLabel(category);
 			String comment = getTextField(nodeList.get( i  +"" + 5)).getText();
 
 			if (category.equalsIgnoreCase("sonstiges") || category.equalsIgnoreCase("IOM Ende")) {
-			ontEdit.addFindings(categoryUri,  category, time , comment, documentUri);
+				ontEdit.addFindings(categoryUri,  category, time , comment, documentUri);
 			}
 			else if (category.equalsIgnoreCase("Operationsprozess") || category.equalsIgnoreCase("Anästhesie Prozess") 
 					|| category.equalsIgnoreCase("Technische Probleme") ) {
@@ -1231,11 +1050,13 @@ public class IOMRecordingController {
 			}
 			else if (category.equals("Mapping Messung")){
 				//unterkategorie und wert
-				ontEdit.addMeasurement( ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri, getTextField(nodeList.get(i  + "" + 4)).getText());
+				String value = checkStringforNumber(getTextField(nodeList.get(i  + "" + 4)).getText());
+				ontEdit.addMeasurement( ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri, value);
 			} 
 			else if (category.equals("CBT Messung")) {
 				//kategory und wert
-				ontEdit.addMeasurement(categoryUri, category, time, comment, documentUri, getTextField(nodeList.get(i  + "" + 4)).getText());
+				String value = checkStringforNumber(getTextField(nodeList.get(i  + "" + 4)).getText());
+				ontEdit.addMeasurement(categoryUri, category, time, comment, documentUri, value);
 			}
 			else if(category.contains("MEP Messung")) {
 				int numberOfMuscles = 0;
@@ -1244,129 +1065,45 @@ public class IOMRecordingController {
 				}if(category.equals("DCS MEP Messung")) {
 					numberOfMuscles = dcsMepMuscleChoice.size();
 				}
-					String entryUri = ontClassMap.getUriFromLabel(entry);
-					List<String> muscleUriList = new ArrayList<String>();
-					List<String> muscleLabelList = new ArrayList<String>();
-					List<String> valueList = new ArrayList<String>();
-					for(int z= 0; z < numberOfMuscles; z++) {
-						String entryTemp = getComboBox(nodeList.get( ((i+z)  +"" + 3))).getSelectionModel().getSelectedItem();
-						String valueTemp = getTextField(nodeList.get((i+z)  + "" + 4)).getText();
-						String muscleUri = ontClassMap.getUriFromLabel(entryTemp);
-						muscleUriList.add(muscleUri);
-						muscleLabelList.add(entryTemp);
-						valueList.add(valueTemp);
-					}	
-					ontEdit.addMeasurement(categoryUri, category, time, comment, documentUri, valueList, muscleUriList, muscleLabelList);
-					//System.out.println("lines to skip: " + numberOfMuscles );
-					i = i + (numberOfMuscles -1);	
-		}else {
-			ontEdit.addFindings(ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri);
+				List<String> muscleUriList = new ArrayList<String>();
+				List<String> muscleLabelList = new ArrayList<String>();
+				List<String> valueList = new ArrayList<String>();
+
+				for(int z= 0; z < numberOfMuscles; z++) {
+					String entryTemp = getComboBox(nodeList.get( ((i+z)  +"" + 3))).getSelectionModel().getSelectedItem();
+					String valueTemp = checkStringforNumber(getTextField(nodeList.get((i+z)  + "" + 4)).getText());
+					String muscleUri = ontClassMap.getUriFromLabel(entryTemp);
+					muscleUriList.add(muscleUri);
+					muscleLabelList.add(entryTemp);
+					valueList.add(valueTemp);
+				}	
+				ontEdit.addMeasurement(categoryUri, category, time, comment, documentUri, valueList, muscleUriList, muscleLabelList);
+				i = i + (numberOfMuscles -1);	
+			}else {
+				ontEdit.addFindings(ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri);
+			}
 		}
-		}
-		
-		//speichern der intraoperativen Dispositionen
+
+		//saves the postoperative Disposition
 		String outcome = outcomeCB.getSelectionModel().getSelectedItem();
 		String outcomeComment = outcomeCommentTF.getText();
-		//addDisposition Methode is missing!!
 		if(outcome != null) {
-		ontEdit.addDisposition(ontClassMap.getUriFromLabel(outcome), outcome, outcomeComment, documentUri);
+			if (outcome.equals(I18n.getString("text.noDisposition"))) {
+				ontEdit.addDisposition(ontClassMap.getUriFromLabel("postoperative Disposition"), outcome, outcomeComment, documentUri);
+			}else {
+				ontEdit.addDisposition(ontClassMap.getUriFromLabel(outcome), outcome, outcomeComment, documentUri);
+			}
 		}
-		
-		 
+
 		// a new alert to inform the user that the data was saved successfully
-		//Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setHeaderText("Gespeichert");
 		alert.setContentText("Daten erfolgreich abgespeichert!");
 		alert.show();
-		//alert.showAndWait();
 
-		//alles zurücksetzen
-		//documenturi auf null oder nächste id?
-		//String documentUri = "";
-		//caseNrTF.setText("");
-		//fidTF.setText("");
-		//pidTF.setText("");
-		//surnameTF.setText("");
-		//firstNameTF.setText("");
-		//timeStartTF.setText("");
-		//birthdayTF.setText("");
-
-		//diagnosisCB.getSelectionModel().clearSelection();
-		//surgeryCB.getSelectionModel().clearSelection();
-		//deviceCB.getSelectionModel().clearSelection();
-		//dateOfSurgeryTF.setText("");
-		//surgeonCB.getSelectionModel().clearSelection();
-		//assistantCB.getSelectionModel().clearSelection();
-
-
-		//commentIOMStart.setText("");
-		//int rowsToRead1 = nodeList.size()/4;
-		//for(int i= 2; i <= rowsToRead1 + 1; i++) {
-			//getTextField(  nodeList.get( i  +"" + 1)).setText("");;
-			//getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().clearSelection();;
-			//getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().clearSelection();
-
-			//TextField valueTF = getTextField(  nodeList.get( i  +"" + 4));
-			//if(valueTF != null) {
-			//	getTextField(  nodeList.get( i  +"" + 4)).setText("");;
-			//}
-
-			//getTextField(nodeList.get( i  +"" + 5)).setText("");
-			//IOM Documentation end
-		//}
-
-
-		/*
-			if(category1.contains(I18n.getString("rec.measurement"))) {
-				//uri fehlt noch!
-				ontEdit.addStatement(document, NS + has_data_item , category);
-				//ontEdit.addTimestampToEntity(category, time);
-				String value = getTextField(  nodeList.get( i  +"" + 4)).getText();
-
-
-				//Add Value to measurement needs to be added!
-			}else {
-				String entry = getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem();
-				String entryUri = map.getUri(entry);
-				ontEdit.addStatement(document, NS + has_data_item , entryUri);
-				//ontEdit.addTimestampToEntity(entryUri, time);
-			}
-
-
-
-
-			//if(!comment.isEmpty()) {
-				//save comment
-			//}
-
+		save.setDisable(true);
 		}
-
-		//ontEdit.saveNewOWLFile();
-
-		//String has_document = "0000285";
-
-		/*
-	
-
-			//IOM Documentation end
-
-		}
-
-		 */
-
 	}
-
-	/*
-	public String getTextFromNode(Node node) {
-		if (node.getClass().cast(node).getClass().equals(tf.getClass())) {
-			TextField test = (TextField) node.getClass().cast(node);
-			return test.getText();
-		}
-
-		return "";
-	}
-	 */
 
 	/**
 	 * a method to show the right item in the second combobox of the IOM Documentation
@@ -1389,9 +1126,6 @@ public class IOMRecordingController {
 			Collections.sort(technicalIssuesList);
 			entry.setItems(technicalIssuesList);
 			break;
-			//case "D-Welle Messung":
-			//entry.setItems(dwaveMeasurementList);
-			//break;
 		case "TES MEP Messung":
 			entry.setVisible(true);
 			Collections.sort(tesMepMuscleChoice);
@@ -1402,13 +1136,6 @@ public class IOMRecordingController {
 			Collections.sort(dcsMepMuscleChoice);
 			entry.setItems(dcsMepMuscleChoice);
 			break;
-			/*
-		case "VEP Messung":
-			entry.setItems(vepMeasurementList);
-		case "SEP Messung":
-			entry.setItems(sepMeasurementList);
-			break;
-			 */
 		case "AEP Messung":
 			entry.setVisible(true);
 			Collections.sort(aepMeasurementList);
@@ -1416,7 +1143,6 @@ public class IOMRecordingController {
 			break;
 		case "CBT Messung":
 			entry.setVisible(false);
-			//entry.setItems(cbtMeasurementList); gibts nicht
 			break;
 		case "Operationsprozess":
 			entry.setVisible(true);
@@ -1443,15 +1169,12 @@ public class IOMRecordingController {
 			Collections.sort(mappingFindingList);
 			entry.setItems(mappingFindingList);
 			break;
-			//case "IOM Prozess":
-			//entry.setItems(iomProcessList);
-			//break;
 		case "SEP Beobachtung":
 			entry.setVisible(true);
 			Collections.sort(sepFindingList);
 			entry.setItems(sepFindingList);
 			break;
-			case "AEP Beobachtung":
+		case "AEP Beobachtung":
 			entry.setVisible(true);
 			Collections.sort(aepFindingList);
 			entry.setItems(aepFindingList);
@@ -1471,13 +1194,6 @@ public class IOMRecordingController {
 			Collections.sort(mepFindingList);
 			entry.setItems(mepFindingList);
 			break;
-			/*
-		case "Aktion":
-			entry.setVisible(true);
-			Collections.sort(actionList);
-			entry.setItems(actionList);
-			break;
-			 */
 		case "Grid Positionierung":
 			entry.setVisible(true);
 			Collections.sort(gridPositioningList);
@@ -1494,22 +1210,26 @@ public class IOMRecordingController {
 		}	
 	}
 
-
-
-
 	@SuppressWarnings("exports")
 	public TextField getTextField(Node node) {
 		return (TextField) node.getClass().cast(node);
 	}
-
 
 	@SuppressWarnings("unchecked")
 	public ComboBox<String> getComboBox(Node node) {
 		return (ComboBox<String>) node.getClass().cast(node);
 	}
 
-	//----------------------------------------------IOM Documentation End
-
-
+	public String checkStringforNumber(String value) {
+		char[] charArray = value.toCharArray();
+		StringBuilder stringBuilder = new StringBuilder();
+		for(char character : charArray){
+			if(Character.isDigit(character)){
+				stringBuilder.append(character);
+			}
+		}
+		return stringBuilder.toString();
+	}
+	//----------------------------------------------IOM actual recording End
 
 }

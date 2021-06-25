@@ -1083,11 +1083,11 @@
                                              <font>
                                                 <Font size="15.0" />
                                              </font></Label>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <TextField fx:id="tfAEP1L" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets right="20.0" />
                                              </GridPane.margin></TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <TextField fx:id="tfAEP1R" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <GridPane.margin>
                                                 <Insets right="20.0" />
                                              </GridPane.margin></TextField>

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="800.0" prefWidth="1000.0" styleClass="pane" stylesheets="@style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ExpandOntologyController">
+<BorderPane prefHeight="800.0" prefWidth="1000.0" styleClass="pane" stylesheets="@style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bachelorthesis.IOMDOProject.controller.ShowOntologyController">
    <center>
       <GridPane styleClass="pane" stylesheets="@style1.css">
          <columnConstraints>
