@@ -116,7 +116,7 @@ public class ProtocolOverviewController  {
 		//protocolTblView.setPlaceholder(new Label("Nothing found"));		
 		searchTF.setText("");
         event.consume();
-        //System.out.println(oe.getBirthday("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000262").toString().substring(0, 10));
+       
 		
 	}
 	
@@ -129,29 +129,11 @@ public class ProtocolOverviewController  {
 	 * @throws IOException 
 	 */
 	public IOMCase loadPatient(OntologyReader oe, String indvUri) throws ParseException, IOException {
-		//System.out.println(oe.getBirthday(indvUri).toString().replace("^^" + XSDDatatype.XSDdate.getURI(), ""));
-		//System.out.println(XSDDatatype.XSDdate.getURI());
-		//System.out.println(XSDDatatype.XSDdate.unparse(oe.getBirthday(indvUri)));
-		//System.out.println(XSDDatatype.XSDdate.parse("2002-09-24"));
-		//System.out.println(XSDDatatype.XSDdate.trimPlus(XSDDatatype.XSDdate.getURI()));
-		
-		//.replace("^^" + XSDDatatype.XSDint.getURI(), "eger").toString()
-		//^^http://www.w3.org/2001/XMLSchema#integer
-		
-		//gib alle Individuen die diese uri haben (indvUri)(sollte nur 1 sein), und gibe dessen Surgery, surgerydate,  usw. 
-		
-		//aus Array lesen und setter Methode von IOMCase anvenden
-		
-		
-		
-		
 		ArrayList<String> list = PatientDataQuery.sparqlTest(indvUri);
 		String diagnosis = "";
 		String surgery = "";
 		if (!list.isEmpty()) {
 			
-		ArrayList<String> list2 = PatientDataQuery.sparqlTest("http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000276");
-		System.out.println(indvUri);
 		diagnosis = list.get(1);
 		surgery = list.get(2);
 		}
@@ -164,9 +146,6 @@ public class ProtocolOverviewController  {
 		int caseNumber = Integer.parseInt(oe.getCaseNumber(indvUri).toString().replace("^^" + XSDDatatype.XSDint.getURI(), "").toString());
 		
 		IOMCase iomCase = new IOMCase(surname, firstname, birthday,PID, FID, caseNumber, diagnosis, surgery);
-		
-		
-		//iomcase.setSurgeryDate
 		return iomCase;
 	}
 	

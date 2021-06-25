@@ -547,7 +547,6 @@ public class IOMRecordingController {
 		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
 			tesMepMuscleChoice.add(0, selectedItem);
-			//categoryList.addAll(ontEdit.getAllMeasurementsWithValues().keySet());	
 			categoryList.add("TES MEP Messung");
 		}
 	}
@@ -1019,7 +1018,7 @@ public class IOMRecordingController {
 		String surgery= surgeryCB.getSelectionModel().getSelectedItem();
 		ontEdit.addSurgery(ontClassMap.getUriFromLabel(surgery), surgery , dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem(), documentUri);
 		String diagnosis= diagnosisCB.getSelectionModel().getSelectedItem();
-		ontEdit.addDiagnosis(ontClassMap.getUriFromLabel(diagnosis), diagnosis, documentUri);
+		ontEdit.createDiagnosis(ontClassMap.getUriFromLabel(diagnosis), diagnosis, documentUri);
 
 		getDcsBaselineValues(documentUri);
 		getTesBaselineValues(documentUri);
