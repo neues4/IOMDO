@@ -20,6 +20,6 @@ public class ShowOntologyController {
 
 	@FXML
 	void openProtege(ActionEvent event) throws IOException, URISyntaxException {		
-		Desktop.getDesktop().browse(new URL("https://webprotege.stanford.edu/#projects/4ff1be76-81df-425e-b567-99996c664c9f/edit/Classes?selection=Class(%3Chttp://purl.obolibrary.org/obo/BFO_0000002%3E)").toURI());
+		Desktop.getDesktop().browse(new URL("https://webprotege.stanford.edu/#projects/1b446c21-46aa-482a-9c54-36235b2e36c5/edit/Classes").toURI());
 	}
 }

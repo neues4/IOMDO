@@ -31,17 +31,19 @@ import javafx.collections.ObservableList;
 
 /**
  * 
- * @author neues4
+ * @author neues4, romap1
  * 
  */
 public class OntologyEditor {
 
 	//Namesspace
 	private final static String NS = "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/";
+	
 	private OntModel ontModel;
 	private static OntologyEditor editor;
 	private int counter;
 	private String id = "IOMO_0000000";
+	
 	//Object Properties IDs
 	private String has_timestamp = "IOMO_0000266";
 	private String has_document = "IOMO_0000285";
@@ -65,18 +67,26 @@ public class OntologyEditor {
 	private String has_comment = "IOMO_0000459";
 	private String has_measurement_value = "http://purl.obolibrary.org/obo/IAO_0000004";
 
+	/**
+	 * method to get an instance of the ontology editor
+	 * @return the instance of the ontology editor
+	 */
 	public static OntologyEditor getInstance()
 	{
 		
 		if (editor == null)
 			//Windows
-			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_40.owl");
+			//editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_40.owl");
 		//mac
-		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_36.owl");
+		editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_40.owl");
 
 		return editor;
 	}
 
+	/**
+	 * method to get the model of the ontology
+	 * @return the model of the ontology
+	 */
 	@SuppressWarnings("exports")
 	public Model getModel() {
 		Model model = OntologyEditor.getInstance().ontModel;
@@ -100,9 +110,16 @@ public class OntologyEditor {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getId()  {
 		Scanner scanner;
-		File file = new File("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IDCounter.txt");
+		// für Windows
+		//File file = new File("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IDCounter.txt");
+		// für Mac
+		File file = new File("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IDCounter.txt");
 		try {
 			scanner = new Scanner(file);
 			counter = scanner.nextInt();
@@ -148,7 +165,10 @@ public class OntologyEditor {
 		return id;
 	}
 	
-	
+	/**
+	 * method to get all classes in the ontology
+	 * @return an arrayList of all classes in the ontology
+	 */
 	public ArrayList<OntClass> getAllOntologyClasses() {
 		Iterator<OntClass> classIter = ontModel.listClasses();
 		ArrayList<OntClass> list= new ArrayList<OntClass>();
@@ -251,10 +271,11 @@ public class OntologyEditor {
 		indv.addProperty(datPropSurname, surname);
 		indv.addProperty(datPropBirthday, birthday);
 	}
+	
 	/**
 	 * method to add the dataproperties to the surgery
 	 * @author neues4
-	 * @param surgery the label of the surgery individual
+	 * @param surgery the uri of the surgery individual
 	 * @param surgeryDate the date of the surgery
 	 * @param surgeon the name of the surgeon
 	 * @param assistant the name of the assistant
@@ -449,6 +470,13 @@ public class OntologyEditor {
 		saveNewOWLFile(); 
 	}
 	
+	/**
+	 * 
+	 * @param dispositionUri
+	 * @param label
+	 * @param comment
+	 * @param documentUri
+	 */
 	public void addDisposition(String dispositionUri, String label, String comment, String documentUri) {
 		String clinicalDataItem = "http://purl.obolibrary.org/obo/OGMS_0000123";
 		String clinicalDataIndvUri= createNewIndividual(clinicalDataItem, "ClinicalDataItem");
@@ -465,6 +493,14 @@ public class OntologyEditor {
 			saveNewOWLFile(); 
 	}
 	
+	/**
+	 * 
+	 * @param dispositionUri
+	 * @param label
+	 * @param timestamp
+	 * @param comment
+	 * @param documentUri
+	 */
 	public void addDisposition(String dispositionUri, String label, String timestamp, String comment, String documentUri) {
 		String clinicalDataItem = "http://purl.obolibrary.org/obo/OGMS_0000123";
 		String clinicalDataIndvUri= createNewIndividual(clinicalDataItem, "ClinicalDataItem");
@@ -511,6 +547,10 @@ public class OntologyEditor {
 		return list;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public ObservableList<String> getSurgicalProcesses() {
 		String surgicalProcess = NS + "IOMO_0000058";
 		String corticomy = NS + "IOMO_0000122";
@@ -536,6 +576,10 @@ public class OntologyEditor {
 		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public ObservableList<String> getIntraoperativeDisposition() {
 		String intraoperativeDisposition = NS + "IOMO_0000382";
 		String AbnormalCardiovascularSystemPhysiology =  "http://purl.obolibrary.org/obo/HP_0011025";

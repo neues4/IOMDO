@@ -37,7 +37,7 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="Query3" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#executeQuery3" stylesheets="@style1.css" text="%btn.executeQuery" GridPane.columnIndex="5" GridPane.rowIndex="3">
+            <Button fx:id="Query2" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#executeQuery2" stylesheets="@style1.css" text="%btn.executeQuery" GridPane.columnIndex="5" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="8.0" />
                </GridPane.margin>
@@ -47,7 +47,7 @@
                   <Insets left="8.0" />
                </GridPane.margin>
             </Button>
-            <TextArea fx:id="test" editable="false" stylesheets="@style1.css" GridPane.columnSpan="5" GridPane.rowIndex="4">
+            <TextArea fx:id="queryResult" editable="false" stylesheets="@style1.css" GridPane.columnSpan="5" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="8.0" />
                </GridPane.margin>

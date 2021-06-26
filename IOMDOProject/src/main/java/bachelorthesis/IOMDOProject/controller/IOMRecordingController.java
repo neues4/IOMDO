@@ -299,7 +299,7 @@ public class IOMRecordingController {
 	 * a method to read all ms values in the text boxes of sep baseline and create instances of nerve, ms and data item
 	 * FEHLT NOCH VERBINDUNG ZUM IOM PROTOKOLL!
 	 */
-	public void getSepBaselineValues() {
+	public void getSepBaselineValues(String document) {
 		nodeMapSepBaselines.put("21", tfMedLN); nodeMapSepBaselines.put("22", tfMedLP); nodeMapSepBaselines.put("23", tfMedLA);
 		nodeMapSepBaselines.put("31", tfMedRN); nodeMapSepBaselines.put("32", tfMedRP); nodeMapSepBaselines.put("33", tfMedRA);
 		nodeMapSepBaselines.put("41", tfTibLN); nodeMapSepBaselines.put("42", tfTibLP); nodeMapSepBaselines.put("43", tfTibLA);
@@ -308,7 +308,6 @@ public class IOMRecordingController {
 		// create a new sep baseline measurement
 		String sepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("SEP Baseline Messung"), "SepBaselineMeasurement");
 		String nerve = null;
-		int msCounter = 1;
 		// go through all the rows of the grid
 		int rowsInSep = nodeMapSepBaselines.size()/3;
 		for(int i= 2; i <= rowsInSep + 1; i++) {
@@ -329,24 +328,21 @@ public class IOMRecordingController {
 			}
 			// see if textfield is filled out, read the value, create new instances in the ontology
 			if(getTextField(nodeMapSepBaselines.get(i +"" + 1)).getText() != "") {
-				String ms1 = ontEdit.createNewMilisecond("ms" + msCounter);
+				String ms1 = ontEdit.createNewMilisecond("ms");
 				String msValue1 = getTextField(  nodeMapSepBaselines.get( i  +"" + 1)).getText();
-				createSepBaselineStatement(ms1, msValue1, sepBaselineMeasurement, nerve);
-				msCounter ++;
+				createSepBaselineStatement(ms1, msValue1, sepBaselineMeasurement, nerve, document);
 			}
 			// see if textfield is filled out, read the value, create new instances in the ontology
 			if(getTextField(nodeMapSepBaselines.get(i +"" + 2)).getText() != "") {
-				String ms2 = ontEdit.createNewMilisecond("ms" + msCounter);
+				String ms2 = ontEdit.createNewMilisecond("ms");
 				String msValue2 = getTextField(  nodeMapSepBaselines.get( i  +"" + 2)).getText();
-				createSepBaselineStatement(ms2, msValue2, sepBaselineMeasurement, nerve);
-				msCounter ++;
+				createSepBaselineStatement(ms2, msValue2, sepBaselineMeasurement, nerve, document);
 			}
 			// see if textfield is filled out, read the value, create new instances in the ontology
 			if(getTextField(nodeMapSepBaselines.get(i +"" + 3)).getText() != "") {
-				String ms3 = ontEdit.createNewMilisecond("ms" + msCounter);
+				String ms3 = ontEdit.createNewMilisecond("ms");
 				String msValue3 = getTextField(  nodeMapSepBaselines.get( i  +"" + 3)).getText();
-				createSepBaselineStatement(ms3, msValue3, sepBaselineMeasurement, nerve);
-				msCounter ++;
+				createSepBaselineStatement(ms3, msValue3, sepBaselineMeasurement, nerve, document);
 			}
 		}
 	}
@@ -358,10 +354,11 @@ public class IOMRecordingController {
 	 * @param sepBaselineMeasurement the sep baseline measurement individual
 	 * @param nerve the nerve individual
 	 */
-	public void createSepBaselineStatement(String ms, String msValue, String sepBaselineMeasurement, String nerve) {
+	public void createSepBaselineStatement(String ms, String msValue, String sepBaselineMeasurement, String nerve, String document) {
 		ontEdit.addPropertiesToMilisecond(ms, msValue);
 		ontEdit.addStatement(sepBaselineMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", ms);
 		ontEdit.addStatement(ms, "http://purl.obolibrary.org/obo/IAO_0000136", nerve);
+		ontEdit.addStatement(document, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", sepBaselineMeasurement);
 	}
 
 
@@ -389,8 +386,6 @@ public class IOMRecordingController {
 
 		// create a new tes baseline measurement
 		String tesMepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("TES MEP Baseline Messung"), "TesMepBaselineMessung");
-		int muscleCounter = 1;
-		int mATesBaselineCounter = 1;
 		// go through all the rows of the grid
 		int rowsInTes = nodeMapTesBaselines.size()/4;
 		for(int i= 2; i <= rowsInTes + 1; i++) {
@@ -399,28 +394,24 @@ public class IOMRecordingController {
 				// get the chosen muscle out of the combobox
 				String muscleChosen = getComboBox(nodeMapTesBaselines.get(i +"" + 0)).getSelectionModel().getSelectedItem();
 				// create a new instance for muscle
-				String muscle = ontEdit.createNewIndividual(ontEdit.getAllMuscles().get(muscleChosen), "MuskelTesBaseline" + muscleCounter );
-				muscleCounter ++;
+				String muscle = ontEdit.createNewIndividual(ontEdit.getAllMuscles().get(muscleChosen), "MuskelTesBaseline");
 				// see if first text field is filled out, read the value, create new instances in ontology
 				if (getTextField(nodeMapTesBaselines.get( i  +"" + 1)).getText() != "") {
 					String maValue = getTextField(nodeMapTesBaselines.get( i  +"" + 1)).getText();
-					String mA = ontEdit.createNewMiliampere("mATesBaseline" + muscleCounter );
+					String mA = ontEdit.createNewMiliampere("mATesBaseline");
 					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle, document);
-					mATesBaselineCounter ++;
 				}
 				// see if the second text field is filled out, read the value, create new instances in ontology
 				if(getTextField(nodeMapTesBaselines.get( i  +"" + 2)).getText() != "") {
 					String maValue = getTextField(nodeMapTesBaselines.get( i  +"" + 2)).getText();
-					String mA = ontEdit.createNewMiliampere("mATesBasline" + muscleCounter );
+					String mA = ontEdit.createNewMiliampere("mATesBasline");
 					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle, document);
-					mATesBaselineCounter ++;
 				}
 				// see if the third text field is filled out, read the value, create new instances in ontology
 				if (getTextField(nodeMapTesBaselines.get( i  +"" + 3)).getText() != "") {
 					String maValue = getTextField(nodeMapTesBaselines.get( i  +"" + 3)).getText();
-					String mA = ontEdit.createNewMiliampere("mATesBasline" + muscleCounter );
+					String mA = ontEdit.createNewMiliampere("mATesBasline");
 					createTesBaselineStatement(mA, maValue, tesMepBaselineMeasurement, muscle, document);
-					mATesBaselineCounter  ++;
 				}
 			}
 		}
@@ -437,10 +428,10 @@ public class IOMRecordingController {
 		ontEdit.addPropertiesToMiliampere(mA, maValue);
 		ontEdit.addStatement(tesMepBaselineMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", mA);
 		ontEdit.addStatement(mA, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000468", muscle);
-		ontEdit.addStatement(document, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000285", tesMepBaselineMeasurement);
+		ontEdit.addStatement(document, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", tesMepBaselineMeasurement);
 	}
 
-/*
+	/*
 	/**
 	 * a method to read all mA values in the text boxes of dcs baseline and create instances of muscle, mA and data item
 	 */
@@ -458,50 +449,43 @@ public class IOMRecordingController {
 
 		// create a new tes baseline measurement
 		String dcsMepBaselineMeasurement = ontEdit.createNewIndividual(ontEdit.getBaselines().get("DCS MEP Baseline Messung"), "DcsMepBaselineMessung");
-		int muscleCounter = 1;
-		int  mADcsBaselineCounter = 1;
 		// go through all the rows of the grid
 		int rowsInDcs = nodeMapDcsBaselines.size()/5;
 		for(int i= 2; i <= rowsInDcs + 1; i++) {
 			// get the chosen muscle out of the combobox
 			if (getComboBox(nodeMapDcsBaselines.get( i  +"" + 0)).getSelectionModel().getSelectedItem() != null) {
 				String muscleChosen = getComboBox(nodeMapDcsBaselines.get(i +"" + 0)).getSelectionModel().getSelectedItem();
-				//String muscle = ontEdit.createNewIndividual(ontEdit.getAllMuscles().get(muscleChosen), "muskelDscBaseline".concat(muscleCounter.toString()));
-				muscleCounter ++;
+				String muscle = ontEdit.createNewIndividual(ontEdit.getAllMuscles().get(muscleChosen), "muskelDscBaseline");
 				// see if first text field is filled out, read the value, create new instances in ontology
 				if (getTextField(nodeMapDcsBaselines.get( i  +"" + 1)).getText() != "") {
 					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 1)).getText();
-					String mA = ontEdit.createNewMiliampere("mADcsBaseline" +  muscleCounter);
-					//createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
-					mADcsBaselineCounter ++;
+					String mA = ontEdit.createNewMiliampere("mADcsBaseline");
+					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
 				}
 				// see if second text field is filled out, read the value, create new instances in ontology
 				if(getTextField(nodeMapDcsBaselines.get( i  +"" + 2)).getText() != "") {
 					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 2)).getText();
-					String mA = ontEdit.createNewMiliampere("mADcsBaseline" + muscleCounter);
-				//	createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
-					mADcsBaselineCounter ++;
+					String mA = ontEdit.createNewMiliampere("mADcsBaseline");
+					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
 				}
 				// see if third text field is filled out, read the value, create new instances in ontology
 				if (getTextField(nodeMapDcsBaselines.get( i  +"" + 3)).getText() != "") {
 					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 3)).getText();
-					String mA = ontEdit.createNewMiliampere("mADcsBaseline" + muscleCounter);
-					//createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
-					mADcsBaselineCounter ++;
+					String mA = ontEdit.createNewMiliampere("mADcsBaseline");
+					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
 
 				}
 				// see if fourth text field is filled out, read the value, create new instances in ontology
 				if (getTextField(nodeMapDcsBaselines.get( i  +"" + 4)).getText() != "") {
 					String maValue = getTextField(nodeMapDcsBaselines.get( i  +"" + 4)).getText();
-					String mA = ontEdit.createNewMiliampere("mADcsBaseline" + muscleCounter);
-					//createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
-					mADcsBaselineCounter ++;
+					String mA = ontEdit.createNewMiliampere("mADcsBaseline");
+					createDcsBaselineStatement(mA, maValue, dcsMepBaselineMeasurement, muscle, document);
 				}
 			}
 		}
 	}
 
-	
+
 	/**
 	 * method to create a new dcs mep baseline statement
 	 * @param mA
@@ -513,7 +497,7 @@ public class IOMRecordingController {
 		ontEdit.addPropertiesToMiliampere(mA, maValue);
 		ontEdit.addStatement(dcsMepBaselineMeasurement, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000275", mA);
 		ontEdit.addStatement(mA, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000468", muscle);
-		ontEdit.addStatement(document, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000285", dcsMepBaselineMeasurement);
+		ontEdit.addStatement(document, "http://www.semanticweb.org/ontologies/2021/1/24/IOMO/IOMO_0000282", dcsMepBaselineMeasurement);
 	}
 
 	/**
@@ -546,7 +530,7 @@ public class IOMRecordingController {
 		else if (!selectedItem.isBlank()) {
 			TESMEPPane.setTextFill(Color.GREEN);
 			tesMepMuscleChoice.add(0, selectedItem);
-			
+
 			categoryList.add("TES MEP Messung");
 		}
 	}
@@ -1012,95 +996,96 @@ public class IOMRecordingController {
 
 		}else {
 
-		String documentUri = ontEdit.createNewIOMDocument("IOMDocumentTest");
+			String documentUri = ontEdit.createNewIOMDocument("IOMDocumentTest");
 
-		ontEdit.addPatient( caseNrTF.getText(), pidTF.getText(), fidTF.getText(), firstNameTF.getText(), surnameTF.getText(), birthdayTF.getText(), documentUri );
-		String surgery= surgeryCB.getSelectionModel().getSelectedItem();
-		ontEdit.addSurgery(ontClassMap.getUriFromLabel(surgery), surgery , dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem(), documentUri);
-		String diagnosis= diagnosisCB.getSelectionModel().getSelectedItem();
-		ontEdit.createDiagnosis(ontClassMap.getUriFromLabel(diagnosis), diagnosis, documentUri);
+			ontEdit.addPatient( caseNrTF.getText(), pidTF.getText(), fidTF.getText(), firstNameTF.getText(), surnameTF.getText(), birthdayTF.getText(), documentUri );
+			String surgery= surgeryCB.getSelectionModel().getSelectedItem();
+			ontEdit.addSurgery(ontClassMap.getUriFromLabel(surgery), surgery , dateOfSurgeryTF.getText(), surgeonCB.getSelectionModel().getSelectedItem(), assistantCB.getSelectionModel().getSelectedItem(), deviceCB.getSelectionModel().getSelectedItem(), documentUri);
+			String diagnosis= diagnosisCB.getSelectionModel().getSelectedItem();
+			ontEdit.createDiagnosis(ontClassMap.getUriFromLabel(diagnosis), diagnosis, documentUri);
 
-		getDcsBaselineValues(documentUri);
-		getTesBaselineValues(documentUri);
+			getDcsBaselineValues(documentUri);
+			getTesBaselineValues(documentUri);
+			getSepBaselineValues(documentUri);
 
-		//Only a Category with Measurement will be saved into the Ontology.  new Baseline not included! Baslines measurment can be removed 
-		String category1 =categoryIOMStart.getSelectionModel().getSelectedItem();
-		String category1Uri = ontClassMap.getUriFromLabel(category1);
+			//Only a Category with Measurement will be saved into the Ontology.  new Baseline not included! Baslines measurment can be removed 
+			String category1 =categoryIOMStart.getSelectionModel().getSelectedItem();
+			String category1Uri = ontClassMap.getUriFromLabel(category1);
 
-		ontEdit.addFindings(category1Uri, "IOM Start", timeStartTF.getText(),commentIOMStart.getText(), documentUri);
+			ontEdit.addFindings(category1Uri, "IOM Start", timeStartTF.getText(),commentIOMStart.getText(), documentUri);
 
-		int rowsToRead = nodeList.size()/4;
-		for(int i= 2; i < rowsToRead + 1; i++) {
-			String time = getTextField(  nodeList.get( i  +"" + 1)).getText();
-			String category = getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().getSelectedItem();
-			String entry = getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem();
-			String categoryUri = ontClassMap.getUriFromLabel(category);
-			String comment = getTextField(nodeList.get( i  +"" + 5)).getText();
+			int rowsToRead = nodeList.size()/4;
+			for(int i= 2; i < rowsToRead + 1; i++) {
+				String time = getTextField(  nodeList.get( i  +"" + 1)).getText();
+				String category = getComboBox(nodeList.get( i  +"" + 2)).getSelectionModel().getSelectedItem();
+				String entry = getComboBox(nodeList.get( i  +"" + 3)).getSelectionModel().getSelectedItem();
+				String categoryUri = ontClassMap.getUriFromLabel(category);
+				String comment = getTextField(nodeList.get( i  +"" + 5)).getText();
 
-			if (category.equalsIgnoreCase("sonstiges") || category.equalsIgnoreCase("IOM Ende")) {
-				ontEdit.addFindings(categoryUri,  category, time , comment, documentUri);
-			}
-			else if (category.equalsIgnoreCase("Operationsprozess") || category.equalsIgnoreCase("Anästhesie Prozess") 
-					|| category.equalsIgnoreCase("Technische Probleme") ) {
-				ontEdit.addProcessObservationDatum(ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri);
-			}
-			else if(category.equalsIgnoreCase("Intraoperative Disposition")) {
-				ontEdit.addDisposition(ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri);
-			}
-			else if (category.equals("Mapping Messung")){
-				//unterkategorie und wert
-				String value = checkStringforNumber(getTextField(nodeList.get(i  + "" + 4)).getText());
-				ontEdit.addMeasurement( ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri, value);
-			} 
-			else if (category.equals("CBT Messung")) {
-				//kategory und wert
-				String value = checkStringforNumber(getTextField(nodeList.get(i  + "" + 4)).getText());
-				ontEdit.addMeasurement(categoryUri, category, time, comment, documentUri, value);
-			}
-			else if(category.contains("MEP Messung")) {
-				int numberOfMuscles = 0;
-				if(category.equals("TES MEP Messung")) {
-					numberOfMuscles = tesMepMuscleChoice.size();
-				}if(category.equals("DCS MEP Messung")) {
-					numberOfMuscles = dcsMepMuscleChoice.size();
+				if (category.equalsIgnoreCase("sonstiges") || category.equalsIgnoreCase("IOM Ende")) {
+					ontEdit.addFindings(categoryUri,  category, time , comment, documentUri);
 				}
-				List<String> muscleUriList = new ArrayList<String>();
-				List<String> muscleLabelList = new ArrayList<String>();
-				List<String> valueList = new ArrayList<String>();
+				else if (category.equalsIgnoreCase("Operationsprozess") || category.equalsIgnoreCase("Anästhesie Prozess") 
+						|| category.equalsIgnoreCase("Technische Probleme") ) {
+					ontEdit.addProcessObservationDatum(ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri);
+				}
+				else if(category.equalsIgnoreCase("Intraoperative Disposition")) {
+					ontEdit.addDisposition(ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri);
+				}
+				else if (category.equals("Mapping Messung")){
+					//unterkategorie und wert
+					String value = checkStringforNumber(getTextField(nodeList.get(i  + "" + 4)).getText());
+					ontEdit.addMeasurement( ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri, value);
+				} 
+				else if (category.equals("CBT Messung")) {
+					//kategory und wert
+					String value = checkStringforNumber(getTextField(nodeList.get(i  + "" + 4)).getText());
+					ontEdit.addMeasurement(categoryUri, category, time, comment, documentUri, value);
+				}
+				else if(category.contains("MEP Messung")) {
+					int numberOfMuscles = 0;
+					if(category.equals("TES MEP Messung")) {
+						numberOfMuscles = tesMepMuscleChoice.size();
+					}if(category.equals("DCS MEP Messung")) {
+						numberOfMuscles = dcsMepMuscleChoice.size();
+					}
+					List<String> muscleUriList = new ArrayList<String>();
+					List<String> muscleLabelList = new ArrayList<String>();
+					List<String> valueList = new ArrayList<String>();
 
-				for(int z= 0; z < numberOfMuscles; z++) {
-					String entryTemp = getComboBox(nodeList.get( ((i+z)  +"" + 3))).getSelectionModel().getSelectedItem();
-					String valueTemp = checkStringforNumber(getTextField(nodeList.get((i+z)  + "" + 4)).getText());
-					String muscleUri = ontClassMap.getUriFromLabel(entryTemp);
-					muscleUriList.add(muscleUri);
-					muscleLabelList.add(entryTemp);
-					valueList.add(valueTemp);
-				}	
-				ontEdit.addMeasurement(categoryUri, category, time, comment, documentUri, valueList, muscleUriList, muscleLabelList);
-				i = i + (numberOfMuscles -1);	
-			}else {
-				ontEdit.addFindings(ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri);
+					for(int z= 0; z < numberOfMuscles; z++) {
+						String entryTemp = getComboBox(nodeList.get( ((i+z)  +"" + 3))).getSelectionModel().getSelectedItem();
+						String valueTemp = checkStringforNumber(getTextField(nodeList.get((i+z)  + "" + 4)).getText());
+						String muscleUri = ontClassMap.getUriFromLabel(entryTemp);
+						muscleUriList.add(muscleUri);
+						muscleLabelList.add(entryTemp);
+						valueList.add(valueTemp);
+					}	
+					ontEdit.addMeasurement(categoryUri, category, time, comment, documentUri, valueList, muscleUriList, muscleLabelList);
+					i = i + (numberOfMuscles -1);	
+				}else {
+					ontEdit.addFindings(ontClassMap.getUriFromLabel(entry), entry, time, comment, documentUri);
+				}
 			}
-		}
 
-		//saves the postoperative Disposition
-		String outcome = outcomeCB.getSelectionModel().getSelectedItem();
-		String outcomeComment = outcomeCommentTF.getText();
-		if(outcome != null) {
-			if (outcome.equals(I18n.getString("text.noDisposition"))) {
-				ontEdit.addDisposition(ontClassMap.getUriFromLabel("Postoperative Disposition"), outcome, outcomeComment, documentUri);
-			}else {
-				ontEdit.addDisposition(ontClassMap.getUriFromLabel(outcome), outcome, outcomeComment, documentUri);
+			//saves the postoperative Disposition
+			String outcome = outcomeCB.getSelectionModel().getSelectedItem();
+			String outcomeComment = outcomeCommentTF.getText();
+			if(outcome != null) {
+				if (outcome.equals(I18n.getString("text.noDisposition"))) {
+					ontEdit.addDisposition(ontClassMap.getUriFromLabel("Postoperative Disposition"), outcome, outcomeComment, documentUri);
+				}else {
+					ontEdit.addDisposition(ontClassMap.getUriFromLabel(outcome), outcome, outcomeComment, documentUri);
+				}
 			}
-		}
 
-		// a new alert to inform the user that the data was saved successfully
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setHeaderText("Gespeichert");
-		alert.setContentText("Daten erfolgreich abgespeichert!");
-		alert.show();
+			// a new alert to inform the user that the data was saved successfully
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setHeaderText("Gespeichert");
+			alert.setContentText("Daten erfolgreich abgespeichert!");
+			alert.show();
 
-		save.setDisable(true);
+			save.setDisable(true);
 		}
 	}
 
