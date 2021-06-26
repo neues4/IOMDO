@@ -33,7 +33,7 @@ import org.apache.jena.util.FileManager;
 
 import bachelorthesis.IOMDOProject.model.OntologyReader;
 //import bachelorthesis.IOMDOProject.model.QueryException;
-import bachelorthesis.IOMDOProject.model.QueryTester;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

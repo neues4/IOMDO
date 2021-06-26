@@ -37,12 +37,12 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="Query3" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#executeQuery3" stylesheets="@TestStyle.css" text="%btn.executeQuery" GridPane.columnIndex="5" GridPane.rowIndex="3">
+            <Button fx:id="Query3" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#executeQuery3" stylesheets="@style1.css" text="%btn.executeQuery" GridPane.columnIndex="5" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="8.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="query1" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#executeQuery" stylesheets="@TestStyle.css" text="%btn.executeQuery" GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <Button fx:id="query1" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#executeQuery" stylesheets="@style1.css" text="%btn.executeQuery" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="8.0" />
                </GridPane.margin>
@@ -86,7 +86,7 @@
                   <Insets left="8.0" />
                </GridPane.margin>
             </Label>
-            <Button fx:id="ownQuery" alignment="CENTER_RIGHT" layoutX="518.0" layoutY="56.0" mnemonicParsing="false" onAction="#executeOwnQuery" stylesheets="@TestStyle.css" text="%btn.executeQuery" GridPane.columnIndex="5" GridPane.rowIndex="7" GridPane.valignment="BOTTOM">
+            <Button fx:id="ownQuery" alignment="CENTER_RIGHT" layoutX="518.0" layoutY="56.0" mnemonicParsing="false" onAction="#executeOwnQuery" stylesheets="@style1.css" text="%btn.executeQuery" GridPane.columnIndex="5" GridPane.rowIndex="7" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets left="8.0" />
                </GridPane.margin></Button>

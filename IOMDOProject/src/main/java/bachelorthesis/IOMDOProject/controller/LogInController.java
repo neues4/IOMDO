@@ -1,7 +1,6 @@
 package bachelorthesis.IOMDOProject.controller;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -27,9 +26,6 @@ import javafx.stage.Stage;
 public class LogInController {
 
 
-	public LogInController() {
-
-	}
 	@FXML
 	private ResourceBundle resources;
 	@FXML
@@ -54,14 +50,13 @@ public class LogInController {
 	public void userLogIn(ActionEvent event) throws IOException{
 
 		// Für Windows
-		file = new File("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\loginInfo.txt");
+		file = new File("src\\main\\resources\\bachelorthesis\\IOMDOProject\\loginInfo.txt");
 		// Für Mac:
 		//file = new File("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/loginInfo.txt");
 		Scanner sc= new Scanner(file);
 		int lineNr = searchUsername(usernameTF.getText().toString());
 		skipLines(sc, lineNr);
 		if(usernameTF.getText().toString().equals(sc.next()) && passwordTF.getText().toString().equals(sc.next())) {
-			//Parent parent = FXMLLoader.load(Main.class.getResource("Menu.fxml"),  I18n.getResourceBundle());
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("Menu.fxml"));
 			loader.setResources(resources);
@@ -69,6 +64,7 @@ public class LogInController {
 
 			Scene scene = new Scene(root);
 			Stage window =  (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene.getStylesheets().add(Main.class.getResource("style1.css").toExternalForm());
 			window.setScene(scene);
 			window.show();
 			//sets Username from Menu View.

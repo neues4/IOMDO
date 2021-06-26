@@ -1,24 +1,10 @@
 package bachelorthesis.IOMDOProject.model;
 
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import org.apache.jena.ontology.OntClass;
-import org.apache.jena.ontology.OntModel;
-import org.apache.jena.ontology.OntModelSpec;
-import org.apache.jena.ontology.OntTools;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.util.iterator.ExtendedIterator;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 /**
  * 
@@ -98,16 +84,7 @@ public class OntClassMap {
 	public List<OntClass> getOntClassList() {
 		return OntClassList;
 	}
-	
-	//not finished!!!
-	public OntClass getOntClass(String label) {
-		for(int i = 0; i < OntClassList.size(); i++)
-		if (OntClassList.get(i).toString() ==(label));
-		
-		
-		return null;
-	}
-		
+			
 }
 
 

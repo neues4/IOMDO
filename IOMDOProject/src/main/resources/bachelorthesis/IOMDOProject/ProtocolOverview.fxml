@@ -37,7 +37,7 @@
                      </padding>
                   </Label>
                   <TextField id="searchField" fx:id="searchTF" stylesheets="@style1.css" />
-                  <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#reset" stylesheets="@TestStyle.css">
+                  <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#reset" stylesheets="@style1.css">
                      <graphic>
                         <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                            <image>

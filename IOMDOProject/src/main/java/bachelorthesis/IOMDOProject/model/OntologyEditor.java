@@ -20,7 +20,6 @@ import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
-import org.apache.jena.ontology.Ontology;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -327,19 +326,19 @@ public class OntologyEditor {
 	}
 
 	/**
-	 * FOR DCS MEP and TES MEP Measurement
+	 * Adds a DCS MEP and TES MEP Measurement that requires additional a list of muscles and values and saves it into the Ontology.
 	 * @author romap1
-	 * @param entityUri
-	 * @param label
-	 * @param timestamp
-	 * @param comment
-	 * @param doccumentUri
-	 * @param measurementValue
-	 * @param muscleUri
-	 * @param muscleLabel
+	 * @param entityUri: The Uri of the category
+	 * @param label: The label of the Individual
+	 * @param timestamp: the time of the documented entity
+	 * @param comment: Additional comment of the documented entity
+	 * @param documentUri: the uri of the document that the entity belongs too
+	 * @param measurementValue: List of muscle values
+	 * @param muscleUri: List of muscle uris
+	 * @param muscleLabel: List of muscle labels
 	 */
 	public void addMeasurement(String entityUri, String label,String timestamp, String comment, 
-			String doccumentUri, List<String> measurementValue, List<String> muscleUri, List<String> muscleLabel) {
+			String documentUri, List<String> measurementValue, List<String> muscleUri, List<String> muscleLabel) {
 		String indivUri= createNewIndividual(entityUri, label);
 		Individual indv = ontModel.getIndividual(indivUri);
 		DatatypeProperty datPropTimeStamp = ontModel.getDatatypeProperty( NS + has_timestamp);
@@ -349,7 +348,7 @@ public class OntologyEditor {
 			DatatypeProperty datPropComment = ontModel.getDatatypeProperty( NS + has_comment);
 			indv.addProperty(datPropComment, comment);
 		}
-		addStatement(doccumentUri, NS + has_data_item , indivUri);
+		addStatement(documentUri, NS + has_data_item , indivUri);
 		Iterator<String> valueIter = measurementValue.iterator();
 		Iterator<String> muscleIter = muscleLabel.iterator();
 		Iterator<String> muscleUriIter = muscleUri.iterator();

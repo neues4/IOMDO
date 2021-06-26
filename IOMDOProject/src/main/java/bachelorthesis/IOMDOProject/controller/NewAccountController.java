@@ -7,11 +7,8 @@ import java.util.Scanner;
 import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,8 +17,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -30,7 +25,6 @@ import javafx.stage.Stage;
  *
  */
 public class NewAccountController {
-
 
 	@FXML
 	private Button cancelBtn;
@@ -60,13 +54,11 @@ public class NewAccountController {
 	 * @throws IOException
 	 */
 	public void cancel(ActionEvent event) throws IOException{
-
 		Parent root = FXMLLoader.load(Main.class.getResource("LogIn.fxml"),  I18n.getResourceBundle());
 		Scene scene = new Scene(root);
 		Stage window =  (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
-
 	}
 
 	/**
@@ -91,7 +83,6 @@ public class NewAccountController {
 			alert.setHeaderText(I18n.getString("confirmationMsg.succsess"));
 			alert.setContentText(I18n.getString("confirmationMsg.userCreated"));
 			alert.show();
-
 		}
 	}
 
@@ -100,7 +91,6 @@ public class NewAccountController {
 	 * @throws IOException
 	 */
 	private void saveFile() throws IOException {
-
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n" + "\n" + usernameTF.getText().toString()+ "\n" );
 		sb.append(passwordTF.getText().toString() );

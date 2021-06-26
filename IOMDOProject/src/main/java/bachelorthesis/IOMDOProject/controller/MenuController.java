@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import javafx.scene.effect.Glow;
 import bachelorthesis.IOMDOProject.I18n;
 import bachelorthesis.IOMDOProject.Main;
-import bachelorthesis.IOMDOProject.model.PatientSurgeryData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,15 +66,12 @@ public class MenuController {
 
 
 	public void openNewProtocol(ActionEvent event) throws IOException {
-		//changeCenter("RecordDocument_PatientData.fxml");
 		changeCenter("IOMRecording.fxml");
 		newProtocolBtn.setStyle("-fx-background-color: #629c9e");
 		protocolOverviewBtn.setStyle("-fx-background-color: white");
 		createQueryBtn.setStyle("-fx-background-color: white");
 		showOntologyBtn.setStyle("-fx-background-color: white");
 		settingsBtn.setStyle("-fx-background-color: white");
-		
-	
 		
 	}
 
@@ -85,11 +81,9 @@ public class MenuController {
 		protocolOverviewBtn.setStyle("-fx-background-color: #629c9e");
 		createQueryBtn.setStyle("-fx-background-color: white");
 		showOntologyBtn.setStyle("-fx-background-color: white");
-		settingsBtn.setStyle("-fx-background-color: white");
-		
+		settingsBtn.setStyle("-fx-background-color: white");	
 	}
 
-	
 
 	/**
 	 * 
@@ -101,8 +95,7 @@ public class MenuController {
 		Scene scene = new Scene(root);
 		Stage window =  (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(scene);
-		window.show();
-		
+		window.show();	
 	}
 
 	public void openCreatQuery(ActionEvent event) throws IOException {
@@ -112,8 +105,8 @@ public class MenuController {
 		createQueryBtn.setStyle("-fx-background-color: #629c9e");
 		showOntologyBtn.setStyle("-fx-background-color: white");
 		settingsBtn.setStyle("-fx-background-color: white");
-
 	}
+	
 	public void openShowOntology(ActionEvent event) throws IOException {
 		changeCenter("ShowOntology.fxml");
 		newProtocolBtn.setStyle("-fx-background-color: white");
@@ -129,13 +122,11 @@ public class MenuController {
 		createQueryBtn.setStyle("-fx-background-color: white");
 		showOntologyBtn.setStyle("-fx-background-color: white");
 		settingsBtn.setStyle("-fx-background-color: #629c9e");
-
 	}
 
 	public void setLabelText(String text){
 		userName.setText(text);
 	}
-	
 
 	/**
 	 * 

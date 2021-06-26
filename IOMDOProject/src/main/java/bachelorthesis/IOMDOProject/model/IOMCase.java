@@ -11,7 +11,6 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class IOMCase {
 
-	
 	//with Property the content will be automatically updated
 		private SimpleStringProperty surname;
 		private SimpleStringProperty firstname;
