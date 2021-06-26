@@ -148,8 +148,8 @@ public class QueryController {
 						"PREFIX obo: <http://purl.obolibrary.org/obo/> \n" +
 						"SELECT DISTINCT ?Name ?Vorname ?Geburtsdatum ?Diagnose ?PostopOutcome ?kleinsterMappingwert \n" +
 						"WHERE    \n" +
-						"{ ?pat rdf:type OntoSPM:patient .    \n" +
-						"?pat rdfs:label ?patient .    \n" +
+						"{ \n" +
+						"?pat rdf:type OntoSPM:patient .    \n" +
 						"?pat IOMO:IOMO_0000254 ?Name .  \n" +
 						"?pat IOMO:IOMO_0000253 ?Vorname .  \n" +
 						"?pat IOMO:IOMO_0000255 ?Geburtsdatum .  \n" +
@@ -165,13 +165,9 @@ public class QueryController {
 						"?doc IOMO:IOMO_0000282  ?clinDataItem .     \n" +
 						"?clinDataItem obo:BFO_0000058 ?disp . \n" +
 						"?diag rdf:type ?nameOfDiagnosis .    \n" +
-						"?surg rdf:type ?nameOfSurgery .    \n"+ 
-						"?mapping rdf:type ?nameOfMapping .  \n" +
-						"?nameOfMapping rdfs:label ?map .  \n" +
-						"filter(langMatches(lang(?map),\"DE\"))  \n" +
-						"?doc rdfs:label ?iomdoc .    \n" +
 						"?nameOfDiagnosis rdfs:label ?Diagnose .  \n  " +
 						"filter(langMatches(lang(?Diagnose),\"DE\"))    \n" +
+						"?surg rdf:type ?nameOfSurgery .    \n"+ 
 						"?nameOfSurgery rdfs:label ?surgery .    \n" +
 						"filter(langMatches(lang(?surgery),\"DE\")) .   \n " +
 						"?disp rdf:type ?nameOfDisposition . \n" +
@@ -199,21 +195,16 @@ public class QueryController {
 		try {
 			// create a new result set
 			ResultSet results = qexec.execSelect();
-
 			// write to a ByteArrayOutputStream
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
+			// output as CSV
 			ResultSetFormatter.outputAsCSV(outputStream, results);
-
-
 			// and turn that into a String
 			String csv = new String(outputStream.toByteArray());
-
 			// save a new csv file to desktop
 			String userHomeFolder = System.getProperty("user.home");
 			File textFile = new File(userHomeFolder, "queryResultLowestMappingThreshold.csv");
 			FileWriter csvWriter = new FileWriter(textFile);
-
 
 			csvWriter.append(csv);
 
