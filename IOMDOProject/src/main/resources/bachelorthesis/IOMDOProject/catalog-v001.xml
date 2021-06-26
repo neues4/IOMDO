@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="User Entered Import Resolution" name="http://purl.obolibrary.org/obo/bfo/2019-08-26/bfo.owl" uri="IOMO_21.owl"/>
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1623652535610" name="duplicate:http://www.semanticweb.org/ontologies/2021/1/24/IOMO" uri="IOMO_29.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1623652535610" name="duplicate:http://www.semanticweb.org/ontologies/2021/1/24/IOMO" uri="IOMO_30.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1623652535610" name="duplicate:http://www.semanticweb.org/ontologies/2021/1/24/IOMO" uri="IOMO_31.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1623652535610" name="duplicate:http://www.semanticweb.org/ontologies/2021/1/24/IOMO" uri="IOMO_32.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1623652535610" name="duplicate:http://www.semanticweb.org/ontologies/2021/1/24/IOMO" uri="IOMO_33.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1623652535610" name="duplicate:http://www.semanticweb.org/ontologies/2021/1/24/IOMO" uri="IOMO_34.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1623652535610" name="duplicate:http://www.semanticweb.org/ontologies/2021/1/24/IOMO" uri="IOMO_35.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1623652535610" name="duplicate:http://www.semanticweb.org/ontologies/2021/1/24/IOMO" uri="IOMO_36.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1623652535610" name="duplicate:http://www.semanticweb.org/ontologies/2021/1/24/IOMO" uri="IOMO_SPARQLtest.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1623652535610" name="duplicate:http://www.semanticweb.org/ontologies/2021/1/24/IOMO" uri="SPARQLtest2.owl"/>
+    </group>
+</catalog>
