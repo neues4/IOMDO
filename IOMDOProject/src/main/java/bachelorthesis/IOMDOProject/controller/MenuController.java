@@ -26,47 +26,29 @@ import javafx.stage.Stage;
 
 
 /**
- * 
+ * Navigates through the different views
  * @author romap1
  *
  */
 public class MenuController {
 
 	@FXML
-	private Button newProtocolBtn;
+	private Button newProtocolBtn, protocolOverviewBtn,createQueryBtn,showOntologyBtn,settingsBtn,logOutBtn; 
 	@FXML
-	private Button protocolOverviewBtn;
+	private Label userName, labelEn, labelDe;
 	@FXML
-	private Button createQueryBtn;
-	@FXML
-	private Button showOntologyBtn;
-	@FXML
-	private Button settingsBtn;
-	@FXML
-	private Button logOutBtn;
-	
-	@FXML
-	private Label userName;
-	
-	@FXML
-    private Label labelEn;
-
-    @FXML
-    private Label labelDe;
-
-
-	@FXML public BorderPane borderPaneMenu;
-
+	public BorderPane borderPaneMenu;
 	@FXML
 	private GridPane gridPane;
 
-	public void initialize() {
-		
-	}
-
-
+/**
+ * Changes the center of the borderPane of the the Menu View to IOMRecording View
+ * @param event: an Action event
+ * @throws IOException
+ */
 	public void openNewProtocol(ActionEvent event) throws IOException {
 		changeCenter("IOMRecording.fxml");
+		//selected stays highlighted for better orientation
 		newProtocolBtn.setStyle("-fx-background-color: #629c9e");
 		protocolOverviewBtn.setStyle("-fx-background-color: white");
 		createQueryBtn.setStyle("-fx-background-color: white");
@@ -75,8 +57,14 @@ public class MenuController {
 		
 	}
 
+	/**
+	 * Changes the center of the borderPane of the the Menu View to ProtocolOverview View
+	 * @param event: an Action event
+	 * @throws IOException
+	 */
 	public  void openProtocolOverview(ActionEvent event) throws IOException {
 		changeCenter("ProtocolOverview.fxml");
+		//selected stays highlighted for better orientation
 		newProtocolBtn.setStyle("-fx-background-color: white");
 		protocolOverviewBtn.setStyle("-fx-background-color: #629c9e");
 		createQueryBtn.setStyle("-fx-background-color: white");
@@ -84,10 +72,53 @@ public class MenuController {
 		settingsBtn.setStyle("-fx-background-color: white");	
 	}
 
-
 	/**
-	 * 
-	 * @param event
+	 * Changes the center of the borderPane of the the Menu View to CreateQuery View
+	 * @param event: an Action event
+	 * @throws IOException
+	 */
+	public void openCreatQuery(ActionEvent event) throws IOException {
+		changeCenter("Query.fxml");
+		//selected stays highlighted for better orientation
+		newProtocolBtn.setStyle("-fx-background-color: white");
+		protocolOverviewBtn.setStyle("-fx-background-color: white");
+		createQueryBtn.setStyle("-fx-background-color: #629c9e");
+		showOntologyBtn.setStyle("-fx-background-color: white");
+		settingsBtn.setStyle("-fx-background-color: white");
+	}
+	
+	/**
+	 * Changes the center of the borderPane of the the Menu View to ShowOntology View
+	 * @param event: an Action event
+	 * @throws IOException
+	 */
+	public void openShowOntology(ActionEvent event) throws IOException {
+		changeCenter("ShowOntology.fxml");
+		//selected stays highlighted for better orientation
+		newProtocolBtn.setStyle("-fx-background-color: white");
+		protocolOverviewBtn.setStyle("-fx-background-color: white");
+		createQueryBtn.setStyle("-fx-background-color: white");
+		showOntologyBtn.setStyle("-fx-background-color: #629c9e");
+		settingsBtn.setStyle("-fx-background-color: white");
+	}
+/**
+ * Changes the center of the borderPane of the the Menu View to Settings View 
+ * @param event: an Action event
+ * @throws IOException
+ */
+	public void openSettings(ActionEvent event) throws IOException {
+		changeCenter("Settings.fxml");
+		//selected stays highlighted for better orientation
+		newProtocolBtn.setStyle("-fx-background-color: white");
+		protocolOverviewBtn.setStyle("-fx-background-color: white");
+		createQueryBtn.setStyle("-fx-background-color: white");
+		showOntologyBtn.setStyle("-fx-background-color: white");
+		settingsBtn.setStyle("-fx-background-color: #629c9e");
+	}
+	
+	/**
+	 * Changes to the Login View
+	 * @param event: an Action event
 	 * @throws IOException
 	 */
 	public void logout(ActionEvent event) throws IOException {
@@ -98,38 +129,16 @@ public class MenuController {
 		window.show();	
 	}
 
-	public void openCreatQuery(ActionEvent event) throws IOException {
-		changeCenter("Query.fxml");
-		newProtocolBtn.setStyle("-fx-background-color: white");
-		protocolOverviewBtn.setStyle("-fx-background-color: white");
-		createQueryBtn.setStyle("-fx-background-color: #629c9e");
-		showOntologyBtn.setStyle("-fx-background-color: white");
-		settingsBtn.setStyle("-fx-background-color: white");
-	}
-	
-	public void openShowOntology(ActionEvent event) throws IOException {
-		changeCenter("ShowOntology.fxml");
-		newProtocolBtn.setStyle("-fx-background-color: white");
-		protocolOverviewBtn.setStyle("-fx-background-color: white");
-		createQueryBtn.setStyle("-fx-background-color: white");
-		showOntologyBtn.setStyle("-fx-background-color: #629c9e");
-		settingsBtn.setStyle("-fx-background-color: white");
-	}
-	public void openSettings(ActionEvent event) throws IOException {
-		changeCenter("Settings.fxml");
-		newProtocolBtn.setStyle("-fx-background-color: white");
-		protocolOverviewBtn.setStyle("-fx-background-color: white");
-		createQueryBtn.setStyle("-fx-background-color: white");
-		showOntologyBtn.setStyle("-fx-background-color: white");
-		settingsBtn.setStyle("-fx-background-color: #629c9e");
-	}
-
+	/**
+	 * Set the user name on the top right of the screen
+	 * @param text: String of the user name
+	 */
 	public void setLabelText(String text){
 		userName.setText(text);
 	}
 
 	/**
-	 * 
+	 * Changes the center of the BorderPane of the Menu View
 	 * @param url
 	 * @throws IOException
 	 */
@@ -137,12 +146,20 @@ public class MenuController {
 		borderPaneMenu.setCenter(FXMLLoader.load(Main.class.getResource(url),  I18n.getResourceBundle()));
 	}
 	
+	/**
+	 * Sets the language in German
+	 * @param event
+	 */
 	@FXML
     void setLanguageDe(MouseEvent event) {
 		I18n.setLocale(new Locale("de_CH"));
 	
     }
 
+	/**
+	 * Sets the language in English
+	 * @param event
+	 */
     @FXML
     void setLanguageEn(MouseEvent event) {
     	I18n.setLocale(new Locale("en"));

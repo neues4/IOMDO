@@ -50,7 +50,7 @@ public class NewAccountController {
 
 	/**
 	 * Returns to the logIn Screen
-	 * @param event
+	 * @param event: Action event
 	 * @throws IOException
 	 */
 	public void cancel(ActionEvent event) throws IOException{
@@ -63,7 +63,7 @@ public class NewAccountController {
 
 	/**
 	 * Creates a new account if user name is new.  
-	 * @param event
+	 * @param event: Action event
 	 * @throws IOException
 	 */
 	public void signIn(ActionEvent event) throws IOException{

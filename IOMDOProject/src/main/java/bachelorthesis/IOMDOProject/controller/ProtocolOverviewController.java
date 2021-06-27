@@ -20,7 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
 /**
- * Contoller for the Protocol Overview View
+ * Shows the recorded Patients in a table. 
  * @author romap1
  *
  */
@@ -35,27 +35,17 @@ public class ProtocolOverviewController  {
 	@FXML
 	private TableView<IOMCase> protocolTblView;
 	@FXML
-	private TableColumn<IOMCase, String> surnameColumn;
-	@FXML
-	private TableColumn<IOMCase, String> firstnameColumn;
-	@FXML
-	private TableColumn<IOMCase, String> caseNrColumn;
-	@FXML
-	private TableColumn<IOMCase, String> dateOfBirthColumn;	
-	@FXML
-	private TableColumn<IOMCase, String> diagnosisColumn;
-	@FXML
-	private TableColumn<IOMCase, String> surgeryColumn;
-	@FXML
-	private TableColumn<IOMCase, String> FIDColumn;
-	@FXML
-	private TableColumn<IOMCase, String> PIDColumn;
+	private TableColumn<IOMCase, String> surnameColumn, firstnameColumn,caseNrColumn,dateOfBirthColumn,	diagnosisColumn,surgeryColumn, FIDColumn, PIDColumn;
 
-
-	OntologyReader oe = OntologyReader.getInstance();
+	private OntologyReader oe = OntologyReader.getInstance();
 	private ObservableList<IOMCase> list = FXCollections.observableArrayList();
 	private String patientURI;
 
+	/**
+	 * Initializes the table with the needed Properties 
+	 * @throws ParseException
+	 * @throws IOException
+	 */
 	@FXML
 	public void initialize() throws ParseException, IOException {
 		caseNrColumn.setCellValueFactory(new PropertyValueFactory<>("caseNr"));
@@ -75,18 +65,17 @@ public class ProtocolOverviewController  {
 			patientURI = AL.get(i);
 			list.add(loadPatient(oe, patientURI));
 		}
-
+		//dynamycaly changes the content display of the table according to whats entered into the searchfield
 		FilteredList<IOMCase> filteredData = new FilteredList<>(FXCollections.observableList(list));
 		protocolTblView.setItems(filteredData);
 		searchTF.textProperty().addListener((observable, oldValue, newValue) ->
-		filteredData.setPredicate(createPredicate(newValue))
-				);
+		filteredData.setPredicate(createPredicate(newValue)));	
 	}
 
 
 	/**
-	 * 
-	 * @param event
+	 * Resets the searchField that searches in the table.
+	 * @param event: an actionEvent
 	 * @throws IOException
 	 */
 	public void reset(ActionEvent event) throws IOException{	
@@ -95,14 +84,16 @@ public class ProtocolOverviewController  {
 	}
 
 	/**
+	 * Returns a Class with information about the patient and the surgery
 	 * Loads all Properties from a Patient
-	 * @param oe
-	 * @param indvUri
-	 * @return
+	 * @param oe: OntologyReader 
+	 * @param indvUri: Uri of a Patient
+	 * @return a Class with information about the patient and the surgery
 	 * @throws ParseException 
 	 * @throws IOException 
 	 */
 	public IOMCase loadPatient(OntologyReader oe, String indvUri) throws ParseException, IOException {
+		//Queries an array with the patient [0], his diagnosis [1] and his surgery[2]
 		ArrayList<String> list = PatientDataQuery.sparqlTest(indvUri);
 		String diagnosis = "";
 		String surgery = "";
@@ -116,17 +107,18 @@ public class ProtocolOverviewController  {
 		String birthday = oe.getBirthdayValue(indvUri);
 		String PID = oe.getPID(indvUri).toString();
 		String FID = oe.getFID(indvUri).toString();
+		//removes datatype Uri of XDSint to use it as int
 		int caseNumber = Integer.parseInt(oe.getCaseNumber(indvUri).toString().replace("^^" + XSDDatatype.XSDint.getURI(), "").toString());
-
+		//creating a new IOM case with patient and surgery properties
 		IOMCase iomCase = new IOMCase(surname, firstname, birthday,PID, FID, caseNumber, diagnosis, surgery);
 		return iomCase;
 	}
 
 	/**
-	 * 
-	 * @param iOMCase
-	 * @param searchText
-	 * @return
+	 * private method that searches if a property of the IOM case contains the searched string
+	 * @param iOMCase: the IOM case where the search happens
+	 * @param searchText: the string that is searched
+	 * @return true or false
 	 */
 	private boolean filterCaseData(IOMCase iOMCase, String searchText) {
 		return (iOMCase.getSurname().toLowerCase().contains(searchText.toLowerCase())) ||
@@ -139,9 +131,9 @@ public class ProtocolOverviewController  {
 	}
 
 	/**
-	 * 
+	 * private method that creates a predicate for the seached text
 	 * @param searchText
-	 * @return
+	 * @return a Predicate
 	 */
 	private Predicate<IOMCase> createPredicate(String searchText){
 		return patient -> {

@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Locale;
 
 /**
- * JavaFX App
+ * JavaFX App. Launches the Application.
  */
 public class Main extends Application {
 	
