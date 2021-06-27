@@ -20,18 +20,17 @@ public class IOMCase {
 		private SimpleIntegerProperty caseNr;
 		private SimpleStringProperty surgery;
 		private SimpleStringProperty diagnosis;
-		
-		
+				
 		/**
 		 * Constructor
-		 * @param surname
-		 * @param firstname
-		 * @param birthday
-		 * @param PID
-		 * @param FID
-		 * @param caseNr
-		 * @param diagnosis
-		 * @param surgery
+		 * @param surname: the surname of the patient of the IOM case
+		 * @param firstname: the firstname of the patient of the IOM case
+		 * @param birthday: the birthday of the patient of the IOM case
+		 * @param PID: the Patient ID of the patient of the IOM case
+		 * @param FID: the case ID of the patient of the IOM case
+		 * @param caseNr: the caseNr of the patient of the IOM case
+		 * @param diagnosis: the diagnosis of the patient of the IOM case
+		 * @param surgery: the surgery of the patient of the IOM case
 		 */
 		public IOMCase(String surname, String firstname, String birthday, String PID, String FID, int caseNr, String diagnosis, String surgery) {
 			this.surname = new SimpleStringProperty(surname);
@@ -43,17 +42,7 @@ public class IOMCase {
 			this.surgery = new SimpleStringProperty(surgery);
 			this.diagnosis = new SimpleStringProperty(diagnosis);
 		}
-		public IOMCase() {
-			this.surname = new SimpleStringProperty("");
-			this.firstname = new SimpleStringProperty("");
-			this.birthday = new SimpleStringProperty("");
-			this.PID = new SimpleStringProperty("");
-			this.FID = new SimpleStringProperty("");
-			this.caseNr = new SimpleIntegerProperty(0);
-			this.surgery = new SimpleStringProperty("");
-			this.diagnosis = new SimpleStringProperty("");
-		}
-		
+			
 		//getter Methodes
 		public String getSurname() {
 			return surname.get();

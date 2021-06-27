@@ -30,7 +30,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * 
+ * -class for editing the ontology
  * @author neues4, romap1
  * 
  */
@@ -76,9 +76,9 @@ public class OntologyEditor {
 		
 		if (editor == null)
 			//Windows
-			//editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_40.owl");
+			editor = new OntologyEditor("src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_40.owl");
 		//mac
-		editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_40.owl");
+		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_40.owl");
 
 		return editor;
 	}
@@ -117,9 +117,9 @@ public class OntologyEditor {
 	public String getId()  {
 		Scanner scanner;
 		// für Windows
-		//File file = new File("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IDCounter.txt");
+		File file = new File("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IDCounter.txt");
 		// für Mac
-		File file = new File("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IDCounter.txt");
+		//File file = new File("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IDCounter.txt");
 		try {
 			scanner = new Scanner(file);
 			counter = scanner.nextInt();
@@ -296,11 +296,11 @@ public class OntologyEditor {
 	/**
 	 * Adds a Finding to Document and saves it into the Ontology.
 	 * @author romap1
-	 * @param entityUri
-	 * @param label
-	 * @param timestamp
-	 * @param comment
-	 * @param doccumentUri
+	 * @param entityUri: the URI of the diagnosis
+	 * @param label: the Label of the diagnosis
+	 * @param timestamp: the timeStamp of when the Process was documented
+	 * @param comment: the optional comment that is added to the measurement.
+	 * @param doccumentUri: the URI of the document that is recorded
 	 */
 	public void addFindings(String entityUri, String label,String timestamp, String comment, String doccumentUri) {
 		String indivUri= createNewIndividual(entityUri, label);
@@ -320,10 +320,10 @@ public class OntologyEditor {
 	/**
 	 * Adds a Meassurement to Document and saves it into the Ontology.
 	 * @author romap1
-	 * @param entityUri
-	 * @param label
-	 * @param timestamp
-	 * @param comment
+	 * @param entityUri: the URI of the diagnosis
+	 * @param label: the Label of the diagnosis
+	 * @param timestamp: the timeStamp of when the Process was documented
+	 * @param comment: the optional comment that is added to the measurement.
 	 * @param doccumentUri
 	 * @param MeasurementValue
 	 */
@@ -395,7 +395,7 @@ public class OntologyEditor {
 	 * @param firstname
 	 * @param surname
 	 * @param birthday
-	 * @param documentUri
+	 * @param documentUri: the URI of the document that is recorded
 	 */
 	public void addPatient(String caseNumber, String pid, String fid, String firstname, String surname, String birthday, String documentUri) {
 		String patientUri = createNewPatient("patient"); 
@@ -407,13 +407,13 @@ public class OntologyEditor {
 
 	/**
 	 * Creates a Individual of a Surgery Subclass and adds it to the existing Ontology model
-	 * @param surgeryUri
-	 * @param label
+	 * @param surgeryUri: the URI of the surgery
+	 * @param label: the Label of the diagnosis
 	 * @param dateOfSurgery
 	 * @param surgeon
 	 * @param assistant
 	 * @param device
-	 * @param documentUri
+	 * @param documentUri: the URI of the document that is recorded
 	 */
 	public void addSurgery(String surgeryUri,String label,  String dateOfSurgery, String surgeon, String assistant, String device, String documentUri) {
 		String indivUri= createNewIndividual(surgeryUri, label);
@@ -432,10 +432,11 @@ public class OntologyEditor {
 	}
 
 	/**
+	 * Adds statements to a diagnosis
 	 * @author romap1
-	 * @param diagnosisUri
-	 * @param label
-	 * @param documentUri
+	 * @param diagnosisUri: the URI of the diagnosis
+	 * @param label: the Label of the diagnosis
+	 * @param documentUri: the URI of the document that is recorded 
 	 */
 	public void createDiagnosis(String diagnosisUri, String label,String documentUri) {
 		String indivUri= createNewIndividual(diagnosisUri, label);
@@ -444,12 +445,13 @@ public class OntologyEditor {
 	}
 	
 	/**
-	 * 
-	 * @param processUri
-	 * @param label
-	 * @param timestamp
-	 * @param comment
-	 * @param documentUri
+	 * Add an Process Observation Datum  with the given parameters into the ontology.
+	 * @author romap1
+	 * @param processUri: the URI of the Process
+	 * @param label: the label of the Process
+	 * @param timestamp: the timeStamp of when the Process was documented
+	 * @param comment: an optional comment of the Process
+	 * @param documentUri: the URI of the document that is recorded
 	 */
 	public void addProcessObservationDatum (String processUri, String label,String timestamp, String comment, String documentUri) {
 		String processObservationDatumUri = NS + "IOMO_0000287";
@@ -471,11 +473,11 @@ public class OntologyEditor {
 	}
 	
 	/**
-	 * 
-	 * @param dispositionUri
-	 * @param label
-	 * @param comment
-	 * @param documentUri
+	 * Add an postoperative Disposition with the given parameters into the ontology.
+	 * @param dispositionUri: the URI of the Disposition
+	 * @param label: the label of the Disposition
+	 * @param comment: an optional comment of the Disposition
+	 * @param documentUri: the URI of the document that is recorded
 	 */
 	public void addDisposition(String dispositionUri, String label, String comment, String documentUri) {
 		String clinicalDataItem = "http://purl.obolibrary.org/obo/OGMS_0000123";
@@ -494,12 +496,13 @@ public class OntologyEditor {
 	}
 	
 	/**
-	 * 
-	 * @param dispositionUri
-	 * @param label
-	 * @param timestamp
-	 * @param comment
-	 * @param documentUri
+	 * Add an intraoperative Disposition with the given parameters into the ontology.
+	 * @author romap1
+	 * @param dispositionUri: the URI of the Disposition
+	 * @param label: the label of the Disposition
+	 * @param timestamp: the timeStamp of when the Disposition was documented
+	 * @param comment: an optional comment of the Disposition
+	 * @param documentUri: the URI of the document that is recorded
 	 */
 	public void addDisposition(String dispositionUri, String label, String timestamp, String comment, String documentUri) {
 		String clinicalDataItem = "http://purl.obolibrary.org/obo/OGMS_0000123";
@@ -521,8 +524,9 @@ public class OntologyEditor {
 	}
 
 	/**
+	 * Returns an ObservableList with all postoperative Dispositions
 	 * @author romap1
-	 * @return
+	 * @return an ObservableList with all postoperative Dispositions
 	 */
 	public ObservableList<String> getPostoperativeDisposition() {
 		String abnormalNervousSystemPhysiologyHP = "http://purl.obolibrary.org/obo/HP_0012638";
@@ -548,10 +552,12 @@ public class OntologyEditor {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Returns an ObservableList with all Surgical Processes
+	 * @author romap1
+	 * @return an ObservableList with all Surgical Processes
 	 */
 	public ObservableList<String> getSurgicalProcesses() {
+		// the URIs of the upper classes
 		String surgicalProcess = NS + "IOMO_0000058";
 		String corticomy = NS + "IOMO_0000122";
 		String laminectomy = NS +"IOMO_0000151";
@@ -559,29 +565,34 @@ public class OntologyEditor {
 		String suture = NS + "IOMO_0000160";
 		
 		ObservableList<String> list = FXCollections.observableArrayList();
+		//get the subclasses of the upper classes
 		Map<String, String> map = getSubclasses(surgicalProcess);
 		Map<String, String> map2 = getSubclasses(corticomy);
 		Map<String, String> map3 = getSubclasses(laminectomy);
 		Map<String, String> map4 = getSubclasses(resection);
 		Map<String, String> map5 = getSubclasses(suture);
-		
+		//add them to the list
 		list.addAll(map.keySet());
 		list.addAll(map2.keySet());
 		list.addAll(map3.keySet());
 		list.addAll(map4.keySet());
 		list.addAll(map5.keySet());
 		list.remove(null);
+		//sort the list
 		Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
 		return list;
 		
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Returns an ObservableList with all Intraoperative Dispositions
+	 * @author romap1
+	 * @return an ObservableList with all Intraoperative Dispositions
 	 */
 	public ObservableList<String> getIntraoperativeDisposition() {
+
 		String intraoperativeDisposition = NS + "IOMO_0000382";
+		// the URIs of the upper classes
 		String AbnormalCardiovascularSystemPhysiology =  "http://purl.obolibrary.org/obo/HP_0011025";
 		String AbnormalSystemicBloodPressure = "http://purl.obolibrary.org/obo/HP_0030972";
 		String AbnormalityOfTheVasculature = "http://purl.obolibrary.org/obo/HP_0002597";
@@ -591,6 +602,7 @@ public class OntologyEditor {
 		String nervousSystemInjury = "http://purl.obolibrary.org/obo/MONDO_0044745";
 		
 		ObservableList<String> list = FXCollections.observableArrayList();
+		//get the subclasses of the upper classes
 		Map<String, String> map = getSubclasses(intraoperativeDisposition);
 		Map<String, String> map2 = getSubclasses(AbnormalCardiovascularSystemPhysiology);
 		Map<String, String> map3 = getSubclasses(AbnormalSystemicBloodPressure);
@@ -599,13 +611,13 @@ public class OntologyEditor {
 		Map<String, String> map6 = getSubclasses(AbnormalityOfTheRespiratorySystem);
 		Map<String, String> map7 = getSubclasses(cardiacRhythmDisease);
 		Map<String, String> map8 = getSubclasses(nervousSystemInjury);
-
-		
+//add them to the list
 		list.addAll(map.keySet());list.addAll(map2.keySet());list.addAll(map3.keySet());
 		list.addAll(map4.keySet());list.addAll(map5.keySet());list.addAll(map6.keySet());
 		list.addAll(map7.keySet());list.addAll(map8.keySet());
 		
 		list.remove(null);
+		//sort the list
 		Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
 		return list;
 	}
@@ -795,7 +807,7 @@ public class OntologyEditor {
 	public Map<String, String> getSubclasses(String classURI) {
 		OntClass ontClass = ontModel.getOntClass(classURI);
 		HashMap<String, String> subClassMap = new HashMap<>();
-		Iterator iter = ontClass.listSubClasses();
+		Iterator<OntClass> iter = ontClass.listSubClasses();
 		while (iter.hasNext()) {
 			OntClass sub = (OntClass) iter.next();
 			subClassMap.put(sub.getLabel("DE"), sub.getURI());
