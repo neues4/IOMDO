@@ -75,11 +75,9 @@ public class OntologyEditor {
 	{
 		
 		if (editor == null)
-			//Windows
-			editor = new OntologyEditor("myModel.owl");//"src\\\\main\\\\resources\\\\bachelorthesis\\\\IOMDOProject\\\\IOMO_FINAL_withoutDepecrated.owl");
-		//mac
-		//editor = new OntologyEditor("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IOMO_40.owl");
-
+			
+			editor = new OntologyEditor("myModel.owl");
+		
 		return editor;
 	}
 
