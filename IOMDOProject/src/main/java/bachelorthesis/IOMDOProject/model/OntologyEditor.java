@@ -30,7 +30,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * -class for editing the ontology
+ * Class for editing the ontology
  * @author neues4, romap1
  * 
  */
@@ -111,12 +111,13 @@ public class OntologyEditor {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Returns the next ID for the IRI of an new Individual.
+	 * @author romap1
+	 * @return the next ID for the IRI of an new Individual.
 	 */
 	public String getId()  {
 		Scanner scanner;
-		// für Windows
+		// reads file with an counter
 		File file = new File("src\\main\\resources\\bachelorthesis\\IOMDOProject\\IDCounter.txt");
 		// für Mac
 		//File file = new File("/Users/stefanie/Documents/maven.1619428611109/IOMDOProject/src/main/resources/bachelorthesis/IOMDOProject/IDCounter.txt");
@@ -126,7 +127,10 @@ public class OntologyEditor {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		//Converts counter to String
 		String  counterAsString = Integer.toString(counter);
+		//checks the size of the string and add the suitable beginning for the ID. Example: Number 222 has lenght of 3. The Prefix IOMDO_INDV_0000 is added 
+		//and the final ID is IOMDO_INDV_0000222
 		int sizeOfInt = counterAsString.length();
 		switch (sizeOfInt) {
 		case 1:
@@ -152,6 +156,7 @@ public class OntologyEditor {
 			break;
 		}
 		counter ++;
+		//overwrites incremented counter into file
 		FileWriter fw;
 		try {
 			StringBuilder sb = new StringBuilder();
@@ -296,10 +301,10 @@ public class OntologyEditor {
 	/**
 	 * Adds a Finding to Document and saves it into the Ontology.
 	 * @author romap1
-	 * @param entityUri: the URI of the diagnosis
-	 * @param label: the Label of the diagnosis
-	 * @param timestamp: the timeStamp of when the Process was documented
-	 * @param comment: the optional comment that is added to the measurement.
+	 * @param entityUri: the URI of the finding
+	 * @param label: the Label of the finding
+	 * @param timestamp: the timeStamp of when the finding was documented
+	 * @param comment: the optional comment that is added to the finding.
 	 * @param doccumentUri: the URI of the document that is recorded
 	 */
 	public void addFindings(String entityUri, String label,String timestamp, String comment, String doccumentUri) {
@@ -318,14 +323,14 @@ public class OntologyEditor {
 	}
 
 	/**
-	 * Adds a Meassurement to Document and saves it into the Ontology.
+	 * Adds a Meassurement to Document and saves it into the Ontology model.
 	 * @author romap1
-	 * @param entityUri: the URI of the diagnosis
-	 * @param label: the Label of the diagnosis
-	 * @param timestamp: the timeStamp of when the Process was documented
+	 * @param entityUri: the URI of the measurement
+	 * @param label: the Label of the measurement
+	 * @param timestamp: the timeStamp of when the measurement was documented
 	 * @param comment: the optional comment that is added to the measurement.
-	 * @param doccumentUri
-	 * @param MeasurementValue
+	 * @param doccumentUri: the URI of the document that is recorded
+	 * @param MeasurementValue: the value of the measurement
 	 */
 	public void addMeasurement(String entityUri, String label,String timestamp, String comment, String doccumentUri, String MeasurementValue) {
 		String indivUri= createNewIndividual(entityUri, label);
@@ -347,19 +352,20 @@ public class OntologyEditor {
 	}
 
 	/**
-	 * Adds a DCS MEP and TES MEP Measurement that requires additional a list of muscles and values and saves it into the Ontology.
+	 * Adds a DCS MEP and TES MEP Measurement that requires additional a list of muscles and values and saves it into the Ontology model.
 	 * @author romap1
-	 * @param entityUri: The Uri of the category
-	 * @param label: The label of the Individual
-	 * @param timestamp: the time of the documented entity
-	 * @param comment: Additional comment of the documented entity
-	 * @param documentUri: the uri of the document that the entity belongs too
+	 * @param entityUri: The URI of the measurement
+	 * @param label: The label of the measurement
+	 * @param timestamp: the timeStamp of when the measurement was documented
+	 * @param comment: Optional comment of the documented measurement
+	 * @param documentUri: the URI of the document that is recorded
 	 * @param measurementValue: List of muscle values
-	 * @param muscleUri: List of muscle uris
+	 * @param muscleUri: List of muscle URIs
 	 * @param muscleLabel: List of muscle labels
 	 */
 	public void addMeasurement(String entityUri, String label,String timestamp, String comment, 
 			String documentUri, List<String> measurementValue, List<String> muscleUri, List<String> muscleLabel) {
+		//create individual to add it to the model
 		String indivUri= createNewIndividual(entityUri, label);
 		Individual indv = ontModel.getIndividual(indivUri);
 		DatatypeProperty datPropTimeStamp = ontModel.getDatatypeProperty( NS + has_timestamp);
@@ -389,12 +395,12 @@ public class OntologyEditor {
 	/**
 	 * Creates a Patient Individual with its Data Properties and adds it to the existing Ontology model
 	 * @author romap1
-	 * @param caseNumber:
-	 * @param pid: 
-	 * @param fid
-	 * @param firstname
-	 * @param surname
-	 * @param birthday
+	 * @param caseNumber: case number as String
+	 * @param pid: patient ID as String
+	 * @param fid: case ID as String
+	 * @param firstname: first name of the patient
+	 * @param surname: surname of the patient
+	 * @param birthday: birthday of the patient as string
 	 * @param documentUri: the URI of the document that is recorded
 	 */
 	public void addPatient(String caseNumber, String pid, String fid, String firstname, String surname, String birthday, String documentUri) {
@@ -409,15 +415,16 @@ public class OntologyEditor {
 	 * Creates a Individual of a Surgery Subclass and adds it to the existing Ontology model
 	 * @param surgeryUri: the URI of the surgery
 	 * @param label: the Label of the diagnosis
-	 * @param dateOfSurgery
-	 * @param surgeon
-	 * @param assistant
-	 * @param device
+	 * @param dateOfSurgery: Date of the surgery as String
+	 * @param surgeon: surgeon name 
+	 * @param assistant: assistant name
+	 * @param device: name of the device
 	 * @param documentUri: the URI of the document that is recorded
 	 */
 	public void addSurgery(String surgeryUri,String label,  String dateOfSurgery, String surgeon, String assistant, String device, String documentUri) {
 		String indivUri= createNewIndividual(surgeryUri, label);
 		Individual indv = ontModel.getIndividual(indivUri);
+		//add properties to the individual
 		DatatypeProperty datPropSurgeryDate = ontModel.getDatatypeProperty(NS + has_date_of_surgery);
 		DatatypeProperty datPropSurgeon = ontModel.getDatatypeProperty(NS + has_surgeon);
 		DatatypeProperty datPropAssistant = ontModel.getDatatypeProperty(NS + has_assistant);
@@ -445,7 +452,7 @@ public class OntologyEditor {
 	}
 	
 	/**
-	 * Add an Process Observation Datum  with the given parameters into the ontology.
+	 * Add an Process Observation Datum  with the given parameters into Ontology model.
 	 * @author romap1
 	 * @param processUri: the URI of the Process
 	 * @param label: the label of the Process
@@ -462,10 +469,12 @@ public class OntologyEditor {
 		
 		DatatypeProperty datPropTimeStamp = ontModel.getDatatypeProperty( NS + has_timestamp);
 		indv.addProperty(datPropTimeStamp, timestamp);
+		//only add comment if something is written
 		if(!comment.equals("")){
 			DatatypeProperty datPropComment = ontModel.getDatatypeProperty( NS + has_comment);
 			indv.addProperty(datPropComment, comment);
 		}
+		//add statement between the Observation and the process
 		String indivUri= createNewIndividual(processUri, label);
 		addStatement(observationIndvUri, NS + documents_process, indivUri);
 		addStatement(indivUri, NS + documented_in, observationIndvUri);
@@ -473,7 +482,7 @@ public class OntologyEditor {
 	}
 	
 	/**
-	 * Add an postoperative Disposition with the given parameters into the ontology.
+	 * Add an postoperative Disposition with the given parameters into the ontology model.
 	 * @param dispositionUri: the URI of the Disposition
 	 * @param label: the label of the Disposition
 	 * @param comment: an optional comment of the Disposition
@@ -485,6 +494,7 @@ public class OntologyEditor {
 		addStatement(documentUri, NS + has_data_item, clinicalDataIndvUri);
 		addStatement(clinicalDataIndvUri, NS + data_item_of, documentUri);
 		Individual indv = ontModel.getIndividual(clinicalDataIndvUri);
+		//only add comment if something is written
 		if(!comment.equals("")){
 			DatatypeProperty datPropComment = ontModel.getDatatypeProperty( NS + has_comment);
 			indv.addProperty(datPropComment, comment);
@@ -496,7 +506,7 @@ public class OntologyEditor {
 	}
 	
 	/**
-	 * Add an intraoperative Disposition with the given parameters into the ontology.
+	 * Add an intraoperative Disposition with the given parameters into the ontology model.
 	 * @author romap1
 	 * @param dispositionUri: the URI of the Disposition
 	 * @param label: the label of the Disposition
@@ -513,6 +523,7 @@ public class OntologyEditor {
 		//adds timestamp
 		DatatypeProperty datPropTimeStamp = ontModel.getDatatypeProperty( NS + has_timestamp);
 		indv.addProperty(datPropTimeStamp, timestamp);
+		//only add comment if something is written
 		if(!comment.equals("")){
 			DatatypeProperty datPropComment = ontModel.getDatatypeProperty( NS + has_comment);
 			indv.addProperty(datPropComment, comment);
