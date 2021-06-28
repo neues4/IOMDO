@@ -19,9 +19,16 @@ public class SettingsController {
 	@FXML
     private Button btnUserManual;
 
+	/**
+	 * Method to open the user manual on google drive
+	 * @param event
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 */
     @FXML
     void openUserManual(ActionEvent event) throws MalformedURLException, IOException, URISyntaxException {
-    	Desktop.getDesktop().browse(new URL("https://drive.google.com/file/d/1tFdDVWYZRq8LIY9NCA-uJNqGNe0KmqmW/view?usp=sharing").toURI());
+    	Desktop.getDesktop().browse(new URL("https://drive.google.com/file/d/1CF98Sj5RvkDCqt_3ylkTebegoBzIKjXm/view?usp=sharing").toURI());
 	
     }
 

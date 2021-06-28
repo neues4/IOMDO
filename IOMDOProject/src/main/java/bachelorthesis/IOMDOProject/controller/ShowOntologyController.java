@@ -18,6 +18,12 @@ public class ShowOntologyController {
 	@FXML
 	private Button btnProtege;
 
+	/**
+	 * method to open the ontology in webprotege
+	 * @param event
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 */
 	@FXML
 	void openProtege(ActionEvent event) throws IOException, URISyntaxException {		
 		Desktop.getDesktop().browse(new URL("https://webprotege.stanford.edu/#projects/1b446c21-46aa-482a-9c54-36235b2e36c5/edit/Classes").toURI());
